@@ -1,4 +1,9 @@
 <?php
+if(empty($_COOKIE['uid'])){
+	$host= $_SERVER['HTTP_HOST'];
+	$uri= rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+	header("Location: http://$host$uri");
+}
 require "assets/document-header.php";
 require "assets/header.php";
 ?>
@@ -7,9 +12,12 @@ require "assets/header.php";
 	<div class="row">
 		<div class="col-md-12 col-md-offset-0">
 			<div class="panel panel-primary">
-				<div class="panel-body">
-				
-					<hr><input class="btn btn-default" type="button" value="Create New Project" data-toggle="modal" data-target="#projectModal"/>
+				<div class="panel-body" id="panelProjects">
+					<div class="list-group" id="projectLists">
+					</div>
+					<hr>
+					<br>
+					<input class="btn btn-default" type="button" value="Create New Project" data-toggle="modal" data-target="#projectModal"/>
 				</div><!-- panel body -->
 			</div> <!-- panel-primary -->
 		</div>

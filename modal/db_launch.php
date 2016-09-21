@@ -3,7 +3,7 @@
 require __DIR__.'/db_connection.php';
 require __DIR__.'/db_delete.php';
 require __DIR__.'/db_connection.php';
-$database = 'rt';
+$database = 'rt2';
 $sql = "CREATE DATABASE " .$database;
 if ($conn ->query($sql)) {
 	echo "Database created successfully. <br>";

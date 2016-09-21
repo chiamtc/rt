@@ -1,4 +1,7 @@
 <?php
+if(!empty($_COOKIE['uid'])){
+	header("Location:dashboards.php");
+}
 require "assets/document-header.php";
 require "assets/header.php";
 ?>
@@ -34,10 +37,6 @@ require "assets/header.php";
 								</label>
                                 <button style="float:right" type="submit" class="btn btn-primary">Login</button>
 							</div>
-                            <br>
-                            <div class="text-center">
-                                <p id="loginResponse"></p>
-                            </div>
                         </form>
                         <hr>
                         

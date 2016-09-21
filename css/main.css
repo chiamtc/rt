@@ -15,6 +15,11 @@ body{
 	margin-top:7%;
 }
 
+.alert-success{
+	visibility:hidden;
+	
+}
+
 .navbar .navbar-brand {
     color:white;
 }
