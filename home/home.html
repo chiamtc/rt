@@ -1,0 +1,89 @@
+<home-header></home-header>
+<!-- <div ng-controller="homeProjectCtrl"> -->
+<div class="nav navbar-default">
+	<div class="container">
+	<br>
+		<div class="pull-left"><h4>Project Lists</h4></div>
+		<div class="pull-right"><button class="btn btn-primary" data-toggle="modal" data-target="#projectCreateModal">Create Project</button></div>
+	</div>
+</div>
+<br>
+<div class="container">			
+	<div class="projectPaneSection">
+		<section class="projectPaneContent">
+			<ul class="projectTiles" ng-repeat="x in records">
+				<li class="projectTile">
+					<header class="projectTileHeader">
+						<span>project name</span>
+					</header>
+					<div class="projectTileContent">
+						<span> project desc, number of ppl involved and sprint planned..</span>
+						
+					</div>
+				</li>
+			</ul>
+		</section>
+	</div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="projectCreateModal" aria-hidden="true" role="dialog" tabindex="-1" aria-labelledby="projectModal">
+	<div class="modal-dialog">
+      <!-- Modal content-->
+		<div class="modal-content">
+		
+			<div class="modal-header">
+			  <button type="button" class="close" data-dismiss="modal">&times;</button>
+			  <h4 class="modal-title">New Project</h4>
+			</div>
+			
+			<div class="modal-body">
+				<form name="projectForm" class="form-group">
+					<div class="form-group">
+						<input ng-model="projectCreateName" type="text" class="form-control" name="projectName" required placeholder="Project Name">
+						
+						<div ng-messages="projectForm.projectName.$error" ng-if="projectForm.projectName.$touched">
+							<div ng-message="required" class="alert alert-danger alert-dismissible" role="alert">
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								<strong>Warning!</strong> Project title is required!
+							</div>  <!-- end of ng-message -->
+						</div> <!-- end of ng-messages -->
+					</div>
+					<br>
+					<div class="form-group">
+						<textarea ng-model="projectCreateDesc" class="form-control" rows="4" name="projectDesc" placeholder="Project Description (optional)"></textarea>
+					</div>
+					<br>
+					<div class="form-group has-feedback">
+						<input ng-blur="checkProjectKey()" ng-model="projectKey" type="text" class="form-control" name="projectKey" required placeholder="Project Key">
+						
+						<span ng-show="clearKey" class="glyphicon glyphicon-ok form-control-feedback"></span>
+						
+						<div ng-messages="projectForm.projectKey.$error" ng-if="projectForm.projectKey.$touched">
+							<div ng-message="required" class="alert alert-danger alert-dismissible" role="alert">
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="false">&times;</span></button>
+								<strong>Warning!</strong> Project key is required!
+							</div>  <!-- end of ng-message -->
+						</div> <!-- end of ng-messages -->
+						
+						<div ng-show="checkResponse" ng-class="checkResponseClass" role="alert">
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							{{checkMessage}}
+						</div> <!-- checkprojectkey response -->
+					</div>
+					
+				</form>
+				<div ng-show="createResponse" ng-class="createResponseClass" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							{{createResponseMessage}}
+				</div> <!-- create response -->
+			</div>
+			
+			<div class="modal-footer">
+				<button type="button" data-dismiss="modal" class="btn btn-default">Cancel</button>
+				<button type="button" ng-click="createProject()" class="btn btn-primary">Create Project</button>
+			</div>
+      </div> <!-- end of modal content -->
+	</div> <!-- end of modal dialog -->
+</div> <!-- end of modal -->
+<!--</div> for ng controller -->

@@ -1,0 +1,124 @@
+/**
+header color:#36648B
+hover over color : #2F2F4F 
+background-color grey :#525C65  f3f4f4
+**/
+
+/**
+header color:#36648B
+hover over color : #2F2F4F 
+background-color grey :#525C65  f3f4f4
+**/
+html{}
+
+body{
+	background-color: #EDEDEE;
+    padding-top:50px;
+	width:100%;
+}
+
+textarea{
+	resize:vertical;
+}
+
+.login{
+	margin-top:7%;
+}
+
+.navbar .navbar-brand {
+    color:white;
+}
+.navbar-inverse{
+    background-color:#36648B ;
+}
+
+.navbar .nav > li> a{
+    color:white;   
+}
+
+.navbar .nav > .active > a{
+    background-color:#2F2F4F;
+}
+
+.navbar .nav > li > a:hover {
+    background-color:#2F2F4F ;
+}
+
+.navbar .navbar-right > li > a:hover{
+    background-color:#2F2F4F ;
+}
+
+/** optional deisng for input typ=e"text or email"
+.loginTxt:focus{
+	border: 2px solid #f3f4f4;
+}**/
+
+.loginDiv{
+  background-color: #fff;
+  position: relative;
+  margin: auto;
+  top: 100px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width:500px;
+  
+  border-radius: 4px;
+  box-shadow: 5px 5px 4px rgba(0, 0, 0, .5);
+}
+
+.projectPaneSection {
+    padding-bottom: 60px;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.projectPaneContent{
+	width:100%;
+}
+
+.projectTiles{
+	margin:auto;
+	list-style: none;
+    font-family: "Open Sans", sans-serif;
+    display: inline-block;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+.projectTile{
+	display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    height: 140px;
+    width: 500px;
+    background: #FFF;
+    box-sizing: border-box;
+    margin-bottom: 32px;
+    border: 1px solid #DDDDDD;
+    border-radius: 10px;
+}
+
+@media only screen and (max-width: 600px) {
+    .projectTile {
+		margin-left:-30px;
+        width:280px;
+    }
+}
+
+.projectTileHeader{
+	width:100%;
+	border-bottom: 2px solid #EFEFEF;
+    display: flex;
+    align-items: flex-start;
+    padding: 8px 16px;
+}
+
+.projectTileContent{
+	box-sizing: border-box;
+    padding: 10px 30px;
+    display: -ms-flexbox;
+    display: flex;
+}

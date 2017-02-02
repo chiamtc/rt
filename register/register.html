@@ -1,0 +1,56 @@
+<div class="text-center loginDiv">
+	<div class="panel-heading">
+		<h3 class="text-center"><b>Project Management Tool </b></h3>
+		<hr>
+		<p class="lead">Get an account free to start your projects now!</p>
+	</div>
+	<form class="panel-body" name="registerForm" novalidate="">
+	<div class="form-group">
+		<input type="email" class="form-control loginTxt" name="email" ng-model="registerEmail" placeholder="Email" required>
+		
+		<div ng-messages="registerForm.email.$error" ng-if="registerForm.email.$touched">
+			<div ng-message="required" class="alert alert-danger alert-dismissible" role="alert">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<strong>Warning!</strong> Email is empty!
+			</div>
+			<div ng-message="email" class="alert alert-danger alert-dismissible" role="alert">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<strong>Warning!</strong> That's not an email!
+			</div>
+		</div> 
+	</div>
+	<div class="form-group">
+	<br>
+		<input type="password" class="form-control loginTxt" name="password" ng-model="registerPassword" placeholder="Password" required>
+		<div ng-messages="registerForm.password.$error" ng-if="registerForm.password.$touched">
+			<div ng-message="required" class="alert alert-danger alert-dismissible" role="alert">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<strong>Warning!</strong> Password is empty!
+			</div>
+		</div>
+	</div>
+	<br>
+	
+	<div class="form-group">
+	<input type="password" class="form-control loginTxt" name="confPassword" ng-model="registerConfPassword" placeholder="Confirm Password"  confirm-pwd="registerPassword" required>
+		
+		<div ng-messages="registerForm.confPassword.$error" ng-if="registerForm.confPassword.$touched">
+			<div ng-message="required" class="alert alert-danger alert-dismissible" role="alert">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<strong>Warning!</strong> Password is empty!
+			</div>
+			<div ng-message="password" class="alert alert-danger alert-dismissible" role="alert">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<strong>Warning!</strong> Password isn't matched!
+			</div>
+		</div> 
+	</div> 
+	<button type="button" width="100%" class="btn btn-secondary btn-block" ng-click="register()">{{btnRegister}}</button>
+	<hr>
+	</form>
+	
+<div ng-show="registerResponse" ng-class="registerResponseClass" role="alert">
+<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+{{registerMessage}}</div>
+
+</div>

@@ -1,0 +1,48 @@
+<div class="text-center loginDiv">
+	<div class="panel-heading">
+		<h3 class="text-center"><b>Project Management Tool </b></h3>
+		<hr>
+	</div>
+	<form class="panel-body" name="loginForm">
+	<div class="form-group">
+		<input type="email" class="form-control " name="loginemail" ng-model="loginEmail" placeholder="Email" required>
+		
+		<div ng-messages="loginForm.loginemail.$error" ng-if="loginForm.loginemail.$touched">
+			<div ng-message="required" class="alert alert-danger alert-dismissible" role="alert">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<strong>Warning!</strong> Email is empty!
+			</div>
+			
+			
+			<div ng-message="email" class="alert alert-danger alert-dismissible" role="alert">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<strong>Warning!</strong> That's not an email!
+			</div>
+		</div>
+		
+	</div>
+	<br>
+	<div class="form-group">
+		<input type="password" class="form-control" name="loginpassword" ng-model="loginPassword" placeholder="Password" required>
+		
+		<div ng-messages="loginForm.loginpassword.$error" ng-if="loginForm.loginpassword.$touched">
+			<div ng-message="required" class="alert alert-danger alert-dismissible" role="alert">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<strong>Warning!</strong> Password is empty!
+			</div>
+		</div>
+	</div>
+	<br>
+	<button type="button" width="100%" class="btn btn-secondary btn-block" ng-click="login()">{{btnLogin}}</button>	
+	
+	<div ng-show="loginResponse" ng-class="loginResponseClass" role="alert">
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		{{loginMessage}}
+	</div>
+	
+	<hr>
+	</form>
+<p> New user? <a href="#/register"> Create an account now!</a> </p>
+<br>
+
+</div>
