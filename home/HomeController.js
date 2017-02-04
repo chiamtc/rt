@@ -5,27 +5,37 @@ angular.module('home')
 	
 	$scope.checkResponse = false;
 	$scope.createResponse = false;
-	
+	$scope.projectListResponse = false;
 	$scope.clearKey = false;
 	var userProjectKey = false;
 	/** fancy starts **/
 		NProgress.start();
 		NProgress.done();
-	$scope.records = [
-        "Alfreds Futterkiste",
-        "Berglunds snabbköp",
-        "Centro comercial Moctezuma",
-        "Ernst Handel",
-    ]
+	
+	HomeService.ListProjects(function(response){
+		switch(response.success){
+			case 0:
+				$scope.projectListResponse = !$scope.projectListResponse;
+				$scope.createResponseClass ="alert alert-info";
+				$scope.createResponseMessage = "no projects found :( ";
+			break;
+			case 1:
+				console.log(response.projects);
+				$scope.projectLists = response.projects;
+			break;
+			default:
+			break;
+		}
+	});
 	
 	/** uppercase the project key field **/
 	$scope.$watch('projectKey', function(val) {
 		$scope.projectKey = $filter('uppercase')(val);
 	}, true);
 	
+	/** UI function(s) **/
 	$scope.checkProjectKey = function(){
 		HomeService.CheckProjectKey($scope.projectKey,function(response){
-			
 			switch(response.success){
 				case 0:
 					$scope.checkResponse = !$scope.checkResponse;
@@ -46,9 +56,10 @@ angular.module('home')
 	};
 	
 	$scope.createProject = function(){
+		NProgress.set(0.5);
 		if(userProjectKey){
 			HomeService.CreateProject($scope.projectCreateName, $scope.projectCreateDesc, $scope.projectKey, function(response){
-					NProgress.set(0.5);
+					
 					
 					$scope.createResponse = !$scope.createResponse;
 					switch(response.success){
@@ -82,9 +93,6 @@ angular.module('home')
 		}
 		NProgress.done();
 	};
-	
-	
-	
 	/**ends **/
 }])
 

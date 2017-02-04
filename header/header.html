@@ -1,5 +1,6 @@
+<div class="container-fluid">
 <nav class="navbar navbar-inverse navbar-fixed-top">
-  <div class="container-fluid">
+
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -18,6 +19,7 @@
 	
 	<!-- navbar left -->
 	<ul class="nav navbar-nav">
+		<li ng-class="isActive('{{pathParams}}')" ng-show="currentPath"><a href="">{{headerProjectName}}</a></li>
 		<li ng-class="isActive('/works')"><a href="#/works">My Works</a></li>
       </ul>
 	  
@@ -34,5 +36,5 @@
     </ul>
 	
     </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
 </nav>
+</div><!-- /.container-fluid -->

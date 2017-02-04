@@ -1,8 +1,11 @@
 angular.module('header')
 
-.controller('HeaderController',['LoginService','$cookies','$scope','$location', function(LoginService, $cookies,$scope, $location){
+.controller('HeaderController',['LoginService','$routeParams','$cookies','$scope','$location', function(LoginService, $routeParams, $cookies,$scope, $location){
 	/** UI binding **/
 	$scope.userEmail = $cookies.get('email');
+	$scope.headerProjectName = $routeParams.projectName;
+	$scope.pathParams ="/project/"+ $routeParams.projectKey + "/"+ $routeParams.projectName;
+	$scope.currentPath = $location.path() == $scope.pathParams;
 	if($cookies.get('uid') == null){
 		$location.path('/');
 	}
@@ -23,7 +26,7 @@ angular.module('header')
 }])
 
 /** header directive **/
-.directive('homeHeader', function(){
+.directive('projectHeader', function(){
 	return{
 		templateUrl:"header/header.html",
 		controller:"HeaderController"

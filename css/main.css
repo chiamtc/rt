@@ -25,15 +25,26 @@ textarea{
 	margin-top:7%;
 }
 
-.navbar .navbar-brand {
+.nav-stacked > li > a{
+	padding-left:0px;
+	padding-right:0px;
+}
+
+.navbar {
     color:white;
 }
+
+.navbar-nav{
+	margin:0;
+}
+
 .navbar-inverse{
     background-color:#36648B ;
 }
 
 .navbar .nav > li> a{
-    color:white;   
+    color:white;
+	padding-top:17px;
 }
 
 .navbar .nav > .active > a{
@@ -47,6 +58,11 @@ textarea{
 .navbar .navbar-right > li > a:hover{
     background-color:#2F2F4F ;
 }
+
+.navbar-brand{
+	padding-bottom:18px;
+}
+
 
 /** optional deisng for input typ=e"text or email"
 .loginTxt:focus{
@@ -111,14 +127,76 @@ textarea{
 .projectTileHeader{
 	width:100%;
 	border-bottom: 2px solid #EFEFEF;
-    display: flex;
+    display:inline-block;
     align-items: flex-start;
-    padding: 8px 16px;
+    padding: 10px 15px;
 }
 
 .projectTileContent{
 	box-sizing: border-box;
-    padding: 10px 30px;
+    padding: 10px 15px;
     display: -ms-flexbox;
-    display: flex;
+}
+
+/** side nav **/
+.sidenav {
+    height: 100%;
+    width: 150px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 50px;
+}
+
+.sidenav ul{
+	list-style:none;
+	padding-left: 0px;
+}
+
+.sidenav li a{
+    text-decoration: none;
+	
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+    padding:15px 15px;
+}
+
+
+.sidenav li.current a{
+	color:#fff;
+	background-color:#2F2F4F;
+}
+
+
+.sidenav li:hover a:hover, .offcanvas li:focus a:focus{
+    color: #f1f1f1;
+	background-color:#2F2F4F;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+#main {
+	position:fixed;
+    padding: 16px;
+	height:100%;
+	width:92%;
+	z-index:1;
+	overflow-x:visible;
+	background-color:#fff;
+	margin-left:150px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav li {font-size: 18px;}
 }

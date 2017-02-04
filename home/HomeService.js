@@ -2,7 +2,7 @@
 
 angular.module('home')
 
-.factory('HomeService', [ '$http',function($http){
+.factory('HomeService', ['$http',function($http){
 	 
 	var factory = {};
 	
@@ -35,5 +35,20 @@ angular.module('home')
 		}); //end of then
 	}; //end of checkprojectkey factory
 	
+	factory.ListProjects = function(callback){
+		$http({
+			method : 'POST',
+			url: 'php/home/getProjects.php',
+			headers : { 'Content-Type' : 'application/json' }
+		}).then(function(response){
+			
+			callback(response.data);
+		});
+	}
 	return factory;
 }])
+
+/** note to myself
+	callback function for array = response.data.projects
+	but in controller callback function -> function(response) uses response.projects
+**/

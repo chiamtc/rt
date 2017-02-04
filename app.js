@@ -4,10 +4,12 @@ angular.module('login',[]);
 angular.module('header',[]);
 angular.module('home',[]);
 angular.module('register',[]);
+angular.module('project',[]);
+angular.module('sidebar',[]);
 
 
 
-angular.module('reApp',['header','login','home','register','ngRoute','ngCookies', 'ngMessages'])
+angular.module('reApp',['header','login','home','register','project','sidebar','ngRoute','ngCookies', 'ngMessages'])
 
 .config(['$routeProvider', function($routeProvider){
 	$routeProvider
@@ -23,6 +25,12 @@ angular.module('reApp',['header','login','home','register','ngRoute','ngCookies'
 	.when('/register',{
 		controller:'RegisterController',
 		templateUrl:'register/register.html'
+	})
+	
+	.when('/project/:projectKey/:projectName',{
+		controller : 'ProjectController',
+		templateUrl:'project/project.html'
+		
 	})
 	.otherwise({
 		redirectTo: '/'

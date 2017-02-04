@@ -1,0 +1,7 @@
+<div id="mySidenav" class="sidenav">
+	<ul>
+		<li ng-class="isCurrent('{{menu.ahref}}')" ng-repeat="menu in menus.items">
+		<a href="{{menu.href}}"><i class="{{menu.icon}}"></i> {{menu.item}} </a>
+		</li>
+	</ul>
+</div>
