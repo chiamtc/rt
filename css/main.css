@@ -269,3 +269,7 @@ textarea{
 	background-color:#fff;
 	padding-left:10px;
 }
+
+.dropPlace{
+	height: 300px !important; 
+}

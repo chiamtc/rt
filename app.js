@@ -10,7 +10,7 @@ angular.module('backlog',[]);
 
 
 
-angular.module('reApp',['header','login','home','register','project','sidebar','backlog','ngRoute','ngCookies', 'ngMessages'])
+angular.module('reApp',['header','login','home','register','project','sidebar','backlog','ngDragDrop','ngRoute','ngCookies', 'ngMessages'])
 
 .config(['$routeProvider', function($routeProvider){
 	$routeProvider

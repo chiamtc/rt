@@ -5,11 +5,12 @@
 	
 </div>
 <div class="backlogLists">
-	<ul class="nav nav-pills nav-stacked">
-		<li role="presentation"><a href="">asd</a></li>
-		<li role="presentation"><a href="">asd</a></li>
-		<li role="presentation"><a href="">asd</a></li>
-		<li role="presentation"><a href="">asd</a></li>
-		<li role="presentation"><a href="">asd</a></li>
+	
+	<ul class="nav nav-pills nav-stacked dropPlace" data-drop="true" data-jqyoui-options="list1" ng-model="list1" jqyoui-droppable="{multiple:true}" style="border:1px solid black">
+		<li role="presentation" data-drag="true" data-jqyoui-options="{revert:'invalid'}" ng-repeat="item in list1" ng-model="list1" jqyoui-draggable="{index: {{$index}},animate:true}" ng-show="item.title"><a href="">{{item.title}}</a></li>
+	</ul>
+	<hr>
+	<ul class="nav nav-pills nav-stacked dropPlace" data-drop="true" ng-model="list2" data-jqyoui-options="list2" jqyoui-droppable="{multiple:true}"  style="border:1px solid red">
+		<li role="presentation" data-drag="true" data-jqyoui-options="{revert:'invalid'}" ng-repeat="item2 in list2" ng-model="list2" jqyoui-draggable="{index: {{$index}},animate:true}" ng-show="item2.title"><a href="">{{item2.title}}</a></li>
 	</ul>
 </div>
