@@ -25,6 +25,7 @@ angular.module('sidebar')
     return "";
 	};
 	
+	
 }])
 
 .directive('sideBar',function(){

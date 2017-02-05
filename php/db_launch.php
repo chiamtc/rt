@@ -85,23 +85,21 @@ if($conn -> query($sqltbl5)){
     echo "tbl sprint failed to create <br>";
 }
 
-$sqltbl6 = "CREATE TABLE usrstories(
-            usrstoriesId int NOT NULL AUTO_INCREMENT,
-            usrstoriesDescription text NOT NULL,
-			epicId int NOT NULL,
-			sprintId int NOT NULL,
-			PRIMARY KEY(usrstoriesId,epicId,sprintId),
-			FOREIGN KEY(epicId) REFERENCES epic(epicId),
-			FOREIGN KEY(sprintId) REFERENCES sprint(sprintId)
+$sqltbl8 = "CREATE TABLE backlog(
+            backlogId int NOT NULL,
+			backlogType varchar(255) NOT NULL,
+			backlogTitle TEXT,
+			backlogDesc TEXT,
+            PRIMARY KEY(backlogId)
         )";
 
-if($conn -> query($sqltbl6)){
-    echo "tbl usrstories created<br>";
+if($conn -> query($sqltbl8)){
+    echo "tbl backlog created<br>";
 }else{
-    echo "tbl usrstories failed to create<br>";
+    echo "tbl backlog failed to create<br>";
 }
 
-$sqltbl7 = "CREATE TABLE tasks(
+/**$sqltbl7 = "CREATE TABLE tasks(
             tasksId int NOT NULL AUTO_INCREMENT,
 			tasksDescription text NOT NULL,
 			tasksType varchar(255) NOT NULL,
@@ -115,25 +113,8 @@ if($conn -> query($sqltbl7)){
     echo "tbl tasks created<br>";
 }else{
     echo "tbl tasks failed to create<br>";
-}
+}**/
 
-$sqltbl8 = "CREATE TABLE backlog(
-            uid int NOT NULL,
-            projectKey varchar(255) NOT NULL,
-			sprintId int NOT NULL,
-			usrstoriesId int NOT NULL,
-            PRIMARY KEY(uid,projectKey,sprintId,usrstoriesId),
-            FOREIGN KEY(uid) REFERENCES userproject(uid),
-            FOREIGN KEY(projectKey) REFERENCES userproject(projectKey),
-			FOREIGN KEY(sprintId) REFERENCES sprint(sprintId),
-			FOREIGN KEY(usrstoriesId) REFERENCES usrstories(usrstoriesId)
-        )";
-
-if($conn -> query($sqltbl8)){
-    echo "tbl backlog created<br>";
-}else{
-    echo "tbl backlog failed to create<br>";
-}
 
 
 $conn->close();

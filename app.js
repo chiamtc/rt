@@ -6,10 +6,11 @@ angular.module('home',[]);
 angular.module('register',[]);
 angular.module('project',[]);
 angular.module('sidebar',[]);
+angular.module('backlog',[]);
 
 
 
-angular.module('reApp',['header','login','home','register','project','sidebar','ngRoute','ngCookies', 'ngMessages'])
+angular.module('reApp',['header','login','home','register','project','sidebar','backlog','ngRoute','ngCookies', 'ngMessages'])
 
 .config(['$routeProvider', function($routeProvider){
 	$routeProvider
