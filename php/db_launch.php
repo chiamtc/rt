@@ -34,6 +34,7 @@ $sqltbl2= "CREATE TABLE project(
 			projectName varchar(255) NOT NULL,
 			projectDescription text,
 			date_created varchar(255) NOT NULL,
+			time_created varchar(255) NOT NULL,
             PRIMARY KEY(projectKey)
         )";
 
@@ -86,10 +87,13 @@ if($conn -> query($sqltbl5)){
 }
 
 $sqltbl8 = "CREATE TABLE backlog(
-            backlogId int NOT NULL,
+            backlogId int NOT NULL AUTO_INCREMENT,
 			backlogType varchar(255) NOT NULL,
 			backlogTitle TEXT,
 			backlogDesc TEXT,
+			date_created varchar(255) NOT NULL,
+			time_created varchar(255) NOT NULL,
+			backlogCreator varchar(255) NOT NULL,
             PRIMARY KEY(backlogId)
         )";
 
@@ -97,6 +101,23 @@ if($conn -> query($sqltbl8)){
     echo "tbl backlog created<br>";
 }else{
     echo "tbl backlog failed to create<br>";
+}
+
+$sqltbl9 = "CREATE TABLE upb(
+			uid int NOT NULL,
+			projectKey varchar(255) NOT NULL,
+			backlogId int NOT NULL,
+			PRIMARY KEY(uid, projectKey, backlogId),
+			FOREIGN KEY(uid) REFERENCES user(uid),
+			FOREIGN KEY(projectKey) REFERENCES project(projectKey),
+			FOREIGN KEY(backlogId) REFERENCES backlog(backlogId)
+			
+			)";
+			
+if($conn -> query($sqltbl9)){
+    echo "tbl ubp created<br>";
+}else{
+    echo "tbl ubp failed to create<br>";
 }
 
 /**$sqltbl7 = "CREATE TABLE tasks(

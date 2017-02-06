@@ -1,16 +1,76 @@
 <div class="backlogTitle">
 	<span>Product Backlog</span>
 	<span class="minimize"> 0 issues</span>
-	<span class="addBacklog"><a href="" style="color:black"><i class="glyphicon glyphicon-plus"></i></a></span>
-	
+	<span class="addBacklog"><a href="" data-toggle="modal" data-target="#backlogCreateModal" style="color:black"><i class="glyphicon glyphicon-plus"></i></a></span>
 </div>
 <div class="backlogLists">
 	
-	<ul class="nav nav-pills nav-stacked dropPlace" data-drop="true" data-jqyoui-options="list1" ng-model="list1" jqyoui-droppable="{multiple:true}" style="border:1px solid black">
-		<li role="presentation" data-drag="true" data-jqyoui-options="{revert:'invalid'}" ng-repeat="item in list1" ng-model="list1" jqyoui-draggable="{index: {{$index}},animate:true}" ng-show="item.title"><a href="">{{item.title}}</a></li>
+	<ul class="nav nav-pills nav-stacked dropPlace" data-drop="true" data-jqyoui-options="backlogLists" ng-model="backlogLists" jqyoui-droppable="{multiple:true}" style="border:1px solid black">
+		<li role="presentation" data-drag="true" data-jqyoui-options="{revert:'invalid'}" ng-repeat="item in backlogLists" ng-model="backlogLists" jqyoui-draggable="{index: {{$index}},animate:true}" ng-show="item.backlogTitle"><a href="">{{item.backlogTitle}}</a></li>
 	</ul>
 	<hr>
 	<ul class="nav nav-pills nav-stacked dropPlace" data-drop="true" ng-model="list2" data-jqyoui-options="list2" jqyoui-droppable="{multiple:true}"  style="border:1px solid red">
-		<li role="presentation" data-drag="true" data-jqyoui-options="{revert:'invalid'}" ng-repeat="item2 in list2" ng-model="list2" jqyoui-draggable="{index: {{$index}},animate:true}" ng-show="item2.title"><a href="">{{item2.title}}</a></li>
+		<li role="presentation" data-drag="true" data-jqyoui-options="{revert:'invalid'}" ng-repeat="item2 in list2" ng-model="list2" jqyoui-draggable="{index: {{$index}},animate:true}" ng-show="item2.backlogTitle"><a href="">{{item2.backlogTitle}}</a></li>
 	</ul>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="backlogCreateModal" aria-hidden="true" role="dialog" tabindex="-1" aria-labelledby="backlogModal">
+	<div class="modal-dialog">
+      <!-- Modal content-->
+		<div class="modal-content">
+		
+			<div class="modal-header">
+			  <button type="button" class="close" data-dismiss="modal">&times;</button>
+			  <h4 class="modal-title">New Backlog</h4>
+			</div>
+			
+			<div class="modal-body">
+				<form name="backlogForm" class="form-group">
+					<div class="form-group">
+					<label>Backlog Name</label>
+					<input ng-model="backlogCreateName" type="text" class="form-control" name="backlogName" required placeholder="Backlog Name">
+					
+					<div ng-messages="backlogForm.backlogName.$error" ng-if="backlogForm.backlogName.$touched">
+						<div ng-message="required" class="alert alert-danger alert-dismissible" role="alert">
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<strong>Warning!</strong> Backlog title is required!
+						</div>  <!-- end of ng-message -->
+					</div> <!-- end of ng-messages -->
+					
+					</div>	
+					
+					<div class="form-group">
+						<label>Backlog Type</label>
+						<select class="form-control" ng-model="backlogCreateType" ng-options="backlogType.typeName for backlogType in backlogCreateTypes"  ng-init="backlogCreateType = backlogCreateTypes[0]" name="backlogDropDown"></select>
+					</div>
+					
+					<div class="form-group">
+						<label>Backlog Description</label>
+						<textarea ng-model="backlogCreateDesc" class="form-control" rows="4" name="backlogDesc" placeholder="Backlog Description"></textarea>
+					</div>
+					
+					<div class="form-group">
+						<label>Backlog Priority</label>
+						<select class="form-control" ng-model="backlogCreatePriority" ng-options="backlogPriority.name for backlogPriority in backlogPriorities"  ng-init="backlogCreatePriority = backlogPriorities[0]" name="backlogDropDown"></select>
+					</div>
+					
+					<div class="form-group">
+						<label>Created by {{userEmail}}</label>
+					</div>
+				</form>
+
+				<div ng-show="createBacklogResponse" ng-class="createBacklogResponseClass" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							{{createBacklogResponseMessage}}
+				</div> <!-- create response -->
+			</div>
+			
+			<div class="modal-footer">
+				<button type="button" data-dismiss="modal" class="btn btn-default">Cancel</button>
+				<button type="button" ng-click="createBacklog()" class="btn btn-primary">Create Backlog</button>
+			</div>
+      </div> <!-- end of modal content -->
+	</div> <!-- end of modal dialog -->
+</div> <!-- end of modal -->
+<!--</div> for ng controller -->

@@ -19,6 +19,7 @@ if(!empty($uid)){
 			$project["projectName"] = $rowGetProjects["projectName"];
 			$project["projectDesc"] = $rowGetProjects["projectDescription"];
 			$project["dateCreated"] = $rowGetProjects["date_created"];
+			$project["timeCreated"] = $rowGetProjects["time_created"];
 			array_push($response["projects"], $project);
 		}
 		$response["success"] = 1;

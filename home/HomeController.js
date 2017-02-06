@@ -1,13 +1,16 @@
 'use strict';
 angular.module('home')
 
-.controller('HomeController',['HomeService','$filter','$cookies','$scope','$location', function(HomeService,$filter, $cookies, $scope, $location){
-	
+.controller('HomeController',['HomeService','$filter','$timeout','$cookies','$scope','$location', function(HomeService,$filter,$timeout ,$cookies, $scope, $location){
+	/** UI bindings **/
 	$scope.checkResponse = false;
 	$scope.createResponse = false;
 	$scope.projectListResponse = false;
 	$scope.clearKey = false;
 	var userProjectKey = false;
+	$scope.projectLists = [];
+	
+	
 	/** fancy starts **/
 		NProgress.start();
 		NProgress.done();
@@ -16,11 +19,11 @@ angular.module('home')
 		switch(response.success){
 			case 0:
 				$scope.projectListResponse = !$scope.projectListResponse;
-				$scope.createResponseClass ="alert alert-info";
-				$scope.createResponseMessage = "no projects found :( ";
+				$scope.projectListResponseClass ="alert alert-info";
+				$scope.projectListResponseMessage = "no projects found :( ";
 			break;
 			case 1:
-				console.log(response.projects);
+				
 				$scope.projectLists = response.projects;
 			break;
 			default:
@@ -49,6 +52,7 @@ angular.module('home')
 					userProjectKey = !userProjectKey;
 				break;
 				default:
+				
 				break;
 			}
 		});
@@ -70,7 +74,16 @@ angular.module('home')
 						
 						case 1:
 							$scope.createResponseClass ="alert alert-success";
-							$scope.createResponseMessage = "Project Created. Redirecting..";
+							$scope.createResponseMessage = "Project Created.";
+							//console.log('/project/' + response.project[0].projectKey +'/'+ response.project[0].projectName);
+							$scope.projectLists.push(response.project[0]);
+							$timeout(function(){
+								
+								$('#projectCreateModal').modal('toggle');
+								$scope.checkResponse = !$scope.checkResponse;
+								$scope.createResponse = !$scope.createResponse;
+								$('#projectCreateModal').find('form').trigger('reset');
+							},1500);
 						break;
 						
 						case 2:

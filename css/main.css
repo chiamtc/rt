@@ -71,15 +71,10 @@ textarea{
 }**/
 
 .loginDiv{
+  display:block;
   background-color: #fff;
-  position: relative;
   margin: auto;
-  top: 100px;
-  right: 0;
-  bottom: 0;
-  left: 0;
   width:500px;
-  
   border-radius: 4px;
   box-shadow: 5px 5px 4px rgba(0, 0, 0, .5);
 }
@@ -195,7 +190,6 @@ textarea{
 	padding-top:0px;
 	height:100%;
 	z-index:1;
-	
 	background-color:#f1f1f1;
 	margin-left:150px;
 }
@@ -214,8 +208,8 @@ textarea{
 	padding-left:10px;
 	padding-right:10px;
 	box-sizing:border-box;
-	height:100%;
-	border-right: 1px solid #f1f1f1;
+	border-right: 2px solid #A4A294;
+	height:100vh;
 	
 }
 .minimize{
@@ -237,7 +231,6 @@ textarea{
 	padding-bottom:5px;
 	overflow-x:hidden;
 	font-size:16px;
-	border-bottom:1px solid black;
 }
 
 .addBacklog{
@@ -271,5 +264,6 @@ textarea{
 }
 
 .dropPlace{
-	height: 300px !important; 
+	min-height: 70px !important; 
 }
+

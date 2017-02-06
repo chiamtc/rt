@@ -10,6 +10,7 @@ $projectKey = mysqli_real_escape_string($conn, $projectKey);
 $uid = mysqli_real_escape_string($conn, $_COOKIE['uid']);
 date_default_timezone_set("Australia/Brisbane");
 $date_created = date("Y/m/d");
+$time_created = date("h:i:sa");
 $response = array();
 
 if(!empty($projectName) && !empty($projectDesc) && !empty($projectKey)){
@@ -18,8 +19,8 @@ if(!empty($projectName) && !empty($projectDesc) && !empty($projectKey)){
 	$resultCheckProjectKey = $conn -> query($checkProjectKeySql);
 		
 	if($resultCheckProjectKey -> num_rows ==0){
-		$sqlCreateProject = "INSERT INTO `project`(`projectKey`, `projectName`, `projectDescription`, `date_created`)
-							VALUES('$projectKey', '$projectName', '$projectDesc', '$date_created')";
+		$sqlCreateProject = "INSERT INTO `project`(`projectKey`, `projectName`, `projectDescription`, `date_created`, `time_created`)
+							VALUES('$projectKey', '$projectName', '$projectDesc', '$date_created', '$time_created')";
 							
 		if($conn -> query($sqlCreateProject)){
 			$sqlToUserProject ="INSERT INTO `userproject`(`uid`,`projectKey`)
@@ -28,8 +29,14 @@ if(!empty($projectName) && !empty($projectDesc) && !empty($projectKey)){
 						(select `projectKey` from `project`where `projectKey`='$projectKey') p";
 						
 			if($conn ->query($sqlToUserProject)){
+				$response["project"] = array();
+				$project = array();
+				$project["projectKey"] = $projectKey;
+				$project["projectName"] = $projectName;
+				$project["dateCreated"] = $date_created;
+				$project["projectMembers"] = 1;
+				array_push($response["project"], $project);
 				$response["success"] = 1;
-				$response["message"]= "project_created";
 				echo json_encode($response);
 			}
 			else{

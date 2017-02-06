@@ -7,7 +7,7 @@ angular.module('login')
 		NProgress.start();
 		NProgress.done();
 		
-		/** UI binding **/
+		/** UI bindings **/
 		$scope.btnLogin= "Login Here";
 		$scope.loginResponse =false;
 		
