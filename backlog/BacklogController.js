@@ -55,8 +55,6 @@ angular.module('backlog')
 	console.log($scope.list2);
   };
 
- 
-	
 	$scope.createBacklog= function(){
 		NProgress.set(0.5);
 		BacklogService.CreateBacklog($scope.backlogCreateName,$scope.backlogCreateType.type,$scope.backlogCreateDesc,$scope.backlogCreatePriority.type, $scope.userEmail, function(response){

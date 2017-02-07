@@ -11,17 +11,15 @@
 			<div class="backlogItemHeader">
 			<div class="backlogItemHeaderTitle">
 				<h5> {{item.backlogTitle}}</h5>
+				<span class="minimize" data-toggle="tooltip" data-placement="bottom" title="Created Since">{{item.dateCreated}} - {{item.timeCreated}}</span>
 			</div>
 			<div class="backlogItemHeaderTitleDetails">
 				<div class="backlogDetails">
 					<p class="minimize">Priority: {{item.backlogPriority}}</p>
 					<p class="minimize">Type: {{item.backlogType}}</p>
+					<p class="minimize" data-toggle="tooltip" data-placement="bottom" title="Backlog Owner"><i class="glyphicon glyphicon-user"></i> {{item.backlogCreator}}></p>
 				</div>
 			</div>
-			</div>
-			<div class="backlogItemFooter">
-				<span class="minimize">Created since {{item.dateCreated}} {{item.timeCreated}}</span>
-				<span class="minimize" style="float:right" data-toggle="tooltip" data-placement="bottom" title="Backlog Owner"><i class="glyphicon glyphicon-user"></i> {{item.backlogCreator}}</span>
 			</div>
 		</div>
 		</li>
@@ -34,17 +32,15 @@
 			<div class="backlogItemHeader">
 			<div class="backlogItemHeaderTitle">
 				<h5> {{item.backlogTitle}}</h5>
+				<span class="minimize" data-toggle="tooltip" data-placement="bottom" title="Created Since">{{item.dateCreated}} - {{item.timeCreated}}</span>
 			</div>
 			<div class="backlogItemHeaderTitleDetails">
 				<div class="backlogDetails">
 					<p class="minimize">Priority: {{item.backlogPriority}}</p>
 					<p class="minimize">Type: {{item.backlogType}}</p>
+					<p class="minimize" data-toggle="tooltip" data-placement="bottom" title="Backlog Owner"><i class="glyphicon glyphicon-user"></i> {{item.backlogCreator}}></p>
 				</div>
 			</div>
-			</div>
-			<div class="backlogItemFooter">
-				<span class="minimize">Created since {{item.dateCreated}} {{item.timeCreated}}</span>
-				<span class="minimize" style="float:right" data-toggle="tooltip" data-placement="bottom" title="Backlog Owner"><i class="glyphicon glyphicon-user"></i> {{item.backlogCreator}}</span>
 			</div>
 		</div>
 		</li>
