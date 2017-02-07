@@ -305,3 +305,95 @@ textarea{
 	.backlogItemFooter{display:table;width:100%;}
 }
 
+/** backlog **/
+#sprint{
+	padding-left:0px;
+	padding-right:0px;
+	box-sizing:border-box;
+	border-right: 2px solid #A4A294;
+	height:100vh;
+	
+}
+
+.sprintTitle{
+	box-sizing:border-box;
+	position:relative;
+	display:inline-block;
+	width:100%;
+	padding: 15px 10px 5px 10px;
+	overflow-x:hidden;
+	font-size:20px;
+	
+}
+
+.addSprint{
+	font-size:14px;
+	white-space: nowrap;
+	display:block;
+	float:right;
+	flex-wrap: wrap;
+	box-sizing:border-box;
+}
+
+.addSprint > i{
+	color:#000;
+}
+
+.sprintLists{
+	box-sizing:border-box;
+	padding:0px 10px;
+	display:inline-block;
+	width:100%;
+}
+
+.sprintLists> ul >li{
+	
+	background-color:#fff
+}
+
+.sprintLists > ul > li > a{
+	padding-left:10px;
+}
+
+.sprintItem{
+	
+	cursor:move;
+	border:1px solid #ccc;
+	border-left: 5px solid #ccc;
+	display:block;
+	margin:5px 0px;
+}
+
+.sprintItemHeader{
+	line-height:10px;
+	padding:5px 10px;
+	width:100%;
+	display:flex;
+	border-bottom: 1px solid #ccc;
+}
+
+.sprintItemHeaderTitle{
+	width:70%;
+}
+
+.sprintItemHeaderTitleDetails{
+	width:30%;
+	border-left:1px solid #ccc;
+}
+
+.sprintDetails{
+	padding:5px 5px;
+}
+
+.sprintItemFooter{
+	line-height:10px;
+	padding:12px 10px 15px 10px;
+}
+
+@media screen and (max-width: 450px) {
+	.sprintItem{border:1px solid #ccc; border-left:5px solid #ccc;}
+	.sprintItemHeader {display:table; width:100%; border-bottom:1px solid #ccc;}
+	.sprintItemHeaderTitle{width:100%;border-bottom: 1px solid #ccc; padding-bottom:20px;}
+	.sprintItemHeaderTitleDetails{border-left: none; width:100%;}
+	.sprintItemFooter{display:table;width:100%;}
+}

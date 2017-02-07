@@ -7,10 +7,10 @@ angular.module('register',[]);
 angular.module('project',[]);
 angular.module('sidebar',[]);
 angular.module('backlog',[]);
+angular.module('sprint',[]);
 
 
-
-angular.module('reApp',['header','login','home','register','project','sidebar','backlog','ngDragDrop','ngRoute','ngCookies', 'ngMessages'])
+angular.module('reApp',['header','login','home','register','project','sidebar','backlog','sprint','ngDragDrop','ngRoute','ngCookies', 'ngMessages'])
 
 .config(['$routeProvider', function($routeProvider){
 	$routeProvider

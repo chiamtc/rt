@@ -1,0 +1,87 @@
+<div class="sprintTitle">
+	<span>Sprint Backlog</span>
+	<span class="minimize" style="margin-left:12px"> <span class="badge">{{sprintCounts}} issues</span></span>
+	<button class="btn btn-default addSprint" data-toggle="modal" data-target="#sprintCreateModal" style="color:black">Create sprint</button>
+</div>
+<div class="sprintLists">
+	<ul style="border:1px solid blue" class="nav nav-pills nav-stacked dropPlace" data-drop="true" data-jqyoui-options="sprintLists" ng-model="sprintLists" jqyoui-droppable="{index:$index, multiple:true, onDrop:'dropCallback'}">
+		<li role="presentation"  data-drag="true" data-jqyoui-options="{revert:'invalid'}" ng-repeat="item in sprintLists | orderBy: 'item.sprintType'" ng-model="sprintLists" jqyoui-draggable="{index: {{$index}},animate:true, onStart:'startCallback(item, $index)'}" ng-show="item.backlogTitle">
+		<div class="sprintItem">
+			<div class="sprintItemHeader">
+			<div class="sprintItemHeaderTitle">
+				<h5> {{item.backlogTitle}}</h5>
+				<span class="minimize" data-toggle="tooltip" data-placement="bottom" title="Created Since">{{item.dateCreated}} - {{item.timeCreated}}</span>
+			</div>
+			<div class="sprintItemHeaderTitleDetails">
+				<div class="sprintDetails">
+					<p class="minimize">Priority: {{item.backlogPriority}}</p>
+					<p class="minimize">Type: {{item.backlogType}}</p>
+					<p class="minimize">Status: {{item.backlogStatus}}</p>
+					<p class="minimize" data-toggle="tooltip" data-placement="bottom" title="sprint Owner"><i class="glyphicon glyphicon-user"></i> {{item.backlogCreator}}></p>
+				</div>
+			</div>
+			</div>
+		</div>
+		</li>
+	</ul>
+
+<!-- Modal -->
+<div class="modal fade" id="sprintCreateModal" aria-hidden="true" role="dialog" tabindex="-1" aria-labelledby="sprintModal">
+	<div class="modal-dialog">
+      <!-- Modal content-->
+		<div class="modal-content">
+		
+			<div class="modal-header">
+			  <button type="button" class="close" data-dismiss="modal">&times;</button>
+			  <h4 class="modal-title">New sprint</h4>
+			</div>
+			
+			<div class="modal-body">
+				<form name="sprintForm" class="form-group">
+					<div class="form-group">
+					<label>sprint Name</label>
+					<input ng-model="sprintCreateName" type="text" class="form-control" name="sprintName" required placeholder="sprint Name">
+					
+					<div ng-messages="sprintForm.sprintName.$error" ng-if="sprintForm.sprintName.$touched">
+						<div ng-message="required" class="alert alert-danger alert-dismissible" role="alert">
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<strong>Warning!</strong> sprint title is required!
+						</div>  <!-- end of ng-message -->
+					</div> <!-- end of ng-messages -->
+					
+					</div>	
+					
+					<div class="form-group">
+						<label>sprint Type</label>
+						<select class="form-control" ng-model="sprintCreateType" ng-options="sprintType.typeName for sprintType in sprintCreateTypes"  ng-init="sprintCreateType = sprintCreateTypes[0]" name="sprintDropDown"></select>
+					</div>
+					
+					<div class="form-group">
+						<label>sprint Description</label>
+						<textarea ng-model="sprintCreateDesc" class="form-control" rows="4" name="sprintDesc" placeholder="sprint Description"></textarea>
+					</div>
+					
+					<div class="form-group">
+						<label>sprint Priority</label>
+						<select class="form-control" ng-model="sprintCreatePriority" ng-options="sprintPriority.name for sprintPriority in sprintPriorities"  ng-init="sprintCreatePriority = sprintPriorities[0]" name="sprintDropDown"></select>
+					</div>
+					
+					<div class="form-group">
+						<label>Created by {{userEmail}}</label>
+					</div>
+				</form>
+
+				<div ng-show="createsprintResponse" ng-class="createsprintResponseClass" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							{{createsprintResponseMessage}}
+				</div> <!-- create response -->
+			</div>
+			
+			<div class="modal-footer">
+				<button type="button" data-dismiss="modal" class="btn btn-default">Cancel</button>
+				<button type="button" ng-click="createsprint()" class="btn btn-primary">Create sprint</button>
+			</div>
+      </div> <!-- end of modal content -->
+	</div> <!-- end of modal dialog -->
+</div> <!-- end of modal -->
+<!--</div> for ng controller -->
