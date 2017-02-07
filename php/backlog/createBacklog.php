@@ -21,7 +21,7 @@ $date_created = date("Y/m/d");
 $time_created = date("h:i:sa");
 $backlogId = 0;
 if(!empty($backlogName) && !empty($backlogType) && !empty($backlogPriority) && !empty($backlogCreator) && !empty($projectKey)){
-	$createBacklogSql = "INSERT INTO `backlog`(`backlogId`, `backlogType`, `backlogTitle`, `backlogDesc`,  `date_created`, `time_created`, `backlogCreator`)VALUES('', '$backlogType', '$backlogTitle', '$backlogDesc', '$date_created', '$time_created','$backlogCreator')";
+	$createBacklogSql = "INSERT INTO `backlog`(`backlogId`, `backlogType`, `backlogTitle`, `backlogPriority`,`backlogDesc`,  `date_created`, `time_created`, `backlogCreator`)VALUES('', '$backlogType', '$backlogTitle', '$backlogPriority','$backlogDesc', '$date_created', '$time_created','$backlogCreator')";
 	if($conn ->query($createBacklogSql)){
 		$backlogId = $conn -> insert_id;
 		

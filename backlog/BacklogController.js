@@ -10,30 +10,52 @@ angular.module('backlog')
 	/** UI bindings **/
 	$scope.createBacklogResponse = false;
 	$scope.backlogLists = [];
-	
+	$scope.backlogCounts = 0;
 	$scope.list2 = [];
+	console.log($scope.list2);
 	$scope.backlogCreateTypes=[
-		{typeName: 'User Story', type: 'user_story',icon:'glyphicon glyphicon-plus'},
-		{typeName: 'Issues', type: 'issues',icon:'glyphicon glyphicon-user'},
-		{typeName: 'Tasks', type: 'tasks',icon:'glyphicon glyphicon-euro'},
+		{typeName: 'User Story', type: 'User Story',icon:'glyphicon glyphicon-plus'},
+		{typeName: 'Issues', type: 'Issues',icon:'glyphicon glyphicon-user'},
+		{typeName: 'Tasks', type: 'Tasks',icon:'glyphicon glyphicon-euro'},
 	];
 	
 	
 	$scope.backlogPriorities=[
-		{name: 'Highest', type: 'highest'},
-		{name: 'High', type: 'high'},
-		{name: 'Medium', type: 'medium'},
-		{name: 'Low', type: 'low'},
-		{name: 'Lowest', type: 'lowest'},
+		{name: 'Highest', type: 'Highest'},
+		{name: 'High', type: 'High'},
+		{name: 'Medium', type: 'Medium'},
+		{name: 'Low', type: 'Low'},
+		{name: 'Lowest', type: 'Lowest'},
 	];
 	
 	/** UI function(s) **/
 	
 	BacklogService.ListBacklogs(function(response){
-		console.log(response.backlogs);
-		$scope.backlogLists= response.backlogs;
+		if(response.backlogs == null){
+			$scope.backlogLists = [];
+			$scope.backlogListClass = "backlogListEmpty";
+		}else{
+			$scope.backlogListClass ="backlogLists";
+			$scope.backlogLists= response.backlogs;
+			$scope.backlogCounts = $scope.backlogLists.length;
+		}
 		
 	});
+	
+	$scope.startCallback = function(event, ui, title) {
+    console.log('You started draggin: ' + title.backlogTitle);
+    $scope.draggedTitle = title.backlogTitle;
+  };
+
+  $scope.dropCallback = function(event, ui) {
+    console.log('hey, you dumped me :-(' , $scope.draggedTitle);
+	BacklogService.SendUp($scope.draggedTitle,function(response){
+		console.log(response.message);
+	});
+	console.log($scope.list2);
+  };
+
+ 
 	
 	$scope.createBacklog= function(){
 		NProgress.set(0.5);
@@ -52,7 +74,6 @@ angular.module('backlog')
 					$scope.createBacklogResponseMessage = "Backlog Created.";
 					//console.log('/project/' + response.project[0].projectKey +'/'+ response.project[0].projectName);
 					$scope.backlogLists.push(response.backlog[0]);
-					console.log(response);
 					$timeout(function(){
 							$('#backlogCreateModal').modal('toggle');
 					},1500);

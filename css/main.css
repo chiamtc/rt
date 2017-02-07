@@ -205,8 +205,8 @@ textarea{
 
 /** backlog **/
 #backlog{
-	padding-left:10px;
-	padding-right:10px;
+	padding-left:0px;
+	padding-right:0px;
 	box-sizing:border-box;
 	border-right: 2px solid #A4A294;
 	height:100vh;
@@ -214,9 +214,8 @@ textarea{
 }
 .minimize{
 	text-decoration:none;
-	font-size: 12px;
+	font-size: 14px;
 	color:#999;
-	margin-left:12px;
 }
 
 .backlogTitle{
@@ -224,21 +223,16 @@ textarea{
 	position:relative;
 	display:inline-block;
 	width:100%;
-	font-weight:bold;
-	padding-top:10px;
-	padding-left:10px;
-	padding-right:10px;
-	padding-bottom:5px;
+	padding: 15px 10px 5px 10px;
 	overflow-x:hidden;
-	font-size:16px;
+	font-size:20px;
+	
 }
 
 .addBacklog{
-	padding-top:0px;
-	font-size:15px;
+	font-size:14px;
 	white-space: nowrap;
 	display:block;
-	text-decoration: none;
 	float:right;
 	flex-wrap: wrap;
 	box-sizing:border-box;
@@ -250,20 +244,61 @@ textarea{
 
 .backlogLists{
 	box-sizing:border-box;
+	padding:0px 10px;
 	display:inline-block;
 	width:100%;
 }
 
 .backlogLists> ul >li{
-	line-height:50px;
+	
+	background-color:#fff
 }
 
 .backlogLists > ul > li > a{
-	background-color:#fff;
 	padding-left:10px;
 }
 
 .dropPlace{
-	min-height: 70px !important; 
+	min-height: 100px !important; 
 }
 
+.backlogItem{
+	cursor:pointer;
+	border:1px solid #ccc;
+	display:block;
+	margin:5px 0px;
+}
+
+.backlogItemHeader{
+	line-height:10px;
+	padding:5px 10px;
+	width:100%;
+	display:flex;
+	border-bottom: 1px solid #ccc;
+}
+
+.backlogItemHeaderTitle{
+	width:80%;
+}
+
+.backlogItemHeaderTitleDetails{
+	width:20%;
+	border-left:1px solid #ccc;
+}
+
+.backlogDetails{
+	padding:5px 5px;
+}
+
+@media screen and (max-width: 450px) {
+	.backlogItem{border:1px solid #ccc;}
+	.backlogItemHeader {display:table; width:100%; border-bottom:1px solid #ccc;}
+	.backlogItemHeaderTitle{width:100%;border-bottom: 1px solid #ccc; }
+	.backlogItemHeaderTitleDetails{border-left: none; width:100%;}
+}
+
+
+.backlogItemFooter{
+	line-height:10px;
+	padding:10px 10px 15px 10px;
+}

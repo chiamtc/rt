@@ -1,16 +1,76 @@
 <div class="backlogTitle">
 	<span>Product Backlog</span>
-	<span class="minimize"> 0 issues</span>
-	<span class="addBacklog"><a href="" data-toggle="modal" data-target="#backlogCreateModal" style="color:black"><i class="glyphicon glyphicon-plus"></i></a></span>
+	<span class="minimize" style="margin-left:12px"> <span class="badge">{{backlogCounts}} issues</span></span>
+	<button class="btn btn-default addBacklog" data-toggle="modal" data-target="#backlogCreateModal" style="color:black">Create Backlog</button>
 </div>
 <div class="backlogLists">
 	
-	<ul class="nav nav-pills nav-stacked dropPlace" data-drop="true" data-jqyoui-options="backlogLists" ng-model="backlogLists" jqyoui-droppable="{multiple:true}" style="border:1px solid black">
-		<li role="presentation" data-drag="true" data-jqyoui-options="{revert:'invalid'}" ng-repeat="item in backlogLists" ng-model="backlogLists" jqyoui-draggable="{index: {{$index}},animate:true}" ng-show="item.backlogTitle"><a href="">{{item.backlogTitle}}</a></li>
+	<ul style="border:1px solid blue" class="nav nav-pills nav-stacked dropPlace" data-drop="true" data-jqyoui-options="backlogLists" ng-model="backlogLists" jqyoui-droppable="{index:$index, multiple:true, onDrop:'dropCallback' }">
+		<li role="presentation"  data-drag="true" data-jqyoui-options="{revert:'invalid'}" ng-repeat="item in backlogLists" ng-model="backlogLists" jqyoui-draggable="{index: {{$index}},animate:true, onStart:'startCallback(item, $index)'}" ng-show="item.backlogTitle">
+		<div class="backlogItem">
+			<div class="backlogItemHeader">
+			<div class="backlogItemHeaderTitle">
+				<h5> {{item.backlogTitle}}</h5>
+			</div>
+			<div class="backlogItemHeaderTitleDetails">
+				<div class="backlogDetails">
+					<p class="minimize">Priority: {{item.backlogPriority}}</p>
+					<p class="minimize">Type: {{item.backlogType}}</p>
+				</div>
+			</div>
+			</div>
+			<div class="backlogItemFooter">
+				<span class="minimize">Created since {{item.dateCreated}} {{item.timeCreated}}</span>
+				<span class="minimize" style="float:right" data-toggle="tooltip" data-placement="bottom" title="Backlog Owner"><i class="glyphicon glyphicon-user"></i> {{item.backlogCreator}}</span>
+			</div>
+		</div>
+		</li>
 	</ul>
 	<hr>
-	<ul class="nav nav-pills nav-stacked dropPlace" data-drop="true" ng-model="list2" data-jqyoui-options="list2" jqyoui-droppable="{multiple:true}"  style="border:1px solid red">
-		<li role="presentation" data-drag="true" data-jqyoui-options="{revert:'invalid'}" ng-repeat="item2 in list2" ng-model="list2" jqyoui-draggable="{index: {{$index}},animate:true}" ng-show="item2.backlogTitle"><a href="">{{item2.backlogTitle}}</a></li>
+	
+	<ul style="border: 1px solid red" class="nav nav-pills nav-stacked dropPlace" data-drop="true" data-jqyoui-options="list2" ng-model="list2" jqyoui-droppable="{index:$index, multiple:true, onDrop:'dropCallback' }">
+		<li role="presentation"  data-drag="true" data-jqyoui-options="{revert:'invalid'}" ng-repeat="item in list2" ng-model="list2" jqyoui-draggable="{index: {{$index}},animate:true, onStart:'startCallback(item, $index)'}" ng-show="item.backlogTitle">
+		<div class="backlogItem">
+			<div class="backlogItemHeader">
+			<div class="backlogItemHeaderTitle">
+				<h5> {{item.backlogTitle}}</h5>
+			</div>
+			<div class="backlogItemHeaderTitleDetails">
+				<div class="backlogDetails">
+					<p class="minimize">Priority: {{item.backlogPriority}}</p>
+					<p class="minimize">Type: {{item.backlogType}}</p>
+				</div>
+			</div>
+			</div>
+			<div class="backlogItemFooter">
+				<span class="minimize">Created since {{item.dateCreated}} {{item.timeCreated}}</span>
+				<span class="minimize" style="float:right" data-toggle="tooltip" data-placement="bottom" title="Backlog Owner"><i class="glyphicon glyphicon-user"></i> {{item.backlogCreator}}</span>
+			</div>
+		</div>
+		</li>
+	</ul>
+	
+	<!--  replace list2 with sprintList in sprintcontroller and sprint ui.html
+	<ul style="border: 1px solid red" class="nav nav-pills nav-stacked dropPlace" data-drop="true" data-jqyoui-options="list2" ng-model="list2" jqyoui-droppable="{index:$index, multiple:true, onDrop:'dropCallback' }">
+		<li role="presentation"  data-drag="true" data-jqyoui-options="{revert:'invalid'}" ng-repeat="item in list2" ng-model="list2" jqyoui-draggable="{index: {{$index}},animate:true, onStart:'startCallback(item, $index)'}" ng-show="item.backlogTitle">
+		<div class="backlogItem">
+			<div class="backlogItemHeader">
+			<div class="backlogItemHeaderTitle">
+				<h5> {{item.backlogTitle}}</h5>
+			</div>
+			<div class="backlogItemHeaderTitleDetails">
+				<div class="backlogDetails">
+					<p class="minimize">Priority: {{item.backlogPriority}}</p>
+					<p class="minimize">Type: {{item.backlogType}}</p>
+				</div>
+			</div>
+			</div>
+			<div class="backlogItemFooter">
+				<span class="minimize">Created since {{item.dateCreated}} {{item.timeCreated}}</span>
+				<span class="minimize" style="float:right" data-toggle="tooltip" data-placement="bottom" title="Backlog Owner"><i class="glyphicon glyphicon-user"></i> {{item.backlogCreator}}</span>
+			</div>
+		</div>
+		</li>
 	</ul>
 </div>
 
