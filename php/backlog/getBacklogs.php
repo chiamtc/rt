@@ -6,7 +6,7 @@ $projectKey = $data -> projectKey;
 $projectKey = mysqli_real_escape_string($conn, $projectKey);
 $response= array();
 
-$getBacklogSql = "SELECT * FROM `backlog` b join `upb` upb on b.backlogId = upb.backlogId AND upb.projectKey = '$projectKey'";
+$getBacklogSql = "SELECT * FROM `backlog` b join `upb` upb on b.backlogId = upb.backlogId AND b.sprintId = 0 AND upb.projectKey = '$projectKey'";
 $resultGetBacklogs = $conn -> query($getBacklogSql);
 if($resultGetBacklogs -> num_rows >0){
 	$response["backlogs"] = array();
@@ -20,7 +20,7 @@ if($resultGetBacklogs -> num_rows >0){
 		$backlog["dateCreated"] = $rowGetBacklogs["date_created"];
 		$backlog["timeCreated"] = $rowGetBacklogs["time_created"];
 		$backlog["backlogCreator"] = $rowGetBacklogs["backlogCreator"];
-		
+		$backlog["backlogStatus"] = $rowGetBacklogs["backlogStatus"];
 		array_push($response["backlogs"], $backlog);
 	}
 	$response["success"]=1;

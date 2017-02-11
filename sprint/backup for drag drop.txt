@@ -3,10 +3,10 @@
 	<span class="minimize" style="margin-left:12px"> <span class="badge">{{sprintCounts}} issues</span></span>
 	<button class="btn btn-default addSprint" data-toggle="modal" data-target="#sprintCreateModal" style="color:black">Create sprint</button>
 </div>
-<div ng-class="sprintListsClass"  style="border:1px solid black" ng-repeat="sprint in sprintLists track by $index">
-	<span>Sprint #{{$index +1}}</span>
+<div ng-class="sprintListsClass" style="border:1px solid black"; ng-repeat="sprint in sprintLists">
+	<span>{{sprint.sprintGoal}}</span>
 	<ul class="nav nav-pills nav-stacked dropPlace"   data-drop="true" data-jqyoui-options="{ greedy:true}" ng-model="sprint.backlogs" jqyoui-droppable="{multiple:true, onDrop:'dropCallback2'}">
-		<li role="presentation"  ng-repeat="item in sprint.backlogs" data-drag="true" data-jqyoui-options="{revert:'invalid'}"   ng-model="sprint.backlogs" jqyoui-draggable="{index: {{$index}},animate:true, onStart:'startCallback2(item, $index)'}">
+		<li role="presentation"  ng-repeat="item in sprint.backlogs" data-drag="true" data-jqyoui-options="{revert:'invalid'}"  data-id="{{item.backlogTitle}}" ng-model="sprint.backlogs" jqyoui-draggable="{index: {{$index}},animate:true, onStart:'startCallback2(item, $index)'}">
 		<div class="sprintItem">
 			<div class="sprintItemHeader">
 			<div class="sprintItemHeaderTitle">

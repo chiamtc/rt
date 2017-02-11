@@ -3,49 +3,30 @@
 	<span class="minimize" style="margin-left:12px"> <span class="badge">{{backlogCounts}} issues</span></span>
 	<button class="btn btn-default addBacklog" data-toggle="modal" data-target="#backlogCreateModal" style="color:black">Create Backlog</button>
 </div>
-<div class="backlogLists">
-	
-	<ul style="border:1px solid blue" class="nav nav-pills nav-stacked dropPlace" data-drop="true" data-jqyoui-options="backlogLists" ng-model="backlogLists" jqyoui-droppable="{index:$index, multiple:true, onDrop:'dropCallback' }">
-		<li role="presentation"  data-drag="true" data-jqyoui-options="{revert:'invalid'}" ng-repeat="item in backlogLists | orderBy: 'item.backlogType'" ng-model="backlogLists" jqyoui-draggable="{index: {{$index}},animate:true, onStart:'startCallback(item, $index)'}" ng-show="item.backlogTitle">
+<div ng-class="backlogListsClass">
+	<ul class="nav nav-pills nav-stacked dropPlace" data-drop="true" data-jqyoui-options="backlogLists" ng-model="backlogLists" jqyoui-droppable="{index:$index, multiple:true, onDrop:'dropCallback' }">
+		<li role="presentation"  data-drag="true" data-jqyoui-options="{revert:'invalid'}" ng-repeat="item in backlogLists" ng-model="backlogLists" jqyoui-draggable="{index: {{$index}},animate:true, onStart:'startCallback(item, $index)'}">
 		<div class="backlogItem">
 			<div class="backlogItemHeader">
 			<div class="backlogItemHeaderTitle">
-				<h5> {{item.backlogTitle}}</h5>
+				<h6> {{item.backlogTitle}}</h6>
 				<span class="minimize" data-toggle="tooltip" data-placement="bottom" title="Created Since">{{item.dateCreated}} - {{item.timeCreated}}</span>
+				<span class="minimize" data-toggle="tooltip" data-placement="bottom" title="Backlog Owner"> - <i class="glyphicon glyphicon-user"></i> {{item.backlogCreator}}</span>
 			</div>
 			<div class="backlogItemHeaderTitleDetails">
 				<div class="backlogDetails">
 					<p class="minimize">Priority: {{item.backlogPriority}}</p>
 					<p class="minimize">Type: {{item.backlogType}}</p>
-					<p class="minimize">Status: {{item.backlogStatus}}</p>
-					<p class="minimize" data-toggle="tooltip" data-placement="bottom" title="Backlog Owner"><i class="glyphicon glyphicon-user"></i> {{item.backlogCreator}}></p>
+					
 				</div>
 			</div>
 			</div>
 		</div>
 		</li>
 	</ul>
-	<hr>
 	
-	<ul style="border: 1px solid red" class="nav nav-pills nav-stacked dropPlace" data-drop="true" data-jqyoui-options="list2" ng-model="list2" jqyoui-droppable="{index:$index, multiple:true, onDrop:'dropCallback' }">
-		<li role="presentation"  data-drag="true" data-jqyoui-options="{revert:'invalid'}" ng-repeat="item in list2 | orderBy: 'item.backlogType'" ng-model="list2" jqyoui-draggable="{index: {{$index}},animate:true, onStart:'startCallback2(item, $index)'}" ng-show="item.backlogTitle">
-		<div class="backlogItem">
-			<div class="backlogItemHeader">
-			<div class="backlogItemHeaderTitle">
-				<h5> {{item.backlogTitle}}</h5>
-				<span class="minimize" data-toggle="tooltip" data-placement="bottom" title="Created Since">{{item.dateCreated}} - {{item.timeCreated}}</span>
-			</div>
-			<div class="backlogItemHeaderTitleDetails">
-				<div class="backlogDetails">
-					<p class="minimize">Priority: {{item.backlogPriority}}</p>
-					<p class="minimize">Type: {{item.backlogType}}</p>
-					<p class="minimize" data-toggle="tooltip" data-placement="bottom" title="Backlog Owner"><i class="glyphicon glyphicon-user"></i> {{item.backlogCreator}}></p>
-				</div>
-			</div>
-			</div>
-		</div>
-		</li>
-	</ul>
+	
+</div>
 	
 <!-- Modal -->
 <div class="modal fade" id="backlogCreateModal" aria-hidden="true" role="dialog" tabindex="-1" aria-labelledby="backlogModal">
@@ -62,7 +43,7 @@
 				<form name="backlogForm" class="form-group">
 					<div class="form-group">
 					<label>Backlog Name</label>
-					<input ng-model="backlogCreateName" type="text" class="form-control" name="backlogName" required placeholder="Backlog Name">
+					<input ng-model="backlogCreateName" type="text" maxlength="81" class="form-control" name="backlogName" required placeholder="Backlog Name">
 					
 					<div ng-messages="backlogForm.backlogName.$error" ng-if="backlogForm.backlogName.$touched">
 						<div ng-message="required" class="alert alert-danger alert-dismissible" role="alert">

@@ -38,19 +38,6 @@ angular.module('backlog')
 		});
 	};
 	
-	factory.SendUp = function(dummyData,callback){
-		$http({
-			method :'POST',
-			url: 'php/backlog/sendUp.php',
-			data:{
-				dummyData : dummyData,
-			},
-			headers:{ 'Content-Type' : 'application/json'}
-		}).then(function(response){
-			callback(response.data);
-		});
-	}
-	
 	return factory;
 	
 }])

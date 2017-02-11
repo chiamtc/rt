@@ -77,7 +77,9 @@ $sqltbl5 = "CREATE TABLE sprint(
             sprintGoal text NOT NULL,
 			sprintStartDate varchar(255),
 			sprintEndDate varchar(255),
-			PRIMARY KEY(sprintId)
+			projectKey varchar(255) NOT NULL,
+			PRIMARY KEY(sprintId),
+			FOREIGN KEY (projectKey) REFERENCES project(projectKey)
         )";
 
 if($conn -> query($sqltbl5)){
@@ -90,10 +92,13 @@ $sqltbl8 = "CREATE TABLE backlog(
             backlogId int NOT NULL AUTO_INCREMENT,
 			backlogType varchar(255) NOT NULL,
 			backlogTitle TEXT,
+			backlogPriority varchar(255) NOT NULL,
 			backlogDesc TEXT,
 			date_created varchar(255) NOT NULL,
 			time_created varchar(255) NOT NULL,
 			backlogCreator varchar(255) NOT NULL,
+			backlogStatus varchar(255) NOT NULL,
+			sprintId int,
             PRIMARY KEY(backlogId)
         )";
 

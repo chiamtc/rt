@@ -26,26 +26,32 @@ angular.module('backlog')
 		{name: 'Lowest', type: 'Lowest'},
 	];
 	
-	/** UI function(s) **/
 	$scope.startCallback = function(event, ui, title){
 		console.log('You started draggin: ' + title.backlogTitle);
 		$scope.draggedTitle = title.backlogTitle;
-		$scope.backlogCounts = $scope.backlogLists.length;
 	};
 
 	$scope.dropCallback = function(event, ui) {
-		console.log('hey, you dumped me :-(' , $scope.draggedTitle);
-		$scope.backlogCounts = $scope.backlogLists.length;
+		if($scope.backlogLists.length == 0){
+			$scope.backlogListsClass = "backlogListsEmpty";
+		}
+		
+		if($scope.sprintLists.length == 0){
+			$scope.sprintListsClass= "sprintListsEmpty";
+		}else{
+			$scope.backlogListsClass ="backlogLists";
+			console.log('hey, you dumped me :-(' , $scope.draggedTitle);
+			
+		}
 		
 	};
-	
 	
 	BacklogService.ListBacklogs(function(response){
 		if(response.backlogs == null){
 			$scope.backlogLists = [];
-			$scope.backlogListClass = "backlogListEmpty";
+			$scope.backlogListsClass = "backlogListsEmpty";
 		}else{
-			$scope.backlogListClass ="backlogLists";
+			$scope.backlogListsClass ="backlogLists";
 			$scope.backlogLists= response.backlogs;
 			$scope.backlogCounts = $scope.backlogLists.length;
 			$scope.sprintCounts = $scope.sprintLists.length;
@@ -61,7 +67,7 @@ angular.module('backlog')
 			
 			switch(response.success){
 				case 0:
-					$scope.createResponseClass ="alert alert-warning";
+					$scope.createResponseClass ="alert alert-danger";
 					$scope.createResponseMessage = "Server Error";
 				break;
 				
@@ -69,20 +75,22 @@ angular.module('backlog')
 					$scope.createBacklogResponseClass ="alert alert-success";
 					$scope.createBacklogResponseMessage = "Backlog Created.";
 					//console.log('/project/' + response.project[0].projectKey +'/'+ response.project[0].projectName);
+					
+					$scope.backlogListsClass = "backlogLists";
 					$scope.backlogLists.push(response.backlog[0]);
-					console.log(response.backlog[0]);
 					$timeout(function(){
 							$('#backlogCreateModal').modal('toggle');
-					},1500);
+					},500);
+					
 				break;
 				
 				case 2:
-					$scope.createResponseClass ="alert alert-warning";
+					$scope.createResponseClass ="alert alert-danger";
 					$scope.createResponseMessage = "Server error 2";
 				break;
 				
 				default:
-					$scope.createResponseClass ="alert alert-warning";
+					$scope.createResponseClass ="alert alert-danger";
 					$scope.createResponseMessage = "Empty field(s) detected";
 				break;
 				

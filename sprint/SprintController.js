@@ -10,19 +10,84 @@ angular.module('sprint')
 	/** UI bindings **/
 	$scope.sprintLists = [];
 	$scope.sprintCounts = 0;
+	$scope.createSprintResponse= false;
+	/** date format **/
+	//var a = new Date(Date.parse("2017-02-08T14:00:00.000Z"));
 	
-	$scope.startCallback = function(event, ui, title){
+	$scope.startCallback2 = function(event, ui, title){
 		console.log('You started draggin: ' + title.backlogTitle);
 		$scope.draggedTitle = title.backlogTitle;
 	};
 
-	$scope.dropCallback = function(event, ui) {
-		console.log('hey, you dumped me :-(' , $scope.draggedTitle);
-		console.log($scope.sprintLists);
-		$scope.sprintCounts = $scope.sprintLists.length;
-		$scope.backlogCounts = $scope.backlogLists.length;
+	$scope.dropCallback2 = function(event, ui) {
+		if($scope.backlogLists.length == 0){
+			$scope.backlogListsClass = "backlogListsEmpty";
+		}
 		
+		if($scope.sprintLists.length == 0){
+			$scope.sprintListsClass= "sprintListsEmpty";
+		}else{
+			if($scope.backlogLists.length == 0){
+				$scope.backlogListsClass = "backlogListsEmpty";
+			}
+			$scope.sprintListsClass = "sprintLists";
+			console.log('hey, you dumped me :-(' , $scope.draggedTitle);
+			console.log($scope.sprintLists);
+		}
 	};
+	
+	SprintService.ListSprints(function(response){
+		switch(response.success){
+			case 1:
+				$scope.sprintListsClass="sprintLists";
+				$scope.sprintLists = response.sprints;
+			break;
+		}
+	});
+	
+	$scope.createSprint = function(){
+		$scope.createSprintResponse = !$scope.createSprintResponse;
+		if($scope.sprintStartDate.getTime() == $scope.sprintEndDate.getTime()){
+			$scope.createSprintResponseClass ="alert alert-danger";
+			$scope.createSprintResponseMessage = "Both dates shouldn't be the same!";
+			
+		}else if($scope.sprintStartDate.getTime() > $scope.sprintEndDate.getTime()){
+			$scope.createSprintResponseClass ="alert alert-danger";
+			$scope.createSprintResponseMessage = "Start date is later than end date";
+		}else{
+			SprintService.CreateSprint($scope.sprintGoal, $scope.sprintStartDate, $scope.sprintEndDate, function(response){
+				switch(response.success){
+				case 0:
+					$scope.createSprintResponseClass ="alert alert-danger";
+					$scope.createSprintResponseMessage = "Server Error";
+				break;
+				
+				case 1:
+					$scope.createSprintResponseClass ="alert alert-success";
+					$scope.createSprintResponseMessage = "Sprint Created.";
+					//console.log('/project/' + response.project[0].projectKey +'/'+ response.project[0].projectName);
+					$scope.sprintLists.push(response.sprints[0]);
+					$scope.sprintListsClass = "sprintLists";
+					$timeout(function(){
+							$('#sprintCreateModal').modal('toggle');
+					},500);
+					
+				break;
+				
+				case 2:
+					$scope.createSprintResponseClass ="alert alert-danger";
+					$scope.createSprintResponseMessage = "Server error 2";
+				break;
+				
+				case 3:
+					$scope.createSprintResponseClass ="alert alert-danger";
+					$scope.createSprintResponseMessage = "Empty field(s) detected";
+				break;
+				
+			}
+			}); 
+		}
+	}
 }])
 
 .directive('productSprint',function(){
