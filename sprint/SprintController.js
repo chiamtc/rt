@@ -14,12 +14,12 @@ angular.module('sprint')
 	/** date format **/
 	//var a = new Date(Date.parse("2017-02-08T14:00:00.000Z"));
 	
-	$scope.startCallback2 = function(event, ui, title){
-		console.log('You started draggin: ' + title.backlogTitle);
-		$scope.draggedTitle = title.backlogTitle;
+	$scope.startCallback2 = function(event, ui, sc2){
+		console.log('You started draggin: ' + sc2.backlogId);
+		$scope.draggedTitle2 = sc2.backlogId;
 	};
 
-	$scope.dropCallback2 = function(event, ui) {
+	$scope.dropCallback2 = function(event, ui, item) {
 		if($scope.backlogLists.length == 0){
 			$scope.backlogListsClass = "backlogListsEmpty";
 		}
@@ -31,8 +31,7 @@ angular.module('sprint')
 				$scope.backlogListsClass = "backlogListsEmpty";
 			}
 			$scope.sprintListsClass = "sprintLists";
-			console.log('hey, you dumped me :-(' , $scope.draggedTitle);
-			console.log($scope.sprintLists);
+			console.log('hey, you dumped me :-(' , item,$scope.draggedTitle);
 		}
 	};
 	

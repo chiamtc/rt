@@ -5,7 +5,7 @@
 </div>
 <div ng-class="sprintListsClass"  style="border:1px solid black" ng-repeat="sprint in sprintLists track by $index">
 	<span>Sprint #{{$index +1}}</span>
-	<ul class="nav nav-pills nav-stacked dropPlace"   data-drop="true" data-jqyoui-options="{ greedy:true}" ng-model="sprint.backlogs" jqyoui-droppable="{multiple:true, onDrop:'dropCallback2'}">
+	<ul class="nav nav-pills nav-stacked dropPlace"   data-drop="true" data-jqyoui-options="{ greedy:true}" ng-model="sprint.backlogs" jqyoui-droppable="{multiple:true, onDrop:'dropCallback2(sprint.sprintId)'}">
 		<li role="presentation"  ng-repeat="item in sprint.backlogs" data-drag="true" data-jqyoui-options="{revert:'invalid'}"   ng-model="sprint.backlogs" jqyoui-draggable="{index: {{$index}},animate:true, onStart:'startCallback2(item, $index)'}">
 		<div class="sprintItem">
 			<div class="sprintItemHeader">

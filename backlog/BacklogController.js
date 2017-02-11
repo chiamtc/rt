@@ -27,8 +27,8 @@ angular.module('backlog')
 	];
 	
 	$scope.startCallback = function(event, ui, title){
-		console.log('You started draggin: ' + title.backlogTitle);
-		$scope.draggedTitle = title.backlogTitle;
+		console.log('You started draggin: ' + title.backlogId);
+		$scope.draggedTitle = title.backlogId;
 	};
 
 	$scope.dropCallback = function(event, ui) {
@@ -40,7 +40,7 @@ angular.module('backlog')
 			$scope.sprintListsClass= "sprintListsEmpty";
 		}else{
 			$scope.backlogListsClass ="backlogLists";
-			console.log('hey, you dumped me :-(' , $scope.draggedTitle);
+			console.log('hey, you dumped me :-(' , $scope.draggedTitle2, 'from sc12');
 			
 		}
 		

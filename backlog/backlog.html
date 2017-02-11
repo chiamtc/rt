@@ -4,7 +4,7 @@
 	<button class="btn btn-default addBacklog" data-toggle="modal" data-target="#backlogCreateModal" style="color:black">Create Backlog</button>
 </div>
 <div ng-class="backlogListsClass">
-	<ul class="nav nav-pills nav-stacked dropPlace" data-drop="true" data-jqyoui-options="backlogLists" ng-model="backlogLists" jqyoui-droppable="{index:$index, multiple:true, onDrop:'dropCallback' }">
+	<ul class="nav nav-pills nav-stacked dropPlace" data-drop="true" data-jqyoui-options="backlogLists" ng-model="backlogLists" jqyoui-droppable="{index:$index, multiple:true, onDrop:'dropCallback(item, $index)' }">
 		<li role="presentation"  data-drag="true" data-jqyoui-options="{revert:'invalid'}" ng-repeat="item in backlogLists" ng-model="backlogLists" jqyoui-draggable="{index: {{$index}},animate:true, onStart:'startCallback(item, $index)'}">
 		<div class="backlogItem">
 			<div class="backlogItemHeader">
