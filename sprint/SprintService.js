@@ -26,6 +26,7 @@ angular.module('sprint')
 			data:{
 				sprintId: sprintId,
 				backlogId : backlogId,
+				projectKey : $routeParams.projectKey,
 			},
 			headers: {'Content-Type':'application/json'}
 		}).then(function(response){

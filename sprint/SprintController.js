@@ -16,7 +16,7 @@ angular.module('sprint')
 	
 	$scope.startCallback2 = function(event, ui, sc2){
 		console.log('You started draggin: ' + sc2.backlogId);
-		$scope.draggedTitle2= sc2.backlogId;
+		$scope.draggedTitle= sc2.backlogId;
 	};
 
 	$scope.dropCallback2 = function(event, ui, item) {
@@ -36,6 +36,7 @@ angular.module('sprint')
 				NProgress.start();
 				NProgress.set(0.7);
 				NProgress.done();
+				$scope.sprintLists = response.sprints;
 			});
 		}
 	};

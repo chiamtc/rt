@@ -9,13 +9,11 @@ $backlogId = mysqli_real_escape_string($conn, $backlogId);
 $response = array();
 $updateSprintSql = "UPDATE `backlog` SET `sprintId`=$sprintId WHERE `backlogId` = $backlogId";
 if($conn -> query($updateSprintSql)){
-	$response["success"] = 1;
-	$response["message"] = "updated sprint!";
-	echo json_encode($response);
+	include 'getSprints.php';
 }else{
 	$response["success"] = 0;
 	$response["message"] = "sprint update failed";
 	echo json_encode($response);
 }
-$conn ->close();
+//$conn ->close();
 ?>

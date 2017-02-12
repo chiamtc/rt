@@ -40,16 +40,14 @@ angular.module('backlog')
 			$scope.sprintListsClass= "sprintListsEmpty";
 		}else{
 			$scope.backlogListsClass ="backlogLists";
-			console.log('hey, you dumped me :-(' , $scope.draggedTitle2, 'from sc12');
-			SprintService.UpdateSprint(0, $scope.draggedTitle2, function(response){
+			console.log('hey, you dumped me :-(' , $scope.draggedTitle, 'from sc12');
+			SprintService.UpdateSprint(0, $scope.draggedTitle, function(response){
 				console.log(0 + " " + $scope.draggedTitle2);
 				NProgress.start();
 				NProgress.set(0.7);
 				NProgress.done();
-			});
-			
+			});	
 		}
-		
 	};
 	
 	BacklogService.ListBacklogs(function(response){
@@ -62,49 +60,47 @@ angular.module('backlog')
 			$scope.backlogCounts = $scope.backlogLists.length;
 			$scope.sprintCounts = $scope.sprintLists.length;
 		}
-		
 	});
 
 	$scope.createBacklog= function(){
 		NProgress.set(0.5);
 		BacklogService.CreateBacklog($scope.backlogCreateName,$scope.backlogCreateType.type,$scope.backlogCreateDesc,$scope.backlogCreatePriority.type, $scope.userEmail, function(response){
 			
-			$scope.createBacklogResponse = !$scope.createBacklogResponse;
+		$scope.createBacklogResponse = !$scope.createBacklogResponse;
+		
+		switch(response.success){
+			case 0:
+				$scope.createResponseClass ="alert alert-danger";
+				$scope.createResponseMessage = "Server Error";
+			break;
 			
-			switch(response.success){
-				case 0:
-					$scope.createResponseClass ="alert alert-danger";
-					$scope.createResponseMessage = "Server Error";
-				break;
-				
-				case 1:
-					$scope.createBacklogResponseClass ="alert alert-success";
-					$scope.createBacklogResponseMessage = "Backlog Created.";
+			case 1:
+				$scope.createBacklogResponseClass ="alert alert-success";
+				$scope.createBacklogResponseMessage = "Backlog Created.";
 					//console.log('/project/' + response.project[0].projectKey +'/'+ response.project[0].projectName);
 					
-					$scope.backlogListsClass = "backlogLists";
-					$scope.backlogLists.push(response.backlog[0]);
-					$timeout(function(){
-							$('#backlogCreateModal').modal('toggle');
-					},500);
+				$scope.backlogListsClass = "backlogLists";
+				$scope.backlogLists.push(response.backlog[0]);
+				$timeout(function(){
+					$('#backlogCreateModal').modal('toggle');
+				},500);
 					
-				break;
+			break;
 				
-				case 2:
-					$scope.createResponseClass ="alert alert-danger";
-					$scope.createResponseMessage = "Server error 2";
-				break;
+			case 2:
+				$scope.createResponseClass ="alert alert-danger";
+				$scope.createResponseMessage = "Server error 2";
+			break;
 				
-				default:
-					$scope.createResponseClass ="alert alert-danger";
-					$scope.createResponseMessage = "Empty field(s) detected";
-				break;
-				
+			default:
+				$scope.createResponseClass ="alert alert-danger";
+				$scope.createResponseMessage = "Empty field(s) detected";
+			break;
+			
 			}
 		});
 		NProgress.done();
 	};
-	
 }])
 
 .directive('productBacklog',function(){

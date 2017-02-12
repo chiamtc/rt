@@ -1,10 +1,74 @@
 <div id="mySidenav" class="sidenav">
 	<ul>
-		<li ng-class="isCurrent('{{menu.ahref}}')" ng-repeat="menu in menus.items">
-		<a href="{{menu.href}}"><i class="{{menu.icon}}"></i> {{menu.item}} </a>
+		<li ng-class="isCurrent('/project/{{pathParams}}')">
+		<a href="#/project/{{pathParams}}"><i class="glyphicon glyphicon-list"></i> Backlog </a>
 		</li>
 		
+		<li ng-class="isCurrent('/sprint')">
+		<a href="#/sprint"><i class="glyphicon glyphicon-tasks"></i> Sprint </a>
+		</li>
+		
+		<li ng-class="isCurrent('/tasks')">
+		<a href="#/tasks"><i class="glyphicon glyphicon-flag"></i> Issues </a>
+		</li>
+		
+		<li ng-class="isCurrent('/analytics')">
+		<a href="#/analytics"><i class="glyphicon glyphicon-stats"></i> Analytics </a>
+		</li>
+		
+		<li >
+		<a href="" data-toggle="modal" data-target="#inviteModal"><i class="glyphicon glyphicon-user"></i> Invite Member </a>
+		</li>
+		
+		<li ng-class="isCurrent('/settings')">
+		<a href="#/settings"><i class="glyphicon glyphicon-wrench"></i> Project Settings </a>
+		</li>
 		<!--<li class="closebtn" style="cursor:pointer" ng-click="controlNavSize()"> <a href="">  navsize</a></li>-->
 	</ul>
 	
 </div>
+
+<div class="modal fade" id="inviteModal" aria-hidden="true" role="dialog" tabindex="-1" aria-labelledby="inviteModal">
+	<div class="modal-dialog">
+      <!-- Modal content-->
+		<div class="modal-content">
+		
+		<div class="modal-header">
+		  <button type="button" class="close" data-dismiss="modal">&times;</button>
+		  <h4 class="modal-title">Invite New Member</h4>
+		</div>
+			
+		<div class="modal-body">
+			<form name="inviteForm" class="form-group">
+				<div class="form-group">
+				<label>New Member's Email</label>
+				<input ng-model="memberEmail" type="email" class="form-control" name="memberemail" required placeholder="Member's Email">
+					
+				<div ng-messages="inviteForm.memberemail.$error" ng-if="inviteForm.memberemail.$touched">
+					<div ng-message="required" class="alert alert-danger alert-dismissible" role="alert">
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<strong>Warning!</strong> Member's email is required if you want to invite!!!
+					</div>  <!-- end of ng-message -->
+					
+					<div ng-message="email" class="alert alert-danger alert-dismissible" role="alert">
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<strong>Warning!</strong> That's not an email!
+					</div>
+				</div> <!-- end of ng-messages -->
+					
+				</div>	
+			</form>
+
+			<div ng-show="inviteResponse" ng-class="inviteResponseClass" role="alert">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				{{inviteResponseMessage}}
+			</div> <!-- create response -->
+		</div>
+			
+		<div class="modal-footer">
+			<button type="button" data-dismiss="modal" class="btn btn-default">Cancel</button>
+			<button type="button" ng-click="inviteMember()" class="btn btn-primary">Invite Member</button>
+		</div>
+		</div> <!-- end of modal content -->
+	</div> <!-- end of modal dialog -->
+</div> <!-- end of modal -->
