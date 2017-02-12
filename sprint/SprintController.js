@@ -16,7 +16,7 @@ angular.module('sprint')
 	
 	$scope.startCallback2 = function(event, ui, sc2){
 		console.log('You started draggin: ' + sc2.backlogId);
-		$scope.draggedTitle2 = sc2.backlogId;
+		$scope.draggedTitle2= sc2.backlogId;
 	};
 
 	$scope.dropCallback2 = function(event, ui, item) {
@@ -31,7 +31,12 @@ angular.module('sprint')
 				$scope.backlogListsClass = "backlogListsEmpty";
 			}
 			$scope.sprintListsClass = "sprintLists";
-			console.log('hey, you dumped me :-(' , item,$scope.draggedTitle);
+			console.log('sprintId' , item,' backlogId',$scope.draggedTitle);
+			SprintService.UpdateSprint(item, $scope.draggedTitle, function(response){
+				NProgress.start();
+				NProgress.set(0.7);
+				NProgress.done();
+			});
 		}
 	};
 	

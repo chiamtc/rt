@@ -29,6 +29,7 @@ if(!empty($backlogName) && !empty($backlogType) && !empty($backlogPriority) && !
 		if($conn ->query($updateUpbSql)){
 			$response["backlog"] = array();
 			$backlog = array();
+			$backlog["backlogId"] = $backlogId;
 			$backlog["backlogTitle"] = $backlogTitle;
 			$backlog["backlogType"] = $backlogType;
 			$backlog["backlogDesc"] = $backlogDesc;

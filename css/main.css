@@ -209,7 +209,6 @@ textarea{
 	padding-right:0px;
 	box-sizing:border-box;
 	
-	
 }
 .minimize{
 	text-decoration:none;
@@ -227,8 +226,6 @@ textarea{
 	font-size:20px;
 	
 }
-
-
 
 .addBacklog{
 	font-size:14px;
@@ -249,7 +246,6 @@ textarea{
 	padding:0px 10px;
 	display:inline-block;
 	width:100%;
-	border:2px dashed black;
 }
 
 .backlogLists{
@@ -257,7 +253,6 @@ textarea{
 	padding:0px 10px;
 	display:inline-block;
 	width:100%;
-	border:1px solid black;
 }
 
 .backlogLists> ul >li{
@@ -269,16 +264,15 @@ textarea{
 }
 
 .dropPlace{
-	min-height: 200px !important;
+	min-height: 150px !important;
+	border:2px dashed black;
 }
 
 .backlogItem{
-	
 	cursor:move;
 	border:1px solid #ccc;
 	border-left: 5px solid #ccc;
 	display:block;
-	
 }
 
 .backlogItemHeader{

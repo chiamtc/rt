@@ -19,16 +19,18 @@ angular.module('sprint')
 		});
 	}
 	
-	factory.updateSprint = function(){
+	factory.UpdateSprint = function(sprintId, backlogId,callback){
 		$http({
 			method: 'POST',
 			url: 'php/sprint/updateSprint.php',
 			data:{
-				
+				sprintId: sprintId,
+				backlogId : backlogId,
 			},
 			headers: {'Content-Type':'application/json'}
 		}).then(function(response){
-			
+			console.log(response.data);
+			callback(response.data);
 		});
 	}
 	

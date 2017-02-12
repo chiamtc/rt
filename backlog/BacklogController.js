@@ -1,7 +1,7 @@
 'use strict';
 angular.module('backlog')
 
-.controller('BacklogController', ['$scope','$timeout','BacklogService', function($scope, $timeout, BacklogService){
+.controller('BacklogController', ['$scope','$timeout','SprintService','BacklogService', function($scope, $timeout,SprintService,  BacklogService){
 	
 	/** fancy starts **/
 	NProgress.start();
@@ -41,6 +41,12 @@ angular.module('backlog')
 		}else{
 			$scope.backlogListsClass ="backlogLists";
 			console.log('hey, you dumped me :-(' , $scope.draggedTitle2, 'from sc12');
+			SprintService.UpdateSprint(0, $scope.draggedTitle2, function(response){
+				console.log(0 + " " + $scope.draggedTitle2);
+				NProgress.start();
+				NProgress.set(0.7);
+				NProgress.done();
+			});
 			
 		}
 		

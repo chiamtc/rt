@@ -15,24 +15,24 @@ if(!empty($sprintStartDate) && !empty($sprintEndDate) && !empty($projectKey)){
 	$createSprintSql = "Insert into `sprint`(`sprintId`, `sprintGoal`, `sprintStartDate`, `sprintEndDate`, `projectKey`) VALUES('', '$sprintGoal', '$sprintStartDate', '$sprintEndDate', '$projectKey')";
 	if($conn -> query($createSprintSql)){
 			
-			$response["sprints"] = array();
-			$sprint = array();
-								
-			$sprint["sprintId"] = $conn->insert_id;
-			$sprint["sprintGoal"] = $sprintGoal;
-			$sprint["sprintStartDate"] = $sprintStartDate;
-			$sprint["sprintEndDate"] = $sprintEndDate;
+		$response["sprints"] = array();
+		$sprint = array();
 			
-			$sprint["backlogs"] = array();
-			$backlog = array();
+		$sprint["sprintId"] = $conn->insert_id;
+		$sprint["sprintGoal"] = $sprintGoal;
+		$sprint["sprintStartDate"] = $sprintStartDate;
+		$sprint["sprintEndDate"] = $sprintEndDate;
+		
+		$sprint["backlogs"] = array();
+		$backlog = array();
 			
-			array_push($sprint["backlogs"], $backlog);
+		array_push($sprint["backlogs"], $backlog);
 			
-			array_push($response["sprints"], $sprint);
+		array_push($response["sprints"], $sprint);
 			
-			$response["success"] = 1;
-			$response["message"] = "sprint_created";
-			echo json_encode($response);
+		$response["success"] = 1;
+		$response["message"] = "sprint_created";
+		echo json_encode($response);
 		
 	}else{
 		$response["success"] = 0;
