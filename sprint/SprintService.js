@@ -53,6 +53,21 @@ angular.module('sprint')
 		});
 	}
 	
+	factory.DeleteSprint = function(sprintId,callback){
+		$http({
+			method: 'POST',
+			url: 'php/sprint/deleteSprint.php',
+			data:{
+				sprintId: sprintId,
+				projectKey : $routeParams.projectKey,
+			},
+			headers: {'Content-Type':'application/json'}
+		}).then(function(response){
+			console.log(response.data);
+			callback(response.data);
+		});
+	}
+	
 	factory.CreateSprint = function(sprintGoal, sprintStartDate, sprintEndDate,callback){
 		$http({
 			method : 'POST',

@@ -1,7 +1,7 @@
 'use strict';
 angular.module('sprint')
 
-.controller('SprintController', ['$scope', '$timeout', 'SprintService', function($scope, $timeout,SprintService){
+.controller('SprintController', ['$scope', '$timeout', 'BacklogService','SprintService', function($scope, $timeout,BacklogService, SprintService){
 
 	/** fancy starts **/
 	NProgress.start();
@@ -45,7 +45,7 @@ angular.module('sprint')
 		$scope.sprintEditEndDate = new Date(Date.parse(sprint.sprintEndDate));
 	}
 	
-	$scope.updateSprint = function(){
+	$scope.updateSprintDetails = function(){
 		SprintService.UpdateSprintDetails($scope.sprintEditId, $scope.sprintEditGoal, $scope.sprintEditStartDate, $scope.sprintEditEndDate, function(response){
 			NProgress.start();
 			$scope.editSprintResponse = !$scope.editSprintResponse;
@@ -66,6 +66,48 @@ angular.module('sprint')
 			NProgress.set(0.7);
 			NProgress.done();
 		});
+	}
+	
+	$scope.passDelete = function(sprint){
+		$scope.sprintDeleteId = sprint.sprintId;
+	}
+	
+	$scope.deleteSprint = function(){
+		SprintService.DeleteSprint($scope.sprintDeleteId, function(response){
+			NProgress.start();
+			switch(response.success){
+				case 0:
+				break;
+				
+				case 1:
+					SprintService.ListSprints(function(response){
+					
+						switch(response.success){
+							case 1:
+								$scope.sprintListsClass="sprintLists";
+								$scope.sprintLists = response.sprints;
+							break;
+						}
+					});
+					BacklogService.ListBacklogs(function(response){
+						if(response.backlogs == null){
+							$scope.backlogLists = [];
+							$scope.backlogListsClass = "backlogListsEmpty";
+						}else{
+							$scope.backlogListsClass ="backlogLists";
+							$scope.backlogLists= response.backlogs;
+						}
+					});
+					$timeout(function(){
+						$('#sprintDeleteModal').modal('toggle');
+					},500);
+				
+				NProgress.set(0.7);
+				NProgress.done();
+				break;
+			}
+		});
+
 	}
 	
 	SprintService.ListSprints(function(response){
@@ -104,7 +146,6 @@ angular.module('sprint')
 					$timeout(function(){
 							$('#sprintCreateModal').modal('toggle');
 					},500);
-					
 				break;
 				
 				case 2:

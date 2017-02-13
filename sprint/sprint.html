@@ -2,7 +2,7 @@
 <span>Sprint Backlog</span>
 <span class="minimize" style="margin-left:12px;padding-top:9px"> 
 <span class="badge">{{sprintLists.length}} sprints</span></span>
-<button class="btn btn-default addSprint" data-toggle="modal" data-target="#sprintCreateModal" style="color:black">Create sprint</button>
+<button class="btn btn-default addSprint" data-toggle="modal" data-target="#sprintCreateModal" style="color:black"><i class="glyphicon glyphicon-plus"></i> Create sprint</button>
 	
 </div>
 <div ng-class="sprintListsClass" ng-repeat="sprint in sprintLists track by $index">
@@ -13,8 +13,8 @@
 			<div class="dropdown">
 				<button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown"><i class="glyphicon glyphicon-option-horizontal" style="font-weight:bold"></i></button>
 					<ul class="dropdown-menu dropdown-menu-right">
-						<li><a href="" ng-click="passEdit(sprint)" data-toggle="modal" data-target="#sprintEditModal">Edit Sprint</a></li>
-						<li><a href="" ng-click="deleteSprint()">Delete Sprint</a></li>
+						<li><a href="" ng-click="passEdit(sprint)" data-toggle="modal" data-target="#sprintEditModal"><i class="glyphicon glyphicon-edit"></i> Edit Sprint</a></li>
+						<li><a href="" ng-click="passDelete(sprint)" data-toggle="modal" data-target="#sprintDeleteModal"><i class="glyphicon glyphicon-remove"></i> Delete Sprint</a></li>
 					</ul>
 			</div>
 		</div>
@@ -41,13 +41,35 @@
 	<hr>
 </div>
 
+<div class="modal fade" id="sprintDeleteModal" aria-hidden="true" role="dialog" tabindex="-1" >
+	<div class="modal-dialog">
+      <!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+			  <button type="button" class="close" data-dismiss="modal">&times;</button>
+			 <h4 class="modal-title" ng-model="sprintDeleteId">Delete Sprint</h4>
+			</div>
+			
+			<div class="modal-body">
+				<h5> Are you sure to <span style="color:red;font-weight:bold;">delete</span> this sprint?</h5>
+			</div>
+			
+			<div class="modal-footer">
+				<button type="button" data-dismiss="modal" class="btn btn-default">Cancel</button>
+				<button type="button" ng-click="deleteSprint()" class="btn btn-danger">Delete Sprint</button>
+			</div>
+      </div> <!-- end of modal content -->
+	</div> <!-- end of modal dialog -->
+</div> <!-- end of modal -->
+<!--</div> for ng controller -->
+
 <div class="modal fade" id="sprintEditModal" aria-hidden="true" role="dialog" tabindex="-1" >
 	<div class="modal-dialog">
       <!-- Modal content-->
 		<div class="modal-content">
 			<div class="modal-header">
 			  <button type="button" class="close" data-dismiss="modal">&times;</button>
-			  <h4 class="modal-title" ng-model="sprintEditId"><i class="glyphicon glyphicon-tasks"></i> Edit Sprint</h4>
+			  <h4 class="modal-title" ng-model="sprintEditId">Edit Sprint</h4>
 			</div>
 			
 			<div class="modal-body">
@@ -100,7 +122,7 @@
 			
 			<div class="modal-footer">
 				<button type="button" data-dismiss="modal" class="btn btn-default">Cancel</button>
-				<button type="button" ng-click="updateSprint()" class="btn btn-primary">Update Sprint</button>
+				<button type="button" ng-click="updateSprintDetails()" class="btn btn-primary">Update Sprint</button>
 			</div>
       </div> <!-- end of modal content -->
 	</div> <!-- end of modal dialog -->
@@ -115,7 +137,7 @@
 		
 			<div class="modal-header">
 			  <button type="button" class="close" data-dismiss="modal">&times;</button>
-			  <h4 class="modal-title"><i class="glyphicon glyphicon-tasks"></i>New Sprint</h4>
+			  <h4 class="modal-title">New Sprint</h4>
 			</div>
 			
 			<div class="modal-body">
