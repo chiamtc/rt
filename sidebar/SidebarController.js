@@ -34,7 +34,7 @@ angular.module('sidebar')
 			switch(response.success){
 				case 0:
 					$scope.inviteResponseClass ="alert alert-danger";
-					$scope.inviteResponseMessage = "Failed to invite user!";
+					$scope.inviteResponseMessage = "You can't invite yourself!";
 				break;
 				case 1:
 					$scope.inviteResponseClass ="alert alert-success";
@@ -46,10 +46,11 @@ angular.module('sidebar')
 				break;
 				case 3:
 					$scope.inviteResponseClass ="alert alert-danger";
-					$scope.inviteResponseMessage = "Empty field";
+					$scope.inviteResponseMessage = "Empty field or invalid email";
 				break;
 			}
 			console.log(response);
+			
 		});
 	};
 }])

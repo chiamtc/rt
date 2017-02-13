@@ -208,7 +208,6 @@ textarea{
 	padding-left:0px;
 	padding-right:0px;
 	box-sizing:border-box;
-	
 }
 .minimize{
 	text-decoration:none;
@@ -221,7 +220,8 @@ textarea{
 	position:relative;
 	display:inline-block;
 	width:100%;
-	padding: 15px 10px 5px 10px;
+	margin:0px 5px 5px 5px;
+	padding: 15px 10px 10px 10px;
 	overflow-x:hidden;
 	font-size:20px;
 	
@@ -243,9 +243,9 @@ textarea{
 .backlogListsEmpty{
 	box-sizing:border-box;
 	height:100px;
-	padding:0px 10px;
 	display:inline-block;
 	width:100%;
+	border:2px dashed #a4a294;
 }
 
 .backlogLists{
@@ -264,8 +264,7 @@ textarea{
 }
 
 .dropPlace{
-	min-height: 200px !important;
-	border:2px dashed black;
+	min-height: 70px !important;
 }
 
 .backlogItem{
@@ -324,10 +323,10 @@ textarea{
 	position:relative;
 	display:inline-block;
 	width:100%;
-	padding: 15px 10px 5px 10px;
 	overflow-x:hidden;
-	font-size:20px;
-	
+	font-size:20px;	
+	margin:0px 5px 5px 5px;
+	padding: 15px 10px 10px 10px;
 }
 
 .addSprint{
@@ -358,6 +357,21 @@ textarea{
 	padding:0px 10px;
 	display:inline-block;
 	width:100%;
+}
+
+.sprintListTop{
+	box-sizing:border-box;
+	display:inline-block;
+	width:100%;
+	font-size:16px;
+}
+
+.sprintListRight{
+	white-space: nowrap;
+	float:right;
+	flex-wrap: wrap;
+	margin-left:50px;
+	
 }
 
 .sprintLists> ul >li{

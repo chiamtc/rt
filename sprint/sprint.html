@@ -1,11 +1,25 @@
 <div class="sprintTitle">
-	<span>Sprint Backlog</span>
-	<span class="minimize" style="margin-left:12px"> <span class="badge">{{sprintCounts}} issues</span></span>
-	<button class="btn btn-default addSprint" data-toggle="modal" data-target="#sprintCreateModal" style="color:black">Create sprint</button>
+<span>Sprint Backlog</span>
+<span class="minimize" style="margin-left:12px;padding-top:9px"> 
+<span class="badge">{{sprintLists.length}} sprints</span></span>
+<button class="btn btn-default addSprint" data-toggle="modal" data-target="#sprintCreateModal" style="color:black">Create sprint</button>
+	
 </div>
 <div ng-class="sprintListsClass" ng-repeat="sprint in sprintLists track by $index">
-	<span>Sprint #{{$index +1}}</span>
-	<ul class="nav nav-pills nav-stacked dropPlace"   data-drop="true" data-jqyoui-options="{ greedy:true}" ng-model="sprint.backlogs" jqyoui-droppable="{multiple:true, onDrop:'dropCallback2(sprint.sprintId)'}">
+	<div class="sprintListTop">
+		<span>Sprint #{{$index +1}}</span>
+		<span class="badge">{{sprint.backlogs.length}} issues</span>
+		<div class="sprintListRight">
+			<div class="dropdown">
+				<button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown"><i class="glyphicon glyphicon-option-horizontal" style="font-weight:bold"></i></button>
+					<ul class="dropdown-menu dropdown-menu-right">
+						<li><a href="" ng-click="passEdit(sprint)" data-toggle="modal" data-target="#sprintEditModal">Edit Sprint</a></li>
+						<li><a href="" ng-click="deleteSprint()">Delete Sprint</a></li>
+					</ul>
+			</div>
+		</div>
+	</div>
+	<ul class="nav nav-pills nav-stacked dropPlace" data-drop="true" data-jqyoui-options="{ greedy:true}" ng-model="sprint.backlogs" jqyoui-droppable="{multiple:true, onDrop:'dropCallback2(sprint.sprintId)'}">
 		<li role="presentation"  ng-repeat="item in sprint.backlogs" data-drag="true" data-jqyoui-options="{revert:'invalid'}"   ng-model="sprint.backlogs" jqyoui-draggable="{index: {{$index}},animate:true, onStart:'startCallback2(item, $index)'}">
 		<div class="sprintItem">
 			<div class="sprintItemHeader">
@@ -27,6 +41,72 @@
 	<hr>
 </div>
 
+<div class="modal fade" id="sprintEditModal" aria-hidden="true" role="dialog" tabindex="-1" >
+	<div class="modal-dialog">
+      <!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+			  <button type="button" class="close" data-dismiss="modal">&times;</button>
+			  <h4 class="modal-title" ng-model="sprintEditId"><i class="glyphicon glyphicon-tasks"></i> Edit Sprint</h4>
+			</div>
+			
+			<div class="modal-body">
+				<form name="sprintEditForm" class="form-group">
+					
+					<div class="form-group">
+						<label>Sprint Goals</label>
+						<textarea ng-model="sprintEditGoal" class="form-control" rows="4"></textarea>
+					</div>
+					
+					<div class="form-group">
+						<label>Sprint Start Date:</label>
+						<input ng-model="sprintEditStartDate" class="form-control" type="date" name="sprintEditStart" required/>
+						<div ng-messages="sprintEditForm.sprintEditStart.$error" ng-if="sprintEditForm.sprintEditStart.$touched">
+							<div ng-message="required" class="alert alert-danger alert-dismissible" role="alert">
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+									<strong>Warning!</strong> Sprint Start Date is empty!
+							</div>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label>Sprint End Date:</label>
+						<input ng-model="sprintEditEndDate" class="form-control" type="date" name="sprintEditEnd" required"/>
+						<div ng-messages="sprintEditForm.sprintEditEnd.$error" ng-if="sprintEditForm.sprintEditEnd.$touched">
+							<div ng-message="required" class="alert alert-danger alert-dismissible" role="alert">
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+									<strong>Warning!</strong> Sprint End Date is empty!
+							</div>
+						</div>
+						
+						<div ng-show="sprintEditStartDate.getTime()  == sprintEditEndDate.getTime() && sprintEditForm.sprintEditStart.$error && sprintEditForm.sprintEditEnd.$error" class="alert alert-danger" role="alert">
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								<strong>Warning!</strong> <span> Both dates shouldn't be the same </span>
+						</div> <!-- create response -->
+						
+						<div ng-show="sprintEditStartDate.getTime()> sprintEditEndDate.getTime() && sprintEditForm.sprintEditStart.$error && sprintEditForm.sprintEditEnd.$error" class="alert alert-danger" role="alert">
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								<strong>Warning!</strong> <span> Start date is later than end date </span>
+						</div> <!-- create response -->
+					</div>
+					
+				</form>
+				
+				<div ng-show="editSprintResponse" ng-class="editSprintResponseClass" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							{{editSprintResponseMessage}}
+				</div> <!-- create response -->
+			</div>
+			
+			<div class="modal-footer">
+				<button type="button" data-dismiss="modal" class="btn btn-default">Cancel</button>
+				<button type="button" ng-click="updateSprint()" class="btn btn-primary">Update Sprint</button>
+			</div>
+      </div> <!-- end of modal content -->
+	</div> <!-- end of modal dialog -->
+</div> <!-- end of modal -->
+<!--</div> for ng controller -->
+
 <!-- Modal -->
 <div class="modal fade" id="sprintCreateModal" aria-hidden="true" role="dialog" tabindex="-1" aria-labelledby="sprintModal">
 	<div class="modal-dialog">
@@ -35,7 +115,7 @@
 		
 			<div class="modal-header">
 			  <button type="button" class="close" data-dismiss="modal">&times;</button>
-			  <h4 class="modal-title">New Sprint</h4>
+			  <h4 class="modal-title"><i class="glyphicon glyphicon-tasks"></i>New Sprint</h4>
 			</div>
 			
 			<div class="modal-body">

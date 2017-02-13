@@ -35,6 +35,24 @@ angular.module('sprint')
 		});
 	}
 	
+	factory.UpdateSprintDetails = function(sprintId, sprintGoal, sprintStartDate, sprintEndDate,callback){
+		$http({
+			method: 'POST',
+			url: 'php/sprint/updateSprintDetails.php',
+			data:{
+				sprintId: sprintId,
+				sprintGoal : sprintGoal,
+				sprintStartDate : sprintStartDate,
+				sprintEndDate : sprintEndDate,
+				projectKey : $routeParams.projectKey,
+			},
+			headers: {'Content-Type':'application/json'}
+		}).then(function(response){
+			//console.log(response.data);
+			callback(response.data);
+		});
+	}
+	
 	factory.CreateSprint = function(sprintGoal, sprintStartDate, sprintEndDate,callback){
 		$http({
 			method : 'POST',

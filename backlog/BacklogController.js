@@ -10,8 +10,6 @@ angular.module('backlog')
 	/** UI bindings **/
 	$scope.createBacklogResponse = false;
 	$scope.backlogLists = [];
-	$scope.backlogCounts = 0;
-	$scope.list2 = [];
 	$scope.backlogCreateTypes=[
 		{typeName: 'User Story', type: 'User Story',icon:'glyphicon glyphicon-plus'},
 		{typeName: 'Issues', type: 'Issues',icon:'glyphicon glyphicon-user'},
@@ -57,8 +55,6 @@ angular.module('backlog')
 		}else{
 			$scope.backlogListsClass ="backlogLists";
 			$scope.backlogLists= response.backlogs;
-			$scope.backlogCounts = $scope.backlogLists.length;
-			$scope.sprintCounts = $scope.sprintLists.length;
 		}
 	});
 

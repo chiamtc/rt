@@ -1,0 +1,65 @@
+<div class="modal fade" id="sprintEditModal" aria-hidden="true" role="dialog" tabindex="-1" >
+	<div class="modal-dialog">
+      <!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+			  <button type="button" class="close" data-dismiss="modal">&times;</button>
+			  <h4 class="modal-title"><i class="glyphicon glyphicon-tasks"></i> Edit Sprint</h4>
+			</div>
+			
+			<div class="modal-body">
+				<form name="sprintForm" class="form-group">
+					
+					<div class="form-group">
+						<label>Sprint Goals</label>
+						<textarea ng-model="sprintEditGoal" class="form-control" rows="4" >Deault?asd</textarea>
+					</div>
+					
+					<div class="form-group">
+						<label>Sprint Start Date:</label>
+						<input ng-model="sprintStartDate" class="form-control" type="date" name="sprintStart" required/>
+						<div ng-messages="sprintForm.sprintStart.$error" ng-if="sprintForm.sprintStart.$touched">
+							<div ng-message="required" class="alert alert-danger alert-dismissible" role="alert">
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+									<strong>Warning!</strong> Sprint Start Date is empty!
+							</div>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label>Sprint End Date:</label>
+						<input ng-model="sprintEditEndDate" class="form-control" type="date" name="sprintEnd" required"/>
+						<div ng-messages="sprintForm.sprintEnd.$error" ng-if="sprintForm.sprintEnd.$touched">
+							<div ng-message="required" class="alert alert-danger alert-dismissible" role="alert">
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+									<strong>Warning!</strong> Sprint End Date is empty!
+							</div>
+						</div>
+						
+						<div ng-show="sprintStartDate.getTime()  == sprintEndDate.getTime() && sprintForm.sprintStart.$touched && sprintForm.sprintEnd.$touched" class="alert alert-danger" role="alert">
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								<strong>Warning!</strong> <span> Both dates shouldn't be the same </span>
+						</div> <!-- create response -->
+						
+						<div ng-show="sprintStartDate.getTime()  > sprintEndDate.getTime() && sprintForm.sprintStart.$touched && sprintForm.sprintEnd.$touched" class="alert alert-danger" role="alert">
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								<strong>Warning!</strong> <span> Start date is later than end date </span>
+						</div> <!-- create response -->
+					</div>
+					
+				</form>
+
+				<div ng-show="createSprintResponse" ng-class="createSprintResponseClass" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							{{createSprintResponseMessage}}
+				</div> <!-- create response -->
+			</div>
+			
+			<div class="modal-footer">
+				<button type="button" data-dismiss="modal" class="btn btn-default">Cancel</button>
+				<button type="button" ng-click="createSprint()" class="btn btn-primary">Create Sprint</button>
+			</div>
+      </div> <!-- end of modal content -->
+	</div> <!-- end of modal dialog -->
+</div> <!-- end of modal -->
+<!--</div> for ng controller -->

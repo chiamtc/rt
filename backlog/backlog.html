@@ -1,7 +1,9 @@
 <div class="backlogTitle">
 	<span>Product Backlog</span>
-	<span class="minimize" style="margin-left:12px"> <span class="badge">{{backlogCounts}} issues</span></span>
+	<span class="minimize" style="margin-left:12px"> 
+	<span class="badge">{{backlogLists.length}} issues</span></span>
 	<button class="btn btn-default addBacklog" data-toggle="modal" data-target="#backlogCreateModal" style="color:black">Create Backlog</button>
+	
 </div>
 <div ng-class="backlogListsClass">
 	<ul class="nav nav-pills nav-stacked dropPlace" data-drop="true" data-jqyoui-options="backlogLists" ng-model="backlogLists" jqyoui-droppable="{index:$index, multiple:true, onDrop:'dropCallback(item, $index)' }">
@@ -17,7 +19,6 @@
 				<div class="backlogDetails">
 					<p class="minimize">Priority: {{item.backlogPriority}}</p>
 					<p class="minimize">Type: {{item.backlogType}}</p>
-					
 				</div>
 			</div>
 			</div>
@@ -35,7 +36,7 @@
 		
 			<div class="modal-header">
 			  <button type="button" class="close" data-dismiss="modal">&times;</button>
-			  <h4 class="modal-title">New Backlog</h4>
+			  <h4 class="modal-title"><i class="glyphicon glyphicon-list"></i> New Backlog</h4>
 			</div>
 			
 			<div class="modal-body">

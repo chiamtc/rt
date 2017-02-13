@@ -9,8 +9,8 @@ angular.module('sprint')
 	
 	/** UI bindings **/
 	$scope.sprintLists = [];
-	$scope.sprintCounts = 0;
 	$scope.createSprintResponse= false;
+	$scope.editSprintResponse= false;
 	/** date format **/
 	//var a = new Date(Date.parse("2017-02-08T14:00:00.000Z"));
 	
@@ -27,9 +27,6 @@ angular.module('sprint')
 		if($scope.sprintLists.length == 0){
 			$scope.sprintListsClass= "sprintListsEmpty";
 		}else{
-			if($scope.backlogLists.length == 0){
-				$scope.backlogListsClass = "backlogListsEmpty";
-			}
 			$scope.sprintListsClass = "sprintLists";
 			console.log('sprintId' , item,' backlogId',$scope.draggedTitle);
 			SprintService.UpdateSprint(item, $scope.draggedTitle, function(response){
@@ -41,11 +38,42 @@ angular.module('sprint')
 		}
 	};
 	
+	$scope.passEdit = function(sprint){
+		$scope.sprintEditId = sprint.sprintId;
+		$scope.sprintEditGoal = sprint.sprintGoal;
+		$scope.sprintEditStartDate = new Date(Date.parse(sprint.sprintStartDate));
+		$scope.sprintEditEndDate = new Date(Date.parse(sprint.sprintEndDate));
+	}
+	
+	$scope.updateSprint = function(){
+		SprintService.UpdateSprintDetails($scope.sprintEditId, $scope.sprintEditGoal, $scope.sprintEditStartDate, $scope.sprintEditEndDate, function(response){
+			NProgress.start();
+			$scope.editSprintResponse = !$scope.editSprintResponse;
+			switch(response.success){
+				case 0:
+					$scope.editSprintResponseClass = "alert alert-danger";
+					$scope.editSprintResponseMessage = "Failed to update";
+				break;
+				
+				case 1:
+					$scope.editSprintResponseClass = "alert alert-success";
+					$scope.editSprintResponseMessage = "Details are updated! :)";
+					$timeout(function(){
+						$('#sprintEditModal').modal('toggle');
+					},500);
+				break;
+			}
+			NProgress.set(0.7);
+			NProgress.done();
+		});
+	}
+	
 	SprintService.ListSprints(function(response){
 		switch(response.success){
 			case 1:
 				$scope.sprintListsClass="sprintLists";
 				$scope.sprintLists = response.sprints;
+				console.log($scope.sprintLists);
 			break;
 		}
 	});
