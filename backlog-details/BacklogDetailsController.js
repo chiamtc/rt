@@ -1,7 +1,7 @@
 'use strict';
 angular.module('backlog-details')
 
-.controller('BacklogDetailsController', ['$scope','$timeout','SprintService','BacklogService', function($scope, $timeout,SprintService,  BacklogService){
+.controller('BacklogDetailsController', ['$scope','$timeout','BacklogDetailsService','SprintService','BacklogService', function($scope, $timeout,BacklogDetailsService,SprintService,  BacklogService){
 	
 	/** fancy starts **/
 	NProgress.start();
@@ -9,14 +9,29 @@ angular.module('backlog-details')
 	
 	/** UI bindings **/
 	$scope.passBacklog = [];
+	$scope.commentLists = [];
+	
+	/** UI functions **/
+	
 	$scope.toggle = function(backlog){
 		$scope.colSize = true;
 		$scope.passBacklog = backlog;
-		console.log($scope.passBacklog);
 		$scope.backlogDDesc = $scope.passBacklog.backlogDesc;
+		
+		BacklogDetailsService.ListComment($scope.passBacklog.backlogId,function(response){
+		switch(response.success){
+			case 0:
+				$scope.commentLists = response.comments;
+			break;
+			case 1:
+				$scope.commentLists = response.comments;
+			break;
+			case 2:
+			break;
+		}
+	});
 	}
 	
-	/** UI functions **/
 	$scope.tested= function(){
 		console.log($scope.backlogDPriority);
 	}
@@ -25,9 +40,23 @@ angular.module('backlog-details')
 		console.log($scope.backlogDDesc);
 	}
 	
-	$scope.cars = [{model : "Ford Mustang", color : "red"},
-    {model : "Fiat 500", color : "white"},
-    {model : "Volvo XC90", color : "black"}];
+	
+	
+	$scope.comment= function(){
+		console.log($scope.passBacklog.backlogId + " "+ $scope.userEmail);
+		BacklogDetailsService.SubmitComment($scope.backlogDComment,$scope.passBacklog.backlogId, function(response){
+			switch(response.success){
+				case 0:
+				break;
+				
+				case 1:
+					$scope.commentLists.push(response.comment[0]);
+					console.log($scope.commentLists);
+				break;
+			}
+		});
+	}
+	
 }])
 
 .directive('backlogDetails',function(){

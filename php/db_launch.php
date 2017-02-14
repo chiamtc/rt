@@ -130,6 +130,7 @@ $sqltbl10 = "create table comment(
 			commentId int not null AUTO_INCREMENT,
 			comment text,
 			date_comment varchar(255),
+			time_comment varchar(255),
 			email varchar(255) not null,
 			backlogId int not null,
 			PRIMARY KEY (commentId),

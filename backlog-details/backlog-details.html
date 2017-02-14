@@ -1,6 +1,6 @@
 <div class="backlogDetailsTitle">
 <h4>Backlog Details <button type="button" class="close" aria-label="Close" ng-click="close()"><span aria-hidden="true">&times;</span></button></h4>
-
+<hr>
 </div>
 
 <div class="backlogDetailsWrap">
@@ -43,8 +43,38 @@
 			</div>
 		</div>
 		
-		
+		<div class="form-group">
+				<label class="col-sm-2 detailLabel">Status </label>
+				<label class="col-sm-10 detailLabel">{{passBacklog.backlogStatus}}</label>
+			</div>
+			
+			<div class="form-group">
+				<label class="col-sm-2 detailLabel">Priority</label>
+				<div class="col-sm-10">
+					<select class="form-control" ng-model="backlogDPriority">	
+						<option ng-selected="backlogPriority.name == passBacklog.backlogPriority" ng-repeat="backlogPriority in backlogPriorities" >{{backlogPriority.name}}</option>
+					</select>
+					
+					<div class="btn-group quickEdit" role="group">
+						<button type="button" class="close" data-toggle="tooltip" ng-click="tested()" data-placement="bottom" title="Retain Title" style="padding-right:5px"><small><i class="glyphicon glyphicon-remove"></i></small></button>
+						<button type="button" class="close" data-toggle="tooltip" data-placement="bottom" title="Update Title" style="padding-right:10px"><small><i class="glyphicon glyphicon-ok"></i></small></button>
+					</div>
+				</div>
+			</div>
+			
+		<div class="form-group">
+			<div class="col-md-12">
+				<label class="detailLabel">Description</label>
+					<textarea ng-model="backlogDDesc" class="form-control" rows="4" name="backlogDDesc"></textarea>
+						
+					<div class="btn-group quickEdit" role="group">
+						<button type="button" class="close" data-toggle="tooltip" ng-click="testedd()" data-placement="bottom" title="Retain Title" style="padding-right:5px"><small><i class="glyphicon glyphicon-remove"></i></small></button>
+						<button type="button" class="close" data-toggle="tooltip" data-placement="bottom" title="Update Title" style="padding-right:10px"><small><i class="glyphicon glyphicon-ok"></i></small></button>
+					</div>
+			</div>
+		</div>
 		<hr>
+		
 		<h5 class="detailHeader">People</h5>
 			<div class="form-group">
 				<label class="col-sm-4 detailLabel">Backlog Owner</label>
@@ -66,48 +96,25 @@
 				<label class="col-sm-4 detailLabel">Modified on</label>
 				<label class="col-sm-8"> AVAILABLE SOON-ISH</label>
 			</div>
-		<hr>
-		<h5 class="detailHeader">Details</h5>
-			<div class="form-group">
-				<label class="col-sm-3 detailLabel">Status </label>
-				<label class="col-sm-9 detailLabel">{{passBacklog.backlogStatus}}</label>
-			</div>
-			
-			<div class="form-group">
-				<label class="col-sm-3 detailLabel">Priority</label>
-				<div class="col-sm-9">
-					<select class="form-control" ng-model="backlogDPriority">	
-						<option ng-selected="backlogPriority.name == passBacklog.backlogPriority" ng-repeat="backlogPriority in backlogPriorities" >{{backlogPriority.name}}</option>
-					</select>
-					
-					<div class="btn-group quickEdit" role="group">
-						<button type="button" class="close" data-toggle="tooltip" ng-click="tested()" data-placement="bottom" title="Retain Title" style="padding-right:5px"><small><i class="glyphicon glyphicon-remove"></i></small></button>
-						<button type="button" class="close" data-toggle="tooltip" data-placement="bottom" title="Update Title" style="padding-right:10px"><small><i class="glyphicon glyphicon-ok"></i></small></button>
-					</div>
-				</div>
-			</div>
-			
-			<div class="form-group">
-				<div class="col-md-12">
-					<label class="detailLabel">Description</label>
-						<textarea ng-model="backlogDDesc" class="form-control" rows="4" name="backlogDDesc"></textarea>
-						
-						<div class="btn-group quickEdit" role="group">
-							<button type="button" class="close" data-toggle="tooltip" ng-click="testedd()" data-placement="bottom" title="Retain Title" style="padding-right:5px"><small><i class="glyphicon glyphicon-remove"></i></small></button>
-							<button type="button" class="close" data-toggle="tooltip" data-placement="bottom" title="Update Title" style="padding-right:10px"><small><i class="glyphicon glyphicon-ok"></i></small></button>
-						</div>
-				</div>
-			</div>
+		
 		<hr>
 		<h5 class="detailHeader">Comments </h5>
-		<div ng-repeat="x in cars">
+		
+		<div ng-repeat="comment in commentLists">
 			<div class="panel panel-info">
 				<div class="panel-heading">
-					who - time
+					{{comment.email}} - {{comment.time_comment}}
 				</div>
 				<div class="panel-body">
-					comment
+					{{comment.comment}}
 				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-md-12">
+			<textarea ng-model="backlogDComment" rows="4" class="form-control" name="backlogDComment"></textarea>
+			<br>
+			<button style="float:right" ng-disabled="!backlogDComment" ng-click="comment()" class="btn btn-default">Comment</button>
 			</div>
 		</div>
 		<br>
