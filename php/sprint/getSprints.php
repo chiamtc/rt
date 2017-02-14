@@ -32,6 +32,7 @@ if(!empty($projectKey)){
 					$backlog["backlogTitle"] = $rowBacklogSprint["backlogTitle"];
 					$backlog["backlogDesc"] = $rowBacklogSprint["backlogDesc"];
 					$backlog["backlogPriority"] = $rowBacklogSprint["backlogPriority"];
+					$backlog["backlogStoryPoint"] = $rowBacklogSprint["backlogStoryPoint"];
 					$backlog["dateCreated"] = $rowBacklogSprint["date_created"];
 					$backlog["timeCreated"] = $rowBacklogSprint["time_created"];
 					$backlog["backlogCreator"] = $rowBacklogSprint["backlogCreator"];

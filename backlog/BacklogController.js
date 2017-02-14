@@ -21,14 +21,15 @@ angular.module('backlog')
 		{name: 'High', type: 'High'},
 		{name: 'Medium', type: 'Medium'},
 		{name: 'Low', type: 'Low'},
-		{name: 'Lowest', type: 'Lowest'},
 	];
+	
+	
 	
 	$scope.startCallback = function(event, ui, title){
 		console.log('You started draggin: ' + title.backlogId);
 		$scope.draggedTitle = title.backlogId;
 	};
-
+	
 	$scope.dropCallback = function(event, ui) {
 		if($scope.backlogLists.length == 0){
 			$scope.backlogListsClass = "backlogListsEmpty";
@@ -60,7 +61,7 @@ angular.module('backlog')
 
 	$scope.createBacklog= function(){
 		NProgress.set(0.5);
-		BacklogService.CreateBacklog($scope.backlogCreateName,$scope.backlogCreateType.type,$scope.backlogCreateDesc,$scope.backlogCreatePriority.type, $scope.userEmail, function(response){
+		BacklogService.CreateBacklog($scope.backlogCreateName,$scope.backlogCreateType.type,$scope.backlogCreateDesc,$scope.backlogCreatePriority.type, $scope.backlogStoryPoint,$scope.userEmail, function(response){
 			
 		$scope.createBacklogResponse = !$scope.createBacklogResponse;
 		

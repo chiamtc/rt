@@ -1,0 +1,85 @@
+<div class="backlogDetailsTitle">
+<h4>Backlog Details <button type="button" class="close" aria-label="Close" ng-click="close()"><span aria-hidden="true">&times;</span></button></h4>
+
+</div>
+
+<div class="backlogDetailsWrap">
+	<div class="backlogDetailsGeneral">
+	<form class="form-horizontal">
+	<h5 class="detailHeader">General Details </h5>
+		<div class="form-group">
+			<label class="col-sm-2 detailLabel"> Title</label>
+			<div class="col-sm-10">
+				<input ng-model="backlogDTitle" ng-value="passBacklog.backlogTitle" type="text" class="form-control" name="backlogDTitle">
+				<div class="btn-group quickEdit" role="group" aria-label="...">
+					<button type="button" class="close" data-toggle="tooltip" data-placement="bottom" title="Retain Title" style="padding-right:5px"><small><i class="glyphicon glyphicon-remove"></i></small></button>
+					<button type="button" class="close" data-toggle="tooltip" data-placement="bottom" title="Update Title" style="padding-right:10px"><small><i class="glyphicon glyphicon-ok"></i></small></button>
+				</div>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 detailLabel">Story Pts.</label>
+			<div class="col-sm-10">
+				<input ng-model="backlogDStoryPoint" ng-value="passBacklog.backlogStoryPoint" type="text" class="form-control" name="backlogDSP">
+				<div class="btn-group quickEdit" role="group" aria-label="...">
+					<button type="button" class="close" data-toggle="tooltip" data-placement="bottom" title="Retain Title" style="padding-right:5px"><small><i class="glyphicon glyphicon-remove"></i></small></button>
+					<button type="button" class="close" data-toggle="tooltip" data-placement="bottom" title="Update Title" style="padding-right:10px"><small><i class="glyphicon glyphicon-ok"></i></small></button>
+				</div>
+			</div>
+		</div>
+		
+		<hr>
+		<h5 class="detailHeader">People</h5>
+			<div class="form-group">
+				<label class="col-sm-4 detailLabel">Backlog Owner</label>
+				<label class="col-sm-3 "> {{passBacklog.backlogCreator}}</label>
+			</div>
+			
+			<div class="form-group">
+				<label class="col-sm-4 detailLabel">Assignees</label>
+				<label class="col-sm-3 "> TEMPORARY UNAVAILABLE</label>
+			</div>
+		<hr>
+		<h5 class="detailHeader">Dates </h5>
+			<div class="form-group">
+				<label class="col-sm-4 detailLabel">Created on</label>
+				<label class="col-sm-8">{{passBacklog.dateCreated}} - {{passBacklog.timeCreated}}</label>
+			</div>
+		<hr>
+		<h5 class="detailHeader">Details</h5>
+			<div class="form-group">
+				<label class="col-sm-2 detailLabel">Status</label>
+				<label class="col-sm-4 detailLabel">{{passBacklog.backlogStatus}}</label>
+			</div>
+			
+			<div class="form-group">
+				<label class="col-sm-2 detailLabel">Priority</label>
+				<div class="col-sm-10">
+					<select class="form-control" ng-model="backlogDPriority">	
+						<option ng-selected="backlogPriority.name == passBacklog.backlogPriority" ng-repeat="backlogPriority in backlogPriorities" >{{backlogPriority.name}}</option>
+					</select>
+					
+					<div class="btn-group quickEdit" role="group">
+						<button type="button" class="close" data-toggle="tooltip" ng-click="tested()" data-placement="bottom" title="Retain Title" style="padding-right:5px"><small><i class="glyphicon glyphicon-remove"></i></small></button>
+						<button type="button" class="close" data-toggle="tooltip" data-placement="bottom" title="Update Title" style="padding-right:10px"><small><i class="glyphicon glyphicon-ok"></i></small></button>
+					</div>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<div class="col-md-12">
+					<label class="detailLabel">Description</label>
+						<textarea ng-model="backlogDDesc" class="form-control" rows="4" name="backlogDDesc"></textarea>
+						
+						<div class="btn-group quickEdit" role="group">
+							<button type="button" class="close" data-toggle="tooltip" ng-click="testedd()" data-placement="bottom" title="Retain Title" style="padding-right:5px"><small><i class="glyphicon glyphicon-remove"></i></small></button>
+							<button type="button" class="close" data-toggle="tooltip" data-placement="bottom" title="Update Title" style="padding-right:10px"><small><i class="glyphicon glyphicon-ok"></i></small></button>
+						</div>
+				</div>
+			</div>
+		<br>
+		
+	</form>
+	</div>
+</div>

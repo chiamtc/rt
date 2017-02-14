@@ -40,7 +40,7 @@ textarea{
 
 .navbar-inverse{
 	/** 36648b **/
-    background-color:#154889;
+    background-color:#4267b2;
 }
 
 .navbar .nav > li> a{
@@ -163,10 +163,9 @@ textarea{
     padding:15px 15px;
 }
 
-
+/** active design **/
 .sidenav li.current a{
-	color:#fff;
-	background-color:#2c3563;
+	border-right:5px solid #2c3563;
 }
 
 
@@ -209,6 +208,7 @@ textarea{
 	padding-right:0px;
 	box-sizing:border-box;
 }
+
 .minimize{
 	text-decoration:none;
 	font-size: 12px;
@@ -309,13 +309,11 @@ textarea{
 	.backlogItemFooter{display:table;width:100%;}
 }
 
-/** backlog **/
+/** sprint **/
 #sprint{
 	padding-left:0px;
 	padding-right:0px;
 	box-sizing:border-box;
-	height:100vh;
-	
 }
 
 .sprintTitle{
@@ -391,6 +389,7 @@ textarea{
 	margin:5px 0px;
 }
 
+
 .sprintItemHeader{
 	line-height:10px;
 	padding:5px 10px;
@@ -423,4 +422,65 @@ textarea{
 	.sprintItemHeaderTitle{width:100%;border-bottom: 1px solid #ccc; padding-bottom:20px;}
 	.sprintItemHeaderTitleDetails{border-left: none; width:100%;}
 	.sprintItemFooter{display:table;width:100%;}
+}
+
+/** backlog details **/
+
+#backlog-details{
+	border-left: 1px solid #dad8de;
+	padding-left:0px;
+	padding-right:0px;
+	box-sizing:border-box;
+	height:100vh;
+}
+
+@media screen and (max-width: 992px) {
+	#backlog-details{border-left:0px;}
+}
+
+.backlogDetailsTitle{
+	box-sizing:border-box;
+	position:relative;
+	display:inline-block;
+	width:100%;
+	overflow-x:hidden;
+	font-size:20px;	
+	margin:0px 5px 5px 5px;
+	padding: 15px 10px 10px 10px;
+}
+
+.backlogDetailsWrap{
+	box-sizing:border-box;
+	padding:0px 10px;
+	display:inline-block;
+	width:100%;
+}
+
+.backlogDetailsGeneral{
+	box-sizing:border-box;
+	display:inline-block;
+	width:100%;
+	font-size:14px;
+}
+
+.quickEdit{
+	position:relative;
+	display:inline-block;
+	float:right;
+	vertical-align:text-top;
+}
+
+hr{
+	margin-top:5px;
+	margin-bottom:5px;
+	border-top:1px solid #dad8de;
+}
+
+.detailLabel{
+	font-weight: normal;
+}
+
+.detailHeader{
+	font-weight:bold;
+	font-size:16px;
 }

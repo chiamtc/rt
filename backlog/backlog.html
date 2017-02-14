@@ -8,7 +8,7 @@
 <div ng-class="backlogListsClass">
 	<ul class="nav nav-pills nav-stacked dropPlace" data-drop="true" data-jqyoui-options="backlogLists" ng-model="backlogLists" jqyoui-droppable="{index:$index, multiple:true, onDrop:'dropCallback(item, $index)' }">
 		<li role="presentation"  data-drag="true" data-jqyoui-options="{revert:'invalid'}" ng-repeat="item in backlogLists" ng-model="backlogLists" jqyoui-draggable="{index: {{$index}},animate:true, onStart:'startCallback(item, $index)'}">
-		<div class="backlogItem">
+		<div class="backlogItem" ng-style="calculateStyle(item)">
 			<div class="backlogItemHeader">
 			<div class="backlogItemHeaderTitle">
 				<h6> {{item.backlogTitle}}</h6>
@@ -17,7 +17,7 @@
 			</div>
 			<div class="backlogItemHeaderTitleDetails">
 				<div class="backlogDetails">
-					<p class="minimize">Priority: {{item.backlogPriority}}</p>
+					<p class="minimize">Story Pts: {{item.backlogStoryPoint}}</p>
 					<p class="minimize">Type: {{item.backlogType}}</p>
 				</div>
 			</div>
@@ -25,9 +25,9 @@
 		</div>
 		</li>
 	</ul>
-	<hr>
-</div>
 	
+</div>
+<hr>	
 <!-- Modal -->
 <div class="modal fade" id="backlogCreateModal" aria-hidden="true" role="dialog" tabindex="-1" aria-labelledby="backlogModal">
 	<div class="modal-dialog">
@@ -36,14 +36,14 @@
 		
 			<div class="modal-header">
 			  <button type="button" class="close" data-dismiss="modal">&times;</button>
-			  <h4 class="modal-title"><i class="glyphicon glyphicon-list"></i> New Backlog</h4>
+			  <h4 class="modal-title">New Backlog</h4>
 			</div>
 			
 			<div class="modal-body">
 				<form name="backlogForm" class="form-group">
 					<div class="form-group">
 					<label>Backlog Name</label>
-					<input ng-model="backlogCreateName" type="text" maxlength="81" class="form-control" name="backlogName" required placeholder="Backlog Name">
+					<input ng-model="backlogCreateName" type="text" class="form-control" name="backlogName" required placeholder="Backlog Name">
 					
 					<div ng-messages="backlogForm.backlogName.$error" ng-if="backlogForm.backlogName.$touched">
 						<div ng-message="required" class="alert alert-danger alert-dismissible" role="alert">
@@ -67,6 +67,11 @@
 					<div class="form-group">
 						<label>Backlog Priority</label>
 						<select class="form-control" ng-model="backlogCreatePriority" ng-options="backlogPriority.name for backlogPriority in backlogPriorities"  ng-init="backlogCreatePriority = backlogPriorities[0]" name="backlogDropDown"></select>
+					</div>
+					
+					<div class="form-group">
+						<label>Backlog Story Point</label>
+						<input ng-model="backlogStoryPoint" type="number" class="form-control" name="backlogStoryPts" placeholder="Backlog Story Point">
 					</div>
 					
 					<div class="form-group">

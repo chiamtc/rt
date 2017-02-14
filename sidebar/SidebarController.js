@@ -1,7 +1,7 @@
 'use strict';
 angular.module('sidebar')
 
-.controller('SidebarController',['$scope','$routeParams','SidebarService','$location',function($scope,$routeParams,SidebarService, $location){
+.controller('SidebarController',['$scope','$timeout','$routeParams','SidebarService','$location',function($scope, $timeout, $routeParams,SidebarService, $location){
 	
 	$scope.pathParams =$routeParams.projectKey + "/"+ $routeParams.projectName;
 	$scope.inviteResponse= false;
@@ -39,6 +39,9 @@ angular.module('sidebar')
 				case 1:
 					$scope.inviteResponseClass ="alert alert-success";
 					$scope.inviteResponseMessage = "User invited!";
+					$timeout(function(){
+						$('#inviteModal').modal('toggle');
+					},1000);
 				break;
 				case 2:
 					$scope.inviteResponseClass ="alert alert-danger";
@@ -54,7 +57,6 @@ angular.module('sidebar')
 		});
 	};
 }])
-	
 	
 .directive('sideBar',function(){
 	return{
