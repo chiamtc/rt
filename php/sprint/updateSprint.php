@@ -11,7 +11,7 @@ $updateSprintSql = "";
 if($sprintId == 0){
 	$updateSprintSql = "UPDATE `backlog` SET `sprintId`=$sprintId , `backlogStatus` = 'Unassigned' WHERE `backlogId` = $backlogId";
 }else{
-	$updateSprintSql = "UPDATE `backlog` SET `sprintId`=$sprintId , `backlogStatus` = 'Ready for sprint' WHERE `backlogId` = $backlogId";
+	$updateSprintSql = "UPDATE `backlog` SET `sprintId`=$sprintId , `backlogStatus` = 'Assigned to sprint' WHERE `backlogId` = $backlogId";
 }
 if($conn -> query($updateSprintSql)){
 	include 'getSprints.php';

@@ -427,11 +427,10 @@ textarea{
 /** backlog details **/
 
 #backlog-details{
-	border-left: 1px solid #dad8de;
 	padding-left:0px;
 	padding-right:0px;
 	box-sizing:border-box;
-	height:100vh;
+	border-left: 1px solid #dad8de;
 }
 
 @media screen and (max-width: 992px) {

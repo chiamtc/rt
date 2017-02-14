@@ -19,6 +19,20 @@
 		</div>
 		
 		<div class="form-group">
+				<label class="col-sm-2 detailLabel">Type</label>
+				<div class="col-sm-10">
+					<select class="form-control" ng-model="backlogDType">	
+						<option ng-selected="backlogType.typeName == passBacklog.backlogType" ng-repeat="backlogType in backlogCreateTypes" >{{backlogType.typeName}}</option>
+					</select>
+					
+					<div class="btn-group quickEdit" role="group">
+						<button type="button" class="close" data-toggle="tooltip" ng-click="tested()" data-placement="bottom" title="Retain Title" style="padding-right:5px"><small><i class="glyphicon glyphicon-remove"></i></small></button>
+						<button type="button" class="close" data-toggle="tooltip" data-placement="bottom" title="Update Title" style="padding-right:10px"><small><i class="glyphicon glyphicon-ok"></i></small></button>
+					</div>
+				</div>
+		</div>
+			
+		<div class="form-group">
 			<label class="col-sm-2 detailLabel">Story Pts.</label>
 			<div class="col-sm-10">
 				<input ng-model="backlogDStoryPoint" ng-value="passBacklog.backlogStoryPoint" type="text" class="form-control" name="backlogDSP">
@@ -29,6 +43,7 @@
 			</div>
 		</div>
 		
+		
 		<hr>
 		<h5 class="detailHeader">People</h5>
 			<div class="form-group">
@@ -38,7 +53,7 @@
 			
 			<div class="form-group">
 				<label class="col-sm-4 detailLabel">Assignees</label>
-				<label class="col-sm-3 "> TEMPORARY UNAVAILABLE</label>
+				<label class="col-sm-3 ">  AVAILABLE SOON-ISH </label>
 			</div>
 		<hr>
 		<h5 class="detailHeader">Dates </h5>
@@ -46,16 +61,21 @@
 				<label class="col-sm-4 detailLabel">Created on</label>
 				<label class="col-sm-8">{{passBacklog.dateCreated}} - {{passBacklog.timeCreated}}</label>
 			</div>
+			
+			<div class="form-group">
+				<label class="col-sm-4 detailLabel">Modified on</label>
+				<label class="col-sm-8"> AVAILABLE SOON-ISH</label>
+			</div>
 		<hr>
 		<h5 class="detailHeader">Details</h5>
 			<div class="form-group">
-				<label class="col-sm-2 detailLabel">Status</label>
-				<label class="col-sm-4 detailLabel">{{passBacklog.backlogStatus}}</label>
+				<label class="col-sm-3 detailLabel">Status </label>
+				<label class="col-sm-9 detailLabel">{{passBacklog.backlogStatus}}</label>
 			</div>
 			
 			<div class="form-group">
-				<label class="col-sm-2 detailLabel">Priority</label>
-				<div class="col-sm-10">
+				<label class="col-sm-3 detailLabel">Priority</label>
+				<div class="col-sm-9">
 					<select class="form-control" ng-model="backlogDPriority">	
 						<option ng-selected="backlogPriority.name == passBacklog.backlogPriority" ng-repeat="backlogPriority in backlogPriorities" >{{backlogPriority.name}}</option>
 					</select>
@@ -78,6 +98,18 @@
 						</div>
 				</div>
 			</div>
+		<hr>
+		<h5 class="detailHeader">Comments </h5>
+		<div ng-repeat="x in cars">
+			<div class="panel panel-info">
+				<div class="panel-heading">
+					who - time
+				</div>
+				<div class="panel-body">
+					comment
+				</div>
+			</div>
+		</div>
 		<br>
 		
 	</form>

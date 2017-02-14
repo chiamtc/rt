@@ -93,6 +93,7 @@ $sqltbl8 = "CREATE TABLE backlog(
 			backlogType varchar(255) NOT NULL,
 			backlogTitle TEXT,
 			backlogPriority varchar(255) NOT NULL,
+			backlogStoryPoint int,
 			backlogDesc TEXT,
 			date_created varchar(255) NOT NULL,
 			time_created varchar(255) NOT NULL,
@@ -125,6 +126,21 @@ if($conn -> query($sqltbl9)){
     echo "tbl ubp failed to create<br>";
 }
 
+$sqltbl10 = "create table comment(
+			commentId int not null AUTO_INCREMENT,
+			comment text,
+			date_comment varchar(255),
+			email varchar(255) not null,
+			backlogId int not null,
+			PRIMARY KEY (commentId),
+			FOREIGN KEY(backlogId) REFERENCES backlog(backlogId)
+			)";
+			
+if($conn -> query($sqltbl10)){
+    echo "tbl comment created<br>";
+}else{
+    echo "tbl comment failed to create<br>";
+}
 /**$sqltbl7 = "CREATE TABLE tasks(
             tasksId int NOT NULL AUTO_INCREMENT,
 			tasksDescription text NOT NULL,

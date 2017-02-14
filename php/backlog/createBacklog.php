@@ -52,7 +52,7 @@ if(!empty($backlogName) && !empty($backlogType) && !empty($backlogPriority) && !
 			echo json_encode($response);
 		}
 	}else{
-		$response["message"] = "server error 1";
+		$response["message"] = $createBacklogSql;
 		$response["success"] = 0;
 			echo json_encode($response);
 	}

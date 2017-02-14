@@ -26,6 +26,9 @@ if(!empty($sprintStartDate) && !empty($sprintEndDate) && !empty($projectKey)){
 		$sprint["backlogs"] = array();
 		$backlog = array();
 			
+		$backlog["backlogTitle"] = "Drag a backlog here :) !";
+		$backlog["backlogPriority"] = "Unknown";
+		$backlog["backlogType"] = "Not even created";
 		array_push($sprint["backlogs"], $backlog);
 			
 		array_push($response["sprints"], $sprint);
