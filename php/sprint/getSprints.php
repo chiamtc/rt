@@ -34,14 +34,18 @@ if(!empty($projectKey)){
 					$backlog["backlogPriority"] = $rowBacklogSprint["backlogPriority"];
 					$backlog["backlogStoryPoint"] = $rowBacklogSprint["backlogStoryPoint"];
 					$backlog["dateCreated"] = $rowBacklogSprint["date_created"];
+					$backlog["dateModified"] = $rowBacklogSprint["date_modified"];
 					$backlog["backlogCreator"] = $rowBacklogSprint["backlogCreator"];
 					$backlog["backlogStatus"] = $rowBacklogSprint["backlogStatus"];
+					$backlog["drag"] =true;
 					array_push($sprint["backlogs"], $backlog);
 				}
 			}else{
 				$backlog["backlogTitle"] = "Drag a backlog here :) !";
 				$backlog["backlogPriority"] = "Unknown";
+				$backlog["backlogStoryPoint"] = "-";
 				$backlog["backlogType"] = "Not even created";
+				$backlog["drag"] = false;
 				array_push($sprint["backlogs"], $backlog);
 			}
 			array_push($response["sprints"], $sprint);

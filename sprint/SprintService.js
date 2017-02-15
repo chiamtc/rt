@@ -18,11 +18,10 @@ angular.module('sprint')
 			angular.forEach(response.data.sprints, function(value, key){
 				angular.forEach(value.backlogs, function(v,k){
 					v.dateCreated = moment(v.dateCreated).fromNow();
+					v.dateModified = moment(v.dateModified).fromNow();
 				});
 			});
-			
 			callback(response.data);
-			
 		});
 	}
 	
@@ -33,6 +32,7 @@ angular.module('sprint')
 			data:{
 				sprintId: sprintId,
 				backlogId : backlogId,
+				dateModified : moment().format(),
 				projectKey : $routeParams.projectKey,
 			},
 			headers: {'Content-Type':'application/json'}
@@ -40,6 +40,7 @@ angular.module('sprint')
 			angular.forEach(response.data.sprints, function(value, key){
 				angular.forEach(value.backlogs, function(v,k){
 					v.dateCreated = moment(v.dateCreated).fromNow();
+					v.dateModified = moment(v.dateModified).fromNow();
 				});
 			});
 			callback(response.data);

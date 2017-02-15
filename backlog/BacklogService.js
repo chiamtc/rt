@@ -17,6 +17,7 @@ angular.module('backlog')
 				backlogStoryPoint : backlogStoryPoint,
 				backlogCreator: backlogCreator,
 				dateCreated : moment().format(),
+				dateModified : moment().format(),
 				projectKey : $routeParams.projectKey,
 			},
 			headers :{ 'Content-Type' : 'application/json' }
@@ -25,6 +26,7 @@ angular.module('backlog')
 			angular.forEach(response.data.backlog, function(value, key){
 				
 				value.dateCreated = moment(value.dateCreated).fromNow();
+				value.dateModified =  moment(value.dateModified).fromNow();
 				
 			});
 			callback(response.data);
@@ -42,7 +44,7 @@ angular.module('backlog')
 		}).then(function(response){
 			angular.forEach(response.data.backlogs, function(value, key){
 				value.dateCreated = moment(value.dateCreated).fromNow();
-				
+				value.dateModified = moment(value.dateModified).fromNow();
 			});
 			callback(response.data);
 		});

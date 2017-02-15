@@ -1,13 +1,14 @@
 'use strict';
 angular.module('project')
 
-.controller('ProjectController', ['$scope','$cookies','$routeParams',function($scope, $cookies, $routeParams){
+.controller('ProjectController', ['$scope','$cookies','$routeParams',function($scope,$cookies, $routeParams){
 	$scope.colSize = false;
 	
 
 	$scope.close = function(){
 		$scope.colSize = false;
 	}
+	
 	
 	$scope.calculateStyle= function(retrieved){
 		var bPVal = retrieved.backlogPriority;

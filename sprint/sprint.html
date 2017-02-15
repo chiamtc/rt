@@ -20,11 +20,11 @@
 		</div>
 	</div>
 	<ul class="nav nav-pills nav-stacked dropPlace" data-drop="true" data-jqyoui-options="{ greedy:true}" ng-model="sprint.backlogs" jqyoui-droppable="{multiple:true, onDrop:'dropCallback2(sprint.sprintId)'}">
-		<li role="presentation" ng-repeat="item in sprint.backlogs" data-drag="true" data-jqyoui-options="{revert:'invalid'}"   ng-model="sprint.backlogs" jqyoui-draggable="{index: {{$index}},animate:true, onStart:'startCallback2(item, $index)'}">
+		<li role="presentation" ng-repeat="item in sprint.backlogs" data-drag="{{item.drag}}" data-jqyoui-options="{revert:'invalid'}"   ng-model="sprint.backlogs" jqyoui-draggable="{index: {{$index}},animate:true, onStart:'startCallback2(item, $index)'}">
 		<div class="sprintItem" ng-style="calculateStyle(item)">
 			<div class="sprintItemHeader">
 			<div class="sprintItemHeaderTitle">
-				<h6> <a href=""  ng-click="toggle(item)" >{{item.backlogTitle}} </a></h6>
+				<h5> <a href=""  ng-click="toggle(item)">{{item.backlogTitle}} </a></h5>
 				<span class="minimize" data-toggle="tooltip" data-placement="bottom" title="Created Since">{{item.dateCreated}}</span>
 				<span class="minimize" data-toggle="tooltip" data-placement="bottom" title="sprint Owner"><i class="glyphicon glyphicon-user"></i> {{item.backlogCreator}}</span>
 			</div>

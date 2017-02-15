@@ -9,6 +9,7 @@ $backlogStoryPoint=  $data ->backlogStoryPoint;
 $backlogCreator = $data -> backlogCreator;
 $projectKey = $data-> projectKey;
 $date_created = $data ->dateCreated;
+$date_modified = $data -> dateModified;
 $uid = $_COOKIE['uid'];
 $response = array();
 
@@ -21,7 +22,7 @@ $backlogCreator = mysqli_real_escape_string($conn, $backlogCreator);
 $projectKey = mysqli_real_escape_string($conn, $projectKey);
 $backlogId = 0;
 if(!empty($backlogName) && !empty($backlogType) && !empty($backlogPriority) && !empty($backlogCreator) && !empty($projectKey)){
-	$createBacklogSql = "INSERT INTO `backlog`(`backlogId`, `backlogType`, `backlogTitle`, `backlogPriority`,`backlogStoryPoint`,`backlogDesc`,  `date_created`, `backlogCreator`, `backlogStatus`, `sprintId`)VALUES('', '$backlogType', '$backlogTitle', '$backlogPriority',$backlogStoryPoint,'$backlogDesc', '$date_created','$backlogCreator', 'Unassigned', 0)";
+	$createBacklogSql = "INSERT INTO `backlog`(`backlogId`, `backlogType`, `backlogTitle`, `backlogPriority`,`backlogStoryPoint`,`backlogDesc`,  `date_created`, `date_modified`,`backlogCreator`, `backlogStatus`, `sprintId`)VALUES('', '$backlogType', '$backlogTitle', '$backlogPriority',$backlogStoryPoint,'$backlogDesc', '$date_created', '$date_modified','$backlogCreator', 'Unassigned', 0)";
 	if($conn ->query($createBacklogSql)){
 		$backlogId = $conn -> insert_id;
 		
@@ -37,6 +38,7 @@ if(!empty($backlogName) && !empty($backlogType) && !empty($backlogPriority) && !
 			$backlog["backlogStoryPoint"] = $backlogStoryPoint;
 			$backlog["backlogCreator"] = $backlogCreator;
 			$backlog["dateCreated"] = $date_created;
+			$backlog["dateModified"] = $date_modified;
 			$backlog["backlogStatus"] = 'Unassigned';
 			
 			array_push($response["backlog"], $backlog);

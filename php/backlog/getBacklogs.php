@@ -19,6 +19,7 @@ if($resultGetBacklogs -> num_rows >0){
 		$backlog["backlogPriority"] = $rowGetBacklogs["backlogPriority"];
 		$backlog["backlogStoryPoint"] = $rowGetBacklogs["backlogStoryPoint"];
 		$backlog["dateCreated"] = $rowGetBacklogs["date_created"];
+		$backlog["dateModified"] = $rowGetBacklogs["date_modified"];
 		$backlog["backlogCreator"] = $rowGetBacklogs["backlogCreator"];
 		$backlog["backlogStatus"] = $rowGetBacklogs["backlogStatus"];
 		array_push($response["backlogs"], $backlog);
