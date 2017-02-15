@@ -4,13 +4,11 @@ $data = json_decode(file_get_contents("php://input"));
 $email = $data -> email;
 $password = $data -> password;
 $confPassword = $data -> confPassword;
-
+$date_joined = $data -> dateJoined;
 $email = mysqli_real_escape_string($conn, $email);
 $password = crypt(mysqli_real_escape_string($conn, $password), '$6$rounds=1000$salted$');
 $confPassword = crypt(mysqli_real_escape_string($conn, $confPassword), '$6$rounds=1000$salted$');
 
-date_default_timezone_set("Australia/Brisbane");
-$date_joined = date("Y/m/d");
 $response = array();
 if(!empty($email)){
 	$getEmailExistSql = "SELECT * FROM `user` WHERE `email`='$email'";

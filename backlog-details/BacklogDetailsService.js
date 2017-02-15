@@ -15,7 +15,9 @@ angular.module('backlog-details')
 			},
 			headers: {'Content-Type':'application/json'}
 		}).then(function(response){
-			console.log(response.data);
+			angular.forEach(response.data.comments, function(value, key){
+				value.dateComment = moment(value.dateComment).fromNow();
+			});
 			callback(response.data);
 		});
 	}
@@ -27,11 +29,17 @@ angular.module('backlog-details')
 			data:{
 				comment : comment,
 				email:$cookies.get('email'),
+				dateComment : moment().format(),
 				backlogId: backlogId,
 			},
 			headers: {'Content-Type':'application/json'}
 		}).then(function(response){
-			console.log(response.data);
+			console.log(response.data.comment);
+			angular.forEach(response.data.comment, function(value, key){
+				
+				value.dateComment = moment(value.dateComment).fromNow();
+				
+			});
 			callback(response.data);
 		});
 	}

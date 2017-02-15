@@ -4,13 +4,11 @@ $data = json_decode(file_get_contents("php://input"));
 $projectName = $data -> projectName;
 $projectDesc = $data -> projectDesc;
 $projectKey = $data ->projectKey;
+$date_created = $data -> dateCreated;
 $projectName = mysqli_real_escape_string($conn, $projectName);
 $projectDesc = mysqli_real_escape_string($conn, $projectDesc);
 $projectKey = mysqli_real_escape_string($conn, $projectKey);
 $uid = mysqli_real_escape_string($conn, $_COOKIE['uid']);
-date_default_timezone_set("Australia/Brisbane");
-$date_created = date("Y/m/d");
-$time_created = date("h:i:sa");
 $response = array();
 
 if(!empty($projectName) && !empty($projectDesc) && !empty($projectKey)){
@@ -19,8 +17,8 @@ if(!empty($projectName) && !empty($projectDesc) && !empty($projectKey)){
 	$resultCheckProjectKey = $conn -> query($checkProjectKeySql);
 		
 	if($resultCheckProjectKey -> num_rows ==0){
-		$sqlCreateProject = "INSERT INTO `project`(`projectKey`, `projectName`, `projectDescription`, `date_created`, `time_created`)
-							VALUES('$projectKey', '$projectName', '$projectDesc', '$date_created', '$time_created')";
+		$sqlCreateProject = "INSERT INTO `project`(`projectKey`, `projectName`, `projectDescription`, `date_created`)
+							VALUES('$projectKey', '$projectName', '$projectDesc', '$date_created')";
 							
 		if($conn -> query($sqlCreateProject)){
 			$sqlToUserProject ="INSERT INTO `userproject`(`uid`,`projectKey`)

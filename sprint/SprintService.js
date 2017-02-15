@@ -14,6 +14,13 @@ angular.module('sprint')
 			},
 			headers : { 'Content-Type' : 'application/json'}
 		}).then(function(response){
+			
+			angular.forEach(response.data.sprints, function(value, key){
+				angular.forEach(value.backlogs, function(v,k){
+					v.dateCreated = moment(v.dateCreated).fromNow();
+				});
+			});
+			
 			callback(response.data);
 			
 		});
@@ -30,7 +37,11 @@ angular.module('sprint')
 			},
 			headers: {'Content-Type':'application/json'}
 		}).then(function(response){
-			console.log(response.data);
+			angular.forEach(response.data.sprints, function(value, key){
+				angular.forEach(value.backlogs, function(v,k){
+					v.dateCreated = moment(v.dateCreated).fromNow();
+				});
+			});
 			callback(response.data);
 		});
 	}

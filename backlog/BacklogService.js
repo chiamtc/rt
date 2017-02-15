@@ -16,11 +16,17 @@ angular.module('backlog')
 				backlogPriority  : backlogPriority,
 				backlogStoryPoint : backlogStoryPoint,
 				backlogCreator: backlogCreator,
+				dateCreated : moment().format(),
 				projectKey : $routeParams.projectKey,
 			},
 			headers :{ 'Content-Type' : 'application/json' }
 		}).then(function(response){
 			console.log(response.data);
+			angular.forEach(response.data.backlog, function(value, key){
+				
+				value.dateCreated = moment(value.dateCreated).fromNow();
+				
+			});
 			callback(response.data);
 		});
 	};
@@ -34,6 +40,10 @@ angular.module('backlog')
 			},
 			headers: { 'Content-Type': 'application/json'}
 		}).then(function(response){
+			angular.forEach(response.data.backlogs, function(value, key){
+				value.dateCreated = moment(value.dateCreated).fromNow();
+				
+			});
 			callback(response.data);
 		});
 	};

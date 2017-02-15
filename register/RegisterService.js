@@ -13,7 +13,8 @@ angular.module('register')
 			data:{
 				email: email,
 				password:password,
-				confPassword:confPassword
+				confPassword:confPassword,
+				dateJoined : moment().format(),
 			},
 			headers: { 'Content-Type': 'application/json' }
 		}).then(function(response){

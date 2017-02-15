@@ -34,7 +34,6 @@ if(!empty($projectKey)){
 					$backlog["backlogPriority"] = $rowBacklogSprint["backlogPriority"];
 					$backlog["backlogStoryPoint"] = $rowBacklogSprint["backlogStoryPoint"];
 					$backlog["dateCreated"] = $rowBacklogSprint["date_created"];
-					$backlog["timeCreated"] = $rowBacklogSprint["time_created"];
 					$backlog["backlogCreator"] = $rowBacklogSprint["backlogCreator"];
 					$backlog["backlogStatus"] = $rowBacklogSprint["backlogStatus"];
 					array_push($sprint["backlogs"], $backlog);

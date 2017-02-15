@@ -8,6 +8,7 @@ $backlogPriority = $data -> backlogPriority;
 $backlogStoryPoint=  $data ->backlogStoryPoint;
 $backlogCreator = $data -> backlogCreator;
 $projectKey = $data-> projectKey;
+$date_created = $data ->dateCreated;
 $uid = $_COOKIE['uid'];
 $response = array();
 
@@ -18,12 +19,9 @@ $backlogPriority = mysqli_real_escape_string($conn, $backlogPriority);
 $backlogStoryPoint = mysqli_real_escape_string($conn, $backlogStoryPoint);
 $backlogCreator = mysqli_real_escape_string($conn, $backlogCreator);
 $projectKey = mysqli_real_escape_string($conn, $projectKey);
-date_default_timezone_set("Australia/Brisbane");
-$date_created = date("Y/m/d");
-$time_created = date("h:i:sa");
 $backlogId = 0;
 if(!empty($backlogName) && !empty($backlogType) && !empty($backlogPriority) && !empty($backlogCreator) && !empty($projectKey)){
-	$createBacklogSql = "INSERT INTO `backlog`(`backlogId`, `backlogType`, `backlogTitle`, `backlogPriority`,`backlogStoryPoint`,`backlogDesc`,  `date_created`, `time_created`, `backlogCreator`, `backlogStatus`, `sprintId`)VALUES('', '$backlogType', '$backlogTitle', '$backlogPriority',$backlogStoryPoint,'$backlogDesc', '$date_created', '$time_created','$backlogCreator', 'Unassigned', 0)";
+	$createBacklogSql = "INSERT INTO `backlog`(`backlogId`, `backlogType`, `backlogTitle`, `backlogPriority`,`backlogStoryPoint`,`backlogDesc`,  `date_created`, `backlogCreator`, `backlogStatus`, `sprintId`)VALUES('', '$backlogType', '$backlogTitle', '$backlogPriority',$backlogStoryPoint,'$backlogDesc', '$date_created','$backlogCreator', 'Unassigned', 0)";
 	if($conn ->query($createBacklogSql)){
 		$backlogId = $conn -> insert_id;
 		
@@ -38,8 +36,7 @@ if(!empty($backlogName) && !empty($backlogType) && !empty($backlogPriority) && !
 			$backlog["backlogPriority"] = $backlogPriority;
 			$backlog["backlogStoryPoint"] = $backlogStoryPoint;
 			$backlog["backlogCreator"] = $backlogCreator;
-			$backlog["dateCreated"] = $dateCreated;
-			$backlog["timeCreated"] = $timeCreated;
+			$backlog["dateCreated"] = $date_created;
 			$backlog["backlogStatus"] = 'Unassigned';
 			
 			array_push($response["backlog"], $backlog);

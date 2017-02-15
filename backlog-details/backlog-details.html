@@ -9,6 +9,7 @@
 	<h5 class="detailHeader">General Details </h5>
 		<div class="form-group">
 			<label class="col-sm-2 detailLabel"> Title</label>
+			<span> {{a}} </span>
 			<div class="col-sm-10">
 				<input ng-model="backlogDTitle" ng-value="passBacklog.backlogTitle" type="text" class="form-control" name="backlogDTitle">
 				<div class="btn-group quickEdit" role="group" aria-label="...">
@@ -89,7 +90,7 @@
 		<h5 class="detailHeader">Dates </h5>
 			<div class="form-group">
 				<label class="col-sm-4 detailLabel">Created on</label>
-				<label class="col-sm-8">{{passBacklog.dateCreated}} - {{passBacklog.timeCreated}}</label>
+				<label class="col-sm-8">{{passBacklog.dateCreated}}</label>
 			</div>
 			
 			<div class="form-group">
@@ -103,7 +104,7 @@
 		<div ng-repeat="comment in commentLists">
 			<div class="panel panel-info">
 				<div class="panel-heading">
-					{{comment.email}} - {{comment.time_comment}}
+					{{comment.email}} - {{comment.dateComment}}
 				</div>
 				<div class="panel-body">
 					{{comment.comment}}

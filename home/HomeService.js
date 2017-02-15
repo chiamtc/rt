@@ -14,10 +14,14 @@ angular.module('home')
 				projectName : projectName,
 				projectDesc : projectDesc,
 				projectKey: projectKey,
+				dateCreated: moment().format(),
 			},
 			headers: { 'Content-Type' : 'application/json' }
 		}).then(function(response){
-			console.log(response.data.success);
+			angular.forEach(response.data.project, function(value, key){
+				value.dateCreated = moment(value.dateCreated).format("D MMMM YYYY");
+				
+			});
 			callback(response.data);
 		}); //end then
 	}; //end createproject factory 
@@ -41,7 +45,10 @@ angular.module('home')
 			url: 'php/home/getProjects.php',
 			headers : { 'Content-Type' : 'application/json' }
 		}).then(function(response){
-			
+			angular.forEach(response.data.projects, function(value, key){
+				value.dateCreated = moment(value.dateCreated).format("D MMMM YYYY");
+				
+			});
 			callback(response.data);
 		});
 	}

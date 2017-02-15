@@ -115,7 +115,7 @@ angular.module('sprint')
 			case 1:
 				$scope.sprintListsClass="sprintLists";
 				$scope.sprintLists = response.sprints;
-				console.log($scope.sprintLists);
+				//console.log($scope.sprintLists);
 			break;
 		}
 	});

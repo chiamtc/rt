@@ -21,7 +21,8 @@ angular.module('backlog-details')
 		BacklogDetailsService.ListComment($scope.passBacklog.backlogId,function(response){
 		switch(response.success){
 			case 0:
-				$scope.commentLists = response.comments;
+				$scope.commentLists =[];
+				console.log($scope.commentLists);
 			break;
 			case 1:
 				$scope.commentLists = response.comments;
@@ -50,6 +51,7 @@ angular.module('backlog-details')
 				break;
 				
 				case 1:
+					
 					$scope.commentLists.push(response.comment[0]);
 					console.log($scope.commentLists);
 				break;
