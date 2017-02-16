@@ -9,9 +9,9 @@ angular.module('sidebar',[]);
 angular.module('backlog',[]);
 angular.module('sprint',[]);
 angular.module('backlog-details',[]);
+angular.module('active-sprint',[]);
 
-
-angular.module('reApp',['header','login','home','register','project','sidebar','backlog','sprint','backlog-details','ngDragDrop','ngRoute','ngCookies', 'ngMessages'])
+angular.module('reApp',['header','login','home','register','project','sidebar','backlog','sprint','backlog-details','active-sprint','ngDragDrop','ngRoute','ngCookies', 'ngMessages'])
 
 .config(['$routeProvider', function($routeProvider){
 	$routeProvider
@@ -32,8 +32,13 @@ angular.module('reApp',['header','login','home','register','project','sidebar','
 	.when('/project/:projectKey/:projectName',{
 		controller : 'ProjectController',
 		templateUrl:'project/project.html'
-		
 	})
+	
+	.when('/active-sprint/:projectKey/:projectName',{
+		controller : 'ActiveSprintController',
+		templateUrl:'active-sprint/active-sprint.html'
+	})
+	
 	.otherwise({
 		redirectTo: '/'
 	});

@@ -5,18 +5,7 @@ angular.module('sidebar')
 	
 	$scope.pathParams =$routeParams.projectKey + "/"+ $routeParams.projectName;
 	$scope.inviteResponse= false;
-	$scope.menus = 
-	{
-		"items":[
-			{"item":"Backlog","icon":"glyphicon glyphicon-list", "ahref":"/project/"+$scope.pathParams,"href":"#/project/"+$scope.pathParams},
-			{"item":"Sprints","icon":"glyphicon glyphicon-tasks", "ahref":"#/tasks","href":"#/home"},
-			{"item":"Issues","icon":"glyphicon glyphicon-flag","ahref":"#/tasks", "href":"#/tasks"},
-			{"item":"Analytics","icon":"glyphicon glyphicon-stats", "ahref":"#/tasks","href":"#/tasks"},
-			{"item":"Invite Member","icon":"glyphicon glyphicon-user", "ahref":""},
-			{"item":"Project Settings","icon":"glyphicon glyphicon-wrench", "ahref":"#/tasks","href":"#/tasks"}
-		]
-	};
-	
+	$scope.toggleNav = true;
 	/** UI functions **/
 	$scope.isCurrent = function (viewLocation) {
     if(viewLocation === $location.path()){
@@ -24,6 +13,10 @@ angular.module('sidebar')
 	}
     return "";
 	};
+	
+	$scope.controlNavSize = function(){
+		return !$scope.toggleNav;
+	}
 	
 	$scope.inviteMember = function(){
 		SidebarService.InviteMember($scope.memberEmail, function(response){

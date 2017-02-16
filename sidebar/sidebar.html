@@ -4,8 +4,8 @@
 		<a href="#/project/{{pathParams}}"><i class="glyphicon glyphicon-list"></i> Backlog </a>
 		</li>
 		
-		<li ng-class="isCurrent('/sprint')">
-		<a href="#/sprint"><i class="glyphicon glyphicon-tasks"></i> Sprint </a>
+		<li ng-class="isCurrent('/active-sprint/{{pathParams}}')">
+		<a href="#/active-sprint/{{pathParams}}"><i class="glyphicon glyphicon-tasks"></i> Sprint </a>
 		</li>
 		
 		<li ng-class="isCurrent('/tasks')">
@@ -25,6 +25,8 @@
 		</li>
 		<!--<li class="closebtn" style="cursor:pointer" ng-click="controlNavSize()"> <a href="">  navsize</a></li>-->
 	</ul>
+	
+		
 </div>
 
 <div class="modal fade" id="inviteModal" aria-hidden="true" role="dialog" tabindex="-1" aria-labelledby="inviteModal">
