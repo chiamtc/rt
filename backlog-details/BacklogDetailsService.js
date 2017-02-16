@@ -28,6 +28,7 @@ angular.module('backlog-details')
 			url : 'php/backlog-details/updateTitle.php',
 			data:{
 				backlogTitle : backlogTitle,
+				dateModified : moment().format(),
 				backlogId: backlogId,
 			},
 			headers: {'Content-Type':'application/json'}
@@ -42,6 +43,7 @@ angular.module('backlog-details')
 			url : 'php/backlog-details/updateType.php',
 			data:{
 				backlogType : backlogType,
+				dateModified : moment().format(),
 				backlogId: backlogId,
 			},
 			headers: {'Content-Type':'application/json'}
@@ -56,6 +58,7 @@ angular.module('backlog-details')
 			url : 'php/backlog-details/updateSP.php',
 			data:{
 				backlogSP : backlogSP,
+				dateModified : moment().format(),
 				backlogId: backlogId,
 			},
 			headers: {'Content-Type':'application/json'}
@@ -70,6 +73,7 @@ angular.module('backlog-details')
 			url : 'php/backlog-details/updatePriority.php',
 			data:{
 				backlogPriority : backlogPriority,
+				dateModified : moment().format(),
 				backlogId: backlogId,
 			},
 			headers: {'Content-Type':'application/json'}
@@ -85,6 +89,7 @@ angular.module('backlog-details')
 			url : 'php/backlog-details/updateDesc.php',
 			data:{
 				backlogDesc : backlogDesc,
+				dateModified : moment().format(),
 				backlogId: backlogId,
 			},
 			headers: {'Content-Type':'application/json'}

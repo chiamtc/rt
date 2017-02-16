@@ -9,10 +9,10 @@ $response = array();
 $response["found"] = false;
 if(!empty($projectKey)){
 	//$getSprintSql = "SELECT * FROM `sprint` s left join `backlog` b on s.sprintId = b.sprintId where s.projectKey = '$projectKey'";
-	$getSprintSql = "Select * from `sprint` where `projectKey` = '$projectKey' AND `sprintStatus` = 'Created' ";
+	$getSprintSql = "Select * from `sprint` where `projectKey` = '$projectKey' AND `sprintStatus` = 'Active'";
 	$resultGetSprint = $conn ->query($getSprintSql);
 	if($resultGetSprint -> num_rows > 0){
-		$response["sprints"] = array();
+		$response["activeSprints"] = array();
 		$sprint = array();
 		while($rowGetSprint = $resultGetSprint -> fetch_assoc()){
 			$sprint["sprintId"] = $rowGetSprint["sprintId"];
@@ -52,7 +52,7 @@ if(!empty($projectKey)){
 				$backlog["drag"] = false;
 				array_push($sprint["backlogs"], $backlog);
 			}
-			array_push($response["sprints"], $sprint);
+			array_push($response["activeSprints"], $sprint);
 		}
 		$response["success"] = 1;
 		echo json_encode($response);

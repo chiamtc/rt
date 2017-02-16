@@ -54,6 +54,8 @@ angular.module('backlog-details')
 				$scope.snackbarClass= "alert alert-success alert-dismissible snackbar";
 				$scope.snackbarMessage = "Backlog Title Updated ! ";
 				$scope.passBacklog.backlogTitle = $scope.backlogDTitle; // two-way binding in parameter
+				$scope.passBacklog.dateModified = moment().fromNow();
+				console.log($scope.passBacklog);
 				$timeout(function(){
 					$scope.snackbarShow = !$scope.snackbarShow;
 				},5000);
@@ -77,8 +79,9 @@ angular.module('backlog-details')
 			case 1:
 				$scope.snackbarShow = !$scope.snackbarShow;
 				$scope.snackbarClass= "alert alert-success alert-dismissible snackbar";
-				$scope.snackbarMessage = "Backlog Title Updated ! ";
+				$scope.snackbarMessage = "Backlog Type Updated ! ";
 				$scope.passBacklog.backlogType = $scope.backlogDType; // two-way binding in parameter
+				$scope.passBacklog.dateModified = moment().fromNow();
 				$timeout(function(){
 					$scope.snackbarShow = !$scope.snackbarShow;
 				},5000);
@@ -104,6 +107,7 @@ angular.module('backlog-details')
 				$scope.snackbarClass= "alert alert-success alert-dismissible snackbar";
 				$scope.snackbarMessage = "Backlog Story Points Updated ! ";
 				$scope.passBacklog.backlogStoryPoint = $scope.backlogDStoryPoint; // two-way binding in parameter
+				$scope.passBacklog.dateModified = moment().fromNow();
 				$timeout(function(){
 					$scope.snackbarShow = !$scope.snackbarShow;
 				},5000);
@@ -129,6 +133,7 @@ angular.module('backlog-details')
 				$scope.snackbarClass= "alert alert-success alert-dismissible snackbar";
 				$scope.snackbarMessage = "Backlog Priority Updated ! ";
 				$scope.passBacklog.backlogPriority = $scope.backlogDPriority; // two-way binding in parameter
+				$scope.passBacklog.dateModified = moment().fromNow();
 				$timeout(function(){
 					$scope.snackbarShow = !$scope.snackbarShow;
 				},5000);
@@ -154,6 +159,7 @@ angular.module('backlog-details')
 				$scope.snackbarClass= "alert alert-success alert-dismissible snackbar";
 				$scope.snackbarMessage = "Backlog Priority Updated ! ";
 				$scope.passBacklog.backlogDesc = $scope.backlogDDesc; // two-way binding in parameter
+				$scope.passBacklog.dateModified = moment().fromNow();
 				$timeout(function(){
 					$scope.snackbarShow = !$scope.snackbarShow;
 				},5000);

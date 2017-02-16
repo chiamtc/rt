@@ -25,6 +25,40 @@ angular.module('sprint')
 		});
 	}
 	
+	factory.ListActiveSprints= function(callback){
+		$http({
+			method: 'POST',
+			url : 'php/sprint/getActiveSprint.php',
+			data:{
+				projectKey : $routeParams.projectKey,
+			},
+			headers : { 'Content-Type' : 'application/json'}
+		}).then(function(response){
+			
+			angular.forEach(response.data.activeSprints, function(value, key){
+				angular.forEach(value.backlogs, function(v,k){
+					v.dateCreated = moment(v.dateCreated).fromNow();
+					v.dateModified = moment(v.dateModified).fromNow();
+				});
+			});
+			callback(response.data);
+		});
+	}
+	
+	factory.StartSprint = function(sprintId, callback){
+		$http({
+			method: 'POST',
+			url: 'php/sprint/startSprint.php',
+			data:{
+				sprintId: sprintId,
+				projectKey : $routeParams.projectKey,
+			},
+			headers: {'Content-Type':'application/json'}
+		}).then(function(response){
+			callback(response.data);
+		});
+	}
+	
 	factory.UpdateSprint = function(sprintId, backlogId,callback){
 		$http({
 			method: 'POST',
@@ -92,6 +126,7 @@ angular.module('sprint')
 			},
 			headers : { 'Content-Type' : 'application/json' }
 		}).then(function(response){
+			console.log(response.data);
 			callback(response.data);
 		});
 	}

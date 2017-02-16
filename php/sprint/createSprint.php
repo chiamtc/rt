@@ -9,16 +9,17 @@ $sprintGoal = mysqli_real_escape_string($conn, $sprintGoal);
 $sprintStartDate = mysqli_real_escape_string($conn, $sprintStartDate);
 $sprintEndDate = mysqli_real_escape_string($conn, $sprintEndDate);
 $projectKey = mysqli_real_escape_string($conn, $projectKey);
-
+$sprintStatus = 'Created';
 $response = array();
 if(!empty($sprintStartDate) && !empty($sprintEndDate) && !empty($projectKey)){
-	$createSprintSql = "Insert into `sprint`(`sprintId`, `sprintGoal`, `sprintStartDate`, `sprintEndDate`, `projectKey`) VALUES('', '$sprintGoal', '$sprintStartDate', '$sprintEndDate', '$projectKey')";
+	$createSprintSql = "Insert into `sprint`(`sprintId`, `sprintStatus`,`sprintGoal`, `sprintStartDate`, `sprintEndDate`, `projectKey`) VALUES('', '$sprintStatus','$sprintGoal', '$sprintStartDate', '$sprintEndDate', '$projectKey')";
 	if($conn -> query($createSprintSql)){
 			
 		$response["sprints"] = array();
 		$sprint = array();
 			
 		$sprint["sprintId"] = $conn->insert_id;
+		$sprint["sprintStatus"]= $sprintStatus;
 		$sprint["sprintGoal"] = $sprintGoal;
 		$sprint["sprintStartDate"] = $sprintStartDate;
 		$sprint["sprintEndDate"] = $sprintEndDate;

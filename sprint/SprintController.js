@@ -9,6 +9,7 @@ angular.module('sprint')
 	
 	/** UI bindings **/
 	$scope.sprintLists = [];
+	$scope.sprintListsActive=[];
 	$scope.createSprintResponse= false;
 	$scope.editSprintResponse= false;
 	/** date format **/
@@ -37,6 +38,48 @@ angular.module('sprint')
 			});
 		}
 	};
+	
+	$scope.startSprint = function(sprintId){
+		SprintService.StartSprint(sprintId , function(response){
+			switch(response.success){
+				case 0:
+					console.log(response);
+				break;
+				case 1:
+					SprintService.ListSprints(function(response){
+					
+						switch(response.success){
+							case 1:
+								$scope.sprintListsClass="sprintLists";
+								$scope.sprintLists = response.sprints;
+							break;
+							
+							case 0:
+								$scope.sprintListsClass = "sprintLists";
+								$scope.sprintLists = [];
+							break;
+						}
+					});
+
+					SprintService.ListActiveSprints(function(response){
+					
+						switch(response.success){
+							case 1:
+								$scope.sprintListsClass="sprintLists";
+								$scope.sprintListsActive = response.activeSprints;
+								console.log(response);
+							break;
+							
+							case 0:
+								$scope.sprintListsClass = "sprintLists";
+								$scope.sprintListsActive = [];
+							break;
+						}
+					}); 
+				break;
+			}
+		});
+	}
 	
 	$scope.passEdit = function(sprint){
 		$scope.sprintEditId = sprint.sprintId;
@@ -80,15 +123,36 @@ angular.module('sprint')
 				break;
 				
 				case 1:
-					SprintService.ListSprints(function(response){
+					 SprintService.ListSprints(function(response){
 					
 						switch(response.success){
 							case 1:
 								$scope.sprintListsClass="sprintLists";
 								$scope.sprintLists = response.sprints;
 							break;
+							
+							case 0:
+								$scope.sprintListsClass = "sprintLists";
+								$scope.sprintLists = [];
+							break;
 						}
 					});
+
+					SprintService.ListActiveSprints(function(response){
+					
+						switch(response.success){
+							case 1:
+								$scope.sprintListsClass="sprintLists";
+								$scope.sprintListsActive = response.activeSprints;
+								console.log(response);
+							break;
+							
+							case 0:
+								$scope.sprintListsClass = "sprintLists";
+								$scope.sprintListsActive = [];
+							break;
+						}
+					}); 
 					BacklogService.ListBacklogs(function(response){
 						if(response.backlogs == null){
 							$scope.backlogLists = [];
@@ -115,7 +179,24 @@ angular.module('sprint')
 			case 1:
 				$scope.sprintListsClass="sprintLists";
 				$scope.sprintLists = response.sprints;
-				
+			break;
+			case 0:
+				$scope.sprintListsClass = "sprintLists";
+				$scope.sprintLists = [];
+			break;
+		}
+	});
+	
+	SprintService.ListActiveSprints(function(response){
+		switch(response.success){
+			case 1:
+				$scope.sprintListsClass="sprintLists";
+				$scope.sprintListsActive = response.activeSprints;
+			break;
+			
+			case 0:
+				$scope.sprintListsClass="sprintLists";
+				$scope.sprintListsActive=[];
 			break;
 		}
 	});

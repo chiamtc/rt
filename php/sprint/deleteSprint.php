@@ -16,6 +16,7 @@ if(!empty($projectKey) && !empty($sprintId)){
 		$deleteSprintSql = "delete from `sprint` where `sprintId` = $sprintId AND `projectKey` = '$projectKey'";
 		if($conn ->query($deleteSprintSql)){
 			$response["success"] = 1;
+			$response["message"] = "sprint_deleted";
 			echo json_encode($response);
 		}else{
 			$response["success"] = 0;
@@ -29,7 +30,7 @@ if(!empty($projectKey) && !empty($sprintId)){
 	}
 	
 }else{
-	$response["success"] = 2;
+	$response["success"] = 3;
 	$response["message"] = "empty fields";
 	echo json_encode($response);
 }

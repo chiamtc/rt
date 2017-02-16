@@ -74,6 +74,7 @@ if($conn -> query($sqltbl4)){
 
 $sqltbl5 = "CREATE TABLE sprint(
             sprintId int NOT NULL AUTO_INCREMENT,
+			sprintStatus varchar(255),
             sprintGoal text NOT NULL,
 			sprintStartDate varchar(255),
 			sprintEndDate varchar(255),

@@ -1,19 +1,56 @@
 <div class="sprintTitle">
 <span>Sprint Backlog</span>
 <span class="minimize" style="margin-left:12px;padding-top:9px"> 
-<span class="badge">{{sprintLists.length}} sprints</span></span>
+<span class="badge">{{sprintLists.length}} sprints</span> </span>
 <button class="btn btn-default addSprint" data-toggle="modal" data-target="#sprintCreateModal" style="color:black"><i class="glyphicon glyphicon-plus"></i> Create sprint</button>
 </div>
 
-<div ng-class="sprintListsClass" ng-repeat="sprint in sprintLists track by $index">
+<div ng-class="sprintListsClass" ng-repeat="sprintActive in sprintListsActive track by $index">
 	<div class="sprintListTop">
-		<span>Sprint #{{$index +1}}</span>
-		<span class="badge">{{sprint.backlogs.length}} issues</span>
+		<span>Active Sprint </span>
+		<span class="badge">{{sprintActive.backlogs.length}} issues</span>
 		<div class="sprintListRight">
 			<div class="dropdown">
 				<button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown"><i class="glyphicon glyphicon-option-horizontal" style="font-weight:bold"></i></button>
 					<ul class="dropdown-menu dropdown-menu-right">
-						<li><a href="" ng-click="passEdit(sprint)" data-toggle="modal" data-target="#sprintEditModal"><i class="glyphicon glyphicon-edit"></i> Edit Sprint</a></li>
+						<li><a href="" ng-click="passEdit(sprintActive)" data-toggle="modal" data-target="#sprintEditModal"><i class="glyphicon glyphicon-edit"></i> Edit Sprint</a></li>
+						<li><a href="" ng-click="passDelete(sprintActive)" data-toggle="modal" data-target="#sprintDeleteModal"><i class="glyphicon glyphicon-remove"></i> Delete Sprint</a></li>
+					</ul>
+			</div>
+		</div>
+	</div>
+	<ul class="nav nav-pills nav-stacked dropPlace" data-drop="true" data-jqyoui-options="{ greedy:true}" ng-model="sprintActive.backlogs" jqyoui-droppable="{multiple:true, onDrop:'dropCallback2(sprintActive.sprintId)'}">
+		<li role="presentation" ng-repeat="itemActive in sprintActive.backlogs" data-drag="{{itemActive.drag}}" data-jqyoui-options="{revert:'invalid'}"   ng-model="sprintActive.backlogs" jqyoui-draggable="{index: {{$index}},animate:true, onStart:'startCallback2(itemActive, $index)'}">
+		<div class="sprintItem" ng-style="calculateStyle(itemActive)">
+			<div class="sprintItemHeader">
+			<div class="sprintItemHeaderTitle">
+				<h5> <a href=""  ng-click="toggle(itemActive)">{{itemActive.backlogTitle}} </a></h5>
+				<span class="minimize" data-toggle="tooltip" data-placement="bottom" title="Created Since">{{itemActive.dateCreated}}</span>
+				<span class="minimize" data-toggle="tooltip" data-placement="bottom" title="sprint Owner"><i class="glyphicon glyphicon-user"></i> {{itemActive.backlogCreator}}</span>
+			</div>
+			<div class="sprintItemHeaderTitleDetails">
+				<div class="sprintDetails">
+					<p class="minimize">Story Pts: {{itemActive.backlogStoryPoint}}</p>
+					<p class="minimize">Type: {{itemActive.backlogType}}</p>
+				</div>
+			</div>
+			</div>
+		</div>
+		</li>
+	</ul>
+	<hr>
+</div>
+
+<div ng-class="sprintListsClass" ng-repeat="sprint in sprintLists track by $index">
+	<div class="sprintListTop">
+		<span>Inactive Sprint </span><br>
+		<span>Sprint #{{$index +1}}</span>
+		<span class="badge">{{sprint.backlogs.length}} issues</span>
+		<div class="sprintListRight">
+			<div class="dropdown">
+				<button class="btn btn-default" type="button" ng-click="startSprint(sprint.sprintId)" ng-show="sprintListsActive.length ==0">Start Sprint</button>
+				<button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown"><i class="glyphicon glyphicon-option-horizontal" style="font-weight:bold"></i></button>
+					<ul class="dropdown-menu dropdown-menu-right">
 						<li><a href="" ng-click="passDelete(sprint)" data-toggle="modal" data-target="#sprintDeleteModal"><i class="glyphicon glyphicon-remove"></i> Delete Sprint</a></li>
 					</ul>
 			</div>

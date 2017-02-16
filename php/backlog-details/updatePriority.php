@@ -7,7 +7,7 @@ $dateModified = $data -> dateModified;
 $backlogPriority = mysqli_real_escape_string($conn, $backlogPriority);
 $backlogId = mysqli_real_escape_string($conn, $backlogId);
 $response = array();
-	$updatePrioritySql = "UPDATE `backlog` SET `backlogPriority`='$backlogPriority' WHERE `backlogId` = $backlogId";
+	$updatePrioritySql = "UPDATE `backlog` SET `backlogPriority`='$backlogPriority', `date_modified` = '$dateModified' WHERE `backlogId` = $backlogId";
 if($conn -> query($updatePrioritySql)){
 	$response["success"] = 1;
 	$response["message"] = "backlog title updated";

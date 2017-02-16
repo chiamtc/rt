@@ -7,7 +7,7 @@ $dateModified = $data -> dateModified;
 $backlogDesc = mysqli_real_escape_string($conn, $backlogDesc);
 $backlogId = mysqli_real_escape_string($conn, $backlogId);
 $response = array();
-	$updateDescSql = "UPDATE `backlog` SET `backlogDesc`='$backlogDesc' WHERE `backlogId` = $backlogId";
+	$updateDescSql = "UPDATE `backlog` SET `backlogDesc`='$backlogDesc', `date_modified` = '$dateModified' WHERE `backlogId` = $backlogId";
 if($conn -> query($updateDescSql)){
 	$response["success"] = 1;
 	$response["message"] = "backlog title updated";
