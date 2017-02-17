@@ -71,13 +71,22 @@ angular.module('backlog-details')
 	}
 	
 	$scope.deleteTask = function(){
-		console.log($scope.passTaskDelete);
 		BacklogDetailsService.DeleteTask($scope.passTaskDelete.tasksId,$scope.passBacklog.backlogId, function(response){
 			switch(response.success){
 				case 1:
-					$scope.taskLists.pop($scope.passTaskDelete);
+					BacklogDetailsService.ListTasks($scope.passBacklog.backlogId,function(response){
+						switch(response.success){
+							case 0:
+								$scope.taskLists =[];
+							break;
+							case 1:
+								$scope.taskLists = response.tasks;
+							break;
+							case 2:
+							break;
+						}
+					});
 					$scope.passBacklog.dateModified = response.date_modified;
-					console.log("?");
 					$timeout(function(){
 						$('#taskDeleteModal').modal('toggle');
 					},500);
@@ -135,7 +144,18 @@ angular.module('backlog-details')
 		BacklogDetailsService.DeleteComment(comment.commentId, comment.backlogId, function(response){
 			switch(response.success){
 				case 1:
-					$scope.commentLists.pop(comment);
+					BacklogDetailsService.ListComment($scope.passBacklog.backlogId,function(response){
+						switch(response.success){
+							case 0:
+								$scope.commentLists =[];
+							break;
+							case 1:
+								$scope.commentLists = response.comments;
+							break;
+							case 2:
+							break;
+						}
+					});
 				break;
 				case 0:
 					console.log(response);
@@ -290,10 +310,18 @@ angular.module('backlog-details')
 				break;
 				
 				case 1:
-					
-					$scope.commentLists.push(response.comment[0]);
-					$scope.backlogDComment = "";
-					console.log($scope.commentLists);
+					BacklogDetailsService.ListComment($scope.passBacklog.backlogId,function(response){
+						switch(response.success){
+							case 0:
+								$scope.commentLists =[];
+							break;
+							case 1:
+								$scope.commentLists = response.comments;
+							break;
+							case 2:
+							break;
+						}
+					});
 				break;
 			}
 		});

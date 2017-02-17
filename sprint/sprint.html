@@ -16,7 +16,7 @@
 				<i data-toggle="dropdown" role="button" class="glyphicon glyphicon-menu-hamburger" style="font-weight:bold"></i>
 					<ul class="dropdown-menu dropdown-menu-right">
 						<li><a href="" ng-click="passEdit(sprintActive)" data-toggle="modal" data-target="#sprintEditModal"><i class="glyphicon glyphicon-edit"></i> Edit Sprint</a></li>
-						<li><a href="" ng-click="passDelete(sprintActive,'active')" data-toggle="modal" data-target="#sprintDeleteModal"><i class="glyphicon glyphicon-remove"></i> Delete Sprint</a></li>
+						<li><a href="" ng-click="passDelete(sprintActive)" data-toggle="modal" data-target="#sprintDeleteModal"><i class="glyphicon glyphicon-remove"></i> Delete Sprint</a></li>
 					</ul>
 			</div>
 		</div>
@@ -54,7 +54,7 @@
 				<button class="btn btn-default" type="button" ng-click="startSprint(sprint.sprintId)" ng-show="sprintListsActive.length ==0">Start Sprint</button>
 				<i role="button" data-toggle="dropdown" class="glyphicon glyphicon-menu-hamburger" style="font-weight:bold"></i>
 					<ul class="dropdown-menu dropdown-menu-right">
-						<li><a href="" ng-click="passDelete(sprint,'inactive')" data-toggle="modal" data-target="#sprintDeleteModal"><i class="glyphicon glyphicon-remove"></i> Delete Sprint</a></li>
+						<li><a href="" ng-click="passDelete(sprint)" data-toggle="modal" data-target="#sprintDeleteModal"><i class="glyphicon glyphicon-remove"></i> Delete Sprint</a></li>
 					</ul>
 			</div>
 		</div>

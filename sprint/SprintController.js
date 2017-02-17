@@ -133,9 +133,9 @@ angular.module('sprint')
 		});
 	}
 	
-	$scope.passDelete = function(sprint,state){
+	$scope.passDelete = function(sprint){
 		$scope.sprintDeletePassed= sprint;
-		$scope.passState = state;
+
 	}
 	
 	$scope.deleteSprint = function(){
@@ -146,11 +146,36 @@ angular.module('sprint')
 				break;
 				
 				case 1:
-					if($scope.passState =='active'){
-						$scope.sprintListsActive.pop($scope.sprintDeletePassed);
-					}else if($scope.passState == 'inactive'){
-						$scope.sprintLists.pop($scope.sprintDeletePassed);
-					}
+					 SprintService.ListSprints(function(response){
+					
+						switch(response.success){
+							case 1:
+								$scope.sprintListsClass="sprintLists";
+								$scope.sprintLists = response.sprints;
+							break;
+							
+							case 0:
+								$scope.sprintListsClass = "sprintLists";
+								$scope.sprintLists = [];
+							break;
+						}
+					});
+
+					SprintService.ListActiveSprints(function(response){
+					
+						switch(response.success){
+							case 1:
+								$scope.sprintListsClass="sprintLists";
+								$scope.sprintListsActive = response.activeSprints;
+								console.log(response);
+							break;
+							
+							case 0:
+								$scope.sprintListsClass = "sprintLists";
+								$scope.sprintListsActive = [];
+							break;
+						}
+					}); 
 					BacklogService.ListBacklogs(function(response){
 						if(response.backlogs == null){
 							$scope.backlogLists = [];

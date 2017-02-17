@@ -120,7 +120,7 @@
 		<hr>
 		<h5 class="detailHeader">Comments </h5>
 		
-		<div ng-repeat="comment in commentLists">
+		<div ng-repeat="comment in commentLists track by $index">
 			<div class="panel panel-info" >
 				<div class="panel-heading">
 				<div class="panelHeader">
@@ -130,7 +130,7 @@
 					<ul class="dropdown-menu dropdown-menu-right">
 						<li><a href="" ng-click="editComment(comment)"><i class="glyphicon glyphicon-edit"></i> Edit 
 						Comment</a></li>
-						<li><a href="" ng-click="deleteComment(comment)"><i class="glyphicon glyphicon-remove"></i> Delete Comment</a></li>
+						<li><a href="" ng-click="deleteComment(comment, $index)"><i class="glyphicon glyphicon-remove"></i> Delete Comment</a></li>
 					</ul>
 				</div>
 					
@@ -254,7 +254,7 @@
 			</div>
 			
 			<div class="modal-body">
-				<h5> Are you sure to <span  style="color:red;font-weight:bold;">delete</span> this sprint?</h5>
+				<h5 ng-model="passIndex"> Are you sure to <span  style="color:red;font-weight:bold;">delete</span> this sprint?</h5>
 			</div>
 			
 			<div class="modal-footer">
