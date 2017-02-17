@@ -19,6 +19,92 @@ angular.module('backlog-details')
 				value.dateComment = moment(value.dateComment).fromNow();
 			});
 			callback(response.data);
+			console.log(response.data);
+		});
+	}
+	
+	factory.DeleteTask = function(taskId,backlogId,callback){
+		$http({
+			method : 'POST',
+			url : 'php/backlog-details/deleteTask.php',
+			data:{
+				
+				taskId : taskId,
+				backlogId:backlogId,
+				date_modified : moment().format(),
+			},
+			headers: {'Content-Type':'application/json'}
+		}).then(function(response){
+			response.data.date_modified = moment(response.data.date_modified).fromNow();
+			callback(response.data);
+			console.log(response.data);
+		});
+	}
+	
+	factory.EditTask= function(taskTitle, taskDesc, taskId, backlogId,callback){
+		$http({
+			method : 'POST',
+			url : 'php/backlog-details/editTask.php',
+			data:{
+				taskTitle:taskTitle,
+				taskDesc : taskDesc,
+				taskId : taskId,
+				backlogId: backlogId,
+				date_modified : moment().format(),
+			},
+			headers: {'Content-Type':'application/json'}
+		}).then(function(response){
+			response.data.date_modified = moment(response.data.date_modified).fromNow();
+			callback(response.data);
+			console.log(response.data);
+		});
+	}
+	
+	factory.ListTasks = function(backlogId, callback){
+		$http({
+			method : 'POST',
+			url : 'php/backlog-details/getTasks.php',
+			data:{
+				backlogId: backlogId,
+			},
+			headers: {'Content-Type':'application/json'}
+		}).then(function(response){
+			
+			callback(response.data);
+			console.log(response.data);
+		});
+	}
+	
+	factory.CreateTask = function(taskTitle, taskDesc, backlogId,callback){
+		$http({
+			method : 'POST',
+			url : 'php/backlog-details/createTask.php',
+			data:{
+				taskTitle:taskTitle,
+				taskDesc:taskDesc,
+				backlogId : backlogId,
+				date_modified : moment().format(),
+			},
+			headers: {'Content-Type':'application/json'}
+		}).then(function(response){
+			
+			response.data.date_modified = moment(response.data.date_modified).fromNow();
+			callback(response.data);
+		});
+	}
+	
+	factory.DeleteComment = function(commentId, backlogId,callback){
+		$http({
+			method : 'POST',
+			url : 'php/backlog-details/deleteComment.php',
+			data:{
+				commentId : commentId,
+				backlogId : backlogId
+			},
+			headers: {'Content-Type':'application/json'}
+		}).then(function(response){
+			console.log(response);
+			callback(response.data);
 		});
 	}
 	

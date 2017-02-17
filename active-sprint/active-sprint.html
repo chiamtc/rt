@@ -1,2 +1,13 @@
 <project-header></project-header>
 <side-bar></side-bar>
+
+<div id="main">
+	<div class="col-md-12" id="md12">
+		
+	</div>
+	<!-- alert alert-success alert-dismissible snackbar -->
+	<div ng-show="snackbarShow" ng-class="snackbarClass" role="alert">
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		{{snackbarMessage}}
+	</div>
+</div>

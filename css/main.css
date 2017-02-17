@@ -272,6 +272,7 @@ textarea{
 	border:1px solid #ccc;
 	border-left: 5px solid #ccc;
 	display:block;
+	
 }
 
 .backlogItemHeader{
@@ -359,14 +360,23 @@ textarea{
 
 .sprintListTop{
 	box-sizing:border-box;
-	display:inline-block;
+	display:flex;
 	width:100%;
+	justify-content: space-between;
 	font-size:16px;
 }
 
 .sprintListRight{
 	white-space: nowrap;
-	float:right;
+	text-align:left;
+	flex-wrap: wrap;
+	margin-left:50px;
+	
+}
+
+.sprintListRight{
+	white-space: nowrap;
+	text-align:right;
 	flex-wrap: wrap;
 	margin-left:50px;
 	
@@ -484,6 +494,20 @@ hr{
 	font-size:16px;
 }
 
+.panelHeader{
+	display:flex;
+	justify-content: space-between;
+	line-height:20px;
+}
+
+.panelTitle{
+	text-align:left;
+}
+
+.panelOptions{
+	text-align:right;	
+}
+
 .snackbar {
    
     position: fixed; /* Sit on top of the screen */										
@@ -520,4 +544,39 @@ However, delay the fade out process for 2.5 seconds */
 @keyframes fadeout {
     from {bottom: 30px; opacity: 1;}
     to {bottom: 0; opacity: 0;}
+}
+
+.taskHeader{
+	display:flex;
+	justify-content: space-between;
+}
+
+.taskHeaderLeft{
+	font-size: 16px;
+	font-weight:bold;
+	text-align:left;
+}
+
+.taskHeaderRight{
+	text-align:right;
+}
+
+.taskItem{
+	border:1px solid #ccc;
+	border-left: 5px solid #ccc;
+	display:flex;
+	justify-content: space-between;
+	line-height:50px;
+	margin:5px 0px;
+	background-color:white;
+}
+
+.taskItemHeader{
+	padding-left:5px;
+	text-align:left;
+}
+
+.taskOptions{
+	padding-right:10px;
+	text-align:right;
 }

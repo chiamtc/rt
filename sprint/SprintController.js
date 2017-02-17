@@ -12,6 +12,7 @@ angular.module('sprint')
 	$scope.sprintListsActive=[];
 	$scope.createSprintResponse= false;
 	$scope.editSprintResponse= false;
+	
 	/** date format **/
 	//var a = new Date(Date.parse("2017-02-08T14:00:00.000Z"));
 	
@@ -35,6 +36,27 @@ angular.module('sprint')
 				NProgress.set(0.7);
 				NProgress.done();
 				$scope.sprintLists = response.sprints;
+			});
+		}
+	};
+	
+	$scope.dropCallback3 = function(event, ui, item) {
+		if($scope.backlogLists.length == 0){
+			$scope.backlogListsClass = "backlogListsEmpty";
+		}
+		
+		if($scope.sprintListsActive.length == 0){
+			$scope.sprintListsClass= "sprintListsEmpty";
+		}else{
+			$scope.sprintListsClass = "sprintLists";
+			console.log('sprintId' , item,' backlogId',$scope.draggedTitle);
+			SprintService.UpdateActiveSprint(item, $scope.draggedTitle, function(response){
+				NProgress.start();
+				NProgress.set(0.7);
+				NProgress.done();
+				console.log(response.activeSprints);
+				$scope.sprintListsActive = response.activeSprints;
+				console.log($scope.sprintListsActive);
 			});
 		}
 	};
@@ -111,48 +133,24 @@ angular.module('sprint')
 		});
 	}
 	
-	$scope.passDelete = function(sprint){
-		$scope.sprintDeleteId = sprint.sprintId;
+	$scope.passDelete = function(sprint,state){
+		$scope.sprintDeletePassed= sprint;
+		$scope.passState = state;
 	}
 	
 	$scope.deleteSprint = function(){
-		SprintService.DeleteSprint($scope.sprintDeleteId, function(response){
+		SprintService.DeleteSprint($scope.sprintDeletePassed.sprintId, function(response){
 			NProgress.start();
 			switch(response.success){
 				case 0:
 				break;
 				
 				case 1:
-					 SprintService.ListSprints(function(response){
-					
-						switch(response.success){
-							case 1:
-								$scope.sprintListsClass="sprintLists";
-								$scope.sprintLists = response.sprints;
-							break;
-							
-							case 0:
-								$scope.sprintListsClass = "sprintLists";
-								$scope.sprintLists = [];
-							break;
-						}
-					});
-
-					SprintService.ListActiveSprints(function(response){
-					
-						switch(response.success){
-							case 1:
-								$scope.sprintListsClass="sprintLists";
-								$scope.sprintListsActive = response.activeSprints;
-								console.log(response);
-							break;
-							
-							case 0:
-								$scope.sprintListsClass = "sprintLists";
-								$scope.sprintListsActive = [];
-							break;
-						}
-					}); 
+					if($scope.passState =='active'){
+						$scope.sprintListsActive.pop($scope.sprintDeletePassed);
+					}else if($scope.passState == 'inactive'){
+						$scope.sprintLists.pop($scope.sprintDeletePassed);
+					}
 					BacklogService.ListBacklogs(function(response){
 						if(response.backlogs == null){
 							$scope.backlogLists = [];
@@ -225,7 +223,9 @@ angular.module('sprint')
 					$scope.sprintLists.push(response.sprints[0]);
 					$scope.sprintListsClass = "sprintLists";
 					$timeout(function(){
-							$('#sprintCreateModal').modal('toggle');
+						$('#sprintCreateModal').modal('toggle');
+						$scope.createSprintResponse = !$scope.createSprintResponse;
+						$('#createSprintForm').trigger("reset");
 					},500);
 				break;
 				

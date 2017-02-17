@@ -11,8 +11,12 @@ angular.module('backlog-details')
 	$scope.passBacklog = [];
 	$scope.copyBacklog = [];
 	$scope.commentLists = [];
+	$scope.taskLists = [];
 	$scope.snackbarShow = false;
+	$scope.createTaskResponse= false;
 	/** UI functions **/
+	
+	
 	
 	$scope.toggle = function(backlog){
 		if(backlog.backlogId == null){
@@ -35,7 +39,104 @@ angular.module('backlog-details')
 					break;
 				}
 			});
+			
+			BacklogDetailsService.ListTasks($scope.passBacklog.backlogId,function(response){
+				switch(response.success){
+					case 0:
+						$scope.taskLists =[];
+					break;
+					case 1:
+						$scope.taskLists = response.tasks;
+					break;
+					case 2:
+					break;
+				}
+			});
 		}
+	}
+	
+	$scope.passEditTask= function(editTask){
+		$scope.taskEditId = editTask.tasksId;
+		$scope.taskEditTitle = editTask.tasksTitle;
+		$scope.taskEditDesc = editTask.tasksDesc;
+		if(editTask.tasksDesc == ""){
+			$scope.taskEditDesc = "No Description when this task was created";
+		}else{
+			$scope.taskEditDesc = editTask.tasksDesc;
+		}
+	}
+	
+	$scope.passDeleteTask = function(deleteTask){
+		$scope.taskDelete = deleteTask;
+	}
+	
+	$scope.deleteTask = function(){
+		
+		BacklogDetailsService.DeleteTask($scope.taskDelete.tasksId,$scope.passBacklog.backlogId, function(response){
+			switch(response.success){
+				case 1:
+					$scope.taskLists.pop($scope.taskDelete);
+					$scope.passBacklog.dateModified = response.date_modified;
+					$timeout(function(){
+						$('#taskDeleteModal').modal('toggle');
+					},500);
+				break;
+				case 0:
+				break;
+			}
+		});
+	}
+	
+	$scope.createTask = function(){
+		BacklogDetailsService.CreateTask($scope.taskCreateTitle, $scope.taskCreateDesc, $scope.passBacklog.backlogId,function(response){
+			switch(response.success){
+				case 1:
+					$scope.taskLists.push(response.task[0]);
+					$scope.createTaskResponse = !$scope.createTaskResponse;
+					$scope.createTaskResponseClass=  "alert alert-success alert-dismissible";
+					$scope.createTaskResponseMessage = "Created a new task !"
+					$scope.passBacklog.dateModified = response.date_modified;
+					$timeout(function(){
+						$('#taskCreateModal').modal('toggle');
+						$('#createTaskForm').trigger("reset");
+						$scope.createTaskResponse = !$scope.createTaskResponse;
+					},500);
+				break;
+				case 0:
+				break;
+			}
+		});
+	}
+	
+	$scope.editTask = function(){
+		BacklogDetailsService.EditTask($scope.taskEditTitle, $scope.taskEditDesc, $scope.taskEditId, $scope.passBacklog.backlogId,function(response){
+			switch(response.success){
+				case 1:
+					$scope.taskLists = response.tasks;
+					$scope.editTaskResponse = !$scope.editTaskResponse;
+					$scope.editTaskResponseClass=  "alert alert-success alert-dismissible";
+					$scope.editTaskResponseMessage = "Task updated !"
+					$scope.passBacklog.dateModified = response.date_modified;
+					$timeout(function(){
+						$('#taskEditModal').modal('toggle');
+						$scope.editTaskResponse = !$scope.editTaskResponse;
+					},500);
+				break;
+				case 0:
+				break;
+			}
+		});
+	}
+	
+	$scope.deleteComment = function(comment){
+		console.log(comment.commentId);
+		BacklogDetailsService.DeleteComment(comment.commentId, comment.backlogId, function(response){
+			switch(response.success){
+				case 1:
+					$scope.commentLists.pop(comment);
+				break;
+			}
+		});
 	}
 	
 	$scope.retain = function(){

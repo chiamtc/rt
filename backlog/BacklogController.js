@@ -31,6 +31,7 @@ angular.module('backlog')
 	};
 	
 	$scope.dropCallback = function(event, ui) {
+		NProgress.start();
 		if($scope.backlogLists.length == 0){
 			$scope.backlogListsClass = "backlogListsEmpty";
 		}
@@ -42,11 +43,28 @@ angular.module('backlog')
 			console.log('hey, you dumped me :-(' , $scope.draggedTitle, 'from sc12');
 			SprintService.UpdateSprint(0, $scope.draggedTitle, function(response){
 				console.log(0 + " " + $scope.draggedTitle2);
-				NProgress.start();
-				NProgress.set(0.7);
-				NProgress.done();
+				switch(response.success){
+					case 1:
+						BacklogService.ListBacklogs(function(response){
+							if(response.backlogs == null){
+								$scope.backlogLists = [];
+								$scope.backlogListsClass = "backlogListsEmpty";
+							}else{
+								$scope.backlogListsClass ="backlogLists";
+								$scope.backlogLists= response.backlogs;
+							}
+						});
+					break;
+					
+					case 0:
+					break;
+				}
+				
+				
 			});	
 		}
+		NProgress.set(0.7);
+		NProgress.done();
 	};
 	
 	BacklogService.ListBacklogs(function(response){
@@ -80,6 +98,8 @@ angular.module('backlog')
 				$scope.backlogLists.push(response.backlog[0]);
 				$timeout(function(){
 					$('#backlogCreateModal').modal('toggle');
+					$scope.createBacklogResponse = !$scope.createBacklogResponse;
+					$("#createBacklogForm").trigger("reset");
 				},500);
 					
 			break;

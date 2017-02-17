@@ -127,14 +127,14 @@ if($conn -> query($sqltbl9)){
     echo "tbl ubp failed to create<br>";
 }
 
-$sqltbl10 = "create table comment(
-			commentId int not null AUTO_INCREMENT,
-			comment text,
+$sqltbl10 = "create table backlogComment(
+			backlogCommentId int not null AUTO_INCREMENT,
+			backlogComment text,
 			date_comment varchar(255),
 			time_comment varchar(255),
 			email varchar(255) not null,
 			backlogId int not null,
-			PRIMARY KEY (commentId),
+			PRIMARY KEY (backlogCommentId),
 			FOREIGN KEY(backlogId) REFERENCES backlog(backlogId)
 			)";
 			
@@ -143,21 +143,20 @@ if($conn -> query($sqltbl10)){
 }else{
     echo "tbl comment failed to create<br>";
 }
-/**$sqltbl7 = "CREATE TABLE tasks(
+$sqltbl7 = "CREATE TABLE tasks(
             tasksId int NOT NULL AUTO_INCREMENT,
 			tasksDescription text NOT NULL,
-			tasksType varchar(255) NOT NULL,
 			tasksStatus varchar(255) NOT NULL,
-			usrstoriesId int NOT NULL,
-			PRIMARY KEY(tasksId,usrstoriesId),
-			FOREIGN KEY(usrstoriesId) REFERENCES usrstories(usrstoriesId)
+			backlogId int,
+			PRIMARY KEY(tasksId,backlogId),
+			FOREIGN KEY(backlogId) REFERENCES backlog(backlogId)
         )";
 
 if($conn -> query($sqltbl7)){
     echo "tbl tasks created<br>";
 }else{
     echo "tbl tasks failed to create<br>";
-}**/
+}
 
 
 

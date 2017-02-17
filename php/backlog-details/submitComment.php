@@ -10,7 +10,7 @@ $email = mysqli_real_escape_string($conn, $email);
 $backlogId = mysqli_real_escape_string($conn, $backlogId);
 $response = array();
 if(!empty($commentIn) && !empty($email)){
-	$submitCommentSql = "Insert into `comment`(`commentId`, `comment`, `date_comment`, `email`, `backlogId`) VALUES('', '$commentIn', '$date_comment', '$email', $backlogId)";
+	$submitCommentSql = "Insert into `backlogComment`(`backlogCommentId`, `backlogComment`, `date_comment`, `email`, `backlogId`) VALUES('', '$commentIn', '$date_comment', '$email', $backlogId)";
 	if($conn -> query($submitCommentSql)){
 		$response["comment"] = array();
 		$comment = array();

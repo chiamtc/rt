@@ -9,15 +9,17 @@ $date_comment = date("Y/m/d");
 $time_comment = date("h:i:sa");
 $response = array();
 if(!empty($backlogId)){
-	$getCommentSql	= "select * from `comment` where `backlogId` = $backlogId order by `date_comment` asc";
+	$getCommentSql	= "select * from `backlogComment` where `backlogId` = $backlogId order by `date_comment` asc";
 	$resultGetComment = $conn -> query($getCommentSql);
 	if($resultGetComment -> num_rows >0){
 		$response["comments"] = array();
 		while($rowGetComments = $resultGetComment -> fetch_assoc()){
 			$comment = array();
-			$comment["comment"] = $rowGetComments["comment"];
+			$comment["commentId"] = $rowGetComments["backlogCommentId"];
+			$comment["comment"] = $rowGetComments["backlogComment"];
 			$comment["dateComment"] = $rowGetComments["date_comment"];
 			$comment["email"] = $rowGetComments["email"];
+			$comment["backlogId"] = $rowGetComments["backlogId"];
 			array_push($response["comments"], $comment);
 		}
 		$response["success"] = 1;

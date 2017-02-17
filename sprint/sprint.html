@@ -7,19 +7,21 @@
 
 <div ng-class="sprintListsClass" ng-repeat="sprintActive in sprintListsActive track by $index">
 	<div class="sprintListTop">
-		<span>Active Sprint </span>
-		<span class="badge">{{sprintActive.backlogs.length}} issues</span>
+		<div class="sprintListLeft">
+			<span>Active Sprint </span>
+			<span class="badge">{{sprintActive.backlogs.length}} issues</span>
+		</div>
 		<div class="sprintListRight">
 			<div class="dropdown">
-				<button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown"><i class="glyphicon glyphicon-option-horizontal" style="font-weight:bold"></i></button>
+				<i data-toggle="dropdown" role="button" class="glyphicon glyphicon-menu-hamburger" style="font-weight:bold"></i>
 					<ul class="dropdown-menu dropdown-menu-right">
 						<li><a href="" ng-click="passEdit(sprintActive)" data-toggle="modal" data-target="#sprintEditModal"><i class="glyphicon glyphicon-edit"></i> Edit Sprint</a></li>
-						<li><a href="" ng-click="passDelete(sprintActive)" data-toggle="modal" data-target="#sprintDeleteModal"><i class="glyphicon glyphicon-remove"></i> Delete Sprint</a></li>
+						<li><a href="" ng-click="passDelete(sprintActive,'active')" data-toggle="modal" data-target="#sprintDeleteModal"><i class="glyphicon glyphicon-remove"></i> Delete Sprint</a></li>
 					</ul>
 			</div>
 		</div>
 	</div>
-	<ul class="nav nav-pills nav-stacked dropPlace" data-drop="true" data-jqyoui-options="{ greedy:true}" ng-model="sprintActive.backlogs" jqyoui-droppable="{multiple:true, onDrop:'dropCallback2(sprintActive.sprintId)'}">
+	<ul class="nav nav-pills nav-stacked dropPlace" data-drop="true" data-jqyoui-options="{ greedy:true}" ng-model="sprintActive.backlogs" jqyoui-droppable="{multiple:true, onDrop:'dropCallback3(sprintActive.sprintId)'}">
 		<li role="presentation" ng-repeat="itemActive in sprintActive.backlogs" data-drag="{{itemActive.drag}}" data-jqyoui-options="{revert:'invalid'}"   ng-model="sprintActive.backlogs" jqyoui-draggable="{index: {{$index}},animate:true, onStart:'startCallback2(itemActive, $index)'}">
 		<div class="sprintItem" ng-style="calculateStyle(itemActive)">
 			<div class="sprintItemHeader">
@@ -43,15 +45,16 @@
 
 <div ng-class="sprintListsClass" ng-repeat="sprint in sprintLists track by $index">
 	<div class="sprintListTop">
-		<span>Inactive Sprint </span><br>
-		<span>Sprint #{{$index +1}}</span>
-		<span class="badge">{{sprint.backlogs.length}} issues</span>
+		<div class="sprintListLeft">
+			<span>Inactive Sprint #{{$index +1}}</span>
+			<span class="badge">{{sprint.backlogs.length}} issues</span>
+		</div>
 		<div class="sprintListRight">
 			<div class="dropdown">
 				<button class="btn btn-default" type="button" ng-click="startSprint(sprint.sprintId)" ng-show="sprintListsActive.length ==0">Start Sprint</button>
-				<button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown"><i class="glyphicon glyphicon-option-horizontal" style="font-weight:bold"></i></button>
+				<i role="button" data-toggle="dropdown" class="glyphicon glyphicon-menu-hamburger" style="font-weight:bold"></i>
 					<ul class="dropdown-menu dropdown-menu-right">
-						<li><a href="" ng-click="passDelete(sprint)" data-toggle="modal" data-target="#sprintDeleteModal"><i class="glyphicon glyphicon-remove"></i> Delete Sprint</a></li>
+						<li><a href="" ng-click="passDelete(sprint,'inactive')" data-toggle="modal" data-target="#sprintDeleteModal"><i class="glyphicon glyphicon-remove"></i> Delete Sprint</a></li>
 					</ul>
 			</div>
 		</div>
@@ -84,11 +87,11 @@
 		<div class="modal-content">
 			<div class="modal-header">
 			  <button type="button" class="close" data-dismiss="modal">&times;</button>
-			 <h4 class="modal-title" ng-model="sprintDeleteId">Delete Sprint</h4>
+			 <h4 class="modal-title" ng-model="sprintDeletePassed">Delete Sprint</h4>
 			</div>
 			
 			<div class="modal-body">
-				<h5> Are you sure to <span style="color:red;font-weight:bold;">delete</span> this sprint?</h5>
+				<h5 ng-model="passState"> Are you sure to <span style="color:red;font-weight:bold;">delete</span> this sprint?</h5>
 			</div>
 			
 			<div class="modal-footer">
@@ -110,7 +113,7 @@
 			</div>
 			
 			<div class="modal-body">
-				<form name="sprintEditForm" class="form-group">
+				<form id="editForm" name="sprintEditForm" class="form-group">
 					
 					<div class="form-group">
 						<label>Sprint Goals</label>
@@ -178,7 +181,7 @@
 			</div>
 			
 			<div class="modal-body">
-				<form name="sprintForm" class="form-group">
+				<form id="createSprintForm" name="sprintForm" class="form-group">
 					
 					<div class="form-group">
 						<label>Sprint Goal</label>

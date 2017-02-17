@@ -21,7 +21,11 @@ $backlogStoryPoint = mysqli_real_escape_string($conn, $backlogStoryPoint);
 $backlogCreator = mysqli_real_escape_string($conn, $backlogCreator);
 $projectKey = mysqli_real_escape_string($conn, $projectKey);
 $backlogId = 0;
+
 if(!empty($backlogName) && !empty($backlogType) && !empty($backlogPriority) && !empty($backlogCreator) && !empty($projectKey)){
+	if(empty($backlogStoryPoint)){
+		$backlogStoryPoint = 0;
+	}
 	$createBacklogSql = "INSERT INTO `backlog`(`backlogId`, `backlogType`, `backlogTitle`, `backlogPriority`,`backlogStoryPoint`,`backlogDesc`,  `date_created`, `date_modified`,`backlogCreator`, `backlogStatus`, `sprintId`)VALUES('', '$backlogType', '$backlogTitle', '$backlogPriority',$backlogStoryPoint,'$backlogDesc', '$date_created', '$date_modified','$backlogCreator', 'Unassigned', 0)";
 	if($conn ->query($createBacklogSql)){
 		$backlogId = $conn -> insert_id;
