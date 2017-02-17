@@ -12,12 +12,13 @@ $response = array();
 if(!empty($taskTitle) && !empty($backlogId)){
 	$createTaskSql = "Insert into `tasks`(`tasksId`, `tasksTitle`, `tasksDescription`, `tasksStatus`, `backlogId`) VALUES('', '$taskTitle', '$taskDesc', 'To-do', $backlogId)";
 	if($conn -> query($createTaskSql)){
+		$taskId = $conn ->insert_id;
 		$updateBacklogModifiedSql = "UPDATE `backlog` SET `date_modified`='$date_modified' where `backlogId` = $backlogId";
 		if($conn ->query($updateBacklogModifiedSql)){
-			$taskId = $conn -> insert_id;
+			
 			$response["task"] = array();
 			$task = array();
-			$task["tasksId"] = $taskId;
+			$task["tasksId"] =$taskId;
 			$task["tasksTitle"] = $taskTitle;
 			$task["tasksDesc"] = $taskDesc;
 			$task["tasksStatus"] = 'To-do';

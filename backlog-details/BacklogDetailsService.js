@@ -19,7 +19,6 @@ angular.module('backlog-details')
 				value.dateComment = moment(value.dateComment).fromNow();
 			});
 			callback(response.data);
-			console.log(response.data);
 		});
 	}
 	
@@ -37,7 +36,6 @@ angular.module('backlog-details')
 		}).then(function(response){
 			response.data.date_modified = moment(response.data.date_modified).fromNow();
 			callback(response.data);
-			console.log(response.data);
 		});
 	}
 	
@@ -56,7 +54,6 @@ angular.module('backlog-details')
 		}).then(function(response){
 			response.data.date_modified = moment(response.data.date_modified).fromNow();
 			callback(response.data);
-			console.log(response.data);
 		});
 	}
 	
@@ -71,7 +68,6 @@ angular.module('backlog-details')
 		}).then(function(response){
 			
 			callback(response.data);
-			console.log(response.data);
 		});
 	}
 	
@@ -103,7 +99,6 @@ angular.module('backlog-details')
 			},
 			headers: {'Content-Type':'application/json'}
 		}).then(function(response){
-			console.log(response);
 			callback(response.data);
 		});
 	}

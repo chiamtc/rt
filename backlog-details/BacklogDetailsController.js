@@ -66,17 +66,18 @@ angular.module('backlog-details')
 		}
 	}
 	
-	$scope.passDeleteTask = function(deleteTask){
-		$scope.taskDelete = deleteTask;
+	$scope.passDeleteTask = function(passTask){
+		$scope.passTaskDelete = passTask;
 	}
 	
 	$scope.deleteTask = function(){
-		
-		BacklogDetailsService.DeleteTask($scope.taskDelete.tasksId,$scope.passBacklog.backlogId, function(response){
+		console.log($scope.passTaskDelete);
+		BacklogDetailsService.DeleteTask($scope.passTaskDelete.tasksId,$scope.passBacklog.backlogId, function(response){
 			switch(response.success){
 				case 1:
-					$scope.taskLists.pop($scope.taskDelete);
+					$scope.taskLists.pop($scope.passTaskDelete);
 					$scope.passBacklog.dateModified = response.date_modified;
+					console.log("?");
 					$timeout(function(){
 						$('#taskDeleteModal').modal('toggle');
 					},500);
@@ -92,6 +93,7 @@ angular.module('backlog-details')
 			switch(response.success){
 				case 1:
 					$scope.taskLists.push(response.task[0]);
+					console.log($scope.taskLists);
 					$scope.createTaskResponse = !$scope.createTaskResponse;
 					$scope.createTaskResponseClass=  "alert alert-success alert-dismissible";
 					$scope.createTaskResponseMessage = "Created a new task !"
@@ -134,6 +136,9 @@ angular.module('backlog-details')
 			switch(response.success){
 				case 1:
 					$scope.commentLists.pop(comment);
+				break;
+				case 0:
+					console.log(response);
 				break;
 			}
 		});

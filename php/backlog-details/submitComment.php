@@ -12,11 +12,13 @@ $response = array();
 if(!empty($commentIn) && !empty($email)){
 	$submitCommentSql = "Insert into `backlogComment`(`backlogCommentId`, `backlogComment`, `date_comment`, `email`, `backlogId`) VALUES('', '$commentIn', '$date_comment', '$email', $backlogId)";
 	if($conn -> query($submitCommentSql)){
+		
 		$response["comment"] = array();
 		$comment = array();
 		$comment["comment"] = $commentIn;
+		$comment["commentId"] = $conn ->insert_id;
 		$comment["dateComment"] = $date_comment;
-		$comment["email"] = $email;		
+		$comment["backlogId"] = $backlogId;
 		array_push($response["comment"], $comment);
 		$response["success"] = 1;
 		echo json_encode($response);

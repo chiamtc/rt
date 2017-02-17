@@ -11,7 +11,7 @@ if($conn -> query($deleteTaskSql)){
 	$updateBacklogModifiedSql = "UPDATE `backlog` SET `date_modified`='$date_modified' where `backlogId` = $backlogId";
 	if($conn ->query($updateBacklogModifiedSql)){
 		$response["success"] = 1;
-		$response["message"] = "deteled";
+		$response["message"] = $deleteTaskSql;
 		$response["date_modified"] = $date_modified;
 		echo json_encode($response);
 	}else{
