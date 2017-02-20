@@ -1,5 +1,6 @@
 <?php 
 include '../db_connection.php';
+include '../functions.php';
 $data = json_decode(file_get_contents("php://input"));
 $projectName = $data -> projectName;
 $projectDesc = $data -> projectDesc;
@@ -10,6 +11,7 @@ $projectDesc = mysqli_real_escape_string($conn, $projectDesc);
 $projectKey = mysqli_real_escape_string($conn, $projectKey);
 $uid = mysqli_real_escape_string($conn, $_COOKIE['uid']);
 $response = array();
+$projectSeo = seoUrl($projectName);
 
 if(!empty($projectName) && !empty($projectDesc) && !empty($projectKey)){
 	
@@ -17,8 +19,8 @@ if(!empty($projectName) && !empty($projectDesc) && !empty($projectKey)){
 	$resultCheckProjectKey = $conn -> query($checkProjectKeySql);
 		
 	if($resultCheckProjectKey -> num_rows ==0){
-		$sqlCreateProject = "INSERT INTO `project`(`projectKey`, `projectName`, `projectDescription`, `date_created`)
-							VALUES('$projectKey', '$projectName', '$projectDesc', '$date_created')";
+		$sqlCreateProject = "INSERT INTO `project`(`projectKey`, `projectName`, `projectDescription`,`date_created`)
+							VALUES('$projectKey', '$projectName', '$projectDesc','$date_created')";
 							
 		if($conn -> query($sqlCreateProject)){
 			$sqlToUserProject ="INSERT INTO `userproject`(`uid`,`projectKey`)
@@ -31,6 +33,7 @@ if(!empty($projectName) && !empty($projectDesc) && !empty($projectKey)){
 				$project = array();
 				$project["projectKey"] = $projectKey;
 				$project["projectName"] = $projectName;
+				$project["projectSeo"] = $projectSeo;
 				$project["dateCreated"] = $date_created;
 				$project["projectMembers"] = 1;
 				array_push($response["project"], $project);

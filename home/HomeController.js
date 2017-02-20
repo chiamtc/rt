@@ -23,7 +23,6 @@ angular.module('home')
 				$scope.projectListResponseMessage = "no projects found :( ";
 			break;
 			case 1:
-				
 				$scope.projectLists = response.projects;
 			break;
 			default:
@@ -77,6 +76,7 @@ angular.module('home')
 							$scope.createResponseMessage = "Project Created.";
 							//console.log('/project/' + response.project[0].projectKey +'/'+ response.project[0].projectName);
 							$scope.projectLists.push(response.project[0]);
+							console.log($scope.projectLists);
 							$timeout(function(){
 								
 								$('#projectCreateModal').modal('toggle');

@@ -1,5 +1,6 @@
 <?php
 include '../db_connection.php';
+include '../functions.php';
 $response = array();
 $uid = mysqli_real_escape_string($conn, $_COOKIE['uid']);
 if(!empty($uid)){
@@ -18,6 +19,7 @@ if(!empty($uid)){
 			$project["projectMembers"] = $rowGetMemberSql["projectTotalMembers"];
 			$project["projectName"] = $rowGetProjects["projectName"];
 			$project["projectDesc"] = $rowGetProjects["projectDescription"];
+			$project["projectSeo"] = seoUrl($rowGetProjects["projectName"]);
 			$project["dateCreated"] = $rowGetProjects["date_created"];
 			array_push($response["projects"], $project);
 		}

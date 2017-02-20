@@ -99,6 +99,7 @@ angular.module('backlog-details')
 	
 	$scope.createTask = function(){
 		BacklogDetailsService.CreateTask($scope.taskCreateTitle, $scope.taskCreateDesc, $scope.passBacklog.backlogId,function(response){
+			console.log(response);
 			switch(response.success){
 				case 1:
 					$scope.taskLists.push(response.task[0]);
@@ -114,6 +115,7 @@ angular.module('backlog-details')
 					},500);
 				break;
 				case 0:
+				console.log(response);
 				break;
 			}
 		});
@@ -140,7 +142,6 @@ angular.module('backlog-details')
 	}
 	
 	$scope.deleteComment = function(comment){
-		console.log(comment.commentId);
 		BacklogDetailsService.DeleteComment(comment.commentId, comment.backlogId, function(response){
 			switch(response.success){
 				case 1:
@@ -308,20 +309,9 @@ angular.module('backlog-details')
 			switch(response.success){
 				case 0:
 				break;
-				
 				case 1:
-					BacklogDetailsService.ListComment($scope.passBacklog.backlogId,function(response){
-						switch(response.success){
-							case 0:
-								$scope.commentLists =[];
-							break;
-							case 1:
-								$scope.commentLists = response.comments;
-							break;
-							case 2:
-							break;
-						}
-					});
+					console.log(response.comment[0]);
+					$scope.commentLists.push(response.comment[0]);
 				break;
 			}
 		});

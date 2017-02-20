@@ -2,8 +2,7 @@
 angular.module('sidebar')
 
 .controller('SidebarController',['$scope','$timeout','$routeParams','SidebarService','$location',function($scope, $timeout, $routeParams,SidebarService, $location){
-	
-	$scope.pathParams =$routeParams.projectKey + "/"+ $routeParams.projectName;
+	$scope.pathParams =$routeParams.projectKey + "/"+ $routeParams.projectSeo;
 	$scope.inviteResponse= false;
 	$scope.toggleNav = true;
 	/** UI functions **/

@@ -28,7 +28,8 @@ angular.module('sprint')
 	factory.ListActiveSprints= function(callback){
 		$http({
 			method: 'POST',
-			url : 'php/sprint/getActiveSprint.php',
+			//url : 'php/sprint/getActiveSprint.php',
+			url :'php/backlog-details/test.php',
 			data:{
 				projectKey : $routeParams.projectKey,
 			},

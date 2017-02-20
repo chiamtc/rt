@@ -1,0 +1,35 @@
+<project-header></project-header>
+<side-bar></side-bar>
+
+<div id="main">
+	<div class="col-md-12" id="md12">
+		<table class="table">
+			<tr ng-repeat="backlog in backlogActive">
+				<td>{{backlog.backlogTitle}}</td>
+				<td>
+				<div ng-repeat="eachTask in backlog.tasks | filter : {tasksStatus: 'To-do'}">
+					{{eachTask.tasksTitle}}
+					<span class="badge">{{eachTask.tasksStatus}}</span>
+				</div>
+				</td>
+				<td>
+				<div ng-repeat="eachTask in backlog.tasks | filter : {tasksStatus : 'In-Progress'}">
+					{{eachTask.tasksTitle}}
+					<span class="badge">{{eachTask.tasksStatus}}</span>
+				</div>
+				</td>
+				<td>
+				<div ng-repeat="eachTask in backlog.tasks | filter : {tasksStatus : 'Done'}">
+					{{eachTask.tasksTitle}}
+					<span class="badge">{{eachTask.tasksStatus}}</span>
+				</div>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<!-- alert alert-success alert-dismissible snackbar -->
+	<div ng-show="snackbarShow" ng-class="snackbarClass" role="alert">
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		{{snackbarMessage}}
+	</div>
+</div>

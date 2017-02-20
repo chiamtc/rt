@@ -32,37 +32,28 @@ angular.module('backlog')
 	
 	$scope.dropCallback = function(event, ui) {
 		NProgress.start();
-		if($scope.backlogLists.length == 0){
-			$scope.backlogListsClass = "backlogListsEmpty";
-		}
+		$scope.backlogListsClass ="backlogLists";
+		console.log('hey, you dumped me :-(' , $scope.draggedTitle, 'from sc12');
+		SprintService.UpdateSprint(0, $scope.draggedTitle, function(response){
+			console.log(0 + " " + $scope.draggedTitle2);
+			switch(response.success){
+				case 1:
+					BacklogService.ListBacklogs(function(response){
+						if(response.backlogs == null){
+							$scope.backlogLists = [];
+							$scope.backlogListsClass = "backlogListsEmpty";
+						}else{
+							$scope.backlogListsClass ="backlogLists";
+							$scope.backlogLists= response.backlogs;
+						}
+					});
+				break;
+				
+				case 0:
+				break;
+			}
+		});	
 		
-		if($scope.sprintLists.length == 0){
-			$scope.sprintListsClass= "sprintListsEmpty";
-		}else{
-			$scope.backlogListsClass ="backlogLists";
-			console.log('hey, you dumped me :-(' , $scope.draggedTitle, 'from sc12');
-			SprintService.UpdateSprint(0, $scope.draggedTitle, function(response){
-				console.log(0 + " " + $scope.draggedTitle2);
-				switch(response.success){
-					case 1:
-						BacklogService.ListBacklogs(function(response){
-							if(response.backlogs == null){
-								$scope.backlogLists = [];
-								$scope.backlogListsClass = "backlogListsEmpty";
-							}else{
-								$scope.backlogListsClass ="backlogLists";
-								$scope.backlogLists= response.backlogs;
-							}
-						});
-					break;
-					
-					case 0:
-					break;
-				}
-				
-				
-			});	
-		}
 		NProgress.set(0.7);
 		NProgress.done();
 	};
@@ -100,6 +91,8 @@ angular.module('backlog')
 					$('#backlogCreateModal').modal('toggle');
 					$scope.createBacklogResponse = !$scope.createBacklogResponse;
 					$("#createBacklogForm").trigger("reset");
+					$scope.backlogCreateType = backlogCreateTypes[0];
+					$scope.backlogCreatePriority = $scope.backlogPriorities[0];
 				},500);
 					
 			break;

@@ -3,24 +3,23 @@ include '../db_connection.php';
 $data = json_decode(file_get_contents('php://input'));
 $commentIn = $data -> comment;
 $email = $data ->email;
-$backlogId = $data -> backlogId;
+$tasksId = $data -> tasksId;
 $date_comment = $data -> dateComment;
 $commentIn = mysqli_real_escape_string($conn, $commentIn);
 $email = mysqli_real_escape_string($conn, $email);
 $backlogId = mysqli_real_escape_string($conn, $backlogId);
 $response = array();
 if(!empty($commentIn) && !empty($email)){
-	$submitCommentSql = "Insert into `backlogComment`(`backlogCommentId`, `backlogComment`, `date_comment`, `email`, `backlogId`) VALUES('', '$commentIn', '$date_comment', '$email', $backlogId)";
+	$submitCommentSql = "Insert into `taskComment`(`taskCommentId`, `taskComment`, `date_comment`, `email`, `tasksId`) VALUES('', '$commentIn', '$date_comment', '$email', $tasksId)";
 	if($conn -> query($submitCommentSql)){
 		
-		$response["comment"] = array();
-		$comment = array();
-		$comment["comment"] = $commentIn;
-		$comment["commentId"] = $conn ->insert_id;
-		$comment["dateComment"] = $date_comment;
-		$comment["email"] = $email;
-		$comment["backlogId"] = $backlogId;
-		array_push($response["comment"], $comment);
+		$response["taskComment"] = array();
+		$taskComment = array();
+		$taskComment["taskComment"] = $commentIn;
+		$taskComment["taskCommentId"] = $conn ->insert_id;
+		$taskComment["dateComment"] = $date_comment;
+		$taskComment["email"] = $email;
+		array_push($response["taskComment"], $taskComment);
 		$response["success"] = 1;
 		echo json_encode($response);
 		

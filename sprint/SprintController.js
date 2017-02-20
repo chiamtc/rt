@@ -125,7 +125,7 @@ angular.module('sprint')
 					$scope.editSprintResponseMessage = "Details are updated! :)";
 					$timeout(function(){
 						$('#sprintEditModal').modal('toggle');
-					},500);
+					},250);
 				break;
 			}
 			NProgress.set(0.7);
@@ -187,7 +187,7 @@ angular.module('sprint')
 					});
 					$timeout(function(){
 						$('#sprintDeleteModal').modal('toggle');
-					},500);
+					},250);
 				
 				NProgress.set(0.7);
 				NProgress.done();
@@ -232,7 +232,7 @@ angular.module('sprint')
 			
 		}else if($scope.sprintStartDate.getTime() > $scope.sprintEndDate.getTime()){
 			$scope.createSprintResponseClass ="alert alert-danger";
-			$scope.createSprintResponseMessage = "Start date is later than end date";
+			$scope.createSprintResponseMessage = "Start date is later than end date 2";
 		}else{
 			SprintService.CreateSprint($scope.sprintGoal, $scope.sprintStartDate, $scope.sprintEndDate, function(response){
 				switch(response.success){
@@ -251,6 +251,7 @@ angular.module('sprint')
 						$('#sprintCreateModal').modal('toggle');
 						$scope.createSprintResponse = !$scope.createSprintResponse;
 						$('#createSprintForm').trigger("reset");
+						
 					},500);
 				break;
 				

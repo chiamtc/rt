@@ -9,7 +9,7 @@ $date_modified = $data ->date_modified;
 $taskTitle = mysqli_real_escape_string($conn, $taskTitle);
 $taskDesc = mysqli_real_escape_string($conn, $taskDesc);
 $response = array();
-	$updateTaskSql = "UPDATE `tasks` SET `tasksTitle`='$taskTitle' , `tasksDescription` = '$taskDesc' WHERE `tasksId`  = $taskId AND `backlogId` = $backlogId";
+	$updateTaskSql = "UPDATE `tasks` SET `tasksTitle`='$taskTitle' , `tasksDescription` = '$taskDesc' , `date_modified` = '$date_modified' WHERE `tasksId`  = $taskId AND `backlogId` = $backlogId";
 
 if($conn -> query($updateTaskSql)){
 	$updateBacklogModifiedSql = "UPDATE `backlog` SET `date_modified`='$date_modified' where `backlogId` = $backlogId";

@@ -5,12 +5,13 @@ $taskTitle = $data ->taskTitle;
 $taskDesc = $data ->taskDesc;
 $backlogId = $data -> backlogId;
 $date_modified = $data ->date_modified;
+$date_created = $data -> date_created;
 $taskTitle = mysqli_real_escape_string($conn, $taskTitle);
 $taskDesc = mysqli_real_escape_string($conn, $taskDesc);
 $backlogId = mysqli_real_escape_string($conn, $backlogId);
 $response = array();
 if(!empty($taskTitle) && !empty($backlogId)){
-	$createTaskSql = "Insert into `tasks`(`tasksId`, `tasksTitle`, `tasksDescription`, `tasksStatus`, `backlogId`) VALUES('', '$taskTitle', '$taskDesc', 'To-do', $backlogId)";
+	$createTaskSql = "Insert into `tasks`(`tasksId`, `tasksTitle`, `tasksDescription`, `tasksStatus`,`date_created`, `date_modified`, `backlogId`) VALUES('', '$taskTitle', '$taskDesc', 'To-do', '$date_created', '$date_modified',$backlogId)";
 	if($conn -> query($createTaskSql)){
 		$taskId = $conn ->insert_id;
 		$updateBacklogModifiedSql = "UPDATE `backlog` SET `date_modified`='$date_modified' where `backlogId` = $backlogId";
@@ -22,6 +23,8 @@ if(!empty($taskTitle) && !empty($backlogId)){
 			$task["tasksTitle"] = $taskTitle;
 			$task["tasksDesc"] = $taskDesc;
 			$task["tasksStatus"] = 'To-do';
+			$task["date_created"] = $date_created;
+			$task["date_modified"] = $date_modified;
 			array_push($response["task"], $task);
 			$response["success"] = 1;
 			$response["date_modified"] = $date_modified;
@@ -33,7 +36,7 @@ if(!empty($taskTitle) && !empty($backlogId)){
 		}
 	}else{
 		$response["success"] = 0;
-		$response["message"] = "fail to create task";
+		$response["message"] = $createTaskSql;
 		echo json_encode($response);
 	}
 }else{

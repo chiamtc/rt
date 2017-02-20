@@ -10,8 +10,8 @@ angular.module('backlog',[]);
 angular.module('sprint',[]);
 angular.module('backlog-details',[]);
 angular.module('active-sprint',[]);
-
-angular.module('reApp',['header','login','home','register','project','sidebar','backlog','sprint','backlog-details','active-sprint','ngDragDrop','ngRoute','ngCookies', 'ngMessages'])
+angular.module('task-details',[]),
+angular.module('reApp',['header','login','home','register','project','sidebar','backlog','sprint','backlog-details','active-sprint','task-details','ngDragDrop','ngRoute','ngCookies', 'ngMessages'])
 
 .config(['$routeProvider', function($routeProvider){
 	$routeProvider
@@ -29,12 +29,12 @@ angular.module('reApp',['header','login','home','register','project','sidebar','
 		templateUrl:'register/register.html'
 	})
 	
-	.when('/project/:projectKey/:projectName',{
+	.when('/project/:projectKey/:projectSeo',{
 		controller : 'ProjectController',
 		templateUrl:'project/project.html'
 	})
 	
-	.when('/active-sprint/:projectKey/:projectName',{
+	.when('/active-sprint/:projectKey/:projectSeo',{
 		controller : 'ActiveSprintController',
 		templateUrl:'active-sprint/active-sprint.html'
 	})

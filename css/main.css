@@ -13,10 +13,8 @@ html{}
 
 body{
 	background-color: #f1f1f1;
-    padding-top:50px;
-	
+    padding-top:50px;	
 }
-
 textarea{
 	resize:vertical;
 }
@@ -288,7 +286,7 @@ textarea{
 }
 
 .backlogItemHeaderTitleDetails{
-	padding:5px 10px;
+	
 	width:30%;
 	border-left:1px solid #ccc;
 }
@@ -580,3 +578,50 @@ However, delay the fade out process for 2.5 seconds */
 	padding-right:10px;
 	text-align:right;
 }
+
+.eachLists{
+	box-sizing:border-box;
+	padding:5px 0px;
+	margin:0px;
+	display:inline-block;
+	border-bottom:1px solid #ccc;
+	width:100%;
+}
+
+
+#main2{
+	padding: 5px;
+	padding-left:0px;
+	padding-right:0px;
+	height:100%;
+	margin-left:150px;
+}
+
+.activeBacklogs{
+	border:1px solid #ccc;
+	border-left: 5px solid #ccc;
+	background-color:white;
+}
+
+.activeBacklogItemHeader{
+	
+	padding:0px 10px;
+	width:100%;
+	display:flex;
+	border-bottom: 1px solid #ccc;
+}
+
+.toDoList{
+	box-sizing:border-box;
+	padding:0px 0px 5px 0px;
+	width:100%;
+}
+
+
+.toDoItem{
+	border:1px solid #ccc;
+	padding:5px;
+	line-height:50px;
+	background-color:white;
+}
+

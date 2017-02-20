@@ -34,7 +34,6 @@ $sqltbl2= "CREATE TABLE project(
 			projectName varchar(255) NOT NULL,
 			projectDescription text,
 			date_created varchar(255) NOT NULL,
-			time_created varchar(255) NOT NULL,
             PRIMARY KEY(projectKey)
         )";
 
@@ -97,7 +96,7 @@ $sqltbl8 = "CREATE TABLE backlog(
 			backlogStoryPoint int,
 			backlogDesc TEXT,
 			date_created varchar(255) NOT NULL,
-			time_created varchar(255) NOT NULL,
+			date_modified varchar(255) NOT NULL,
 			backlogCreator varchar(255) NOT NULL,
 			backlogStatus varchar(255) NOT NULL,
 			sprintId int,
@@ -131,7 +130,6 @@ $sqltbl10 = "create table backlogComment(
 			backlogCommentId int not null AUTO_INCREMENT,
 			backlogComment text,
 			date_comment varchar(255),
-			time_comment varchar(255),
 			email varchar(255) not null,
 			backlogId int not null,
 			PRIMARY KEY (backlogCommentId),
@@ -143,8 +141,10 @@ if($conn -> query($sqltbl10)){
 }else{
     echo "tbl comment failed to create<br>";
 }
+
 $sqltbl7 = "CREATE TABLE tasks(
             tasksId int NOT NULL AUTO_INCREMENT,
+			tasksTitle text NOT NULL,
 			tasksDescription text NOT NULL,
 			tasksStatus varchar(255) NOT NULL,
 			backlogId int,
@@ -158,7 +158,21 @@ if($conn -> query($sqltbl7)){
     echo "tbl tasks failed to create<br>";
 }
 
-
+$sqltbl12 = "create table taskComment(
+			taskCommentId int not null AUTO_INCREMENT,
+			taskComment text,
+			date_comment varchar(255),
+			email varchar(255) not null,
+			tasksId int not null,
+			PRIMARY KEY (taskCommentId, tasksId),
+			FOREIGN KEY(tasksId) REFERENCES tasks(tasksId)
+			)";
+			
+if($conn -> query($sqltbl12)){
+    echo "tbl tasks comment created<br>";
+}else{
+    echo "tbl tasks comment failed to create<br>";
+}
 
 $conn->close();
 ?>

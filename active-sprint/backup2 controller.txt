@@ -8,7 +8,7 @@ angular.module('active-sprint')
 	NProgress.done();
 	$scope.backlogActive = [];
 	$scope.taskActive =[];
-	$scope.colSize = false;
+	$scope.colSize = true;
 	$scope.emptyActiveSprintResponse = false;
 	$scope.calculateStyle= function(retrieved){
 		var bPVal = retrieved.backlogPriority;
@@ -32,6 +32,7 @@ angular.module('active-sprint')
 	}
 	
 	$scope.droppable = true;
+	$scope.disableDrop = false;
 	$scope.startCallback4 = function(event, ui, sc2,bid){
 		console.log('You started draggin: id' + bid);
 		$scope.draggedId = bid;
@@ -42,11 +43,14 @@ angular.module('active-sprint')
 		console.log("bid of drop" + bid +  " and draggedi d" + $scope.draggedId);
 		if(bid == $scope.draggedId){
 			$scope.droppable = true;
-			console.log($scope.droppable);
+			$scope.disableDrop = false;
+			console.log($scope.droppable + " " + $scope.disableDrop);
 		}else{
 			$scope.droppable = false;
-			console.log($scope.droppable);
+			$scope.disableDrop = true;
+			console.log($scope.droppable + " " + $scope.disableDrop);
 		}
+		
 	}
 	
 	$scope.dropCallback4 = function(event, ui, item) {
@@ -88,7 +92,4 @@ angular.module('active-sprint')
 		}
 	});
 	
-	$scope.close = function(){
-		$scope.colSize = false;
-	}
 }]);

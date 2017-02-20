@@ -79,11 +79,12 @@ angular.module('backlog-details')
 				taskTitle:taskTitle,
 				taskDesc:taskDesc,
 				backlogId : backlogId,
+				date_created : moment().format(),
 				date_modified : moment().format(),
 			},
 			headers: {'Content-Type':'application/json'}
 		}).then(function(response){
-			
+			response.data.date_created = moment(response.data.date_created).fromNow();
 			response.data.date_modified = moment(response.data.date_modified).fromNow();
 			callback(response.data);
 		});

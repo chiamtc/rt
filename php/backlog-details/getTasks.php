@@ -29,7 +29,7 @@ if(!empty($backlogId)){
 	}
 }else{
 	$response["success"] = 3;
-	$response["message"] = "empty fields";
+	$response["message"] = "empty fields backlo-gid?";
 	echo json_encode($response);
 }
 
