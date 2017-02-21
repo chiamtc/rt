@@ -14,14 +14,14 @@
 </div>
 <div ng-show="!emptyActiveSprintResponse">
 	<div class="title">
-		<span class="eachTitle">Backlogs</span>
+		<span class="eachTitle">Active Backlogs</span>
 		<span class="eachTitle">To-do</span>
 		<span class="eachTitle">In-Progress</span>
 		<span class="eachTitle">Done</span>
 	</div>
 </div>
-	<ul class="nav nav-pills nav-stacked eachLists" ng-repeat="backlog in backlogActive">
-	<span class="minimizeTitle" style="margin-left:25px">Backlogs</span>
+	<ul class="nav nav-pills nav-stacked eachLists" ng-repeat="backlog in backlogActive track by $index">
+	<span class="minimizeTitle" style="margin-left:25px">Active Backlog #{{$index +1}}</span>
 		<li role="presentation"> 
 			<div class="col-md-3 eachTask">
 				<div class="activeBacklogs" ng-style="calculateStyle(backlog)">

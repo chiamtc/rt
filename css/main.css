@@ -721,6 +721,7 @@ However, delay the fade out process for 2.5 seconds */
 .minimizeTitle{
 	font-size:16px;
 	font-weight:bold;
+	
 }
 
 @media screen and (max-width: 991px) {
