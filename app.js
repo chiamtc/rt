@@ -40,7 +40,8 @@ angular.module('reApp',['header','login','home','register','project','sidebar','
 	})
 	
 	.otherwise({
-		redirectTo: '/'
+		redirectTo: 'error/404.html',
+		templateUrl: 'error/404.html'
 	});
 }])
 .run(['$location', '$cookies',
@@ -49,6 +50,6 @@ angular.module('reApp',['header','login','home','register','project','sidebar','
 		var uid = $cookies.get('uid');
 		
         if($location.path() !== '/' && uid==null) {
-            $location.path('/');
+            $location.path('error/404.html');
 		}
     }]);
