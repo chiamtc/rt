@@ -280,7 +280,6 @@ textarea{
 	display:block;
 	border-radius:5px;
 	margin:5px 0px;
-	
 }
 
 .backlogItemHeader{
@@ -602,6 +601,8 @@ However, delay the fade out process for 2.5 seconds */
 	box-sizing:border-box;
 	margin:0px;
 	display:inline-block;
+	padding-top:10px;
+	padding-bottom:10px;
 	border-bottom:1px solid #ccc;
 	width:100%;
 }
@@ -619,9 +620,11 @@ However, delay the fade out process for 2.5 seconds */
 
 
 .activeBacklogs{
+	display:flex;
 	border:1px solid #ccc;
 	border-left: 5px solid #ccc;
 	background-color:white;
+	border-radius : 5px;
 }
 
 .activeBacklogItemHeader{
@@ -666,9 +669,11 @@ However, delay the fade out process for 2.5 seconds */
 	border-left: 1px solid #dad8de;
 }
 
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 991px) {
 	#task-details{border-left:0px;}
 }
+
+
 
 #tasks{
 	
@@ -678,6 +683,61 @@ However, delay the fade out process for 2.5 seconds */
 }
 
 .eachTask{
-	padding-top:5px;
+	position:relative;
+	padding-top:2px;
 	padding-bottom:5px;
+	
 }
+
+.progress{
+	margin-bottom:0px;
+	height:5px;
+}
+
+.progress:hover{
+	margin-bottom:0px;
+	height:20px;
+}
+
+.activeSprintDetails{
+	padding-bottom: 10px;
+	padding-top: 10px;
+    display: inline-block;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-between;
+	border-bottom:1px solid #ccc;
+}
+
+.title{
+	padding-top: 10px;
+	margin-left:15px;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.minimizeTitle{
+	font-size:16px;
+	font-weight:bold;
+}
+
+@media screen and (max-width: 991px) {
+	.title{display:none; padding-top:0px; padding-bottom:0px;}
+	.minimizeTitle{visibility:visible;margin-left:10px;}
+	.eachLists{padding-top:15px;}
+}
+
+@media screen and (min-width:991px){
+	.minimizeTitle{display:none;}
+}
+
+.eachTitle{
+	display:inline-block;
+	justify-content: space-between;
+	width:25%;
+	font-size:16px;
+	font-weight:bold;
+}
+

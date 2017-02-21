@@ -97,7 +97,14 @@ angular.module('sprint')
 								$scope.sprintListsActive = [];
 							break;
 						}
-					}); 
+					});
+				
+				$scope.snackbarShow = !$scope.snackbarShow;
+				$scope.snackbarClass= "alert alert-success alert-dismissible snackbar";
+				$scope.snackbarMessage = "Sprint has activated ! ";
+				$timeout(function(){
+					$scope.snackbarShow = !$scope.snackbarShow;
+				},3000);
 				break;
 			}
 		});
@@ -141,6 +148,7 @@ angular.module('sprint')
 	$scope.deleteSprint = function(){
 		SprintService.DeleteSprint($scope.sprintDeletePassed.sprintId, function(response){
 			NProgress.start();
+			console.log(response);
 			switch(response.success){
 				case 0:
 				break;
@@ -234,6 +242,10 @@ angular.module('sprint')
 			$scope.createSprintResponseClass ="alert alert-danger";
 			$scope.createSprintResponseMessage = "Start date is later than end date 2";
 		}else{
+			console.log($scope.sprintStartDate);
+			/* var startDate = moment($scope.sprintStartDate).format('DD/MM/YYYY');
+			var endDate = moment($scope.sprintEndDate).format('DD/MM/YYYY');
+			console.log((moment.duration($scope.sprintEndDate - $scope.sprintStartDate)).humanize()); */
 			SprintService.CreateSprint($scope.sprintGoal, $scope.sprintStartDate, $scope.sprintEndDate, function(response){
 				switch(response.success){
 				case 0:
@@ -251,8 +263,6 @@ angular.module('sprint')
 						$('#sprintCreateModal').modal('toggle');
 						$scope.createSprintResponse = !$scope.createSprintResponse;
 						$('#createSprintForm').trigger("reset");
-						$('#startDate') = null;
-						$('#endDate') = null;
 					},500);
 				break;
 				
@@ -267,8 +277,8 @@ angular.module('sprint')
 				break;
 				
 			}
-			}); 
-		}
+			});
+		} 
 	}
 }])
 

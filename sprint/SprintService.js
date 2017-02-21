@@ -16,6 +16,7 @@ angular.module('sprint')
 		}).then(function(response){
 			
 			angular.forEach(response.data.sprints, function(value, key){
+				
 				angular.forEach(value.backlogs, function(v,k){
 					v.dateCreated = moment(v.dateCreated).fromNow();
 					v.dateModified = moment(v.dateModified).fromNow();

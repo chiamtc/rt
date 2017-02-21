@@ -55,8 +55,8 @@ angular.module('active-sprint')
 	
 	
 	$scope.dropCallback4 = function(event, ui, item) {
-		console.log("Tasks title: " + $scope.draggedTitle.tasksTitle+ " status:" +$scope.draggedTitle.tasksStatus + " and "+ item); 
-		if($scope.draggedId != item ){
+		console.log("Tasks title: " + $scope.draggedTitle.tasksTitle+ " status:" +$scope.draggedTitle.tasksStatus + " and "+ item.backlogId); 
+		if($scope.draggedId != item.backlogId ){
 			ActiveSprintService.ListActiveBacklogsTasks(function(response){
 				switch(response.success){
 					case 1:
@@ -79,8 +79,7 @@ angular.module('active-sprint')
 				}
 			});
 		}else{
-		ActiveSprintService.UpdateToDo($scope.draggedTitle.tasksId, item, function(response){
-			console.log(response);
+		ActiveSprintService.UpdateToDo($scope.draggedTitle.tasksId, item.backlogId, function(response){
 			switch(response.success){
 				case 1:
 					$scope.snackbarShow = !$scope.snackbarShow;
@@ -201,14 +200,22 @@ angular.module('active-sprint')
 	ActiveSprintService.ListActiveBacklogsTasks(function(response){
 		switch(response.success){
 			case 1:
-				//$scope.backlogActive = response.activeSprints[0].backlogs;
 				
+				$scope.sprintGoal = response.activeSprints[0].sprintGoal;
+				var startDate = moment(response.activeSprints[0].sprintStartDate);
+				var endDate = moment(response.activeSprints[0].sprintEndDate);
+				var duration = moment.duration(endDate.diff(startDate));
+				var days = duration.asDays();
+				$scope.sprintStartDate = response.activeSprints[0].sprintStartDate;
+				$scope.sprintEndDate = response.activeSprints[0].sprintEndDate;
+				$scope.numberDays = days;
 				angular.forEach(response.activeSprints[0], function(value, key){
 					$scope.backlogActive = value;
 				});
 				
 				angular.forEach($scope.backlogActive, function(value,key){
 					$scope.taskActive.push($scope.backlogActive[key].tasks);
+					
 				}); 
 			break;
 			

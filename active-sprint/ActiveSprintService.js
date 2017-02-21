@@ -15,6 +15,11 @@ angular.module('active-sprint')
 			headers : { 'Content-Type' : 'application/json'}
 		}).then(function(response){
 			angular.forEach(response.data.activeSprints, function(value, key){
+				value.sprintStartDate = moment(value.sprintStartDate).format('YYYY-MM-DD');
+				
+				value.sprintEndDate = moment(value.sprintEndDate).format('YYYY-MM-DD');
+				//console.log(days);
+				//value.days = days;
 				angular.forEach(value.backlogs, function(v,k){
 					v.dateCreated = moment(v.dateCreated).fromNow();
 					v.dateModified = moment(v.dateModified).fromNow();

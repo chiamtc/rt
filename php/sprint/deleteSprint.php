@@ -6,7 +6,6 @@ $sprintId = $data ->sprintId;
 $projectKey = $data -> projectKey;
 $projectKey = mysqli_real_escape_string($conn, $projectKey);
 $sprintId = mysqli_real_escape_string($conn, $sprintId);
-
 $response = array();
 if(!empty($projectKey) && !empty($sprintId)){
 	
