@@ -63,7 +63,7 @@ angular.module('task-details')
 			angular.forEach(response.data.taskComments, function(value, key){
 				value.dateComment = moment(value.dateComment).fromNow();
 			});
-			console.log(response);
+			
 			callback(response.data);
 		});
 	}

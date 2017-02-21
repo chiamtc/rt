@@ -312,6 +312,7 @@ angular.module('backlog-details')
 				case 1:
 					console.log(response.comment[0]);
 					$scope.commentLists.push(response.comment[0]);
+					
 				break;
 			}
 		});

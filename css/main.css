@@ -265,17 +265,27 @@ textarea{
 	min-height: 70px !important;
 }
 
+.backlogListTop{
+	box-sizing:border-box;
+	display:flex;
+	width:100%;
+	justify-content: space-between;
+	font-size:16px;
+}
+
 .backlogItem{
 	cursor:move;
 	border:1px solid #ccc;
 	border-left: 5px solid #ccc;
 	display:block;
+	border-radius:5px;
+	margin:5px 0px;
 	
 }
 
 .backlogItemHeader{
 	line-height:10px;
-	padding:0px 10px;
+	padding:5px 10px;
 	width:100%;
 	display:flex;
 	border-bottom: 1px solid #ccc;
@@ -306,6 +316,14 @@ textarea{
 	.backlogItemHeaderTitle{width:100%;border-bottom: 1px solid #ccc; padding-bottom:20px;}
 	.backlogItemHeaderTitleDetails{border-left: none; width:100%;}
 	.backlogItemFooter{display:table;width:100%;}
+}
+
+#dropdown:hover{
+	color:#000;
+}
+
+.white{
+	color:#ccc;
 }
 
 /** sprint **/
@@ -395,6 +413,7 @@ textarea{
 	border-left: 5px solid #ccc;
 	display:block;
 	margin:5px 0px;
+	border-radius:5px;
 }
 
 
@@ -581,7 +600,6 @@ However, delay the fade out process for 2.5 seconds */
 
 .eachLists{
 	box-sizing:border-box;
-	padding:5px 0px;
 	margin:0px;
 	display:inline-block;
 	border-bottom:1px solid #ccc;
@@ -590,12 +608,15 @@ However, delay the fade out process for 2.5 seconds */
 
 
 #main2{
-	padding: 5px;
+	padding: 15px;
 	padding-left:0px;
-	padding-right:0px;
-	height:100%;
+	padding-top:0px;
+	z-index:1;
+	background-color:#f1f1f1;
 	margin-left:150px;
 }
+
+
 
 .activeBacklogs{
 	border:1px solid #ccc;
@@ -621,7 +642,42 @@ However, delay the fade out process for 2.5 seconds */
 .toDoItem{
 	border:1px solid #ccc;
 	padding:5px;
+	margin:5px;
+	border-radius:5px;
 	line-height:50px;
 	background-color:white;
 }
 
+.dropPlace2{
+	min-height: 70px !important;
+	background-color:#d7d7d7;
+	border-radius :5px;
+}
+
+.dropPlace2:hover{
+	background-color:#ccc;
+}
+
+
+#task-details{
+	padding-left:0px;
+	padding-right:0px;
+	box-sizing:border-box;
+	border-left: 1px solid #dad8de;
+}
+
+@media screen and (max-width: 992px) {
+	#task-details{border-left:0px;}
+}
+
+#tasks{
+	
+	padding-left:0px;
+	padding-right:0px;
+	box-sizing:border-box;
+}
+
+.eachTask{
+	padding-top:5px;
+	padding-bottom:5px;
+}

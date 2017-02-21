@@ -88,11 +88,12 @@ angular.module('backlog')
 				$scope.backlogListsClass = "backlogLists";
 				$scope.backlogLists.push(response.backlog[0]);
 				$timeout(function(){
-					$('#backlogCreateModal').modal('toggle');
+					$('#backlogCreateModal').modal('toggle'); 
 					$scope.createBacklogResponse = !$scope.createBacklogResponse;
 					$("#createBacklogForm").trigger("reset");
-					$scope.backlogCreateType = backlogCreateTypes[0];
+					$scope.backlogCreateType = $scope.backlogCreateTypes[0];
 					$scope.backlogCreatePriority = $scope.backlogPriorities[0];
+					
 				},500);
 					
 			break;

@@ -6,15 +6,18 @@ angular.module('task-details')
 	
 	$scope.passTask = [];
 	$scope.taskCommentLists = [];
+	$scope.snackbarShow = false;
 	$scope.toggle = function(task){
 		$scope.colSize = true;
-		
+		console.log(task);
 		$scope.passTask = task;
 		$scope.taskDTitle = task.tasksTitle;
 		$scope.taskDDesc = task.tasksDesc;
+		
+		$scope.taskDStatus = task.tasksStatus;
 		TaskDetailsService.ListTaskComments($scope.passTask.tasksId,function(response){
-		console.log($scope.passTask.tasksId);
-			switch(response.success){
+		
+			switch(response.success){ 
 				case 0:
 					$scope.taskCommentLists =[];
 				break;

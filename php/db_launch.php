@@ -147,6 +147,8 @@ $sqltbl7 = "CREATE TABLE tasks(
 			tasksTitle text NOT NULL,
 			tasksDescription text NOT NULL,
 			tasksStatus varchar(255) NOT NULL,
+			date_created varchar(255),
+			date_modified varchar(255),
 			backlogId int,
 			PRIMARY KEY(tasksId,backlogId),
 			FOREIGN KEY(backlogId) REFERENCES backlog(backlogId)

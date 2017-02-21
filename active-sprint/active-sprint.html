@@ -1,21 +1,19 @@
 <project-header></project-header>
 <side-bar></side-bar>
 <div  id="main2">
-<div class="col-md-12" style="padding-left:0px; padding-right:0px">
+<div class="col-md-12" id="tasks">
 
-<div ng-show="emptyActiveSprintResponse" ng-class="emptyActiveSprintResponseClass" role="alert">
-	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	{{emptyActiveSprintResponseMessage}}
-</div> <!-- create response -->
 
 <div ng-class="colSize? 'col-md-9':'col-md-12'">
-	<span class="col-md-3">Backlogs</span>
-	<span class="col-md-3">To-do</span>
-	<span class="col-md-3">In-Progress</span>
-	<span class="col-md-3">Done</span>
+<div ng-show="!emptyActiveSprintResponse">
+	<h4 class="col-md-3">Backlogs</h4>
+	<h4 class="col-md-3">To-do</h4>
+	<h4 class="col-md-3">In-Progress</h4>
+	<h4 class="col-md-3">Done</h4>
+</div>
 	<ul class="nav nav-pills nav-stacked eachLists" ng-repeat="backlog in backlogActive">
 		<li role="presentation"> 
-			<div class="col-md-3">
+			<div class="col-md-3 eachTask">
 				<div class="activeBacklogs" ng-style="calculateStyle(backlog)">
 					<div class="activeBacklogItemHeader">
 						<div class="backlogItemHeaderTitle">
@@ -33,9 +31,9 @@
 				</div>
 			</div>
 			
-			<div class="col-md-3" >
-				<ul class="nav nav-pills nav-stacked toDoList dropPlace"  data-drop="{{droppable}}" data-jqyoui-options="{ greedy:true}" ng-model="backlog.tasks" jqyoui-droppable="{multiple:true, onDrop:'dropCallback4(backlog.backlogId)' , onOver:'onOverCallback(backlog.backlogId)' } ">
-					<li ng-repeat="eachTask in backlog.tasks |  filter : {tasksStatus: 'To-do'}" data-drag="true" data-jqyoui-options="{revert:'invalid'}"   ng-model="backlog.tasks" jqyoui-draggable="{index: {{$index}},animate:true, onStart:'startCallback4(eachTask, backlog.backlogId, $index)'}">
+			<div class="col-md-3 eachTask">
+				<ul class="nav nav-pills nav-stacked toDoList dropPlace2"  data-drop="{{droppable}}" data-jqyoui-options="{ greedy:true}" ng-model="backlog.tasks" jqyoui-droppable="{multiple:true, onDrop:'dropCallback4(backlog.backlogId)' , onOver:'onOverCallback(backlog.backlogId)' } ">
+					<li ng-repeat="eachTask in backlog.tasks |  filter : {tasksStatus: 'To-do'}" data-drag="true" data-jqyoui-options="{revert:'invalid'}"   ng-model="backlog.tasks" jqyoui-draggable="{index: {{$index}},animate:true, onStart:'startCallback4(eachTask, backlog.backlogId)', onDrag:'onDragCallback(backlog.backlogId)' }">
 					<div class="toDoItem">
 						<h6><a href="" ng-click="toggle(eachTask)">{{eachTask.tasksTitle}}</a>  <span class="badge">{{eachTask.tasksStatus}}</span></h6>
 						
@@ -44,9 +42,9 @@
 				</ul>
 			</div>		
 			
-			<div class="col-md-3"  >
-				<ul class="nav nav-pills nav-stacked toDoList dropPlace" data-drop="{{droppable}}"  data-jqyoui-options="{ greedy:true}" ng-model="backlog.tasks" jqyoui-droppable="{multiple:true, onDrop:'dropCallback5(backlog.backlogId)' , onOver:'onOverCallback(backlog.backlogId)' }" >
-					<li ng-repeat="eachTask in backlog.tasks |  filter : {tasksStatus: 'In-Progress'}" data-drag="true" data-jqyoui-options="{revert:'invalid'}"   ng-model="backlog.tasks" jqyoui-draggable="{index: {{$index}},animate:true, onStart:'startCallback4(eachTask, backlog.backlogId, $index)' }">
+			<div class="col-md-3 eachTask">
+				<ul class="nav nav-pills nav-stacked toDoList dropPlace2" data-drop="{{droppable}}"  data-jqyoui-options="{ greedy:true}" ng-model="backlog.tasks" jqyoui-droppable="{multiple:true, onDrop:'dropCallback5(backlog.backlogId)' , onOver:'onOverCallback(backlog.backlogId)' }" >
+					<li ng-repeat="eachTask in backlog.tasks |  filter : {tasksStatus: 'In-Progress'}" data-drag="true" data-jqyoui-options="{revert:'invalid'}"   ng-model="backlog.tasks" jqyoui-draggable="{index: {{$index}},animate:true, onStart:'startCallback4(eachTask, backlog.backlogId)', onDrag:'onDragCallback(backlog.backlogId)'  }">
 					<div class="toDoItem">
 						<h6><a href="" ng-click="toggle(eachTask)">{{eachTask.tasksTitle}}</a>  <span class="badge">{{eachTask.tasksStatus}}</span></h6>
 					</div>
@@ -54,9 +52,9 @@
 				</ul>
 			</div>
 					
-			<div class="col-md-3" >
-				<ul class="nav nav-pills nav-stacked toDoList dropPlace" data-drop="{{droppable}}"  data-jqyoui-options="{ greedy:true}" ng-model="backlog.tasks" jqyoui-droppable="{multiple:true, onDrop:'dropCallback6(backlog.backlogId)', onOver:'onOverCallback(backlog.backlogId)' }" >
-					<li ng-repeat="eachTask in backlog.tasks |  filter : {tasksStatus: 'Done'}" data-drag="true" data-jqyoui-options="{revert:'invalid'}"   ng-model="backlog.tasks" jqyoui-draggable="{index: {{$index}},animate:true, onStart:'startCallback4(eachTask, backlog.backlogId, $index)'}">
+			<div class="col-md-3 eachTask" >
+				<ul class="nav nav-pills nav-stacked toDoList dropPlace2" data-drop="{{droppable}}"  data-jqyoui-options="{ greedy:true}" ng-model="backlog.tasks" jqyoui-droppable="{multiple:true, onDrop:'dropCallback6(backlog.backlogId)', onOver:'onOverCallback(backlog.backlogId)' }" >
+					<li ng-repeat="eachTask in backlog.tasks |  filter : {tasksStatus: 'Done'}" data-drag="true" data-jqyoui-options="{revert:'invalid'}"   ng-model="backlog.tasks" jqyoui-draggable="{index: {{$index}},animate:true, onStart:'startCallback4(eachTask, backlog.backlogId)', onDrag:'onDragCallback(backlog.backlogId)' }">
 					<div class="toDoItem">
 						<h6><a href="" ng-click="toggle(eachTask)">{{eachTask.tasksTitle}}</a>  <span class="badge">{{eachTask.tasksStatus}}</span></h6>
 					</div>
@@ -66,13 +64,18 @@
 		</li>
 	</ul>
 	</div>
-	<div  ng-class="colSize? 'col-md-3': 'hidden'">
+	<div  ng-class="colSize? 'col-md-3': 'hidden'" id="task-details">
 		<task-details></task-details>
 	</div>
 </div>
-</div>
-
 <div ng-show="snackbarShow" ng-class="snackbarClass" role="alert">
 	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 		{{snackbarMessage}}
 </div>
+
+<div ng-show="emptyActiveSprintResponse" ng-class="emptyActiveSprintResponseClass" role="alert">
+	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	{{emptyActiveSprintResponseMessage}}
+</div> <!-- create response -->
+</div>
+

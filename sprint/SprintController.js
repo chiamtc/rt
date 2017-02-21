@@ -251,7 +251,8 @@ angular.module('sprint')
 						$('#sprintCreateModal').modal('toggle');
 						$scope.createSprintResponse = !$scope.createSprintResponse;
 						$('#createSprintForm').trigger("reset");
-						
+						$('#startDate') = null;
+						$('#endDate') = null;
 					},500);
 				break;
 				

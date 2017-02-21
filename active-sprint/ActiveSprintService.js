@@ -24,7 +24,55 @@ angular.module('active-sprint')
 					});
 				});
 			});
-			console.log(response.data);
+			
+			callback(response.data);
+		});
+	}
+	
+	factory.UpdateToDo=function(tasksId, backlogId, callback){
+		$http({
+			method: 'POST',
+			url : 'php/active-sprint/updateTodo.php',
+			data:{
+				tasksId: tasksId,
+				backlogId: backlogId,
+				dateModified : moment().format(),
+			},
+			headers : { 'Content-Type' : 'application/json'}
+		}).then(function(response){
+			response.data.dateModified = moment(response.data.dateModified).fromNow();
+			callback(response.data);
+		});
+	}
+	
+	factory.UpdateInProgress=function(tasksId, backlogId, callback){
+		$http({
+			method: 'POST',
+			url : 'php/active-sprint/updateInProgress.php',
+			data:{
+				tasksId: tasksId,
+				backlogId: backlogId,
+				dateModified : moment().format(),
+			},
+			headers : { 'Content-Type' : 'application/json'}
+		}).then(function(response){
+			response.data.dateModified = moment(response.data.dateModified).fromNow();
+			callback(response.data);
+		});
+	}
+	
+	factory.UpdateDone=function(tasksId, backlogId, callback){
+		$http({
+			method: 'POST',
+			url : 'php/active-sprint/updateDone.php',
+			data:{
+				tasksId: tasksId,
+				backlogId: backlogId,
+				dateModified : moment().format(),
+			},
+			headers : { 'Content-Type' : 'application/json'}
+		}).then(function(response){
+			response.data.dateModified = moment(response.data.dateModified).fromNow();
 			callback(response.data);
 		});
 	}
