@@ -5,15 +5,28 @@
 <div ng-class="colSize? 'col-md-9':'col-md-12'">
 
 <div ng-show="!emptyActiveSprintResponse" class="col-md-12 activeSprintDetails">
-	<div class="pull-right">
-		<span>{{sprintStartDate}}</span>
-		<span>{{sprintEndDate}}</span>
-		<span>{{numberDays}}</span>
-		<button class="btn btn-default">Complete Sprint </button>
+	<div class="activeSprintTop">
+		<div class="activeSprintLeft">
+			<p>{{sprintGoal}}</p>
+		</div>
+		<div class="activeSprintRight">
+			<div class="dropdown taskOptions">
+			<h4 data-toggle="dropdown" class="duration" role="button"><i class="glyphicon glyphicon-time"></i> {{numberDays}}</h4>
+				<span class="dropdown-menu dropdown-menu-right" id="dropdownCustom" role="menu">
+				<div class="dropdownDetails">
+					<p>Sprint Start Date: {{sprintStartDate}}</p>
+					<p>Sprint End Date: {{sprintEndDate}}</p>
+				</div>
+				</span>
+			</div>
+			<button class="btn btn-default">Complete Sprint </button>
+		</div>
 	</div>
 </div>
 <div ng-show="!emptyActiveSprintResponse">
 	<div class="title">
+	
+	
 		<span class="eachTitle">Active Backlogs</span>
 		<span class="eachTitle">To-do</span>
 		<span class="eachTitle">In-Progress</span>

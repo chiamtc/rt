@@ -700,13 +700,34 @@ However, delay the fade out process for 2.5 seconds */
 }
 
 .activeSprintDetails{
-	padding-bottom: 10px;
-	padding-top: 10px;
+	padding-bottom: 5px;
+	padding-top:10px;
     display: inline-block;
     flex-wrap: wrap;
     width: 100%;
     justify-content: space-between;
 	border-bottom:1px solid #ccc;
+}
+
+.activeSprintTop{
+	box-sizing:border-box;
+	display:flex;
+	width:100%;
+	justify-content: space-between;
+	font-size:16px;
+}
+
+.activeSprintLeft{
+	padding-top:10px;
+	display:flex;
+	text-size:14px;
+	
+	text-align:left;
+}
+
+.activeSprintRight{
+	display:flex;
+	text-align:right;
 }
 
 .title{
@@ -742,3 +763,37 @@ However, delay the fade out process for 2.5 seconds */
 	font-weight:bold;
 }
 
+.dropdownDetails{
+	padding:10px;
+}
+
+#dropdownCustom{
+	background-color:#333333;
+	color:#ccc;
+}
+
+.duration{
+	font-size:16px;
+	font-weight:bold;
+}
+
+#dropdownCustom::before {
+    border-bottom: 9px solid rgba(0, 0, 0, 0.2);
+    border-left: 9px solid rgba(0, 0, 0, 0);
+    border-right: 9px solid rgba(0, 0, 0, 0);
+    content: "";
+    display: inline-block;
+    left: 125px;
+    position: absolute;
+    top: -8px;
+}
+#dropdownCustom::after {
+    border-bottom: 8px solid #333333;
+    border-left: 9px solid rgba(0, 0, 0, 0);
+    border-right: 9px solid rgba(0, 0, 0, 0);
+    content: "";
+    display: inline-block;
+    left: 125px;
+    position: absolute;
+    top: -7px;
+  }

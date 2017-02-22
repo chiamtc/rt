@@ -204,10 +204,17 @@ angular.module('active-sprint')
 				$scope.sprintGoal = response.activeSprints[0].sprintGoal;
 				var startDate = moment(response.activeSprints[0].sprintStartDate);
 				var endDate = moment(response.activeSprints[0].sprintEndDate);
-				var duration = moment.duration(endDate.diff(startDate));
-				var days = duration.asDays();
+				var today = moment().format('YYYY-MM-DD');
+				
 				$scope.sprintStartDate = response.activeSprints[0].sprintStartDate;
 				$scope.sprintEndDate = response.activeSprints[0].sprintEndDate;
+				if(startDate.isSame(today)){
+					var duration = moment.duration(endDate.diff(today));
+					var days = duration.asDays() + " Days Remaining";
+				}else{
+					var duration = moment.duration(endDate.diff(startDate));
+					var days = duration.asDays() + " Days";
+				}
 				$scope.numberDays = days;
 				angular.forEach(response.activeSprints[0], function(value, key){
 					$scope.backlogActive = value;
