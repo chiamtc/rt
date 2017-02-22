@@ -62,6 +62,7 @@ angular.module('sprint')
 	};
 	
 	$scope.startSprint = function(sprintId){
+		console.log($scope.sprintLists);
 		SprintService.StartSprint(sprintId , function(response){
 			switch(response.success){
 				case 0:
