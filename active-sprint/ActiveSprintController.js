@@ -10,6 +10,7 @@ angular.module('active-sprint')
 	/** UI bindings **/
 	$scope.backlogActive = [];
 	$scope.taskActive =[];
+	$scope.activeSprint = [];
 	$scope.colSize = false;
 	$scope.emptyActiveSprintResponse = false;
 	$scope.snackbarShow = false;
@@ -39,7 +40,8 @@ angular.module('active-sprint')
 	}
 	
 	$scope.completeSprint = function(){
-		alert("Jebaited");
+		ActiveSprintService.CompleteSprint($routeParams.projectKey, function(response){
+		});
 	}
 	
 	$scope.startCallback4 = function(event, ui, sc2,bid){
@@ -234,7 +236,7 @@ angular.module('active-sprint')
 				}
 				
 				$scope.goneNumberDays = goneDays;
-				
+				$scope.activeSprints = response.activeSprints;
 				angular.forEach(response.activeSprints[0], function(value, key){
 					$scope.backlogActive = value;
 				});

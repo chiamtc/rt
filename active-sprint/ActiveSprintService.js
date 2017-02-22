@@ -34,6 +34,19 @@ angular.module('active-sprint')
 		});
 	}
 	
+	factory.CompleteSprint= function(projectKey,callback){
+		$http({
+			method: 'POST',
+			url : 'php/active-sprint/completeSprint.php',
+			data:{
+				projectKey :projectKey,
+			},
+			headers : { 'Content-Type' : 'application/json'}
+		}).then(function(response){
+			console.log(response.data);
+		});
+	}
+	
 	factory.UpdateToDo=function(tasksId, backlogId, callback){
 		$http({
 			method: 'POST',
