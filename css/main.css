@@ -615,6 +615,7 @@ However, delay the fade out process for 2.5 seconds */
 	z-index:1;
 	background-color:#f1f1f1;
 	margin-left:150px;
+	
 }
 
 
@@ -676,7 +677,6 @@ However, delay the fade out process for 2.5 seconds */
 
 
 #tasks{
-	
 	padding-left:0px;
 	padding-right:0px;
 	box-sizing:border-box;

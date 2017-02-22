@@ -31,6 +31,12 @@ angular.module('task-details')
 		});
 	}
 	
+	$scope.borderBottom= function(colSize){
+		if(colSize){
+			return {"border-bottom":"1px solid #ccc"}
+		}
+	}
+	
 	$scope.deleteTaskComment = function(comment){
 		TaskDetailsService.DeleteTaskComment(comment.taskCommentId, comment.tasksId, function(response){
 			switch(response.success){

@@ -1,7 +1,7 @@
 <project-header></project-header>
 <side-bar></side-bar>
 <div  id="main2">
-<div class="col-md-12" id="tasks">
+<div class="col-md-12" id="tasks" ng-style="borderBottom(colSize)">
 <div ng-class="colSize? 'col-md-9':'col-md-12'">
 
 <div ng-show="!emptyActiveSprintResponse" class="col-md-12 activeSprintDetails">
@@ -14,12 +14,15 @@
 			<h4 data-toggle="dropdown" class="duration" role="button"><i class="glyphicon glyphicon-time"></i> {{numberDays}}</h4>
 				<span class="dropdown-menu dropdown-menu-right" id="dropdownCustom" role="menu">
 				<div class="dropdownDetails">
-					<p>Sprint Start Date: {{sprintStartDate}}</p>
-					<p>Sprint End Date: {{sprintEndDate}}</p>
+					<p>Sprint Start Date: <br>{{sprintStartDate}}</p>
+					<p>Sprint End Date: <br>{{sprintEndDate}}</p>
+					<p>Planned Days: <br>{{plannedNumberDays}}</p>
+					<p>Gone Days: <br>{{goneNumberDays}}</p>
 				</div>
 				</span>
 			</div>
-			<button class="btn btn-default">Complete Sprint </button>
+			<small><button class="btn btn-default" ng-click="completeSprint()">Complete Sprint </button></small>
+			
 		</div>
 	</div>
 </div>

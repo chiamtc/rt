@@ -6,11 +6,17 @@ angular.module('active-sprint')
 	/** fancy starts **/
 	NProgress.start();
 	NProgress.done();
+	
+	/** UI bindings **/
 	$scope.backlogActive = [];
 	$scope.taskActive =[];
 	$scope.colSize = false;
 	$scope.emptyActiveSprintResponse = false;
 	$scope.snackbarShow = false;
+	$scope.droppable = true;
+	
+	
+	/** UI function(s) **/
 	$scope.calculateStyle= function(retrieved){
 		var bPVal = retrieved.backlogPriority;
 		if(bPVal == "Highest"){
@@ -32,7 +38,10 @@ angular.module('active-sprint')
 		}
 	}
 	
-	$scope.droppable = true;
+	$scope.completeSprint = function(){
+		alert("Jebaited");
+	}
+	
 	$scope.startCallback4 = function(event, ui, sc2,bid){
 		console.log('You started draggin: id' + bid);
 		$scope.draggedId = bid;
@@ -204,18 +213,28 @@ angular.module('active-sprint')
 				$scope.sprintGoal = response.activeSprints[0].sprintGoal;
 				var startDate = moment(response.activeSprints[0].sprintStartDate);
 				var endDate = moment(response.activeSprints[0].sprintEndDate);
-				var today = moment().format('YYYY-MM-DD');
+				var today = moment(moment().format('YYYY-MM-DD'));
 				
 				$scope.sprintStartDate = response.activeSprints[0].sprintStartDate;
 				$scope.sprintEndDate = response.activeSprints[0].sprintEndDate;
-				if(startDate.isSame(today)){
-					var duration = moment.duration(endDate.diff(today));
-					var days = duration.asDays() + " Days Remaining";
-				}else{
-					var duration = moment.duration(endDate.diff(startDate));
-					var days = duration.asDays() + " Days";
-				}
+				
+				var duration = moment.duration(endDate.diff(today));
+				var days = duration.asDays() + " Day(s) Remaining";
 				$scope.numberDays = days;
+				
+				var plannedDuration = moment.duration(endDate.diff(startDate));
+				var plannedDays = plannedDuration.asDays() + " Day(s) Planned";
+				$scope.plannedNumberDays = plannedDays;
+				
+				var goneDuration = moment.duration(today.diff(startDate));
+				if(goneDuration >0){
+					var goneDays = goneDuration.asDays() + " Day(s) Gone";
+				}else{
+					var goneDays = Math.abs(goneDuration.asDays()) + " Day(s) Before Started";
+				}
+				
+				$scope.goneNumberDays = goneDays;
+				
 				angular.forEach(response.activeSprints[0], function(value, key){
 					$scope.backlogActive = value;
 				});
