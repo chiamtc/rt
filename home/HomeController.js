@@ -7,7 +7,6 @@ angular.module('home')
 	$scope.createResponse = false;
 	$scope.projectListResponse = false;
 	$scope.clearKey = false;
-	var userProjectKey = false;
 	$scope.projectLists = [];
 	
 	
@@ -48,71 +47,61 @@ angular.module('home')
 				
 				case 1:
 					$scope.clearKey = !$scope.clearKey;
-					userProjectKey = !userProjectKey;
 				break;
 				default:
 				
 				break;
 			}
 		});
-		!$scope.clearKey;
 	};
 	
 	$scope.createProject = function(){
 		NProgress.set(0.5);
-		if(userProjectKey){
+		
 			HomeService.CreateProject($scope.projectCreateName, $scope.projectCreateDesc, $scope.projectKey, function(response){
-					
-					
-					$scope.createResponse = !$scope.createResponse;
-					switch(response.success){
-						case 0:
-							$scope.createResponseClass ="alert alert-warning";
-							$scope.createResponseMessage = "Server Error";
-						break;
+			$scope.createResponse = !$scope.createResponse;
+				switch(response.success){
+					case 0:
+						$scope.createResponseClass ="alert alert-danger";
+						$scope.createResponseMessage = "Server Error";
+					break;
 						
-						case 1:
-							$scope.createResponseClass ="alert alert-success";
-							$scope.createResponseMessage = "Project Created.";
-							//console.log('/project/' + response.project[0].projectKey +'/'+ response.project[0].projectName);
-							$scope.projectLists.push(response.project[0]);
-							console.log($scope.projectLists);
-							$timeout(function(){
-								
-								$('#projectCreateModal').modal('toggle');
-								$scope.checkResponse = !$scope.checkResponse;
-								$scope.createResponse = !$scope.createResponse;
-								$('#projectCreateModal').find('form').trigger('reset');
-							},1500);
-						break;
+					case 1:
+						$scope.createResponseClass ="alert alert-success";
+						$scope.createResponseMessage = "Project Created.";
+						$scope.projectLists.push(response.project[0]);
+						console.log($scope.projectLists);
+						$timeout(function(){
+							$('#projectCreateModal').modal('toggle');
+							$scope.checkResponse = !$scope.checkResponse;
+							$scope.createResponse = !$scope.createResponse;
+							$('#projectCreateModal').find('form').trigger('reset');
+						},1500);
+					break;
 						
-						case 2:
-							$scope.createResponseClass ="alert alert-warning";
-							$scope.createResponseMessage = "Project key is used";
-						break;
-						case 3:
-							$scope.createResponseClass ="alert alert-warning";
-							$scope.createResponseMessage = "Server Error 2";
-						break;
-						default:
-							$scope.createResponseClass ="alert alert-warning";
-							$scope.createResponseMessage = "Empty field(s) detected";
-						break;
-					}
+					case 2:
+						$scope.createResponseClass ="alert alert-danger";
+						$scope.createResponseMessage = "Project key is used";
+						$timeout(function(){
+							$scope.createResponse = !$scope.createResponse;
+						},1500);
+					break;
+					case 3:
+						$scope.createResponseClass ="alert alert-danger";
+						$scope.createResponseMessage = "Server Error 2";
+					break;
+					default:
+						$scope.createResponseClass ="alert alert-danger";
+						$scope.createResponseMessage = "Empty field(s) detected";
+						$timeout(function(){
+							$scope.createResponse = !$scope.createResponse;
+						},1500);
+					break;
+				}
 			});
-		}else{
-			$scope.createResponseClass ="alert alert-warning";
-			$scope.createResponseMessage = "Project key is used";
-		}
+		
 		NProgress.done();
 	};
 	/**ends **/
 }])
-
-/**.controller('homeProjectCtrl',['$scope',function($scope){
-	$scope.display1= "from another controller";
-	$scope.createProject= function(){
-		$scope.display1 = "hello from modal";
-	};
-}])**/
 

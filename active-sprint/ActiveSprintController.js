@@ -50,8 +50,16 @@ angular.module('active-sprint')
 						switch(response.success){
 							case 0:
 								$scope.emptyActiveSprintResponse = !$scope.emptyActiveSprintResponse;
-								$scope.emptyActiveSprintResponseClass = "alert alert-warning";
-								$scope.emptyActiveSprintResponseMessage ="You currently do not have any active sprint";
+								$scope.emptyActiveSprintResponseClass = "alert alert-info";
+								$scope.emptyActiveSprintResponseMessage ="You currently do not have any active sprint!";
+								
+								$scope.snackbarShow = !$scope.snackbarShow;
+								$scope.snackbarClass= "alert alert-success alert-dismissible snackbar";
+								$scope.snackbarMessage = "Sprint Completed! ";
+								
+								$timeout(function(){
+									$scope.snackbarShow = !$scope.snackbarShow;
+								},3000);
 							break;
 						}
 					});
@@ -265,8 +273,8 @@ angular.module('active-sprint')
 			
 			case 0:
 				$scope.emptyActiveSprintResponse = !$scope.emptyActiveSprintResponse;
-				$scope.emptyActiveSprintResponseClass = "alert alert-warning";
-				$scope.emptyActiveSprintResponseMessage ="You currently do not have any active sprint";
+				$scope.emptyActiveSprintResponseClass = "alert alert-info";
+				$scope.emptyActiveSprintResponseMessage ="You currently do not have any active sprint!";
 			break;
 		}
 	});

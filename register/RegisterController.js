@@ -30,21 +30,37 @@ angular.module('register')
 					case 0:
 						$scope.registerResponseClass= "alert alert-danger alert-dismissible";
 						$scope.registerMessage ="Sorry, internal server errors!";
+						$timeout(function(){
+							$scope.btnRegister="Create an account";
+							$scope.registerResponse = !$scope.registerResponse;
+						},2000);
 					break;
 					
 					case 2:
 						$scope.registerResponseClass= "alert alert-danger alert-dismissible";
 						$scope.registerMessage ="Sorry, your password isn't matched!";
+						$timeout(function(){
+							$scope.btnRegister="Create an account";
+							$scope.registerResponse = !$scope.registerResponse;
+						},2000);
 					break;
 					
 					case 3:
 						$scope.registerResponseClass= "alert alert-danger alert-dismissible";
 						$scope.registerMessage ="Sorry, the email is in used!";
+						$timeout(function(){
+							$scope.btnRegister="Create an account";
+							$scope.registerResponse = !$scope.registerResponse;
+						},2000);
 					break;
 					
-					case 4																			:
+					case 4:
 						$scope.registerResponseClass= "alert alert-danger alert-dismissible";
 						$scope.registerMessage ="Sorry, empty fields!";
+						$timeout(function(){
+							$scope.btnRegister="Create an account";
+							$scope.registerResponse = !$scope.registerResponse;
+						},2000);
 					break;
 					
 					default:

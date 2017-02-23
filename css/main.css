@@ -294,8 +294,7 @@ textarea{
 	width:70%;
 }
 
-.backlogItemHeaderTitleDetails{
-	
+.backlogItemHeaderTitleDetails{	
 	width:30%;
 	border-left:1px solid #ccc;
 }
@@ -427,7 +426,6 @@ textarea{
 .sprintItemHeaderTitle{
 	width:70%;
 }
-
 .sprintItemHeaderTitleDetails{
 	width:30%;
 	border-left:1px solid #ccc;

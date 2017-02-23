@@ -2,108 +2,109 @@
 <side-bar></side-bar>
 <div  id="main2">
 <div class="col-md-12" id="tasks" ng-style="borderBottom(colSize)">
-<div ng-class="colSize? 'col-md-9':'col-md-12'">
+	<div ng-class="colSize? 'col-md-9':'col-md-12'">
 
-<div ng-show="!emptyActiveSprintResponse" class="col-md-12 activeSprintDetails">
-	<div class="activeSprintTop">
-		<div class="activeSprintLeft">
-			<p>{{sprintGoal}}</p>
-		</div>
-		<div class="activeSprintRight">
-			<div class="dropdown taskOptions">
-			<h4 data-toggle="dropdown" class="duration" role="button"><i class="glyphicon glyphicon-time"></i> {{numberDays}}</h4>
-				<span class="dropdown-menu dropdown-menu-right" id="dropdownCustom" role="menu">
-				<div class="dropdownDetails">
-					<p>Sprint Start Date: <br>{{sprintStartDate}}</p>
-					<p>Sprint End Date: <br>{{sprintEndDate}}</p>
-					<p>Planned Days: <br>{{plannedNumberDays}}</p>
-					<p>Gone Days: <br>{{goneNumberDays}}</p>
+		<div ng-show="emptyActiveSprintResponse" ng-class="emptyActiveSprintResponseClass" style="margin-top:10px"role="alert">
+			{{emptyActiveSprintResponseMessage}}
+		</div> <!-- empty sprint response -->
+
+		<div ng-show="!emptyActiveSprintResponse" class="col-md-12 activeSprintDetails">
+			<div class="activeSprintTop">
+				<div class="activeSprintLeft">
+					<p>{{sprintGoal}}</p>
 				</div>
-				</span>
-			</div>
-			<small><button class="btn btn-default" ng-click="completeSprint()">Complete Sprint </button></small>
-			
-		</div>
-	</div>
-</div>
-<div ng-show="!emptyActiveSprintResponse">
-	<div class="title">
-	
-	
-		<span class="eachTitle">Active Backlogs</span>
-		<span class="eachTitle">To-do</span>
-		<span class="eachTitle">In-Progress</span>
-		<span class="eachTitle">Done</span>
-	</div>
-</div>
-	<ul class="nav nav-pills nav-stacked eachLists" ng-repeat="backlog in backlogActive track by $index">
-	<span class="minimizeTitle" style="margin-left:25px">Active Backlog #{{$index +1}}</span>
-		<li role="presentation"> 
-			<div class="col-md-3 eachTask">
-				<div class="activeBacklogs" ng-style="calculateStyle(backlog)">
-					<div class="activeBacklogItemHeader">
-						<div class="backlogItemHeaderTitle">
-							<h6> <a href="">{{backlog.backlogTitle}} </a></h6>
-							<span class="minimize" data-toggle="tooltip" data-placement="bottom" title="Created Since">{{backlog.dateCreated}}</span>
-							<span class="minimize" data-toggle="tooltip" data-placement="bottom" title="Backlog Owner"> - <i class="glyphicon glyphicon-user"></i> {{backlog.backlogCreator}}</span>
+				<div class="activeSprintRight">
+					<div class="dropdown taskOptions">
+					<h4 data-toggle="dropdown" class="duration" role="button"><i class="glyphicon glyphicon-time"></i> {{numberDays}}</h4>
+						<span class="dropdown-menu dropdown-menu-right" id="dropdownCustom" role="menu">
+						<div class="dropdownDetails">
+							<p>Sprint Start Date: <br>{{sprintStartDate}}</p>
+							<p>Sprint End Date: <br>{{sprintEndDate}}</p>
+							<p>Planned Days: <br>{{plannedNumberDays}}</p>
+							<p>Gone Days: <br>{{goneNumberDays}}</p>
 						</div>
-						<div class="backlogItemHeaderTitleDetails">
-							<div class="backlogDetails">
-								<p class="minimize">SP: {{backlog.backlogStoryPoint}}</p>
-								<p class="minimize">{{backlog.backlogType}}</p>
+						</span>
+					</div>
+					<small><button class="btn btn-default" ng-click="completeSprint()">Complete Sprint </button></small>
+					
+				</div>
+			</div>
+		</div>
+		<div ng-show="!emptyActiveSprintResponse">
+			<div class="title">
+			
+			
+				<span class="eachTitle">Active Backlogs</span>
+				<span class="eachTitle">To-do</span>
+				<span class="eachTitle">In-Progress</span>
+				<span class="eachTitle">Done</span>
+			</div>
+		</div>
+		<ul class="nav nav-pills nav-stacked eachLists" ng-repeat="backlog in backlogActive track by $index">
+		<span class="minimizeTitle" style="margin-left:25px">Active Backlog #{{$index +1}}</span>
+			<li role="presentation"> 
+				<div class="col-md-3 eachTask">
+					<div class="activeBacklogs" ng-style="calculateStyle(backlog)">
+						<div class="activeBacklogItemHeader">
+							<div class="backlogItemHeaderTitle">
+								<h6> <a href="">{{backlog.backlogTitle}} </a></h6>
+								<span class="minimize" data-toggle="tooltip" data-placement="bottom" title="Created Since">{{backlog.dateCreated}}</span>
+								<span class="minimize" data-toggle="tooltip" data-placement="bottom" title="Backlog Owner"> - <i class="glyphicon glyphicon-user"></i> {{backlog.backlogCreator}}</span>
+							</div>
+							<div class="backlogItemHeaderTitleDetails">
+								<div class="backlogDetails">
+									<p class="minimize">SP: {{backlog.backlogStoryPoint}}</p>
+									<p class="minimize">{{backlog.backlogType}}</p>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-			
-			<div class="col-md-3 eachTask">
-			<span class="minimizeTitle">To-do</span>
-				<ul class="nav nav-pills nav-stacked toDoList dropPlace2"  data-drop="{{droppable}}" data-jqyoui-options="{ greedy:true}" ng-model="backlog.tasks" jqyoui-droppable="{multiple:true, onDrop:'dropCallback4(backlog)' , onOver:'onOverCallback(backlog.backlogId)' } ">
-					<li ng-repeat="eachTask in backlog.tasks |  filter : {tasksStatus: 'To-do'}" data-drag="true" data-jqyoui-options="{revert:'invalid'}"   ng-model="backlog.tasks" jqyoui-draggable="{index: {{$index}},animate:true, onStart:'startCallback4(eachTask, backlog.backlogId)', onDrag:'onDragCallback(backlog.backlogId)' }">
-					<div class="toDoItem">
-						<h6><a href="" ng-click="toggle(eachTask)">{{eachTask.tasksTitle}}</a>  <span class="badge">{{eachTask.tasksStatus}}</span></h6>
+				
+				<div class="col-md-3 eachTask">
+				<span class="minimizeTitle">To-do</span>
+					<ul class="nav nav-pills nav-stacked toDoList dropPlace2"  data-drop="{{droppable}}" data-jqyoui-options="{ greedy:true}" ng-model="backlog.tasks" jqyoui-droppable="{multiple:true, onDrop:'dropCallback4(backlog)' , onOver:'onOverCallback(backlog.backlogId)' } ">
+						<li ng-repeat="eachTask in backlog.tasks |  filter : {tasksStatus: 'To-do'}" data-drag="true" data-jqyoui-options="{revert:'invalid'}"   ng-model="backlog.tasks" jqyoui-draggable="{index: {{$index}},animate:true, onStart:'startCallback4(eachTask, backlog.backlogId)', onDrag:'onDragCallback(backlog.backlogId)' }">
+						<div class="toDoItem">
+							<h6><a href="" ng-click="toggle(eachTask)">{{eachTask.tasksTitle}}</a>  <span class="badge">{{eachTask.tasksStatus}}</span></h6>
+							
+						</div>
+						</li>
+					</ul>
+				</div>		
+				
+				<div class="col-md-3 eachTask">
+				<span class="minimizeTitle">In-Progress</span>
+					<ul class="nav nav-pills nav-stacked toDoList dropPlace2" data-drop="{{droppable}}"  data-jqyoui-options="{ greedy:true}" ng-model="backlog.tasks" jqyoui-droppable="{multiple:true, onDrop:'dropCallback5(backlog.backlogId)' , onOver:'onOverCallback(backlog.backlogId)' }" >
+						<li ng-repeat="eachTask in backlog.tasks |  filter : {tasksStatus: 'In-Progress'}" data-drag="true" data-jqyoui-options="{revert:'invalid'}"   ng-model="backlog.tasks" jqyoui-draggable="{index: {{$index}},animate:true, onStart:'startCallback4(eachTask, backlog.backlogId)', onDrag:'onDragCallback(backlog.backlogId)'  }">
+						<div class="toDoItem">
+							<h6><a href="" ng-click="toggle(eachTask)">{{eachTask.tasksTitle}}</a>  <span class="badge">{{eachTask.tasksStatus}}</span></h6>
+						</div>
+						</li>
+					</ul>
+				</div>
 						
-					</div>
-					</li>
-				</ul>
-			</div>		
-			
-			<div class="col-md-3 eachTask">
-			<span class="minimizeTitle">In-Progress</span>
-				<ul class="nav nav-pills nav-stacked toDoList dropPlace2" data-drop="{{droppable}}"  data-jqyoui-options="{ greedy:true}" ng-model="backlog.tasks" jqyoui-droppable="{multiple:true, onDrop:'dropCallback5(backlog.backlogId)' , onOver:'onOverCallback(backlog.backlogId)' }" >
-					<li ng-repeat="eachTask in backlog.tasks |  filter : {tasksStatus: 'In-Progress'}" data-drag="true" data-jqyoui-options="{revert:'invalid'}"   ng-model="backlog.tasks" jqyoui-draggable="{index: {{$index}},animate:true, onStart:'startCallback4(eachTask, backlog.backlogId)', onDrag:'onDragCallback(backlog.backlogId)'  }">
-					<div class="toDoItem">
-						<h6><a href="" ng-click="toggle(eachTask)">{{eachTask.tasksTitle}}</a>  <span class="badge">{{eachTask.tasksStatus}}</span></h6>
-					</div>
-					</li>
-				</ul>
-			</div>
-					
-			<div class="col-md-3 eachTask">
-			<span class="minimizeTitle">Done</span>
-				<ul class="nav nav-pills nav-stacked toDoList dropPlace2" data-drop="{{droppable}}"  data-jqyoui-options="{ greedy:true}" ng-model="backlog.tasks" jqyoui-droppable="{multiple:true, onDrop:'dropCallback6(backlog.backlogId)', onOver:'onOverCallback(backlog.backlogId)' }" >
-					<li ng-repeat="eachTask in backlog.tasks |  filter : {tasksStatus: 'Done'}" data-drag="true" data-jqyoui-options="{revert:'invalid'}"   ng-model="backlog.tasks" jqyoui-draggable="{index: {{$index}},animate:true, onStart:'startCallback4(eachTask, backlog.backlogId)', onDrag:'onDragCallback(backlog.backlogId)' }">
-					<div class="toDoItem">
-						<h6><a href="" ng-click="toggle(eachTask)"><strike ng-if="eachTask.tasksStatus =='Done'">{{eachTask.tasksTitle}}</strike></a>  <span class="badge">{{eachTask.tasksStatus}}</span></h6>
-					</div>
-					</li>
-				</ul>
-			</div>
-		</li>
-	</ul>
+				<div class="col-md-3 eachTask">
+				<span class="minimizeTitle">Done</span>
+					<ul class="nav nav-pills nav-stacked toDoList dropPlace2" data-drop="{{droppable}}"  data-jqyoui-options="{ greedy:true}" ng-model="backlog.tasks" jqyoui-droppable="{multiple:true, onDrop:'dropCallback6(backlog.backlogId)', onOver:'onOverCallback(backlog.backlogId)' }" >
+						<li ng-repeat="eachTask in backlog.tasks |  filter : {tasksStatus: 'Done'}" data-drag="true" data-jqyoui-options="{revert:'invalid'}"   ng-model="backlog.tasks" jqyoui-draggable="{index: {{$index}},animate:true, onStart:'startCallback4(eachTask, backlog.backlogId)', onDrag:'onDragCallback(backlog.backlogId)' }">
+						<div class="toDoItem">
+							<h6><a href="" ng-click="toggle(eachTask)"><strike ng-if="eachTask.tasksStatus =='Done'">{{eachTask.tasksTitle}}</strike></a>  <span class="badge">{{eachTask.tasksStatus}}</span></h6>
+						</div>
+						</li>
+					</ul>
+				</div>
+			</li>
+		</ul>
 	</div>
 	<div  ng-class="colSize? 'col-md-3': 'hidden'" id="task-details">
 		<task-details></task-details>
 	</div>
+	
 </div>
 <div ng-show="snackbarShow" ng-class="snackbarClass" role="alert">
 	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 		{{snackbarMessage}}
 </div>
 
-<div ng-show="emptyActiveSprintResponse" ng-class="emptyActiveSprintResponseClass" role="alert">
-	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	{{emptyActiveSprintResponseMessage}}
-</div> <!-- create response -->
 </div>

@@ -52,7 +52,7 @@ if(!empty($projectKey)){
 				}
 			}
 		}
-		$completeSprintSql= "update `sprint` SET `sprintStatus` = 'Done' where `projectKey` = '$projectKey'";
+		$completeSprintSql= "update `sprint` SET `sprintStatus` = 'Done' where `projectKey` = '$projectKey' AND `sprintId` =".$sprint["sprintId"];
 		if($conn ->  query($completeSprintSql)){
 			$response["success"] = 1;
 			echo json_encode($response);

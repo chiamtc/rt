@@ -140,7 +140,7 @@ angular.module('backlog-details')
 	}
 	
 	$scope.editTask = function(){
-		if($scope.taskEditTitle == null){
+		if(!$scope.taskEditTitle.length){
 			$scope.editTaskResponse = !$scope.editTaskResponse;
 			$scope.editTaskResponseClass=  "alert alert-danger alert-dismissible";
 			$scope.editTaskResponseMessage = "Unable to update task with empty title !"

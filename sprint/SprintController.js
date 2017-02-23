@@ -274,7 +274,7 @@ angular.module('sprint')
 					$scope.sprintListsClass = "sprintLists";
 					$timeout(function(){
 						$('#sprintCreateModal').modal('toggle');
-						$scope.createSprintResponse = !$scope.createSprintResponse;
+						
 						$('#createSprintForm').trigger("reset");
 					},500);
 				break;
