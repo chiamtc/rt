@@ -9,7 +9,6 @@ angular.module('backlog-details')
 	
 	/** UI bindings **/
 	$scope.passBacklog = [];
-	$scope.copyBacklog = [];
 	$scope.commentLists = [];
 	$scope.taskLists = [];
 	$scope.snackbarShow = false;
@@ -24,8 +23,10 @@ angular.module('backlog-details')
 		}else{
 			$scope.colSize = true;
 			$scope.passBacklog = backlog;
-			$scope.copyBacklog = angular.copy($scope.passBacklog);
+			
+			$scope.backlogDTitle = $scope.passBacklog.backlogTitle;
 			$scope.backlogDDesc = $scope.passBacklog.backlogDesc;
+			$scope.backlogDStoryPoint = parseInt($scope.passBacklog.backlogStoryPoint);
 			
 			BacklogDetailsService.ListComment($scope.passBacklog.backlogId,function(response){
 				switch(response.success){
@@ -34,7 +35,6 @@ angular.module('backlog-details')
 						$scope.commentLists =[];
 					break;
 					case 1:
-					console.log(response.comments);
 						$scope.commentLists = response.comments;
 					break;
 					case 2:
@@ -43,11 +43,13 @@ angular.module('backlog-details')
 			});
 			
 			BacklogDetailsService.ListTasks($scope.passBacklog.backlogId,function(response){
+				
 				switch(response.success){
 					case 0:
 						$scope.taskLists =[];
 					break;
 					case 1:
+					
 						$scope.taskLists = response.tasks;
 					break;
 					case 2:
@@ -55,6 +57,7 @@ angular.module('backlog-details')
 				}
 			});
 		}
+		
 	}
 	
 	$scope.passEditTask= function(editTask){
@@ -74,6 +77,7 @@ angular.module('backlog-details')
 	
 	$scope.deleteTask = function(){
 		BacklogDetailsService.DeleteTask($scope.passTaskDelete.tasksId,$scope.passBacklog.backlogId, function(response){
+			console.log(response);
 			switch(response.success){
 				case 1:
 					BacklogDetailsService.ListTasks($scope.passBacklog.backlogId,function(response){
@@ -100,14 +104,12 @@ angular.module('backlog-details')
 	}
 	
 	$scope.createTask = function(){
+		$scope.createTaskResponse = !$scope.createTaskResponse;
 		BacklogDetailsService.CreateTask($scope.taskCreateTitle, $scope.taskCreateDesc, $scope.passBacklog.backlogId,function(response){
 			console.log(response);
 			switch(response.success){
 				case 1:
-				console.log(response.tasks);
 					$scope.taskLists = response.tasks;
-					console.log($scope.taskLists);
-					$scope.createTaskResponse = !$scope.createTaskResponse;
 					$scope.createTaskResponseClass=  "alert alert-success alert-dismissible";
 					$scope.createTaskResponseMessage = "Created a new task !"
 					$scope.passBacklog.dateModified = response.date_modified;
@@ -117,32 +119,51 @@ angular.module('backlog-details')
 						$scope.createTaskResponse = !$scope.createTaskResponse;
 					},500);
 				break;
+				case 3:
+				
+					$scope.createTaskResponseClass=  "alert alert-danger alert-dismissible";
+					$scope.createTaskResponseMessage = "Task Title Required !"
+					$timeout(function(){
+						$scope.createTaskResponse = !$scope.createTaskResponse;
+					},1000);
+				break;
+				
 				case 0:
-				console.log(response);
+					$scope.createTaskResponseClass=  "alert alert-danger alert-dismissible";
+					$scope.createTaskResponseMessage = "Server Error"
+					$timeout(function(){
+						$scope.createTaskResponse = !$scope.createTaskResponse;
+					},1000);
 				break;
 			}
 		});
 	}
 	
 	$scope.editTask = function(){
-		BacklogDetailsService.EditTask($scope.taskEditTitle, $scope.taskEditDesc, $scope.taskEditId, $scope.passBacklog.backlogId,function(response){
-			switch(response.success){
-				case 1:
-				console.log(response.tasks);
-					$scope.taskLists = response.tasks;
-					$scope.editTaskResponse = !$scope.editTaskResponse;
-					$scope.editTaskResponseClass=  "alert alert-success alert-dismissible";
-					$scope.editTaskResponseMessage = "Task updated !"
-					$scope.passBacklog.dateModified = response.date_modified;
-					$timeout(function(){
-						$('#taskEditModal').modal('toggle');
+		if($scope.taskEditTitle == null){
+			$scope.editTaskResponse = !$scope.editTaskResponse;
+			$scope.editTaskResponseClass=  "alert alert-danger alert-dismissible";
+			$scope.editTaskResponseMessage = "Unable to update task with empty title !"
+		}else{
+			BacklogDetailsService.EditTask($scope.taskEditTitle, $scope.taskEditDesc, $scope.taskEditId, $scope.passBacklog.backlogId,function(response){
+				switch(response.success){
+					case 1:
+					console.log(response.tasks);
+						$scope.taskLists = response.tasks;
 						$scope.editTaskResponse = !$scope.editTaskResponse;
-					},500);
-				break;
-				case 0:
-				break;
-			}
-		});
+						$scope.editTaskResponseClass=  "alert alert-success alert-dismissible";
+						$scope.editTaskResponseMessage = "Task updated !"
+						$scope.passBacklog.dateModified = response.date_modified;
+						$timeout(function(){
+							$('#taskEditModal').modal('toggle');
+							$scope.editTaskResponse = !$scope.editTaskResponse;
+						},500);
+					break;
+					case 0:
+					break;
+				}
+			});
+		}
 	}
 	
 	$scope.deleteComment = function(comment){
@@ -201,7 +222,9 @@ angular.module('backlog-details')
 				},5000);
 			break;
 		}
+		
 		});
+		
 	}
 	
 	$scope.updateType = function(){

@@ -10,7 +10,7 @@
 		<div class="form-group">
 			<label class="col-sm-2 detailLabel"> Title</label>
 			<div class="col-sm-10">
-				<input ng-model="backlogDTitle" ng-value="passBacklog.backlogTitle" type="text" class="form-control" name="backlogDTitle">
+				<input ng-model="backlogDTitle" type="text" class="form-control" name="backlogDTitle">
 				<div class="btn-group quickEdit" role="group" aria-label="">
 					<button type="button" class="close" data-toggle="tooltip" ng-click="retain()" data-placement="bottom" title="Retain Title" style="padding-right:5px"><small><i class="glyphicon glyphicon-remove"></i></small></button>
 					<button type="button" class="close" data-toggle="tooltip" ng-click="updateTitle()" data-placement="bottom" title="Update Title" style="padding-right:10px"><small><i class="glyphicon glyphicon-ok"></i></small></button>
@@ -35,7 +35,7 @@
 		<div class="form-group">
 			<label class="col-sm-2 detailLabel">Story Pts.</label>
 			<div class="col-sm-10">
-				<input ng-model="backlogDStoryPoint" ng-value="passBacklog.backlogStoryPoint" type="number" class="form-control" name="backlogDSP">
+				<input  string-to-number ng-model="backlogDStoryPoint" type="number" class="form-control" name="backlogDSP">
 				<div class="btn-group quickEdit" role="group" aria-label="">
 					<button type="button" class="close" data-toggle="tooltip" ng-click="retain()" data-placement="bottom" title="Retain Title" style="padding-right:5px"><small><i class="glyphicon glyphicon-remove"></i></small></button>
 					<button type="button" class="close" data-toggle="tooltip" ng-click="updateSP()" data-placement="bottom" title="Update Title" style="padding-right:10px"><small><i class="glyphicon glyphicon-ok"></i></small></button>
@@ -106,7 +106,7 @@
 		</div>
 			<div class="taskItem" ng-repeat="task in taskLists">
 				<div class="taskItemHeader">
-					<span><strike ng-if="task.tasksStatus =='Done'">{{task.tasksTitle}} </strike> <span class="badge">{{task.tasksStatus}}</span></span>
+					<span class="taskItemTitle" ng-style="taskLabelling(task.tasksStatus)">{{task.tasksTitle}}</span><span ng-class="labelling(task.tasksStatus)">{{task.tasksStatus}}</span>
 				</div>
 				<div class="dropdown taskOptions">
 					<i data-toggle="dropdown" id="dropdown" class="glyphicon glyphicon-menu-hamburger white" role="button" style="font-weight:bold"></i>

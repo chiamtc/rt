@@ -44,7 +44,7 @@ if(!empty($taskTitle) && !empty($backlogId)){
 		}
 	}else{
 		$response["success"] = 0;
-		$response["message"] = $createTaskSql;
+		$response["message"] = "server error";
 		echo json_encode($response);
 	}
 }else{

@@ -73,9 +73,9 @@ angular.module('backlog')
 		BacklogService.CreateBacklog($scope.backlogCreateName,$scope.backlogCreateType.type,$scope.backlogCreateDesc,$scope.backlogCreatePriority.type, $scope.backlogStoryPoint,$scope.userEmail, function(response){
 			
 		$scope.createBacklogResponse = !$scope.createBacklogResponse;
-		
 		switch(response.success){
 			case 0:
+				
 				$scope.createResponseClass ="alert alert-danger";
 				$scope.createResponseMessage = "Server Error";
 			break;
@@ -95,21 +95,24 @@ angular.module('backlog')
 					$scope.backlogCreatePriority = $scope.backlogPriorities[0];
 					
 				},500);
-					
 			break;
 				
 			case 2:
-				$scope.createResponseClass ="alert alert-danger";
-				$scope.createResponseMessage = "Server error 2";
+				$scope.createBacklogResponseClass ="alert alert-danger";
+				$scope.createBacklogResponseMessage = "Server error 2";
 			break;
 				
-			default:
-				$scope.createResponseClass ="alert alert-danger";
-				$scope.createResponseMessage = "Empty field(s) detected";
+			case 3:
+				$scope.createBacklogResponseClass ="alert alert-danger";
+				$scope.createBacklogResponseMessage = "Empty field(s) detected";
+				$timeout(function(){
+					$scope.createBacklogResponse = !$scope.createBacklogResponse;	
+				},1000);
 			break;
 			
 			}
 		});
+		
 		NProgress.done();
 	};
 }])

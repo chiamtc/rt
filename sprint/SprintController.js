@@ -241,7 +241,12 @@ angular.module('sprint')
 	
 	$scope.createSprint = function(){
 		$scope.createSprintResponse = !$scope.createSprintResponse;
-		if($scope.sprintStartDate.getTime() == $scope.sprintEndDate.getTime()){
+		if($scope.sprintStartDate== null ||  $scope.sprintEndDate == null){
+			$scope.createSprintResponseClass ="alert alert-danger";
+			$scope.createSprintResponseMessage = "Dates are empty";
+			
+			
+		}else if($scope.sprintStartDate.getTime() == $scope.sprintEndDate.getTime()){
 			$scope.createSprintResponseClass ="alert alert-danger";
 			$scope.createSprintResponseMessage = "Both dates shouldn't be the same!";
 			
@@ -254,6 +259,7 @@ angular.module('sprint')
 			var endDate = moment($scope.sprintEndDate).format('DD/MM/YYYY');
 			console.log((moment.duration($scope.sprintEndDate - $scope.sprintStartDate)).humanize()); */
 			SprintService.CreateSprint($scope.sprintGoal, $scope.sprintStartDate, $scope.sprintEndDate, function(response){
+				console.log(response);
 				switch(response.success){
 				case 0:
 					$scope.createSprintResponseClass ="alert alert-danger";
@@ -286,6 +292,9 @@ angular.module('sprint')
 			}
 			});
 		} 
+		$timeout(function(){
+			$scope.createSprintResponse = !$scope.createSprintResponse;
+		},1000);
 	}
 }])
 

@@ -30,4 +30,24 @@ angular.module('project')
 			}
 		}
 	}
+	
+	$scope.labelling = function(tasksStatus){
+		var labelStatus = tasksStatus;
+		if(labelStatus =='To-do'){
+			return 'label label-info';
+			
+		}else if(labelStatus == 'In-Progress'){
+			return 'label label-warning';
+		}else if(labelStatus == 'Done'){
+			return 'label label-success';
+		}
+	}
+	
+	$scope.taskLabelling = function(tasksStatus){
+		var labelStatus = tasksStatus;
+		if(labelStatus =='Done'){
+			return {'text-decoration':'line-through'}
+		}
+	}
+	
 }]);
