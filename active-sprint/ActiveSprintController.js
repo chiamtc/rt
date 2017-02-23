@@ -41,6 +41,22 @@ angular.module('active-sprint')
 	
 	$scope.completeSprint = function(){
 		ActiveSprintService.CompleteSprint($routeParams.projectKey, function(response){
+			$scope.backlogActive = [];
+			$scope.taskActive =[];
+			$scope.activeSprint = [];
+			switch(response.success){
+				case 1:
+					ActiveSprintService.ListActiveBacklogsTasks(function(response){
+						switch(response.success){
+							case 0:
+								$scope.emptyActiveSprintResponse = !$scope.emptyActiveSprintResponse;
+								$scope.emptyActiveSprintResponseClass = "alert alert-warning";
+								$scope.emptyActiveSprintResponseMessage ="You currently do not have any active sprint";
+							break;
+						}
+					});
+				break;
+			}
 		});
 	}
 	

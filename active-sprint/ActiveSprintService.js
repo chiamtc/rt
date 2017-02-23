@@ -44,6 +44,7 @@ angular.module('active-sprint')
 			headers : { 'Content-Type' : 'application/json'}
 		}).then(function(response){
 			console.log(response.data);
+			callback(response.data);
 		});
 	}
 	

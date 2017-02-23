@@ -86,7 +86,7 @@ angular.module('backlog')
 					//console.log('/project/' + response.project[0].projectKey +'/'+ response.project[0].projectName);
 					
 				$scope.backlogListsClass = "backlogLists";
-				$scope.backlogLists.push(response.backlog[0]);
+				$scope.backlogLists = response.backlogs;
 				$timeout(function(){
 					$('#backlogCreateModal').modal('toggle'); 
 					$scope.createBacklogResponse = !$scope.createBacklogResponse;

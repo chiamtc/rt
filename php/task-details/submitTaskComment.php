@@ -13,16 +13,27 @@ if(!empty($commentIn) && !empty($email)){
 	$submitCommentSql = "Insert into `taskComment`(`taskCommentId`, `taskComment`, `date_comment`, `email`, `tasksId`) VALUES('', '$commentIn', '$date_comment', '$email', $tasksId)";
 	if($conn -> query($submitCommentSql)){
 		
-		$response["taskComment"] = array();
-		$taskComment = array();
-		$taskComment["taskComment"] = $commentIn;
-		$taskComment["taskCommentId"] = $conn ->insert_id;
-		$taskComment["dateComment"] = $date_comment;
-		$taskComment["email"] = $email;
-		array_push($response["taskComment"], $taskComment);
-		$response["success"] = 1;
-		echo json_encode($response);
-		
+		$getCommentSql	= "select * from `taskComment` where `tasksId` = $tasksId order by `date_comment` asc";
+		$resultGetComment = $conn -> query($getCommentSql);
+		if($resultGetComment -> num_rows >0){
+			$response["taskComments"] = array();
+			while($rowGetComments = $resultGetComment -> fetch_assoc()){
+				$taskComment = array();
+				$taskComment["taskCommentId"] = $rowGetComments["taskCommentId"];
+				$taskComment["taskComment"] = $rowGetComments["taskComment"];
+				$taskComment["dateComment"] = $rowGetComments["date_comment"];
+				$taskComment["email"] = $rowGetComments["email"];
+				$taskComment["tasksId"] = $rowGetComments["tasksId"];
+				array_push($response["taskComments"], $taskComment);
+			}
+			$response["success"] = 1;
+			echo json_encode($response);
+			
+		}else{
+			$response["success"] = 0;
+			$response["message"] = "cant find comment";
+			echo json_encode($response);
+		}
 	}else{
 		$response["success"] = 0;
 		$response["message"] = "failed to comment";

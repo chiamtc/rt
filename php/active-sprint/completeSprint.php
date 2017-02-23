@@ -6,7 +6,6 @@ $projectKey = $data -> projectKey;
 $projectKey = mysqli_real_escape_string($conn, $projectKey);
 
 $response = array();
-$response["found"] = false;
 if(!empty($projectKey)){
 	//$getSprintSql = "SELECT * FROM `sprint` s left join `backlog` b on s.sprintId = b.sprintId where s.projectKey = '$projectKey'";
 	$getSprintSql = "Select * from `sprint` where `projectKey` = '$projectKey' AND `sprintStatus` = 'Active'";

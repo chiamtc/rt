@@ -81,7 +81,7 @@ angular.module('task-details')
 			headers: {'Content-Type':'application/json'}
 		}).then(function(response){
 			
-			angular.forEach(response.data.taskComment, function(value, key){
+			angular.forEach(response.data.taskComments, function(value, key){
 				
 				value.dateComment = moment(value.dateComment).fromNow();
 				

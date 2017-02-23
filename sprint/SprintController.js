@@ -112,6 +112,7 @@ angular.module('sprint')
 	}
 	
 	$scope.passEdit = function(sprint){
+		$scope.sprint = sprint;
 		$scope.sprintEditId = sprint.sprintId;
 		$scope.sprintEditGoal = sprint.sprintGoal;
 		$scope.sprintEditStartDate = new Date(Date.parse(sprint.sprintStartDate));
@@ -131,9 +132,14 @@ angular.module('sprint')
 				case 1:
 					$scope.editSprintResponseClass = "alert alert-success";
 					$scope.editSprintResponseMessage = "Details are updated! :)";
+					$scope.sprint.sprintGoal = $scope.sprintEditGoal;
+					console.log($scope.sprint.sprintEditEndDate);
+					$scope.sprint.sprintEndDate = $scope.sprintEditEndDate;
+					$scope.sprint.sprintStartDate = $scope.sprintEditStartDate;
 					$timeout(function(){
 						$('#sprintEditModal').modal('toggle');
-					},250);
+						$scope.editSprintResponse = !$scope.editSprintResponse;
+					},1000);
 				break;
 			}
 			NProgress.set(0.7);

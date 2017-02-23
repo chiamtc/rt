@@ -32,23 +32,32 @@ if(!empty($backlogName) && !empty($backlogType) && !empty($backlogPriority) && !
 		
 		$updateUpbSql = "INSERT INTO `upb`(`uid`,`projectKey`,`backlogId`)VALUES($uid, '$projectKey', $backlogId)";
 		if($conn ->query($updateUpbSql)){
-			$response["backlog"] = array();
-			$backlog = array();
-			$backlog["backlogId"] = $backlogId;
-			$backlog["backlogTitle"] = $backlogTitle;
-			$backlog["backlogType"] = $backlogType;
-			$backlog["backlogDesc"] = $backlogDesc;
-			$backlog["backlogPriority"] = $backlogPriority;
-			$backlog["backlogStoryPoint"] = $backlogStoryPoint;
-			$backlog["backlogCreator"] = $backlogCreator;
-			$backlog["dateCreated"] = $date_created;
-			$backlog["dateModified"] = $date_modified;
-			$backlog["backlogStatus"] = 'Unassigned';
-			
-			array_push($response["backlog"], $backlog);
-			$response["success"] = 1;
-			
-			echo json_encode($response);
+			$getBacklogSql = "SELECT * FROM `backlog` b join `upb` upb on b.backlogId = upb.backlogId AND b.sprintId = 0 AND upb.projectKey = '$projectKey' AND b.`backlogStatus` != 'Done'";
+			$resultGetBacklogs = $conn -> query($getBacklogSql);
+			if($resultGetBacklogs -> num_rows >0){
+				$response["backlogs"] = array();
+				while($rowGetBacklogs = $resultGetBacklogs -> fetch_assoc()){
+					$backlog = array();
+					$backlog["backlogId"] = $rowGetBacklogs["backlogId"];
+					$backlog["backlogType"] = $rowGetBacklogs["backlogType"];
+					$backlog["backlogTitle"] = $rowGetBacklogs["backlogTitle"];
+					$backlog["backlogDesc"] = $rowGetBacklogs["backlogDesc"];
+					$backlog["backlogPriority"] = $rowGetBacklogs["backlogPriority"];
+					$backlog["backlogStoryPoint"] = $rowGetBacklogs["backlogStoryPoint"];
+					$backlog["dateCreated"] = $rowGetBacklogs["date_created"];
+					$backlog["dateModified"] = $rowGetBacklogs["date_modified"];
+					$backlog["backlogCreator"] = $rowGetBacklogs["backlogCreator"];
+					$backlog["backlogStatus"] = $rowGetBacklogs["backlogStatus"];
+					array_push($response["backlogs"], $backlog);
+				}
+				$response["success"]=1;
+				echo json_encode($response);
+				
+			}else{
+				$response["success"] = 0;
+				$response["message"]= "no backlogs";
+				echo json_encode($response);
+			}
 		}else{
 			$response["message"]= "server error 2";
 			$response["success"] = 2;

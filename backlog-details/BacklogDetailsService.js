@@ -192,8 +192,8 @@ angular.module('backlog-details')
 			},
 			headers: {'Content-Type':'application/json'}
 		}).then(function(response){
-			
-			angular.forEach(response.data.comment, function(value, key){
+			console.log(response.data);
+			angular.forEach(response.data.comments, function(value, key){
 				
 				value.dateComment = moment(value.dateComment).fromNow();
 				

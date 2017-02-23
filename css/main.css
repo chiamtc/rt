@@ -796,4 +796,10 @@ However, delay the fade out process for 2.5 seconds */
     left: 125px;
     position: absolute;
     top: -7px;
-  }
+}
+
+.form-control[readonly],
+fieldset[disabled] .form-control {
+  background-color: white;
+  opacity: 1;
+}

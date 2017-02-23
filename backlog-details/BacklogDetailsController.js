@@ -30,9 +30,11 @@ angular.module('backlog-details')
 			BacklogDetailsService.ListComment($scope.passBacklog.backlogId,function(response){
 				switch(response.success){
 					case 0:
+					
 						$scope.commentLists =[];
 					break;
 					case 1:
+					console.log(response.comments);
 						$scope.commentLists = response.comments;
 					break;
 					case 2:
@@ -102,7 +104,8 @@ angular.module('backlog-details')
 			console.log(response);
 			switch(response.success){
 				case 1:
-					$scope.taskLists.push(response.task[0]);
+				console.log(response.tasks);
+					$scope.taskLists = response.tasks;
 					console.log($scope.taskLists);
 					$scope.createTaskResponse = !$scope.createTaskResponse;
 					$scope.createTaskResponseClass=  "alert alert-success alert-dismissible";
@@ -125,6 +128,7 @@ angular.module('backlog-details')
 		BacklogDetailsService.EditTask($scope.taskEditTitle, $scope.taskEditDesc, $scope.taskEditId, $scope.passBacklog.backlogId,function(response){
 			switch(response.success){
 				case 1:
+				console.log(response.tasks);
 					$scope.taskLists = response.tasks;
 					$scope.editTaskResponse = !$scope.editTaskResponse;
 					$scope.editTaskResponseClass=  "alert alert-success alert-dismissible";
@@ -310,8 +314,8 @@ angular.module('backlog-details')
 				case 0:
 				break;
 				case 1:
-					console.log(response.comment[0]);
-					$scope.commentLists.push(response.comment[0]);
+					console.log(response.comments);
+					$scope.commentLists = response.comments;
 					
 				break;
 			}

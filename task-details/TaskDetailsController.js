@@ -9,7 +9,6 @@ angular.module('task-details')
 	$scope.snackbarShow = false;
 	$scope.toggle = function(task){
 		$scope.colSize = true;
-		console.log(task);
 		$scope.passTask = task;
 		$scope.taskDTitle = task.tasksTitle;
 		$scope.taskDDesc = task.tasksDesc;
@@ -70,12 +69,13 @@ angular.module('task-details')
 	
 	$scope.commentTask= function(){
 		TaskDetailsService.SubmitTaskComment($scope.tasksDComment,$scope.passTask.tasksId, function(response){
+			console.log(response.taskComments);
 			switch(response.success){
 				case 0:
 				break;
 				
 				case 1:
-					$scope.taskCommentLists.push(response.taskComment[0]);
+					$scope.taskCommentLists= response.taskComments;
 				break;
 			}
 		});
