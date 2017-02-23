@@ -85,7 +85,7 @@
 				<ul class="nav nav-pills nav-stacked toDoList dropPlace2" data-drop="{{droppable}}"  data-jqyoui-options="{ greedy:true}" ng-model="backlog.tasks" jqyoui-droppable="{multiple:true, onDrop:'dropCallback6(backlog.backlogId)', onOver:'onOverCallback(backlog.backlogId)' }" >
 					<li ng-repeat="eachTask in backlog.tasks |  filter : {tasksStatus: 'Done'}" data-drag="true" data-jqyoui-options="{revert:'invalid'}"   ng-model="backlog.tasks" jqyoui-draggable="{index: {{$index}},animate:true, onStart:'startCallback4(eachTask, backlog.backlogId)', onDrag:'onDragCallback(backlog.backlogId)' }">
 					<div class="toDoItem">
-						<h6><a href="" ng-click="toggle(eachTask)">{{eachTask.tasksTitle}}</a>  <span class="badge">{{eachTask.tasksStatus}}</span></h6>
+						<h6><a href="" ng-click="toggle(eachTask)"><strike ng-if="eachTask.tasksStatus =='Done'">{{eachTask.tasksTitle}}</strike></a>  <span class="badge">{{eachTask.tasksStatus}}</span></h6>
 					</div>
 					</li>
 				</ul>

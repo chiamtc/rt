@@ -106,7 +106,7 @@
 		</div>
 			<div class="taskItem" ng-repeat="task in taskLists">
 				<div class="taskItemHeader">
-					<span>{{task.tasksTitle}}  <span class="badge">{{task.tasksStatus}}</span></span>
+					<span><strike ng-if="task.tasksStatus =='Done'">{{task.tasksTitle}} </strike> <span class="badge">{{task.tasksStatus}}</span></span>
 				</div>
 				<div class="dropdown taskOptions">
 					<i data-toggle="dropdown" id="dropdown" class="glyphicon glyphicon-menu-hamburger white" role="button" style="font-weight:bold"></i>
