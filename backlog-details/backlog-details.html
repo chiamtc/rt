@@ -126,7 +126,7 @@
 				<div class="panelHeader">
 					<span class="panelTitle">{{comment.email}} - {{comment.dateComment}}</span>
 					<div class="dropdown panelOptions">
-						<i data-toggle="dropdown" id="dropdown" class="glyphicon glyphicon-menu-hamburger" role="button" ></i>
+						<i ng-show="{{comment.email == userEmail}}" data-toggle="dropdown" id="dropdown" class="glyphicon glyphicon-menu-hamburger" role="button" ></i>
 						<ul class="dropdown-menu dropdown-menu-right">
 							<li><a href="" ng-click="editComment(comment)"><i class="glyphicon glyphicon-edit"></i> Edit 
 							Comment</a></li>
