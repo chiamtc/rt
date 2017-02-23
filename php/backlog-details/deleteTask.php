@@ -12,7 +12,7 @@ $response = array();
 			
 			if($conn ->query($updateBacklogModifiedSql)){
 				$response["success"] = 1;
-				$response["message"] = $deleteTaskSql;
+				$response["message"] = "deleted";
 				$response["date_modified"] = $date_modified;
 				echo json_encode($response);
 			}else{

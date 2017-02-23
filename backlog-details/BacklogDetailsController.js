@@ -193,38 +193,43 @@ angular.module('backlog-details')
 	$scope.retain = function(){
 		$scope.backlogDTitle = $scope.passBacklog.backlogTitle;
 		$scope.backlogDType = $scope.passBacklog.backlogType;
-		$scope.backlogDStoryPoint = $scope.passBacklog.backlogStoryPoint;
+		$scope.backlogDStoryPoint = parseInt($scope.passBacklog.backlogStoryPoint);
 		$scope.backlogDPriority = $scope.passBacklog.backlogPriority;
 		$scope.backlogDDesc = $scope.passBacklog.backlogDesc;
 	}
 	
 	$scope.updateTitle = function(){
-		BacklogDetailsService.UpdateTitle($scope.backlogDTitle, $scope.passBacklog.backlogId,function(response){
-		switch(response.success){
-			case 1:
-				$scope.snackbarShow = !$scope.snackbarShow;
-				$scope.snackbarClass= "alert alert-success alert-dismissible snackbar";
-				$scope.snackbarMessage = "Backlog Title Updated ! ";
-				$scope.passBacklog.backlogTitle = $scope.backlogDTitle; // two-way binding in parameter
-				$scope.passBacklog.dateModified = moment().fromNow();
-				console.log($scope.passBacklog);
-				$timeout(function(){
+		if(!$scope.backlogDTitle.length){
+			$scope.snackbarShow = !$scope.snackbarShow;
+			$scope.snackbarClass= "alert alert-danger alert-dismissible snackbar";
+			$scope.snackbarMessage = "Backlog Title cannot be empty ! ";
+		}else{
+			BacklogDetailsService.UpdateTitle($scope.backlogDTitle, $scope.passBacklog.backlogId,function(response){
+			switch(response.success){
+				case 1:
 					$scope.snackbarShow = !$scope.snackbarShow;
-				},5000);
-			break;
+					$scope.snackbarClass= "alert alert-success alert-dismissible snackbar";
+					$scope.snackbarMessage = "Backlog Title Updated ! ";
+					$scope.passBacklog.backlogTitle = $scope.backlogDTitle; // two-way binding in parameter
+					$scope.passBacklog.dateModified = moment().fromNow();
+					console.log($scope.passBacklog);
+					$timeout(function(){
+						$scope.snackbarShow = !$scope.snackbarShow;
+					},5000);
+				break;
+				
+				case 0:
+					$scope.snackbarShow = !$scope.snackbarShow;
+					$scope.snackbarClass= "alert alert-danger alert-dismissible snackbar";
+					$scope.snackbarMessage = "Sorry, Something is wrong ! ";
+					$timeout(function(){
+						$scope.snackbarShow = !$scope.snackbarShow;
+					},5000);
+				break;
+			}
 			
-			case 0:
-				$scope.snackbarShow = !$scope.snackbarShow;
-				$scope.snackbarClass= "alert alert-danger alert-dismissible snackbar";
-				$scope.snackbarMessage = "Sorry, Something is wrong ! ";
-				$timeout(function(){
-					$scope.snackbarShow = !$scope.snackbarShow;
-				},5000);
-			break;
+			});
 		}
-		
-		});
-		
 	}
 	
 	$scope.updateType = function(){
@@ -254,29 +259,35 @@ angular.module('backlog-details')
 	}
 	
 	$scope.updateSP = function(){
-		BacklogDetailsService.UpdateSP($scope.backlogDStoryPoint, $scope.passBacklog.backlogId,function(response){
-		switch(response.success){
-			case 1:
-				$scope.snackbarShow = !$scope.snackbarShow;
-				$scope.snackbarClass= "alert alert-success alert-dismissible snackbar";
-				$scope.snackbarMessage = "Backlog Story Points Updated ! ";
-				$scope.passBacklog.backlogStoryPoint = $scope.backlogDStoryPoint; // two-way binding in parameter
-				$scope.passBacklog.dateModified = moment().fromNow();
-				$timeout(function(){
+		if(!$scope.backlogDStoryPoint){
+			$scope.snackbarShow = !$scope.snackbarShow;
+			$scope.snackbarClass= "alert alert-danger alert-dismissible snackbar";
+			$scope.snackbarMessage = "Backlog Story Point cannot be empty ! ";
+		}else{
+			BacklogDetailsService.UpdateSP($scope.backlogDStoryPoint, $scope.passBacklog.backlogId,function(response){
+			switch(response.success){
+				case 1:
 					$scope.snackbarShow = !$scope.snackbarShow;
-				},5000);
-			break;
-			
-			case 0:
-				$scope.snackbarShow = !$scope.snackbarShow;
-				$scope.snackbarClass= "alert alert-danger alert-dismissible snackbar";
-				$scope.snackbarMessage = "Sorry, Something is wrong ! ";
-				$timeout(function(){
+					$scope.snackbarClass= "alert alert-success alert-dismissible snackbar";
+					$scope.snackbarMessage = "Backlog Story Points Updated ! ";
+					$scope.passBacklog.backlogStoryPoint = $scope.backlogDStoryPoint; // two-way binding in parameter
+					$scope.passBacklog.dateModified = moment().fromNow();
+					$timeout(function(){
+						$scope.snackbarShow = !$scope.snackbarShow;
+					},5000);
+				break;
+				
+				case 0:
 					$scope.snackbarShow = !$scope.snackbarShow;
-				},5000);
-			break;
+					$scope.snackbarClass= "alert alert-danger alert-dismissible snackbar";
+					$scope.snackbarMessage = "Sorry, Something is wrong ! ";
+					$timeout(function(){
+						$scope.snackbarShow = !$scope.snackbarShow;
+					},5000);
+				break;
+			}
+			});
 		}
-		});
 	}
 	
 	$scope.updatePriority = function(){
