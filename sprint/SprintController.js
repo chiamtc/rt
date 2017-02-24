@@ -17,8 +17,9 @@ angular.module('sprint')
 	//var a = new Date(Date.parse("2017-02-08T14:00:00.000Z"));
 	
 	$scope.startCallback2 = function(event, ui, sc2){
-		console.log('You started draggin: ' + sc2.backlogId);
+		console.log('You started draggin: ' + sc2.backlogId + sc2.backlogStatus);
 		$scope.draggedTitle= sc2.backlogId;
+		$scope.draggedStatus = sc2.backlogStatus;
 	};
 
 	$scope.dropCallback2 = function(event, ui, item) {
@@ -30,8 +31,8 @@ angular.module('sprint')
 			$scope.sprintListsClass= "sprintListsEmpty";
 		}else{
 			$scope.sprintListsClass = "sprintLists";
-			console.log('sprintId' , item,' backlogId',$scope.draggedTitle);
-			SprintService.UpdateSprint(item, $scope.draggedTitle, function(response){
+			console.log('sprintId' , item,' backlogId',$scope.draggedTitle, $scope.draggedStatus);
+			SprintService.UpdateSprint(item, $scope.draggedTitle, $scope.draggedStatus, function(response){
 				NProgress.start();
 				NProgress.set(0.7);
 				NProgress.done();
@@ -50,7 +51,7 @@ angular.module('sprint')
 		}else{
 			$scope.sprintListsClass = "sprintLists";
 			console.log('sprintId' , item,' backlogId',$scope.draggedTitle);
-			SprintService.UpdateActiveSprint(item, $scope.draggedTitle, function(response){
+			SprintService.UpdateActiveSprint(item, $scope.draggedTitle, $scope.draggedStatus,function(response){
 				NProgress.start();
 				NProgress.set(0.7);
 				NProgress.done();

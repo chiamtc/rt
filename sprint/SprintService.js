@@ -61,7 +61,7 @@ angular.module('sprint')
 		});
 	}
 	
-	factory.UpdateSprint = function(sprintId, backlogId,callback){
+	factory.UpdateSprint = function(sprintId, backlogId, backlogStatus,callback){
 		$http({
 			method: 'POST',
 			url: 'php/sprint/updateSprint.php',
@@ -69,6 +69,7 @@ angular.module('sprint')
 				sprintId: sprintId,
 				backlogId : backlogId,
 				dateModified : moment().format(),
+				backlogStatus : backlogStatus,
 				projectKey : $routeParams.projectKey,
 			},
 			headers: {'Content-Type':'application/json'}
@@ -79,17 +80,19 @@ angular.module('sprint')
 					v.dateModified = moment(v.dateModified).fromNow();
 				});
 			});
+			console.log(response.data);
 			callback(response.data);
 		});
 	}
 	
-	factory.UpdateActiveSprint = function(sprintId, backlogId,callback){
+	factory.UpdateActiveSprint = function(sprintId, backlogId, backlogStatus, callback){
 		$http({
 			method: 'POST',
 			url: 'php/sprint/updateActiveSprint.php',
 			data:{
 				sprintId: sprintId,
 				backlogId : backlogId,
+				backlogStatus:backlogStatus,
 				dateModified : moment().format(),
 				projectKey : $routeParams.projectKey,
 			},

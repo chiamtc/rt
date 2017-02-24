@@ -26,7 +26,7 @@
 		<div class="sprintItem" ng-style="calculateStyle(itemActive)">
 			<div class="sprintItemHeader">
 			<div class="sprintItemHeaderTitle">
-				<h5> <a href=""  ng-click="toggle(itemActive)">{{itemActive.backlogTitle}} </a></h5>
+				<h5> <a href=""  ng-click="toggle(itemActive)">{{itemActive.backlogTitle}} </a><span class="badge" ng-if="itemActive.backlogStatus == 'Regressed'">{{itemActive.backlogStatus}}</span></h5>
 				<span class="minimize" data-toggle="tooltip" data-placement="bottom" title="Created Since">{{itemActive.dateCreated}}</span>
 				<span class="minimize" data-toggle="tooltip" data-placement="bottom" title="sprint Owner"><i class="glyphicon glyphicon-user"></i> {{itemActive.backlogCreator}}</span>
 			</div>
@@ -42,7 +42,7 @@
 	</ul>
 	<hr>
 </div>
-
+<br><br>
 <div ng-class="sprintListsClass" ng-repeat="sprint in sprintLists track by $index">
 	<div class="sprintListTop">
 		<div class="sprintListLeft">
@@ -64,7 +64,7 @@
 		<div class="sprintItem" ng-style="calculateStyle(item)">
 			<div class="sprintItemHeader">
 			<div class="sprintItemHeaderTitle">
-				<h5> <a href=""  ng-click="toggle(item)">{{item.backlogTitle}} </a></h5>
+				<h5> <a href=""  ng-click="toggle(item)">{{item.backlogTitle}} </a><span class="badge" ng-if="item.backlogStatus == 'Regressed'">{{item.backlogStatus}}</span></h5>
 				<span class="minimize" data-toggle="tooltip" data-placement="bottom" title="Created Since">{{item.dateCreated}}</span>
 				<span class="minimize" data-toggle="tooltip" data-placement="bottom" title="sprint Owner"><i class="glyphicon glyphicon-user"></i> {{item.backlogCreator}}</span>
 			</div>
