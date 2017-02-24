@@ -39,7 +39,7 @@ angular.module('backlog-details')
 		});
 	}
 	
-	factory.EditTask= function(taskTitle, taskDesc, taskId, backlogId,callback){
+	factory.EditTask= function(taskTitle, taskDesc, taskId, assignee,backlogId,callback){
 		$http({
 			method : 'POST',
 			url : 'php/backlog-details/editTask.php',
@@ -47,6 +47,7 @@ angular.module('backlog-details')
 				taskTitle:taskTitle,
 				taskDesc : taskDesc,
 				taskId : taskId,
+				assignee:assignee,
 				backlogId: backlogId,
 				date_modified : moment().format(),
 			},
@@ -71,13 +72,14 @@ angular.module('backlog-details')
 		});
 	}
 	
-	factory.CreateTask = function(taskTitle, taskDesc, backlogId,callback){
+	factory.CreateTask = function(taskTitle, taskDesc, assignee,backlogId,callback){
 		$http({
 			method : 'POST',
 			url : 'php/backlog-details/createTask.php',
 			data:{
 				taskTitle:taskTitle,
 				taskDesc:taskDesc,
+				assignee: assignee,
 				backlogId : backlogId,
 				date_created : moment().format(),
 				date_modified : moment().format(),

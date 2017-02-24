@@ -12,6 +12,7 @@ angular.module('task-details')
 		$scope.passTask = task;
 		$scope.taskDTitle = task.tasksTitle;
 		$scope.taskDDesc = task.tasksDesc;
+		$scope.taskDAssignee = task.assignee;
 		
 		$scope.taskDStatus = task.tasksStatus;
 		TaskDetailsService.ListTaskComments($scope.passTask.tasksId,function(response){
@@ -63,8 +64,10 @@ angular.module('task-details')
 	}
 	
 	$scope.retain = function(){
-		$scope.taskDTitle = $scope.task.taskDTitle;
-		$scope.taskDDesc = $scope.task.backlogDesc;
+		
+		$scope.taskDTitle = $scope.passTask.tasksTitle;
+		$scope.taskDDesc = $scope.passTask.tasksDesc;
+		$scope.taskDAssignee = $scope.passTask.assignee;
 	}
 	
 	$scope.commentTask= function(){
@@ -108,6 +111,34 @@ angular.module('task-details')
 			}
 		});
 	}
+	
+	$scope.updateAssignee= function(){
+		TaskDetailsService.UpdateTaskAssignee($scope.taskDAssignee, $scope.passTask.tasksId, $scope.passTask.backlogId, function(response){
+			switch(response.success){
+				case 1:
+					$scope.snackbarShow = !$scope.snackbarShow;
+					$scope.snackbarClass= "alert alert-success alert-dismissible snackbar";
+					$scope.snackbarMessage = "Task Assignee Updated ! ";
+					$scope.passTask.assignee = $scope.taskDAssignee; // two-way binding in parameter
+					$scope.passTask.dateModified = moment().fromNow();
+					
+					$timeout(function(){
+						$scope.snackbarShow = !$scope.snackbarShow;
+					},5000);
+				break;
+				
+				case 0:
+					$scope.snackbarShow = !$scope.snackbarShow;
+					$scope.snackbarClass= "alert alert-danger alert-dismissible snackbar";
+					$scope.snackbarMessage = "Something is wrong! :X ";
+					$timeout(function(){
+						$scope.snackbarShow = !$scope.snackbarShow;
+					},5000);
+				break;
+			}
+		});
+	}
+	
 	
 	$scope.updateTaskDesc = function(){
 		TaskDetailsService.UpdateTaskDesc($scope.taskDDesc, $scope.passTask.tasksId, $scope.passTask.backlogId, function(response){

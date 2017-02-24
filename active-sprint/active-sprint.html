@@ -4,7 +4,7 @@
 <div class="col-md-12" id="tasks" ng-style="borderBottom(colSize)">
 	<div ng-class="colSize? 'col-md-9':'col-md-12'">
 
-		<div ng-show="emptyActiveSprintResponse" ng-class="emptyActiveSprintResponseClass" style="margin-top:10px"role="alert">
+		<div ng-show="emptyActiveSprintResponse" class="emptyActiveSprint" role="alert">
 			{{emptyActiveSprintResponseMessage}}
 		</div> <!-- empty sprint response -->
 
@@ -63,8 +63,8 @@
 				
 				<div class="col-md-3 eachTask">
 				<span class="minimizeTitle">To-do</span>
-					<ul class="nav nav-pills nav-stacked toDoList dropPlace2"  data-drop="{{droppable}}" data-jqyoui-options="{ greedy:true}" ng-model="backlog.tasks" jqyoui-droppable="{multiple:true, onDrop:'dropCallback4(backlog)' , onOver:'onOverCallback(backlog.backlogId)' } ">
-						<li ng-repeat="eachTask in backlog.tasks |  filter : {tasksStatus: 'To-do'}" data-drag="true" data-jqyoui-options="{revert:'invalid'}"   ng-model="backlog.tasks" jqyoui-draggable="{index: {{$index}},animate:true, onStart:'startCallback4(eachTask, backlog.backlogId)', onDrag:'onDragCallback(backlog.backlogId)' }">
+					<ul class="nav nav-pills nav-stacked toDoList dropPlace2"  data-drop="{{droppable}}" data-jqyoui-options="{ greedy:true}" ng-model="backlog.tasks" jqyoui-droppable="{multiple:true, onDrop:'dropCallback4(backlog)'} ">
+						<li ng-repeat="eachTask in backlog.tasks |  filter : {tasksStatus: 'To-do'}" data-drag="true" data-jqyoui-options="{revert:'invalid'}"   ng-model="backlog.tasks" jqyoui-draggable="{index: {{$index}},animate:true, onStart:'startCallback4(eachTask, backlog.backlogId)'}">
 						<div class="toDoItem">
 							<h6><a href="" ng-click="toggle(eachTask)">{{eachTask.tasksTitle}}</a>  <span class="badge">{{eachTask.tasksStatus}}</span></h6>
 							
@@ -75,8 +75,8 @@
 				
 				<div class="col-md-3 eachTask">
 				<span class="minimizeTitle">In-Progress</span>
-					<ul class="nav nav-pills nav-stacked toDoList dropPlace2" data-drop="{{droppable}}"  data-jqyoui-options="{ greedy:true}" ng-model="backlog.tasks" jqyoui-droppable="{multiple:true, onDrop:'dropCallback5(backlog.backlogId)' , onOver:'onOverCallback(backlog.backlogId)' }" >
-						<li ng-repeat="eachTask in backlog.tasks |  filter : {tasksStatus: 'In-Progress'}" data-drag="true" data-jqyoui-options="{revert:'invalid'}"   ng-model="backlog.tasks" jqyoui-draggable="{index: {{$index}},animate:true, onStart:'startCallback4(eachTask, backlog.backlogId)', onDrag:'onDragCallback(backlog.backlogId)'  }">
+					<ul class="nav nav-pills nav-stacked toDoList dropPlace2" data-drop="{{droppable}}"  data-jqyoui-options="{ greedy:true}" ng-model="backlog.tasks" jqyoui-droppable="{multiple:true, onDrop:'dropCallback5(backlog.backlogId)'}" >
+						<li ng-repeat="eachTask in backlog.tasks |  filter : {tasksStatus: 'In-Progress'}" data-drag="true" data-jqyoui-options="{revert:'invalid'}"   ng-model="backlog.tasks" jqyoui-draggable="{index: {{$index}},animate:true, onStart:'startCallback4(eachTask, backlog.backlogId)'}">
 						<div class="toDoItem">
 							<h6><a href="" ng-click="toggle(eachTask)">{{eachTask.tasksTitle}}</a>  <span class="badge">{{eachTask.tasksStatus}}</span></h6>
 						</div>
@@ -86,8 +86,8 @@
 						
 				<div class="col-md-3 eachTask">
 				<span class="minimizeTitle">Done</span>
-					<ul class="nav nav-pills nav-stacked toDoList dropPlace2" data-drop="{{droppable}}"  data-jqyoui-options="{ greedy:true}" ng-model="backlog.tasks" jqyoui-droppable="{multiple:true, onDrop:'dropCallback6(backlog.backlogId)', onOver:'onOverCallback(backlog.backlogId)' }" >
-						<li ng-repeat="eachTask in backlog.tasks |  filter : {tasksStatus: 'Done'}" data-drag="true" data-jqyoui-options="{revert:'invalid'}"   ng-model="backlog.tasks" jqyoui-draggable="{index: {{$index}},animate:true, onStart:'startCallback4(eachTask, backlog.backlogId)', onDrag:'onDragCallback(backlog.backlogId)' }">
+					<ul class="nav nav-pills nav-stacked toDoList dropPlace2" data-drop="{{droppable}}"  data-jqyoui-options="{ greedy:true}" ng-model="backlog.tasks" jqyoui-droppable="{multiple:true, onDrop:'dropCallback6(backlog.backlogId)'}" >
+						<li ng-repeat="eachTask in backlog.tasks |  filter : {tasksStatus: 'Done'}" data-drag="true" data-jqyoui-options="{revert:'invalid'}"   ng-model="backlog.tasks" jqyoui-draggable="{index: {{$index}},animate:true, onStart:'startCallback4(eachTask, backlog.backlogId)'}">
 						<div class="toDoItem">
 							<h6><a href="" ng-click="toggle(eachTask)"><strike ng-if="eachTask.tasksStatus =='Done'">{{eachTask.tasksTitle}}</strike></a>  <span class="badge">{{eachTask.tasksStatus}}</span></h6>
 						</div>

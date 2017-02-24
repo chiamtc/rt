@@ -22,7 +22,7 @@
 				<label class="col-sm-2 detailLabel">Type</label>
 				<div class="col-sm-10">
 					<select class="form-control" ng-model="backlogDType">	
-						<option ng-selected="backlogType.typeName == passBacklog.backlogType" ng-repeat="backlogType in backlogCreateTypes" >{{backlogType.typeName}}</option>
+						<option ng-selected="backlogDType.typeName == passBacklog.backlogType" ng-repeat="backlogType in backlogCreateTypes" >{{backlogType.typeName}}</option>
 					</select>
 					
 					<div class="btn-group quickEdit" role="group">
@@ -51,8 +51,8 @@
 		<div class="form-group">
 			<label class="col-sm-2 detailLabel">Priority</label>
 			<div class="col-sm-10">
-				<select class="form-control" ng-model="backlogDPriority">	
-					<option ng-selected="backlogPriority.name == passBacklog.backlogPriority" ng-repeat="backlogPriority in backlogPriorities" >{{backlogPriority.name}}</option>
+				<select class="form-control" ng-model="backlogDPriority">
+					<option ng-selected="backlogDPriority.name == passBacklog.backlogPriority" ng-repeat="backlogPriority in backlogPriorities" >{{backlogPriority.name}}</option>
 				</select>
 					
 				<div class="btn-group quickEdit" role="group">
@@ -106,16 +106,28 @@
 		</div>
 			<div class="taskItem" ng-repeat="task in taskLists">
 				<div class="taskItemHeader">
-					<span class="taskItemTitle" ng-style="taskLabelling(task.tasksStatus)">{{task.tasksTitle}}</span><span ng-class="labelling(task.tasksStatus)">{{task.tasksStatus}}</span>
+					<div class="taskInfo">
+						<span class="taskItemTitle" ng-style="taskLabelling(task.tasksStatus)">{{task.tasksTitle}} </span><span ng-class="labelling(task.tasksStatus)">{{task.tasksStatus}}</span>
+						
+						<div class="taskInfoDetails">
+							<span class="minimize"> <span ng-if="task.assignee != 'Unassigned'"> Assigned to:</span> {{task.assignee}}</span>
+						</div>
+					</div>
+					
+					<div class="dropdown taskOptions">
+						<i data-toggle="dropdown" id="dropdown" class="glyphicon glyphicon-menu-hamburger white" role="button" style="font-weight:bold"></i>
+						<ul class="dropdown-menu dropdown-menu-right">
+							<li><a href="" ng-click="passEditTask(task)" data-toggle="modal" data-target="#taskEditModal"><i class="glyphicon glyphicon-edit"></i>Edit 
+							Task</a></li>
+							<li><a href="" ng-click="passDeleteTask(task)" data-toggle="modal" data-target="#taskDeleteModal"><i class="glyphicon glyphicon-remove"></i> Delete Task</a></li>
+						</ul>
+					</div>
+					
+					
 				</div>
-				<div class="dropdown taskOptions">
-					<i data-toggle="dropdown" id="dropdown" class="glyphicon glyphicon-menu-hamburger white" role="button" style="font-weight:bold"></i>
-					<ul class="dropdown-menu dropdown-menu-right">
-						<li><a href="" ng-click="passEditTask(task)" data-toggle="modal" data-target="#taskEditModal"><i class="glyphicon glyphicon-edit"></i>Edit 
-						Task</a></li>
-						<li><a href="" ng-click="passDeleteTask(task)" data-toggle="modal" data-target="#taskDeleteModal"><i class="glyphicon glyphicon-remove"></i> Delete Task</a></li>
-					</ul>
-				</div>
+				
+				
+				
 			</div>
 		<hr>
 		<h5 class="detailHeader">Comments </h5>
@@ -167,7 +179,7 @@
 				<form id="createTaskForm" name="taskForm" class="form-group">
 					<div class="form-group">
 						<label>Task Title</label>
-						<input ng-model="taskCreateTitle" type="text" class="form-control" name="taskTitle" required placeholder="Task Title">
+						<input ng-model="taskCreateTitle" type="text" class="form-control" name="taskCreateTitle" id="taskCreateTitle" required placeholder="Task Title">
 					
 						<div ng-messages="taskForm.taskTitle.$error" ng-if="taskForm.taskTitle.$touched">
 							<div ng-message="required" class="alert alert-danger alert-dismissible" role="alert">
@@ -181,6 +193,15 @@
 						<label>Task Description</label>
 						<textarea ng-model="taskCreateDesc" class="form-control" rows="4" placeholder="Task Description"></textarea>
 					</div>
+					
+					<div class="form-group">
+						<label>Assignees</label>
+							<select class="form-control" ng-model="taskCreateAssignees">
+								<option value="" selected="selected">Unassigned</option>
+								<option ng-repeat="user in userLists" >{{user.email}}</option>
+							</select>
+					</div>
+					
 				</form>
 
 				<div ng-show="createTaskResponse" ng-class="createTaskResponseClass" role="alert">
@@ -224,6 +245,14 @@
 					<div class="form-group">
 						<label>Task Description</label>
 						<textarea ng-model="taskEditDesc" class="form-control" rows="4" placeholder="Task Description"></textarea>
+					</div>
+					
+					<div class="form-group">
+						<label>Assignees</label>
+						<select class="form-control" ng-model="taskEditAssignee">
+							<option value="Unassigned">Unassigned</option>
+							<option ng-selected="taskEditAssignee == user.email" ng-repeat="user in userLists" >{{user.email}}</option>
+						</select>
 					</div>
 				</form>
 				

@@ -35,6 +35,22 @@ angular.module('task-details')
 		});
 	}
 	
+	factory.UpdateTaskAssignee = function(assignee, tasksId, backlogId,callback){
+		$http({
+			method: 'POST',
+			url : 'php/task-details/updateAssignee.php',
+			data:{
+				tasksId:tasksId,
+				assignee:assignee,
+				backlogId:backlogId,
+				dateModified : moment().format(),
+			},
+			headers : { 'Content-Type' : 'application/json'}
+		}).then(function(response){
+			callback(response.data);
+		});
+	}
+	
 	factory.UpdateTaskDesc = function(taskDesc, taskId, backlogId, callback){
 		$http({
 			method: 'POST',

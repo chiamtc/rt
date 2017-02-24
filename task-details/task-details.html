@@ -36,6 +36,25 @@
 				</div>
 			
 				<hr>
+				
+				<h5 class="detailHeader">People</h5>				
+				<div class="form-group">
+					<label class="col-sm-2 detailLabel">Assignees</label>
+					<div class="col-sm-10">
+						<select class="form-control" ng-model="taskDAssignee">
+							<option value="Unassigned">Unassigned</option>
+							<option ng-selected="taskDAssignee == user.email" ng-repeat="user in userLists" >{{user.email}}</option>
+						</select>
+						
+						<div class="btn-group quickEdit" role="group">
+								<button type="button" class="close" data-toggle="tooltip" ng-click="retain()" data-placement="bottom" title="Retain Title" style="padding-right:5px"><small><i class="glyphicon glyphicon-remove"></i></small></button>
+								<button type="button" class="close" data-toggle="tooltip" ng-click="updateAssignee()" data-placement="bottom" title="Update Title" style="padding-right:10px"><small><i class="glyphicon glyphicon-ok"></i></small></button>
+							</div>
+					</div>
+				</div>
+				
+				<hr>
+				
 				<h5 class="detailHeader">Dates </h5>
 					<div class="form-group">
 						<label class="col-sm-4 detailLabel">Created on</label>

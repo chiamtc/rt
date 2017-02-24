@@ -54,6 +54,7 @@ if(!empty($projectKey)){
 								$task["tasksTitle"] = $rowTask["tasksTitle"];
 								$task["tasksDesc"] = $rowTask["tasksDescription"];
 								$task["tasksStatus"] = $rowTask["tasksStatus"];
+								$task["assignee"] = $rowTask["assignee"];
 								$task["dateCreated"] = $rowTask["date_created"];
 								$task["dateModified"] = $rowTask["date_modified"];
 								$task["backlogId"] = $rowTask["backlogId"];

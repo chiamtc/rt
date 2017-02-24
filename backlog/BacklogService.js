@@ -23,7 +23,7 @@ angular.module('backlog')
 			headers :{ 'Content-Type' : 'application/json' }
 		}).then(function(response){
 			console.log(response.data);
-			angular.forEach(response.data.backlog, function(value, key){
+			angular.forEach(response.data.backlogs, function(value, key){
 				
 				value.dateCreated = moment(value.dateCreated).fromNow();
 				value.dateModified =  moment(value.dateModified).fromNow();

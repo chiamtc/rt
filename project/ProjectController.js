@@ -1,9 +1,9 @@
 'use strict';
 angular.module('project')
 
-.controller('ProjectController', ['$scope','$cookies','$routeParams',function($scope,$cookies, $routeParams){
+.controller('ProjectController', ['$scope','$cookies','$routeParams','ProjectService',function($scope,$cookies, $routeParams, ProjectService){
 	$scope.colSize = false;
-	
+	$scope.userLists = [];
 
 	$scope.close = function(){
 		$scope.colSize = false;
@@ -31,6 +31,18 @@ angular.module('project')
 		}
 	}
 	
+	ProjectService.ListUsers($routeParams.projectKey, function(response){
+		switch(response.success){
+			case 0:
+				$scope.userLists = [];
+			break;
+			
+			case 1:
+				$scope.userLists = response.users;
+			break;
+		}
+	});
+	
 	$scope.labelling = function(tasksStatus){
 		var labelStatus = tasksStatus;
 		if(labelStatus =='To-do'){
@@ -47,6 +59,8 @@ angular.module('project')
 		var labelStatus = tasksStatus;
 		if(labelStatus =='Done'){
 			return {'text-decoration':'line-through'}
+		}else{
+			return {'text-decoration':'none'}
 		}
 	}
 	

@@ -2,7 +2,7 @@
 
 angular.module('active-sprint')
 
-.controller('ActiveSprintController',['$timeout','$scope','ActiveSprintService','$http', '$routeParams', '$cookies', function($timeout, $scope,ActiveSprintService,$http, $routeParams, $cookies){
+.controller('ActiveSprintController',['$timeout','$scope','ProjectService','ActiveSprintService','$http', '$routeParams', '$cookies', function($timeout, $scope,ProjectService, ActiveSprintService,$http, $routeParams, $cookies){
 	/** fancy starts **/
 	NProgress.start();
 	NProgress.done();
@@ -11,6 +11,7 @@ angular.module('active-sprint')
 	$scope.backlogActive = [];
 	$scope.taskActive =[];
 	$scope.activeSprint = [];
+	$scope.userLists = [];
 	$scope.colSize = false;
 	$scope.emptyActiveSprintResponse = false;
 	$scope.snackbarShow = false;
@@ -39,6 +40,18 @@ angular.module('active-sprint')
 		}
 	}
 	
+	ProjectService.ListUsers($routeParams.projectKey, function(response){
+		switch(response.success){
+			case 0:
+				$scope.userLists = [];
+			break;
+			
+			case 1:
+				$scope.userLists = response.users;
+			break;
+		}
+	});
+	
 	$scope.completeSprint = function(){
 		ActiveSprintService.CompleteSprint($routeParams.projectKey, function(response){
 			$scope.backlogActive = [];
@@ -50,7 +63,7 @@ angular.module('active-sprint')
 						switch(response.success){
 							case 0:
 								$scope.emptyActiveSprintResponse = !$scope.emptyActiveSprintResponse;
-								$scope.emptyActiveSprintResponseClass = "alert alert-info";
+								
 								$scope.emptyActiveSprintResponseMessage ="You currently do not have any active sprint!";
 								
 								$scope.snackbarShow = !$scope.snackbarShow;
@@ -73,21 +86,6 @@ angular.module('active-sprint')
 		$scope.draggedId = bid;
 		$scope.draggedTitle= sc2;
 	};
-	
-	$scope.onOverCallback = function(event,ui,bid){
-		console.log(bid);
-		if(bid != $scope.draggedId){
-			$(".dropPlace2").css("cursor","no-drop");
-		}
-	}
-	
-	$scope.onDragCallback = function(event,ui,bid){
-		console.log(bid);
-		if(bid != $scope.draggedId){
-			$(".dropPlace2").css("cursor","no-drop");
-		}
-	}
-	
 	
 	$scope.dropCallback4 = function(event, ui, item) {
 		console.log("Tasks title: " + $scope.draggedTitle.tasksTitle+ " status:" +$scope.draggedTitle.tasksStatus + " and "+ item.backlogId); 
@@ -273,7 +271,6 @@ angular.module('active-sprint')
 			
 			case 0:
 				$scope.emptyActiveSprintResponse = !$scope.emptyActiveSprintResponse;
-				$scope.emptyActiveSprintResponseClass = "alert alert-info";
 				$scope.emptyActiveSprintResponseMessage ="You currently do not have any active sprint!";
 			break;
 		}
