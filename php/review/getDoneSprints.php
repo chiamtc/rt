@@ -8,10 +8,10 @@ $projectKey = mysqli_real_escape_string($conn, $projectKey);
 $response = array();
 if(!empty($projectKey)){
 	//$getSprintSql = "SELECT * FROM `sprint` s left join `backlog` b on s.sprintId = b.sprintId where s.projectKey = '$projectKey'";
-	$getSprintSql = "Select * from `sprint` where `projectKey` = '$projectKey' AND `sprintStatus` = 'Active'";
+	$getSprintSql = "Select * from `sprint` where `projectKey` = '$projectKey' AND `sprintStatus` = 'Done' ";
 	$resultGetSprint = $conn ->query($getSprintSql);
 	if($resultGetSprint -> num_rows > 0){
-		$response["activeSprints"] = array();
+		$response["doneSprints"] = array();
 		$sprint = array();
 		while($rowGetSprint = $resultGetSprint -> fetch_assoc()){
 			$sprint["sprintId"] = $rowGetSprint["sprintId"];
@@ -19,10 +19,9 @@ if(!empty($projectKey)){
  			$sprint["sprintGoal"] = $rowGetSprint["sprintGoal"];
 			$sprint["sprintStartDate"] = $rowGetSprint["sprintStartDate"];
 			$sprint["sprintEndDate"] = $rowGetSprint["sprintEndDate"];
-			
-			$getSprintBacklogSql = "Select * from `backlog` where `sprintId` =". $sprint["sprintId"]. ";";
+			$getSprintBacklogSql = "Select * from `backlog` where `backlogStatus` != 'Accepted' AND `backlogStatus` != 'Rejected' AND `sprintId` =". $sprint["sprintId"];
 			$resultsBacklogSprint = $conn ->query($getSprintBacklogSql);
-			$sprint["backlogs"] = array();
+			$sprint["doneBacklogs"] = array();
 			$backlog = array();
 			if($resultsBacklogSprint -> num_rows > 0){
 				
@@ -38,18 +37,10 @@ if(!empty($projectKey)){
 					$backlog["dateModified"] = $rowBacklogSprint["date_modified"];
 					$backlog["backlogCreator"] = $rowBacklogSprint["backlogCreator"];
 					$backlog["backlogStatus"] = $rowBacklogSprint["backlogStatus"];
-					$backlog["drag"] =true;
-					array_push($sprint["backlogs"], $backlog);
+					array_push($sprint["doneBacklogs"], $backlog);
 				}
-			}else{
-				$backlog["backlogTitle"] = "Drag a backlog here !";
-				$backlog["backlogPriority"] = "Unknown";
-				$backlog["backlogStoryPoint"] = 0;
-				$backlog["backlogType"] = "Not even created";
-				$backlog["drag"] = false;
-				array_push($sprint["backlogs"], $backlog);
 			}
-			array_push($response["activeSprints"], $sprint);
+			array_push($response["doneSprints"], $sprint);
 		}
 		$response["success"] = 1;
 		echo json_encode($response);

@@ -9,7 +9,7 @@
 	<div class="sprintListTop">
 		<div>
 			<span>Active Sprint </span>
-			<span class="badge">{{sprintActive.backlogs.length}} issues</span>
+			<span class="badge">{{sprintActive.backlogs.length}} issues /  {{sprintListsActive.backlogTotalPoint}} Total SP</span>
 		</div>
 		<div class="sprintListRight">
 			<div class="dropdown">
@@ -42,7 +42,7 @@
 	</ul>
 	<hr>
 </div>
-<br><br>
+
 <div ng-class="sprintListsClass" ng-repeat="sprint in sprintLists track by $index">
 	<div class="sprintListTop">
 		<div class="sprintListLeft">
@@ -186,7 +186,7 @@
 					
 					<div class="form-group">
 						<label>Sprint Goal</label>
-						<textarea ng-model="sprintGoal" class="form-control" rows="4" placeholder="Sprint Goal Description"></textarea>
+						<textarea ng-model="sprintGoal" class="form-control" rows="4" placeholder="List goals/user stories/epics to achieve in this sprint"></textarea>
 					</div>
 					
 					<div class="form-group">
@@ -222,7 +222,7 @@
 					</div>
 					
 				</form>
-
+				
 				<div ng-show="createSprintResponse" ng-class="createSprintResponseClass" role="alert">
 					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 							{{createSprintResponseMessage}}

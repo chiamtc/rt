@@ -1,0 +1,46 @@
+<project-header></project-header>
+<side-bar></side-bar>
+
+<div id="main3">
+	<div class="col-md-12" id="md12">
+	
+	<div ng-show="emptySprintReviewResponse" class="emptyActiveSprint" role="alert">
+		{{emptySprintReviewResponseMessage}}
+	</div> <!-- empty sprint response -->
+	<div class="panel-group"  id="accordion-group" role="tablist" aria-multiselectable="true">
+		<div class="panel panel-info" ng-show="doneSprint.doneBacklogs.length" ng-repeat="doneSprint in sprintListsDone track by $index">
+			<div class="panel-heading" role="tab" id="headingOne">
+				<h4 class="panel-title">
+				<span role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{$index}}" aria-expanded="true" aria-controls="collapseOne">
+				Done Sprint {{$index + 1}} -  <span class="minimize"> {{doneSprint.sprintStartDate}}  - {{doneSprint.sprintEndDate}}</span>
+					<span class="badge" style="background-color:#777;color:white">{{doneSprint.doneBacklogs.backlogTotalPoint}} Total SP in {{doneSprint.doneBacklogs.length}} Backlogs </span>
+					</span>
+				  </h4>
+				</div>
+				<div id="collapse{{$index}}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+				<div class="panel-body" ng-repeat="doneBacklog in doneSprint.doneBacklogs">
+					<div class="backlogDone">
+						<div class="backlogDoneDetails">
+							
+							<span class="c-label">{{doneBacklog.backlogTitle}} - {{doneBacklog.backlogStoryPoint}} SP <span class="badge">{{doneBacklog.backlogType}}</span></span>
+							<h6><textarea class="form-control" readonly rows="4">{{doneBacklog.backlogDesc}}</textarea></h6>
+						</div>
+						
+						<div class="backlogDoneDecision">
+							
+							<h6><textarea class="form-control" rows="4" placeholder="Notes/Comments for this backlog"></textarea></h6>
+							<button class="btn btn-success" ng-click="acceptBacklog(doneBacklog.backlogId,doneSprint.sprintId)"><i class="glyphicon glyphicon-ok" ></i> Accept </button>
+							<button class="btn btn-danger" ng-click="rejectBacklog(doneBacklog.backlogId, doneSprint.sprintId)"><i class="glyphicon glyphicon-remove"></i> Reject </button>
+						</div>
+					</div>
+				</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- alert alert-success alert-dismissible snackbar -->
+	<div ng-show="snackbarShow" ng-class="snackbarClass" role="alert">
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		{{snackbarMessage}}
+	</div>
+</div>

@@ -40,6 +40,18 @@ angular.module('active-sprint')
 		}
 	}
 	
+	$scope.labelling = function(tasksStatus){
+		var labelStatus = tasksStatus;
+		if(labelStatus =='To-do'){
+			return 'label label-info';
+			
+		}else if(labelStatus == 'In-Progress'){
+			return 'label label-warning';
+		}else if(labelStatus == 'Done'){
+			return 'label label-success';
+		}
+	}
+	
 	ProjectService.ListUsers($routeParams.projectKey, function(response){
 		switch(response.success){
 			case 0:
@@ -63,9 +75,7 @@ angular.module('active-sprint')
 						switch(response.success){
 							case 0:
 								$scope.emptyActiveSprintResponse = !$scope.emptyActiveSprintResponse;
-								
 								$scope.emptyActiveSprintResponseMessage ="You currently do not have any active sprint!";
-								
 								$scope.snackbarShow = !$scope.snackbarShow;
 								$scope.snackbarClass= "alert alert-success alert-dismissible snackbar";
 								$scope.snackbarMessage = "Sprint Completed! ";

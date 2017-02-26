@@ -218,6 +218,7 @@ angular.module('sprint')
 			case 1:
 				$scope.sprintListsClass="sprintLists";
 				$scope.sprintLists = response.sprints;
+				
 			break;
 			case 0:
 				$scope.sprintListsClass = "sprintLists";
@@ -231,6 +232,7 @@ angular.module('sprint')
 			case 1:
 				$scope.sprintListsClass="sprintLists";
 				$scope.sprintListsActive = response.activeSprints;
+				console.log(response.activeSprints);
 			break;
 			
 			case 0:

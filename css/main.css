@@ -291,6 +291,7 @@ textarea{
 }
 
 .backlogItemHeaderTitle{
+	
 	width:70%;
 }
 
@@ -323,6 +324,7 @@ textarea{
 .white{
 	color:#ccc;
 }
+
 
 /** sprint **/
 #sprint{
@@ -381,20 +383,13 @@ textarea{
 }
 
 .sprintListRight{
+	display:flex;
 	white-space: nowrap;
 	text-align:left;
 	flex-wrap: wrap;
-	margin-left:50px;
-	
+	margin:5px;
 }
 
-.sprintListRight{
-	white-space: nowrap;
-	text-align:right;
-	flex-wrap: wrap;
-	margin-left:50px;
-	
-}
 
 .sprintLists> ul >li{
 	background-color:#fff
@@ -454,6 +449,7 @@ textarea{
 	padding-left:0px;
 	padding-right:0px;
 	box-sizing:border-box;
+	height:auto;
 	border-left: 1px solid #dad8de;
 }
 
@@ -655,11 +651,18 @@ However, delay the fade out process for 2.5 seconds */
 
 .toDoItem{
 	border:1px solid #ccc;
-	padding:5px;
+	padding-left:5px;
+	padding-right:5px;
+	padding-bottom:5px;
 	margin:5px;
 	border-radius:5px;
 	line-height:50px;
+	text-spacing:2px;
 	background-color:white;
+}
+
+.toDoItem:hover{
+	background-color:#f4f4f4;
 }
 
 .dropPlace2{
@@ -668,23 +671,17 @@ However, delay the fade out process for 2.5 seconds */
 	border-radius :5px;
 }
 
-.dropPlace2:hover{
-	background-color:#ccc;
-}
-
-
 #task-details{
 	padding-left:0px;
 	padding-right:0px;
 	box-sizing:border-box;
+	height:auto;
 	border-left: 1px solid #dad8de;
 }
 
 @media screen and (max-width: 991px) {
 	#task-details{border-left:0px;}
 }
-
-
 
 #tasks{
 	padding-left:0px;
@@ -696,7 +693,6 @@ However, delay the fade out process for 2.5 seconds */
 	position:relative;
 	padding-top:2px;
 	padding-bottom:5px;
-	
 }
 
 .progress{
@@ -818,4 +814,53 @@ fieldset[disabled] .form-control {
 .emptyActiveSprint{
 	margin-top:20%;
 	text-align:center;
+}
+
+.label{
+	font-size:11px;
+	border-radius:10px;
+}
+
+.badge{
+	padding:4px 7px;
+}
+
+#taskLabelling{
+	font-size:12px;
+	padding:4px 7px;
+	
+}
+
+#main3{
+	padding: 15px;
+	z-index:1;
+	background-color:#f1f1f1;
+	margin-left:150px;
+}
+
+.backlogDone{
+	width:100%;
+	display:flex;
+	space-between:justify-content;
+}
+
+.backlogDoneDetails{
+	width:100%;
+	text-align:left;
+	padding:5px;
+	padding-right:20px;
+}
+
+.c-label{
+	display:inline-block;
+}
+
+.backlogDoneDecision{
+	border-left:1px solid #ccc;
+	width:100%;
+	padding:20px;
+	padding-top:0px;
+	display:inline-block;
+	position:relative;
+	space-between:justify-content;
 }

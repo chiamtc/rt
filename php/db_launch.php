@@ -177,5 +177,18 @@ if($conn -> query($sqltbl12)){
     echo "tbl tasks comment failed to create<br>";
 }
 
+$sqltbl13 = "create table review(
+			reviewId int not null AUTO_INCREMENT,
+			review text,
+			sprintId int not null,
+			PRIMARY KEY (reviewId, tasksId),
+			FOREIGN KEY(tasksId) REFERENCES tasks(tasksId)
+			)";
+			
+if($conn -> query($sqltbl13)){
+    echo "tbl review comment created<br>";
+}else{
+    echo "tbl review comment failed to create<br>";
+}
 $conn->close();
 ?>

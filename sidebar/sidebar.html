@@ -8,6 +8,10 @@
 		<a href="#/active-sprint/{{pathParams}}"><i class="glyphicon glyphicon-tasks"></i> Sprint </a>
 		</li>
 		
+		<li ng-class="isCurrent('/review/{{pathParams}}')">
+		<a href="#/review/{{pathParams}}"><i class="glyphicon glyphicon-eye-open"></i> Review </a>
+		</li>
+		
 		<li ng-class="isCurrent('/tasks')">
 		<a href="#/tasks"><i class="glyphicon glyphicon-flag"></i> Issues </a>
 		</li>

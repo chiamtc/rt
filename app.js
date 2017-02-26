@@ -11,7 +11,9 @@ angular.module('sprint',[]);
 angular.module('backlog-details',[]);
 angular.module('active-sprint',[]);
 angular.module('task-details',[]),
-angular.module('reApp',['header','login','home','register','project','sidebar','backlog','sprint','backlog-details','active-sprint','task-details','ngDragDrop','ngRoute','ngCookies', 'ngMessages'])
+angular.module('review',[]),
+
+angular.module('reApp',['header','login','home','register','project','sidebar','backlog','sprint','backlog-details','active-sprint','task-details','review','ngDragDrop','ngRoute','ngCookies', 'ngMessages'])
 
 .config(['$routeProvider', function($routeProvider){
 	$routeProvider
@@ -37,6 +39,11 @@ angular.module('reApp',['header','login','home','register','project','sidebar','
 	.when('/active-sprint/:projectKey/:projectSeo',{
 		controller : 'ActiveSprintController',
 		templateUrl:'active-sprint/active-sprint.html'
+	})
+	
+	.when('/review/:projectKey/:projectSeo',{
+		controller:'ReviewController',
+		templateUrl:'review/review.html'
 	})
 	
 	.otherwise({

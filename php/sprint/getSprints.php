@@ -6,7 +6,6 @@ $projectKey = $data -> projectKey;
 $projectKey = mysqli_real_escape_string($conn, $projectKey);
 
 $response = array();
-$response["found"] = false;
 if(!empty($projectKey)){
 	//$getSprintSql = "SELECT * FROM `sprint` s left join `backlog` b on s.sprintId = b.sprintId where s.projectKey = '$projectKey'";
 	$getSprintSql = "Select * from `sprint` where `projectKey` = '$projectKey' AND `sprintStatus` = 'Created' ";
@@ -20,9 +19,7 @@ if(!empty($projectKey)){
  			$sprint["sprintGoal"] = $rowGetSprint["sprintGoal"];
 			$sprint["sprintStartDate"] = $rowGetSprint["sprintStartDate"];
 			$sprint["sprintEndDate"] = $rowGetSprint["sprintEndDate"];
-			if($sprint["sprintStatus"] == 'Active'){
-				$response["found"] = true;
-			}
+			
 			$getSprintBacklogSql = "Select * from `backlog` where `sprintId` =". $sprint["sprintId"]. ";";
 			$resultsBacklogSprint = $conn ->query($getSprintBacklogSql);
 			$sprint["backlogs"] = array();
@@ -47,7 +44,7 @@ if(!empty($projectKey)){
 			}else{
 				$backlog["backlogTitle"] = "Drag a backlog here :) !";
 				$backlog["backlogPriority"] = "Unknown";
-				$backlog["backlogStoryPoint"] = "-";
+				$backlog["backlogStoryPoint"] = 0;
 				$backlog["backlogType"] = "Not even created";
 				$backlog["drag"] = false;
 				array_push($sprint["backlogs"], $backlog);

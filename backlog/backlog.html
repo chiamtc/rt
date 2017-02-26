@@ -11,7 +11,7 @@
 		<div class="backlogItem" ng-style="calculateStyle(item)">
 			<div class="backlogItemHeader">
 			<div class="backlogItemHeaderTitle">
-				<h5> <a href=""  ng-click="toggle(item)" >{{item.backlogTitle}} </a> <span ng-if="item.backlogStatus == 'Regressed'" class="badge">{{item.backlogStatus}}</span></h5>
+				<h5> <a href=""  ng-click="toggle(item)" >{{item.backlogTitle}} </a> <span ng-if="item.backlogStatus == 'Regressed' || item.backlogStatus =='Rejected'" class="badge">{{item.backlogStatus}}</span></h5>
 				<span class="minimize" data-toggle="tooltip" data-placement="bottom" title="Created Since">{{item.dateCreated}}</span>
 				<span class="minimize" data-toggle="tooltip" data-placement="bottom" title="Backlog Owner"> - <i class="glyphicon glyphicon-user"></i> {{item.backlogCreator}}</span>
 			</div>
@@ -25,7 +25,6 @@
 		</div>
 		</li>
 	</ul>
-	
 </div>
 <hr>	
 <!-- Modal -->
@@ -61,7 +60,7 @@
 					
 					<div class="form-group">
 						<label>Backlog Description</label>
-						<textarea ng-model="backlogCreateDesc" class="form-control" rows="4" name="backlogDesc" placeholder="Backlog Description"></textarea>
+						<textarea ng-model="backlogCreateDesc" class="form-control" rows="4" name="backlogDesc" placeholder="Describe backlog's details and its acceptance criteria"></textarea>
 					</div>
 					
 					<div class="form-group">

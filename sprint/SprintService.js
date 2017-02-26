@@ -29,20 +29,23 @@ angular.module('sprint')
 	factory.ListActiveSprints= function(callback){
 		$http({
 			method: 'POST',
-			//url : 'php/sprint/getActiveSprint.php',
-			url :'php/backlog-details/test.php',
+			url : 'php/sprint/getActiveSprint.php',
 			data:{
 				projectKey : $routeParams.projectKey,
 			},
 			headers : { 'Content-Type' : 'application/json'}
 		}).then(function(response){
-			
+			var backlogTPoint = 0;
 			angular.forEach(response.data.activeSprints, function(value, key){
 				angular.forEach(value.backlogs, function(v,k){
 					v.dateCreated = moment(v.dateCreated).fromNow();
 					v.dateModified = moment(v.dateModified).fromNow();
+					
+					backlogTPoint = backlogTPoint+ parseInt(v.backlogStoryPoint);
 				});
+				response.data.activeSprints.backlogTotalPoint = backlogTPoint;
 			});
+			console.log(response.data);
 			callback(response.data);
 		});
 	}
