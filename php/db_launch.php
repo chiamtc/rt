@@ -186,9 +186,9 @@ $sqltbl13 = "create table review(
 			)";
 			
 if($conn -> query($sqltbl13)){
-    echo "tbl review comment created<br>";
+    echo "tbl review created<br>";
 }else{
-    echo "tbl review comment failed to create<br>";
+    echo "tbl review failed to create<br>";
 }
 $conn->close();
 ?>

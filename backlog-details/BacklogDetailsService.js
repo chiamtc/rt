@@ -22,6 +22,20 @@ angular.module('backlog-details')
 		});
 	}
 	
+	factory.ListAssignees = function(backlogId,callback){
+		$http({
+			method : 'POST',
+			url : 'php/backlog-details/getAssignees.php',
+			data:{
+				backlogId: backlogId,
+			},
+			headers: {'Content-Type':'application/json'}
+		}).then(function(response){
+			
+			callback(response.data);
+		});
+	}
+	
 	factory.DeleteTask = function(taskId,backlogId,callback){
 		$http({
 			method : 'POST',

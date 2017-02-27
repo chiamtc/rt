@@ -56,6 +56,20 @@ angular.module('backlog-details')
 					break;
 				}
 			});
+			
+			BacklogDetailsService.ListAssignees($scope.passBacklog.backlogId, function(response){
+				var assignees = "";
+				console.log(response);
+				angular.forEach(response.assignees,function(v,k){
+					//console.log(v);
+					if(response.assignees.length == k+1){
+						assignees += v + " (" + response.assignees.length + ")";
+					}else{
+						assignees += v + ", ";
+					}
+				});
+				$scope.backlogAssignee = assignees;
+			});
 		}
 	}
 	

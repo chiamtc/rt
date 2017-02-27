@@ -75,7 +75,7 @@ angular.module('active-sprint')
 						switch(response.success){
 							case 0:
 								$scope.emptyActiveSprintResponse = !$scope.emptyActiveSprintResponse;
-								$scope.emptyActiveSprintResponseMessage ="You currently do not have any active sprint!";
+								$scope.emptyActiveSprintResponseMessage ="You currently do not have any active sprint! Start a sprint from 'Sprint Backlog' by clicking 'Backlog' tab";
 								$scope.snackbarShow = !$scope.snackbarShow;
 								$scope.snackbarClass= "alert alert-success alert-dismissible snackbar";
 								$scope.snackbarMessage = "Sprint Completed! ";

@@ -15,7 +15,7 @@ angular.module('review')
 			
 			case 0:
 				$scope.emptySprintReviewResponse = !$scope.emptySprintReviewResponse;
-				$scope.emptySprintReviewResponseMessage = "You currently do not have any active sprint";
+				$scope.emptySprintReviewResponseMessage = "You currently do not have any active sprint to review. Complete a sprint in 'Sprint' tab";
 			break;
 		}
 	});
