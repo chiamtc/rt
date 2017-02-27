@@ -10,7 +10,13 @@ angular.module('review')
 	ReviewService.ListDoneSprints(function(response){
 		switch(response.success){
 			case 1:
-				$scope.sprintListsDone = response.doneSprints;
+				if(response.doneSprints.length == 0){
+					$scope.emptySprintReviewResponse = !$scope.emptySprintReviewResponse;
+					$scope.emptySprintReviewResponseMessage = "undone backlogs";
+				}else{
+					$scope.sprintListsDone = response.doneSprints;
+				}
+				
 			break;
 			
 			case 0:

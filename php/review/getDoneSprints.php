@@ -19,7 +19,7 @@ if(!empty($projectKey)){
  			$sprint["sprintGoal"] = $rowGetSprint["sprintGoal"];
 			$sprint["sprintStartDate"] = $rowGetSprint["sprintStartDate"];
 			$sprint["sprintEndDate"] = $rowGetSprint["sprintEndDate"];
-			$getSprintBacklogSql = "Select * from `backlog` where `backlogStatus` != 'Accepted' AND `backlogStatus` != 'Rejected' AND `sprintId` =". $sprint["sprintId"];
+			$getSprintBacklogSql = "Select * from `backlog` where `backlogStatus` ='Done' AND `sprintId` =". $sprint["sprintId"];
 			$resultsBacklogSprint = $conn ->query($getSprintBacklogSql);
 			$sprint["doneBacklogs"] = array();
 			$backlog = array();
@@ -39,8 +39,11 @@ if(!empty($projectKey)){
 					$backlog["backlogStatus"] = $rowBacklogSprint["backlogStatus"];
 					array_push($sprint["doneBacklogs"], $backlog);
 				}
-			}
-			array_push($response["doneSprints"], $sprint);
+				array_push($response["doneSprints"], $sprint);
+			}else{
+				$reviewSprintSql= "update `sprint` SET `sprintStatus` = 'Reviewed' where `projectKey` = '$projectKey' AND `sprintId` =".$sprint["sprintId"];
+				$resultReviewSprint = $conn ->query($reviewSprintSql);
+			}	
 		}
 		$response["success"] = 1;
 		echo json_encode($response);

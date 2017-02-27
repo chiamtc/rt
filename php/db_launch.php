@@ -177,7 +177,7 @@ if($conn -> query($sqltbl12)){
     echo "tbl tasks comment failed to create<br>";
 }
 
-$sqltbl13 = "create table review(
+/* $sqltbl13 = "create table review(
 			reviewId int not null AUTO_INCREMENT,
 			review text,
 			sprintId int not null,
@@ -189,6 +189,6 @@ if($conn -> query($sqltbl13)){
     echo "tbl review created<br>";
 }else{
     echo "tbl review failed to create<br>";
-}
+} */
 $conn->close();
 ?>

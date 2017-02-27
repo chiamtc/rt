@@ -9,7 +9,7 @@ $sprintId = mysqli_real_escape_string($conn, $sprintId);
 $response = array();
 if(!empty($projectKey) && !empty($sprintId)){
 	
-	$deleteBacklogFromSprintSql = "Update `backlog` SET `sprintId` = 0 , `backlogStatus` = 'Unassigned' where `sprintId` = $sprintId";
+	$deleteBacklogFromSprintSql = "Update `backlog` SET `sprintId` = 0 ,`backlogStatus` = CASE WHEN `backlogStatus` = 'Rejected' THEN 'Rejected' WHEN `backlogStatus` = 'Regressed' THEN 'Regressed' ELSE 'Unassigned' END where `sprintId` = $sprintId";
 	
 	if($conn ->query($deleteBacklogFromSprintSql)){
 		$deleteSprintSql = "delete from `sprint` where `sprintId` = $sprintId AND `projectKey` = '$projectKey'";

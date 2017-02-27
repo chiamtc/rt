@@ -10,7 +10,7 @@ if(!empty($projectKey)){
 	$editSprintSql = "Update `sprint` SET `sprintStatus` = 'Active' where `projectKey` = '$projectKey' AND `sprintId` = $sprintId";
 	if($conn -> query($editSprintSql)){
 		
-		$updateBacklogStatusSql = "update `backlog` SET `backlogStatus` = 'Assgined to active sprint' where `sprintId` = $sprintId AND `backlogStatus` != 'Regressed'";
+		$updateBacklogStatusSql = "update `backlog` SET `backlogStatus` = 'Assgined to active sprint' where `sprintId` = $sprintId AND `backlogStatus` != 'Regressed' AND `backlogStatus` != 'Rejected'";
 		if($conn ->query($updateBacklogStatusSql)){
 			$response["success"] = 1;
 			$response["message"] = "sprint started";
