@@ -177,18 +177,20 @@ if($conn -> query($sqltbl12)){
     echo "tbl tasks comment failed to create<br>";
 }
 
-/* $sqltbl13 = "create table review(
+$sqltbl13 = "create table review(
 			reviewId int not null AUTO_INCREMENT,
 			review text,
 			sprintId int not null,
-			PRIMARY KEY (reviewId, tasksId),
-			FOREIGN KEY(tasksId) REFERENCES tasks(tasksId)
+			backlogId int not null,
+			PRIMARY KEY (reviewId,sprintId, backlogId),
+			FOREIGN KEY(sprintId) REFERENCES sprint(sprintId)
+			FOREIGN KEY(backlogId) REFERENCES sprint(backlogId)
 			)";
 			
 if($conn -> query($sqltbl13)){
     echo "tbl review created<br>";
 }else{
     echo "tbl review failed to create<br>";
-} */
+}
 $conn->close();
 ?>

@@ -2,7 +2,7 @@
 
 angular.module('backlog')
 
-.factory('BacklogService', ['$http','$routeParams',function($http, $routeParams){
+.factory('BacklogService', ['$http','$filter','$routeParams',function($http, $filter,$routeParams){
 	var factory = {};
 	
 	factory.CreateBacklog = function(backlogName, backlogType, backlogDesc, backlogPriority, backlogStoryPoint, backlogCreator,callback){

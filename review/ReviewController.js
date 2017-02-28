@@ -3,9 +3,16 @@
 angular.module('review')
 
 .controller('ReviewController',['$scope', '$timeout','$routeParams', '$cookies','ReviewService', function($scope, $timeout,$routeParams, $cookies,ReviewService){
-	$scope.emptySprintReviewResponse = false;
-	$scope.sprintListsDone = [];
 	
+	/** fancy starts **/
+	NProgress.start();
+	NProgress.done();
+	
+	/** UI binding(s)**/
+	$scope.emptySprintReviewResponse = false;
+	$scope.sprintListsDone = [];	
+	
+	/** UI function(s) **/
 	
 	ReviewService.ListDoneSprints(function(response){
 		switch(response.success){
@@ -21,13 +28,16 @@ angular.module('review')
 			
 			case 0:
 				$scope.emptySprintReviewResponse = !$scope.emptySprintReviewResponse;
-				$scope.emptySprintReviewResponseMessage = "You currently do not have any active sprint to review. Complete a sprint in 'Sprint' tab";
+				$scope.emptySprintReviewResponseMessage = "You currently do not have any active sprint to review or completed sprint has undone backlogs.";
 			break;
 		}
 	});
 	
-	$scope.acceptBacklog = function(backlogId,sprintId){
-		ReviewService.AcceptBacklog(backlogId, sprintId,function(response){
+	$scope.acceptBacklog = function(backlogId,sprintId,reviewComment){
+		console.log(reviewComment);
+		
+		ReviewService.AcceptBacklog(backlogId, sprintId, reviewComment,function(response){
+			
 			switch(response.success){
 				case 1:
 				

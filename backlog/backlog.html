@@ -1,9 +1,20 @@
 <div class="backlogTitle">
+<div class="backlogTitleLeft">
 	<span>Product Backlog</span>
-	<span class="minimize" style="margin-left:12px"> 
+	<span class="minimize"> 
 	<span class="badge">{{backlogLists.length}} issues</span></span>
-	<button class="btn btn-default addBacklog" data-toggle="modal" data-target="#backlogCreateModal" style="color:black"><i class="glyphicon glyphicon-plus"></i> Create Backlog</button>
-	
+	</div>
+	<div class="backlogTitleRight">
+		<div class="btn-group" style="padding-right:10px">
+		<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="glyphicon glyphicon-sort"></i> <span class="caret"></span></button>
+		<ul class="dropdown-menu">
+			<li><a href="" ng-click="sortBacklog(1)">By Regressed Backlog</a></li>
+			<li><a href="" ng-click="sortBacklog(2)">By Created Date</a></li>
+			<li><a href="" ng-click="sortBacklog(3)">By Story Points</a></li>
+		</ul>
+		</div>
+		<button class="btn btn-default addBacklog" data-toggle="modal" data-target="#backlogCreateModal" style="color:black"><i class="glyphicon glyphicon-plus"></i> Create Backlog</button>
+	</div>
 </div>
 <div ng-class="backlogListsClass">
 	<ul class="nav nav-pills nav-stacked dropPlace" data-drop="true" data-jqyoui-options="backlogLists" ng-model="backlogLists" jqyoui-droppable="{index:$index, multiple:true, onDrop:'dropCallback(item, $index)' }">

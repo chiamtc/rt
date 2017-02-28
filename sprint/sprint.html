@@ -3,6 +3,7 @@
 <span class="minimize" style="margin-left:12px;padding-top:9px"> 
 <span class="badge">{{sprintListsActive.length}} active sprint ,{{sprintLists.length}} inactive sprints</span> </span>
 <button class="btn btn-default addSprint" data-toggle="modal" data-target="#sprintCreateModal" style="color:black"><i class="glyphicon glyphicon-plus"></i> Create sprint</button>
+
 </div>
 
 <div ng-class="sprintListsClass" ng-repeat="sprintActive in sprintListsActive track by $index">

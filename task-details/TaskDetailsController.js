@@ -3,10 +3,16 @@
 angular.module('task-details')
 
 .controller('TaskDetailsController', ['$scope','TaskDetailsService','$timeout', function($scope, TaskDetailsService,$timeout){
+	/** fancy starts **/
+	NProgress.start();
+	NProgress.done();
 	
+	/** UI binding(s) **/
 	$scope.passTask = [];
 	$scope.taskCommentLists = [];
 	$scope.snackbarShow = false;
+	
+	/** UI function(s) **/
 	$scope.toggle = function(task){
 		$scope.colSize = true;
 		$scope.passTask = task;

@@ -1,7 +1,7 @@
 'use strict';
 angular.module('backlog')
 
-.controller('BacklogController', ['$scope','$timeout','SprintService','BacklogService', function($scope, $timeout,SprintService,  BacklogService){
+.controller('BacklogController', ['$scope','$filter','$timeout','SprintService','BacklogService', function($scope, $filter,$timeout,SprintService,  BacklogService){
 	
 	/** fancy starts **/
 	NProgress.start();
@@ -23,8 +23,7 @@ angular.module('backlog')
 		{name: 'Low', type: 'Low'},
 	];
 	
-	
-	
+	/** UI function(s) **/
 	$scope.startCallback = function(event, ui, title){
 		console.log('You started draggin: ' + title.backlogId + " status"+ title.backlogStatus);
 		$scope.draggedTitle = title.backlogId;
@@ -65,7 +64,7 @@ angular.module('backlog')
 			$scope.backlogListsClass = "backlogListsEmpty";
 		}else{
 			$scope.backlogListsClass ="backlogLists";
-			$scope.backlogLists= response.backlogs;
+			$scope.backlogLists =  response.backlogs;
 		}
 	});
 
@@ -121,6 +120,25 @@ angular.module('backlog')
 		}
 		NProgress.done();
 	};
+	
+	$scope.sortBacklog = function(x){
+		switch(x){
+			case 1:
+				$scope.backlogLists = $filter('orderBy')($scope.backlogLists, 'backlogStatus');
+			break;
+			
+			case 2:
+				$scope.backlogLists = $filter('orderBy')($scope.backlogLists, 'dateCreated',true);
+			break;
+			case 3:
+				$scope.backlogLists = $filter('orderBy')($scope.backlogLists, 'backlogStoryPoint');
+			break;
+			
+		}
+		
+		console.log($scope.backlogLists);
+		
+	}
 }])
 
 .directive('productBacklog',function(){
