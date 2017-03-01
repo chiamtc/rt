@@ -35,15 +35,17 @@ angular.module('sprint')
 			},
 			headers : { 'Content-Type' : 'application/json'}
 		}).then(function(response){
-			var backlogTPoint = 0;
+			var backlogTPoint = 0.0;
+			var backlogTBV = 0.0;
 			angular.forEach(response.data.activeSprints, function(value, key){
 				angular.forEach(value.backlogs, function(v,k){
 					v.dateCreated = moment(v.dateCreated).fromNow();
 					v.dateModified = moment(v.dateModified).fromNow();
-					
-					backlogTPoint = backlogTPoint+ parseInt(v.backlogStoryPoint);
+					backlogTBV = backlogTBV + parseFloat(v.backlogBusinessValue);
+					backlogTPoint = backlogTPoint+ parseFloat(v.backlogStoryPoint);
 				});
 				response.data.activeSprints.backlogTotalPoint = backlogTPoint;
+				response.data.activeSprints.backlogTotalBV = backlogTBV;
 			});
 			console.log(response.data);
 			callback(response.data);

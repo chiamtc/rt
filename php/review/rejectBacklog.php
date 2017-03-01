@@ -4,13 +4,22 @@ $data = json_decode(file_get_contents('php://input'));
 $sprintId = $data ->sprintId;
 $backlogId = $data ->backlogId;
 $projectKey = $data->projectKey;
+$reviewComment = $data ->reviewComment;
 $sprintId = mysqli_real_escape_string($conn, $sprintId);
 $backlogId = mysqli_real_escape_string($conn, $backlogId);
 $response = array();
 
 if(!empty($projectKey)){
+	if(!empty($reviewComment)){
+		$insertReviewsql ="INSERT INTO `review`(`reviewId`, `review`, `sprintId`, `backlogId`) VALUES ('','$reviewComment',$sprintId,$backlogId)"; 
+		$resultInsertReview = $conn ->query($insertReviewsql);
+	}else{
+		$insertReviewsql ="INSERT INTO `review`(`reviewId`, `review`, `sprintId`, `backlogId`) VALUES ('','No comments/notes from previous sprint',$sprintId,$backlogId)"; 
+		$resultInsertReview = $conn ->query($insertReviewsql);
+	}
 	$rejectBacklogSql = "UPDATE `backlog` SET `backlogStatus` = 'Rejected' , `sprintId` = 0 WHERE `backlogId` = $backlogId AND `sprintId` = $sprintId";
 	if($conn -> query($rejectBacklogSql)){
+		
 		$numberOfBacklogSql = "select count(*) as rows from `backlog` where `sprintID` = $sprintId AND (`backlogStatus` = 'Done')";
 		$resultCountBacklog = $conn ->query($numberOfBacklogSql);
 		$rowCounts = $resultCountBacklog -> fetch_assoc();

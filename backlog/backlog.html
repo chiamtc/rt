@@ -6,7 +6,7 @@
 	</div>
 	<div class="backlogTitleRight">
 		<div class="btn-group" style="padding-right:10px">
-		<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="glyphicon glyphicon-sort"></i> <span class="caret"></span></button>
+		<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="glyphicon glyphicon-sort"></i> </button>
 		<ul class="dropdown-menu">
 			<li><a href="" ng-click="sortBacklog(1)">By Regressed Backlog</a></li>
 			<li><a href="" ng-click="sortBacklog(2)">By Created Date</a></li>
@@ -17,19 +17,24 @@
 	</div>
 </div>
 <div ng-class="backlogListsClass">
-	<ul class="nav nav-pills nav-stacked dropPlace" data-drop="true" data-jqyoui-options="backlogLists" ng-model="backlogLists" jqyoui-droppable="{index:$index, multiple:true, onDrop:'dropCallback(item, $index)' }">
+	<ul class="nav dropPlace" data-drop="true" data-jqyoui-options="backlogLists" ng-model="backlogLists" jqyoui-droppable="{index:$index, multiple:true, onDrop:'dropCallback(item, $index)' }">
 		<li role="presentation"  data-drag="true" data-jqyoui-options="{revert:'invalid'}" ng-repeat="item in backlogLists" ng-model="backlogLists" jqyoui-draggable="{index: {{$index}},animate:true, onStart:'startCallback(item, $index)'}">
 		<div class="backlogItem" ng-style="calculateStyle(item)">
 			<div class="backlogItemHeader">
-			<div class="backlogItemHeaderTitle">
-				<h5> <a href=""  ng-click="toggle(item)" >{{item.backlogTitle}} </a> <span ng-if="item.backlogStatus == 'Regressed' || item.backlogStatus =='Rejected'" class="badge">{{item.backlogStatus}}</span></h5>
-				<span class="minimize" data-toggle="tooltip" data-placement="bottom" title="Created Since">{{item.dateCreated}}</span>
-				<span class="minimize" data-toggle="tooltip" data-placement="bottom" title="Backlog Owner"> - <i class="glyphicon glyphicon-user"></i> {{item.backlogCreator}}</span>
-			</div>
+				<div class="backlogItemHeaderTitle">
+					<h5> <a href=""  ng-click="toggle(item)" >{{item.backlogTitle}} </a> <span ng-if="item.backlogStatus == 'Regressed' || item.backlogStatus =='Rejected'" class="badge">{{item.backlogStatus}}</span></h5>
+						<div class="backlogItemHeaderDetails">
+							<span class="minimize" data-toggle="tooltip" data-placement="bottom" title="Created Since">{{item.dateCreated}}</span>
+							<span class="minimize" data-toggle="tooltip" data-placement="bottom" title="Backlog Owner"> - <i class="glyphicon glyphicon-user"></i> {{item.backlogCreator}}</span>
+						</div>
+				</div>
+				
 			<div class="backlogItemHeaderTitleDetails">
 				<div class="backlogDetails">
 					<p class="minimize">Story Pts: {{item.backlogStoryPoint}}</p>
 					<p class="minimize">Type: {{item.backlogType}}</p>
+					<p class="minimize" style="margin-bottom:0px">Business Value: {{item.backlogBusinessValue}}</p>
+					
 				</div>
 			</div>
 			</div>
@@ -82,6 +87,11 @@
 					<div class="form-group">
 						<label>Backlog Story Point</label>
 						<input ng-model="backlogCreateStoryPoint"  type="number" class="form-control" name="backlogStoryPts" placeholder="Backlog Story Point" required>
+					</div>
+					
+					<div class="form-group">
+						<label>Business Value</label>
+						<input ng-model="backlogCreateBusinessValue"  type="number" class="form-control" name="backlogBusinessValue" placeholder="Business Value" required>
 					</div>
 					
 					<div class="form-group">

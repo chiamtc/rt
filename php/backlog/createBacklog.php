@@ -6,6 +6,7 @@ $backlogType = $data -> backlogType;
 $backlogDesc = $data -> backlogDesc;
 $backlogPriority = $data -> backlogPriority;
 $backlogStoryPoint=  $data ->backlogStoryPoint;
+$backlogBusinessValue = $data -> backlogBusinessValue;
 $backlogCreator = $data -> backlogCreator;
 $projectKey = $data-> projectKey;
 $date_created = $data ->dateCreated;
@@ -18,6 +19,7 @@ $backlogType = mysqli_real_escape_string($conn, $backlogType);
 $backlogDesc = mysqli_real_escape_string($conn, $backlogDesc);
 $backlogPriority = mysqli_real_escape_string($conn, $backlogPriority);
 $backlogStoryPoint = mysqli_real_escape_string($conn, $backlogStoryPoint);
+$backlogBusinessValue = mysqli_real_escape_string($conn, $backlogBusinessValue);
 $backlogCreator = mysqli_real_escape_string($conn, $backlogCreator);
 $projectKey = mysqli_real_escape_string($conn, $projectKey);
 $backlogId = 0;
@@ -26,7 +28,7 @@ if(!empty($backlogName) && !empty($backlogType) && !empty($backlogPriority) && !
 	if(empty($backlogStoryPoint)){
 		$backlogStoryPoint = 0;
 	}
-	$createBacklogSql = "INSERT INTO `backlog`(`backlogId`, `backlogType`, `backlogTitle`, `backlogPriority`,`backlogStoryPoint`,`backlogDesc`,  `date_created`, `date_modified`,`backlogCreator`, `backlogStatus`, `sprintId`)VALUES('', '$backlogType', '$backlogTitle', '$backlogPriority',$backlogStoryPoint,'$backlogDesc', '$date_created', '$date_modified','$backlogCreator', 'Unassigned', 0)";
+	$createBacklogSql = "INSERT INTO `backlog`(`backlogId`, `backlogType`, `backlogTitle`, `backlogPriority`,`backlogStoryPoint`,`backlogDesc`,  `date_created`, `date_modified`,`backlogCreator`, `backlogStatus`, `backlogBusinessValue`,`sprintId`)VALUES('', '$backlogType', '$backlogTitle', '$backlogPriority',$backlogStoryPoint,'$backlogDesc', '$date_created', '$date_modified','$backlogCreator', 'Unassigned', $backlogBusinessValue,0)";
 	if($conn ->query($createBacklogSql)){
 		$backlogId = $conn -> insert_id;
 		
@@ -48,6 +50,7 @@ if(!empty($backlogName) && !empty($backlogType) && !empty($backlogPriority) && !
 					$backlog["dateModified"] = $rowGetBacklogs["date_modified"];
 					$backlog["backlogCreator"] = $rowGetBacklogs["backlogCreator"];
 					$backlog["backlogStatus"] = $rowGetBacklogs["backlogStatus"];
+					$backlog["backlogBusinessValue"] = $rowGetBacklogs["backlogBusinessValue"];
 					array_push($response["backlogs"], $backlog);
 				}
 				$response["success"]=1;

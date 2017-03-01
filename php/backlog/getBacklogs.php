@@ -22,6 +22,7 @@ if($resultGetBacklogs -> num_rows >0){
 		$backlog["dateModified"] = $rowGetBacklogs["date_modified"];
 		$backlog["backlogCreator"] = $rowGetBacklogs["backlogCreator"];
 		$backlog["backlogStatus"] = $rowGetBacklogs["backlogStatus"];
+		$backlog["backlogBusinessValue"] = $rowGetBacklogs["backlogBusinessValue"];
 		array_push($response["backlogs"], $backlog);
 	}
 	$response["success"]=1;

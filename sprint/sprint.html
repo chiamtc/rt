@@ -10,7 +10,9 @@
 	<div class="sprintListTop">
 		<div>
 			<span>Active Sprint </span>
-			<span class="badge">{{sprintActive.backlogs.length}} issues /  {{sprintListsActive.backlogTotalPoint}} Total SP</span>
+			<span class="badge">{{sprintActive.backlogs.length}} issues </span>
+			<span class="badge">{{sprintListsActive.backlogTotalPoint}} Total SP</span>
+			<span class="badge">{{sprintListsActive.backlogTotalBV}} Business Value</span>
 		</div>
 		<div class="sprintListRight">
 			<div class="dropdown">
@@ -35,6 +37,7 @@
 				<div class="sprintDetails">
 					<p class="minimize">Story Pts: {{itemActive.backlogStoryPoint}}</p>
 					<p class="minimize">Type: {{itemActive.backlogType}}</p>
+					<p class="minimize">Business Value: {{itemActive.backlogBusinessValue}}</p>
 				</div>
 			</div>
 			</div>
@@ -66,13 +69,16 @@
 			<div class="sprintItemHeader">
 			<div class="sprintItemHeaderTitle">
 				<h5> <a href=""  ng-click="toggle(item)">{{item.backlogTitle}} </a><span class="badge" ng-if="item.backlogStatus == 'Regressed' || item.backlogStatus == 'Rejected'">{{item.backlogStatus}}</span></h5>
-				<span class="minimize" data-toggle="tooltip" data-placement="bottom" title="Created Since">{{item.dateCreated}}</span>
-				<span class="minimize" data-toggle="tooltip" data-placement="bottom" title="sprint Owner"><i class="glyphicon glyphicon-user"></i> {{item.backlogCreator}}</span>
+				<div class="sprintItemHeaderDetails">
+					<span class="minimize" data-toggle="tooltip" data-placement="bottom" title="Created Since">{{item.dateCreated}}</span>
+					<span class="minimize" data-toggle="tooltip" data-placement="bottom" title="sprint Owner"><i class="glyphicon glyphicon-user"></i> {{item.backlogCreator}}</span>
+				</div>
 			</div>
 			<div class="sprintItemHeaderTitleDetails">
 				<div class="sprintDetails">
 					<p class="minimize">Story Pts: {{item.backlogStoryPoint}}</p>
 					<p class="minimize">Type: {{item.backlogType}}</p>
+					<p class="minimize" style="margin-bottom:0px">Business Value: {{item.backlogBusinessValue}}</p>
 				</div>
 			</div>
 			</div>

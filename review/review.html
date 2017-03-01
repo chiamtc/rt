@@ -30,7 +30,7 @@
 							
 							<h6><textarea ng-model="reviewComment" class="form-control" rows="4" placeholder="Accept or reject with or without comment/notes for this backlog"></textarea></h6>
 							<button class="btn btn-success" ng-click="acceptBacklog(doneBacklog.backlogId,doneSprint.sprintId, reviewComment)"><i class="glyphicon glyphicon-ok" ></i> Accept </button>
-							<button class="btn btn-danger" ng-click="rejectBacklog(doneBacklog.backlogId, doneSprint.sprintId)"><i class="glyphicon glyphicon-remove"></i> Reject </button>
+							<button class="btn btn-danger" ng-click="rejectBacklog(doneBacklog.backlogId, doneSprint.sprintId,reviewComment)"><i class="glyphicon glyphicon-remove"></i> Reject </button>
 						</div>
 					</div>
 				</div>

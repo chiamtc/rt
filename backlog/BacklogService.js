@@ -5,7 +5,7 @@ angular.module('backlog')
 .factory('BacklogService', ['$http','$filter','$routeParams',function($http, $filter,$routeParams){
 	var factory = {};
 	
-	factory.CreateBacklog = function(backlogName, backlogType, backlogDesc, backlogPriority, backlogStoryPoint, backlogCreator,callback){
+	factory.CreateBacklog = function(backlogName, backlogType, backlogDesc, backlogPriority, backlogStoryPoint, backlogBusinessValue,backlogCreator,callback){
 		$http({
 			method : "POST",
 			url:"php/backlog/createBacklog.php",
@@ -16,6 +16,7 @@ angular.module('backlog')
 				backlogPriority  : backlogPriority,
 				backlogStoryPoint : backlogStoryPoint,
 				backlogCreator: backlogCreator,
+				backlogBusinessValue:backlogBusinessValue,
 				dateCreated : moment().format(),
 				dateModified : moment().format(),
 				projectKey : $routeParams.projectKey,

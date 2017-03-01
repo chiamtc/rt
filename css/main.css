@@ -282,12 +282,15 @@ textarea{
 	padding:5px 10px;
 	width:100%;
 	display:flex;
+	justify-content:space-between;
 	border-bottom: 1px solid #ccc;
 }
 
 .backlogItemHeaderTitle{
-	
-	width:70%;
+}
+
+.backlogItemHeaderDetails{
+	padding-top:10px;
 }
 
 .backlogItemHeaderTitleDetails{	
@@ -297,11 +300,6 @@ textarea{
 
 .backlogDetails{
 	padding:5px 5px;
-}
-
-.backlogItemFooter{
-	line-height:10px;
-	padding:12px 10px 15px 10px;
 }
 
 @media screen and (max-width: 450px) {
@@ -414,6 +412,10 @@ textarea{
 
 .sprintItemHeaderTitle{
 	width:70%;
+}
+
+.sprintItemHeaderDetails{
+	padding-top:10px;
 }
 .sprintItemHeaderTitleDetails{
 	width:30%;
@@ -633,6 +635,7 @@ However, delay the fade out process for 2.5 seconds */
 	padding:0px 10px;
 	width:100%;
 	display:flex;
+	justify-content:space-between;
 	border-bottom: 1px solid #ccc;
 }
 

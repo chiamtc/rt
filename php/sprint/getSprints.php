@@ -38,6 +38,7 @@ if(!empty($projectKey)){
 					$backlog["dateModified"] = $rowBacklogSprint["date_modified"];
 					$backlog["backlogCreator"] = $rowBacklogSprint["backlogCreator"];
 					$backlog["backlogStatus"] = $rowBacklogSprint["backlogStatus"];
+					$backlog["backlogBusinessValue"] = $rowBacklogSprint["backlogBusinessValue"];
 					$backlog["drag"] =true;
 					array_push($sprint["backlogs"], $backlog);
 				}

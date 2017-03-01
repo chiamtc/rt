@@ -22,6 +22,20 @@ angular.module('backlog-details')
 		});
 	}
 	
+	factory.ListReview = function(backlogId,callback){
+		$http({
+			method : 'POST',
+			url : 'php/backlog-details/getReview.php',
+			data:{
+				backlogId: backlogId,
+			},
+			headers: {'Content-Type':'application/json'}
+		}).then(function(response){
+			
+			callback(response.data);
+		});
+	}
+	
 	factory.ListAssignees = function(backlogId,callback){
 		$http({
 			method : 'POST',
@@ -126,6 +140,21 @@ angular.module('backlog-details')
 			url : 'php/backlog-details/updateTitle.php',
 			data:{
 				backlogTitle : backlogTitle,
+				dateModified : moment().format(),
+				backlogId: backlogId,
+			},
+			headers: {'Content-Type':'application/json'}
+		}).then(function(response){
+			callback(response.data);
+		});
+	}
+	
+	factory.UpdateBV = function(backlogBusinessValue, backlogId,callback){
+		$http({
+			method : 'POST',
+			url : 'php/backlog-details/updateBV.php',
+			data:{
+				backlogBusinessValue : backlogBusinessValue,
 				dateModified : moment().format(),
 				backlogId: backlogId,
 			},

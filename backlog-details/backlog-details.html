@@ -21,8 +21,8 @@
 		<div class="form-group">
 				<label class="col-sm-2 detailLabel">Type</label>
 				<div class="col-sm-10">
-					<select class="form-control" ng-model="backlogDType">	
-						<option ng-selected="backlogDType.typeName == passBacklog.backlogType" ng-repeat="backlogType in backlogCreateTypes" >{{backlogType.typeName}}</option>
+					<select class="form-control" ng-model="backlogDType">
+						<option ng-selected="backlogDType == passBacklog.backlogType" ng-repeat="backlogType in backlogCreateTypes" >{{backlogType.typeName}}</option>
 					</select>
 					
 					<div class="btn-group quickEdit" role="group">
@@ -44,6 +44,17 @@
 		</div>
 		
 		<div class="form-group">
+			<label class="col-sm-2 detailLabel">Business Value</label>
+			<div class="col-sm-10">
+				<input  string-to-number ng-model="backlogDBusinessValue" type="number" class="form-control" name="backlogDBV">
+				<div class="btn-group quickEdit" role="group" aria-label="">
+					<button type="button" class="close" data-toggle="tooltip" ng-click="retain()" data-placement="bottom" title="Retain Title" style="padding-right:5px"><small><i class="glyphicon glyphicon-remove"></i></small></button>
+					<button type="button" class="close" data-toggle="tooltip" ng-click="updateBV()" data-placement="bottom" title="Update Title" style="padding-right:10px"><small><i class="glyphicon glyphicon-ok"></i></small></button>
+				</div>
+			</div>
+		</div>
+		
+		<div class="form-group">
 			<label class="col-sm-2 detailLabel">Status </label>
 			<label class="col-sm-10 detailLabel">{{passBacklog.backlogStatus}}</label>
 		</div>
@@ -52,7 +63,7 @@
 			<label class="col-sm-2 detailLabel">Priority</label>
 			<div class="col-sm-10">
 				<select class="form-control" ng-model="backlogDPriority">
-					<option ng-selected="backlogDPriority.name == passBacklog.backlogPriority" ng-repeat="backlogPriority in backlogPriorities" >{{backlogPriority.name}}</option>
+					<option ng-selected="backlogDPriority == passBacklog.backlogPriority" ng-repeat="backlogPriority in backlogPriorities" >{{backlogPriority.name}}</option>
 				</select>
 					
 				<div class="btn-group quickEdit" role="group">
@@ -98,6 +109,16 @@
 			</div>
 		
 		<hr>
+		<div ng-show="passBacklog.backlogStatus == 'Rejected' || passBacklog.backlogStatus == 'Rejected'">
+		<h5 class="detailHeader">Reviews</h5>
+			<div class="form-group" ng-repeat="review in reviewLists">
+				<div class="col-md-12">
+					<textarea class="form-control" readonly rows="4">{{review.review}}</textarea>
+				</div>
+			</div>
+			<hr>
+		</div>
+		
 		<div class="taskHeader">
 			<span class="taskHeaderLeft">Tasks</span>
 			<div class="taskHeaderRight">
@@ -122,12 +143,7 @@
 							<li><a href="" ng-click="passDeleteTask(task)" data-toggle="modal" data-target="#taskDeleteModal"><i class="glyphicon glyphicon-remove"></i> Delete Task</a></li>
 						</ul>
 					</div>
-					
-					
 				</div>
-				
-				
-				
 			</div>
 		<hr>
 		<h5 class="detailHeader">Comments </h5>

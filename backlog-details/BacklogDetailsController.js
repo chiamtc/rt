@@ -25,9 +25,10 @@ angular.module('backlog-details')
 			$scope.backlogDTitle = $scope.passBacklog.backlogTitle;
 			$scope.backlogDDesc = $scope.passBacklog.backlogDesc;
 			$scope.backlogDPriority = $scope.passBacklog.backlogPriority;
+			console.log($scope.backlogDPriority);
 			$scope.backlogDType = $scope.passBacklog.backlogType;
-			$scope.backlogDStoryPoint = parseInt($scope.passBacklog.backlogStoryPoint);
-			
+			$scope.backlogDStoryPoint = parseFloat($scope.passBacklog.backlogStoryPoint);
+			$scope.backlogDBusinessValue = parseFloat($scope.passBacklog.backlogBusinessValue);
 			BacklogDetailsService.ListComment($scope.passBacklog.backlogId,function(response){
 				switch(response.success){
 					case 0:
@@ -41,6 +42,18 @@ angular.module('backlog-details')
 					break;
 				}
 			});
+			
+			BacklogDetailsService.ListReview($scope.passBacklog.backlogId,function(response){
+				console.log(response);
+				switch(response.success){
+					case 1:
+						$scope.reviewLists = response.reviews;
+					break;
+					case 0:
+						$scope.reviewLists = response.reviews;
+					break;
+				}
+			})
 			
 			BacklogDetailsService.ListTasks($scope.passBacklog.backlogId,function(response){
 				
@@ -63,7 +76,7 @@ angular.module('backlog-details')
 				angular.forEach(response.assignees,function(v,k){
 					//console.log(v);
 					if(response.assignees.length == k+1){
-						assignees += v + " (" + response.assignees.length + ")";
+						assignees += v + " (" + response.assignees.length + " )";
 					}else{
 						assignees += v + ", ";
 					}
@@ -256,6 +269,38 @@ angular.module('backlog-details')
 				break;
 			}
 			
+			});
+		}
+	}
+	
+	$scope.updateBV = function(){
+		if(!$scope.backlogDBusinessValue){
+			$scope.snackbarShow = !$scope.snackbarShow;
+			$scope.snackbarClass= "alert alert-danger alert-dismissible snackbar";
+			$scope.snackbarMessage = "Business Value cannot be empty ! ";
+		}else{
+			BacklogDetailsService.UpdateBV($scope.backlogDBusinessValue, $scope.passBacklog.backlogId,function(response){
+			switch(response.success){
+				case 1:
+					$scope.snackbarShow = !$scope.snackbarShow;
+					$scope.snackbarClass= "alert alert-success alert-dismissible snackbar";
+					$scope.snackbarMessage = "Business Value Updated ! ";
+					$scope.passBacklog.backlogBusinessValue = $scope.backlogDBusinessValue; // two-way binding in parameter
+					$scope.passBacklog.dateModified = moment().fromNow();
+					$timeout(function(){
+						$scope.snackbarShow = !$scope.snackbarShow;
+					},5000);
+				break;
+				
+				case 0:
+					$scope.snackbarShow = !$scope.snackbarShow;
+					$scope.snackbarClass= "alert alert-danger alert-dismissible snackbar";
+					$scope.snackbarMessage = "Sorry, Something is wrong ! ";
+					$timeout(function(){
+						$scope.snackbarShow = !$scope.snackbarShow;
+					},5000);
+				break;
+			}
 			});
 		}
 	}

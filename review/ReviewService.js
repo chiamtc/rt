@@ -50,13 +50,15 @@ angular.module('review')
 		});
 	}
 	
-	factory.RejectBacklog= function(backlogId,sprintId,callback){
+	factory.RejectBacklog= function(backlogId,sprintId,reviewComment,callback){
+		console.log(reviewComment);
 		$http({
 			method : "POST",
 			url:"php/review/rejectBacklog.php",
 			data:{
 				backlogId: backlogId,
 				sprintId:sprintId,
+				reviewComment: reviewComment,
 				projectKey : $routeParams.projectKey,
 			},
 			headers :{ 'Content-Type' : 'application/json' }

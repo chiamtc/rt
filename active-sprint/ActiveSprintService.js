@@ -14,18 +14,26 @@ angular.module('active-sprint')
 			},
 			headers : { 'Content-Type' : 'application/json'}
 		}).then(function(response){
+			var backlogTPoint = 0.0;
+			var backlogTBV = 0.0;
 			angular.forEach(response.data.activeSprints, function(value, key){
 				value.sprintStartDate = moment(value.sprintStartDate).format('YYYY-MM-DD');
 				value.sprintEndDate = moment(value.sprintEndDate).format('YYYY-MM-DD');
 				angular.forEach(value.backlogs, function(v,k){
 					v.dateCreated = moment(v.dateCreated).fromNow();
 					v.dateModified = moment(v.dateModified).fromNow();
-					angular.forEach(v.tasks, function(v1,k1){
-						v1.dateCreated = moment(v1.dateCreated).fromNow();
-						v1.dateModified = moment(v1.dateModified).fromNow();
-					});
+					backlogTBV = backlogTBV + parseFloat(v.backlogBusinessValue);
+					backlogTPoint = backlogTPoint+ parseFloat(v.backlogStoryPoint);
+						angular.forEach(v.tasks, function(v1,k1){
+							v1.dateCreated = moment(v1.dateCreated).fromNow();
+							v1.dateModified = moment(v1.dateModified).fromNow();
+						});
+					
 				});
+				response.data.activeSprints.backlogTotalPoint = backlogTPoint;
+				response.data.activeSprints.backlogTotalBV = backlogTBV;
 			});
+			console.log(response.data);
 			callback(response.data);
 		});
 	}

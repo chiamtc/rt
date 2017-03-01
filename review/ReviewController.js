@@ -10,8 +10,7 @@ angular.module('review')
 	
 	/** UI binding(s)**/
 	$scope.emptySprintReviewResponse = false;
-	$scope.sprintListsDone = [];	
-	
+	$scope.sprintListsDone = [];
 	/** UI function(s) **/
 	
 	ReviewService.ListDoneSprints(function(response){
@@ -23,7 +22,6 @@ angular.module('review')
 				}else{
 					$scope.sprintListsDone = response.doneSprints;
 				}
-				
 			break;
 			
 			case 0:
@@ -34,8 +32,6 @@ angular.module('review')
 	});
 	
 	$scope.acceptBacklog = function(backlogId,sprintId,reviewComment){
-		console.log(reviewComment);
-		
 		ReviewService.AcceptBacklog(backlogId, sprintId, reviewComment,function(response){
 			
 			switch(response.success){
@@ -75,8 +71,8 @@ angular.module('review')
 		});
 	}
 	
-	$scope.rejectBacklog = function(backlogId,sprintId){
-		ReviewService.RejectBacklog(backlogId, sprintId,function(response){
+	$scope.rejectBacklog = function(backlogId,sprintId,reviewComment){
+		ReviewService.RejectBacklog(backlogId, sprintId,reviewComment,function(response){
 			switch(response.success){
 				case 1:
 				ReviewService.ListDoneSprints(function(response){

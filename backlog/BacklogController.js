@@ -78,7 +78,7 @@ angular.module('backlog')
 				$scope.createBacklogResponse = !$scope.createBacklogResponse;	
 			},1000);
 		}else{
-			BacklogService.CreateBacklog($scope.backlogCreateName,$scope.backlogCreateType.type,$scope.backlogCreateDesc,$scope.backlogCreatePriority.type, $scope.backlogCreateStoryPoint,$scope.userEmail, function(response){
+			BacklogService.CreateBacklog($scope.backlogCreateName,$scope.backlogCreateType.type,$scope.backlogCreateDesc,$scope.backlogCreatePriority.type, $scope.backlogCreateStoryPoint,$scope.backlogCreateBusinessValue,$scope.userEmail, function(response){
 			switch(response.success){
 				case 0:
 					
