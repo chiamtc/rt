@@ -12,8 +12,9 @@ angular.module('backlog-details',[]);
 angular.module('active-sprint',[]);
 angular.module('task-details',[]),
 angular.module('review',[]),
+angular.module('analytics',[]),
 
-angular.module('reApp',['header','login','home','register','project','sidebar','backlog','sprint','backlog-details','active-sprint','task-details','review','ngDragDrop','ngRoute','ngCookies', 'ngMessages'])
+angular.module('reApp',['header','login','home','register','project','sidebar','backlog','sprint','backlog-details','active-sprint','task-details','review','analytics','ngDragDrop','ngRoute','ngCookies', 'ngMessages','chart.js'])
 
 .config(['$routeProvider', function($routeProvider){
 	$routeProvider
@@ -24,6 +25,11 @@ angular.module('reApp',['header','login','home','register','project','sidebar','
 	.when('/home',{
 		controller:'HomeController',
 		templateUrl:'home/home.html'
+	})
+	
+	.when('/analytics',{
+		controller:'AnalyticsController',
+		templateUrl:'analytics/analytics.html'
 	})
 	
 	.when('/register',{

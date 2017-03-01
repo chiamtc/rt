@@ -115,6 +115,7 @@ angular.module('backlog')
 					},1000);
 				break;
 				
+				
 				}
 			});
 		}
@@ -132,6 +133,9 @@ angular.module('backlog')
 			break;
 			case 3:
 				$scope.backlogLists = $filter('orderBy')($scope.backlogLists, 'backlogStoryPoint');
+			break;
+			case 4:
+				$scope.backlogLists = $filter('orderBy')($scope.backlogLists, 'backlogBusinessValue');
 			break;
 			
 		}
