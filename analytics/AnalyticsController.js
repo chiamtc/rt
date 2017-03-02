@@ -7,7 +7,7 @@ angular.module('analytics')
     NProgress.start();
 	NProgress.done();
 
-    $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
+    $scope.labels = ["12/11", "13/11", "14/11", "15/11", "16/11", "17/11", "18/11"];
     $scope.series = ['Series A'];
     $scope.data = [[65, 59, 80, 81, 56, 55, 40]];
     $scope.onClick = function (points, evt) {
