@@ -8,8 +8,8 @@
 	<form class="form-horizontal">
 	<h5 class="detailHeader">General Details </h5>
 		<div class="form-group">
-			<label class="col-sm-2 detailLabel"> Title</label>
-			<div class="col-sm-10">
+			<label class="col-sm-3 detailLabel"> Title</label>
+			<div class="col-sm-9">
 				<input ng-model="backlogDTitle" type="text" class="form-control" name="backlogDTitle">
 				<div class="btn-group quickEdit" role="group" aria-label="">
 					<button type="button" class="close" data-toggle="tooltip" ng-click="retain()" data-placement="bottom" title="Retain Title" style="padding-right:5px"><small><i class="glyphicon glyphicon-remove"></i></small></button>
@@ -19,8 +19,8 @@
 		</div>
 		
 		<div class="form-group">
-				<label class="col-sm-2 detailLabel">Type</label>
-				<div class="col-sm-10">
+				<label class="col-sm-3 detailLabel">Type</label>
+				<div class="col-sm-9">
 					<select class="form-control" ng-model="backlogDType">
 						<option ng-selected="backlogDType == passBacklog.backlogType" ng-repeat="backlogType in backlogCreateTypes" >{{backlogType.typeName}}</option>
 					</select>
@@ -33,8 +33,8 @@
 		</div>
 			
 		<div class="form-group">
-			<label class="col-sm-2 detailLabel">Story Pts.</label>
-			<div class="col-sm-10">
+			<label class="col-sm-3 detailLabel">Story Pts.</label>
+			<div class="col-sm-9">
 				<input  string-to-number ng-model="backlogDStoryPoint" type="number" class="form-control" name="backlogDSP">
 				<div class="btn-group quickEdit" role="group" aria-label="">
 					<button type="button" class="close" data-toggle="tooltip" ng-click="retain()" data-placement="bottom" title="Retain Title" style="padding-right:5px"><small><i class="glyphicon glyphicon-remove"></i></small></button>
@@ -44,8 +44,8 @@
 		</div>
 		
 		<div class="form-group">
-			<label class="col-sm-2 detailLabel">Business Value</label>
-			<div class="col-sm-10">
+			<label class="col-sm-3 detailLabel">Business Value</label>
+			<div class="col-sm-9">
 				<input  string-to-number ng-model="backlogDBusinessValue" type="number" class="form-control" name="backlogDBV">
 				<div class="btn-group quickEdit" role="group" aria-label="">
 					<button type="button" class="close" data-toggle="tooltip" ng-click="retain()" data-placement="bottom" title="Retain Title" style="padding-right:5px"><small><i class="glyphicon glyphicon-remove"></i></small></button>
@@ -55,13 +55,13 @@
 		</div>
 		
 		<div class="form-group">
-			<label class="col-sm-2 detailLabel">Status </label>
-			<label class="col-sm-10 detailLabel">{{passBacklog.backlogStatus}}</label>
+			<label class="col-sm-3 detailLabel">Status </label>
+			<label class="col-sm-9 detailLabel">{{passBacklog.backlogStatus}}</label>
 		</div>
 			
 		<div class="form-group">
-			<label class="col-sm-2 detailLabel">Priority</label>
-			<div class="col-sm-10">
+			<label class="col-sm-3 detailLabel">Priority</label>
+			<div class="col-sm-9">
 				<select class="form-control" ng-model="backlogDPriority">
 					<option ng-selected="backlogDPriority == passBacklog.backlogPriority" ng-repeat="backlogPriority in backlogPriorities" >{{backlogPriority.name}}</option>
 				</select>
@@ -89,7 +89,7 @@
 		<h5 class="detailHeader">People</h5>
 			<div class="form-group">
 				<label class="col-sm-4 detailLabel">Backlog Owner</label>
-				<label class="col-sm-3 "> {{passBacklog.backlogCreator}}</label>
+				<label class="col-sm-8 "> {{passBacklog.backlogCreator}}</label>
 			</div>
 			
 			<div class="form-group">

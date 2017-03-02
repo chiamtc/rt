@@ -8,8 +8,8 @@
 		<form class="form-horizontal">
 			<h5 class="detailHeader">General Details </h5>
 				<div class="form-group">
-					<label class="col-sm-2 detailLabel"> Title</label>
-					<div class="col-sm-10">
+					<label class="col-sm-4 detailLabel"> Title</label>
+					<div class="col-sm-8">
 						<input ng-model="taskDTitle" ng-value="" type="text" class="form-control" name="taskTitle">
 						<div class="btn-group quickEdit" role="group" aria-label="">
 							<button type="button" class="close" data-toggle="tooltip" ng-click="retain()" data-placement="bottom" title="Retain Title" style="padding-right:5px"><small><i class="glyphicon glyphicon-remove"></i></small></button>
@@ -19,8 +19,8 @@
 				</div>
 								
 				<div class="form-group">
-					<label class="col-sm-2 detailLabel">Status </label>
-					<label class="col-sm-10 detailLabel"><span  id="taskLabelling" ng-class="labelling(taskDStatus)">{{taskDStatus}}</span></label>
+					<label class="col-sm-4 detailLabel">Status </label>
+					<label class="col-sm-8 detailLabel"><span  id="taskLabelling" ng-class="labelling(taskDStatus)">{{taskDStatus}}</span></label>
 				</div>
 				
 				<div class="form-group">
@@ -39,8 +39,8 @@
 				
 				<h5 class="detailHeader">People</h5>				
 				<div class="form-group">
-					<label class="col-sm-2 detailLabel">Assignees</label>
-					<div class="col-sm-10">
+					<label class="col-sm-4 detailLabel">Assignees</label>
+					<div class="col-sm-8">
 						<select class="form-control" ng-model="taskDAssignee">
 							<option value="Unassigned">Unassigned</option>
 							<option ng-selected="taskDAssignee == user.email" ng-repeat="user in userLists" >{{user.email}}</option>
