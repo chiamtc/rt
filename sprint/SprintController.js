@@ -20,6 +20,8 @@ angular.module('sprint')
 		console.log('You started draggin: ' + sc2.backlogId + sc2.backlogStatus);
 		$scope.draggedTitle= sc2.backlogId;
 		$scope.draggedStatus = sc2.backlogStatus;
+		$scope.backlogTotalPoint =  $scope.backlogTotalPoint - sc2.backlogStoryPoint;
+		$scope.backlogTotalBV =  $scope.backlogTotalBV - sc2.backlogBusinessValue;
 	};
 
 	$scope.dropCallback2 = function(event, ui, item) {
@@ -57,6 +59,9 @@ angular.module('sprint')
 				NProgress.done();
 				console.log(response.activeSprints);
 				$scope.sprintListsActive = response.activeSprints;
+				
+				$scope.backlogTotalPoint = response.activeSprints.backlogTotalPoint;
+				$scope.backlogTotalBV = response.activeSprints.backlogTotalBV;
 				console.log($scope.sprintListsActive);
 			});
 		}
@@ -232,7 +237,8 @@ angular.module('sprint')
 			case 1:
 				$scope.sprintListsClass="sprintLists";
 				$scope.sprintListsActive = response.activeSprints;
-				console.log(response.activeSprints);
+				$scope.backlogTotalPoint = response.activeSprints.backlogTotalPoint;
+				$scope.backlogTotalBV = response.activeSprints.backlogTotalBV;
 			break;
 			
 			case 0:
