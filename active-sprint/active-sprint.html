@@ -45,17 +45,15 @@
 					<div class="activeBacklogs" ng-style="calculateStyle(backlog)">
 						<div class="backlogItemHeader">
 							<div class="backlogItemHeaderTitle">
-								<h6> <a href="">{{backlog.backlogTitle}} </a></h6>
+							<h6> <a href="">{{backlog.backlogTitle}} </a></h6>
+								<div class="backlogDetails">
+									<h6 class="label label-primary">SP: {{backlog.backlogStoryPoint}}</h6>
+									<h6 class="label label-primary">Type: {{backlog.backlogType}}</h6>
+									<h6 class="label label-primary">Business Value: {{backlog.backlogBusinessValue}}</h6>
+								</div>
 								<div class="backlogItemHeaderDetails">
 									<span class="minimize" data-toggle="tooltip" data-placement="bottom" title="Created Since">{{backlog.dateCreated}}</span>
 									<span class="minimize" data-toggle="tooltip" data-placement="bottom" title="Backlog Owner"> - <i class="glyphicon glyphicon-user"></i> {{backlog.backlogCreator}}</span>
-								</div>
-							</div>
-							<div class="backlogItemHeaderTitleDetails">
-								<div class="backlogDetails">
-									<p class="minimize">SP: {{backlog.backlogStoryPoint}}</p>
-									<p class="minimize">Type: {{backlog.backlogType}}</p>
-									<p class="minimize" style="margin-bottom:0px">Type: {{backlog.backlogBusinessValue}}</p>
 								</div>
 							</div>
 						</div>
