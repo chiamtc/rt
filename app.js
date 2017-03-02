@@ -10,9 +10,9 @@ angular.module('backlog',[]);
 angular.module('sprint',[]);
 angular.module('backlog-details',[]);
 angular.module('active-sprint',[]);
-angular.module('task-details',[]),
-angular.module('review',[]),
-angular.module('analytics',[]),
+angular.module('task-details',[]);
+angular.module('review',[]);
+angular.module('analytics',[]);
 
 angular.module('reApp',['header','login','home','register','project','sidebar','backlog','sprint','backlog-details','active-sprint','task-details','review','analytics','ngDragDrop','ngRoute','ngCookies', 'ngMessages','chart.js'])
 
