@@ -299,7 +299,7 @@ textarea{
 }
 
 .backlogDetails{
-	line-height:20px;
+	padding:5px 5px;
 }
 
 @media screen and (max-width: 450px) {
@@ -711,7 +711,6 @@ However, delay the fade out process for 2.5 seconds */
     flex-wrap: wrap;
     width: 100%;
     justify-content: space-between;
-	border-bottom:1px solid #ccc;
 }
 
 .activeSprintTop{
@@ -862,4 +861,16 @@ fieldset[disabled] .form-control {
 	display:inline-block;
 	position:relative;
 	space-between:justify-content;
+}
+
+.activeSprintItemHeader{
+	line-height:10px;
+	padding:5px 10px;
+	width:100%;
+	display:flex;
+	justify-content:space-between;
+}
+
+.activeSprintDetails{
+	line-height:15px;
 }
