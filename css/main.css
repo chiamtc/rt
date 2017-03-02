@@ -871,6 +871,6 @@ fieldset[disabled] .form-control {
 	justify-content:space-between;
 }
 
-.activeSprintDetails{
-	line-height:15px;
+.activeSprintItemDetails{
+	line-height:20px;
 }
