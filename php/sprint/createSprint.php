@@ -42,7 +42,7 @@ if(!empty($sprintStartDate) && !empty($sprintEndDate) && !empty($projectKey)){
 		
 	}else{
 		$response["success"] = 0;
-		$response["message"] = "server error 1";
+		$response["message"] = $createSprintSql;
 		echo json_encode($response);
 	}
 }else{

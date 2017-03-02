@@ -93,12 +93,13 @@ $sqltbl8 = "CREATE TABLE backlog(
 			backlogType varchar(255) NOT NULL,
 			backlogTitle TEXT,
 			backlogPriority varchar(255) NOT NULL,
-			backlogStoryPoint int,
+			backlogStoryPoint float(10,1),
 			backlogDesc TEXT,
 			date_created varchar(255) NOT NULL,
 			date_modified varchar(255) NOT NULL,
 			backlogCreator varchar(255) NOT NULL,
 			backlogStatus varchar(255) NOT NULL,
+			backlogBusinessValue float(10,1),
 			sprintId int,
             PRIMARY KEY(backlogId)
         )";
@@ -183,14 +184,14 @@ $sqltbl13 = "create table review(
 			sprintId int not null,
 			backlogId int not null,
 			PRIMARY KEY (reviewId,sprintId, backlogId),
-			FOREIGN KEY(sprintId) REFERENCES sprint(sprintId)
-			FOREIGN KEY(backlogId) REFERENCES sprint(backlogId)
+			FOREIGN KEY(sprintId) REFERENCES sprint(sprintId),
+			FOREIGN KEY(backlogId) REFERENCES backlog(backlogId)
 			)";
 			
 if($conn -> query($sqltbl13)){
     echo "tbl review created<br>";
 }else{
-    echo "tbl review failed to create<br>";
+    echo "tbl review failed <br>";
 }
 $conn->close();
 ?>

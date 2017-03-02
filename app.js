@@ -27,7 +27,7 @@ angular.module('reApp',['header','login','home','register','project','sidebar','
 		templateUrl:'home/home.html'
 	})
 	
-	.when('/analytics',{
+	.when('/analytics/:projectKey/:projectSeo',{
 		controller:'AnalyticsController',
 		templateUrl:'analytics/analytics.html'
 	})
