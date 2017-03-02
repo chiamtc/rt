@@ -299,9 +299,7 @@ textarea{
 }
 
 .backlogDetails{
-	display:inline-block;
 	line-height:20px;
-	padding:5px 5px;
 }
 
 @media screen and (max-width: 450px) {
