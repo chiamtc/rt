@@ -76,7 +76,7 @@ angular.module('backlog-details')
 				angular.forEach(response.assignees,function(v,k){
 					//console.log(v);
 					if(response.assignees.length == k+1){
-						assignees += v + " (" + response.assignees.length + ")";
+						assignees += v + " (" + response.assignees.length + " )";
 					}else{
 						assignees += v + ", ";
 					}

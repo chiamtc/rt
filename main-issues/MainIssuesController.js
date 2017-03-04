@@ -2,11 +2,7 @@
 
 angular.module('main-issues')
 
-<<<<<<< HEAD
 .controller('MainIssuesController', ['$scope','$timeout', '$routeParams','ProjectService', '$cookies','MainIssuesService','BacklogService','SprintService','BacklogDetailsService',function($scope, $timeout,$routeParams, ProjectService,$cookies,MainIssuesService,BacklogService,SprintService,BacklogDetailsService){
-=======
-.controller('MainIssuesController', ['$scope','$timeout', '$routeParams', '$cookies','MainIssuesService','BacklogService','SprintService','BacklogDetailsService',function($scope, $timeout,$routeParams, $cookies,MainIssuesService,BacklogService,SprintService,BacklogDetailsService){
->>>>>>> 63b08976d6018f6431705f547af9a9a690221b69
 	$scope.selectedBacklog = [];
 	$scope.taskLists = [];
 	$scope.commentLists =[];
@@ -26,10 +22,7 @@ angular.module('main-issues')
 				break;
 				case 1:		
 					$scope.taskLists = response.tasks;
-<<<<<<< HEAD
 					console.log($scope.taskLists);
-=======
->>>>>>> 63b08976d6018f6431705f547af9a9a690221b69
 				break;
 				case 2:
 				break;
@@ -42,12 +35,8 @@ angular.module('main-issues')
 					$scope.commentLists =[];
 				break;
 				case 1:
-<<<<<<< HEAD
 					$scope.commentLists = response.comments;
 					
-=======
-						$scope.commentLists = response.comments;
->>>>>>> 63b08976d6018f6431705f547af9a9a690221b69
 				break;
 				case 2:
 				break;
@@ -294,7 +283,6 @@ angular.module('main-issues')
 		$scope.backlogDComment = "";
 	}
 	
-<<<<<<< HEAD
 	ProjectService.ListUsers($routeParams.projectKey, function(response){
 		switch(response.success){
 			case 0:
@@ -307,8 +295,6 @@ angular.module('main-issues')
 		}
 	});
 	
-=======
->>>>>>> 63b08976d6018f6431705f547af9a9a690221b69
 	$scope.deleteComment = function(comment){
 		BacklogDetailsService.DeleteComment(comment.commentId, comment.backlogId, function(response){
 			switch(response.success){

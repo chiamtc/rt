@@ -51,7 +51,6 @@ angular.module('issues')
 		templateUrl : 'main-issues/main-issues.html',
 		controller: 'MainIssuesController',
 	};
-<<<<<<< HEAD
 })
 
 .directive('sideTaskIssues',function(){
@@ -59,6 +58,4 @@ angular.module('issues')
 		templateUrl : 'side-task-issues/side-task-issues.html',
 		controller: 'SideTaskIssuesController',
 	};
-=======
->>>>>>> 63b08976d6018f6431705f547af9a9a690221b69
 });
