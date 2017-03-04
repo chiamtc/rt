@@ -6,12 +6,13 @@ $projectKey = $data -> projectKey;
 $projectKey = mysqli_real_escape_string($conn, $projectKey);
 
 $response = array();
+$response["found"] = false;
 if(!empty($projectKey)){
 	//$getSprintSql = "SELECT * FROM `sprint` s left join `backlog` b on s.sprintId = b.sprintId where s.projectKey = '$projectKey'";
-	$getSprintSql = "Select * from `sprint` where `projectKey` = '$projectKey' AND `sprintStatus` = 'Created' ";
+	$getSprintSql = "Select * from `sprint` where `projectKey` = '$projectKey' AND `sprintStatus` = 'Active'";
 	$resultGetSprint = $conn ->query($getSprintSql);
 	if($resultGetSprint -> num_rows > 0){
-		$response["sprints"] = array();
+		$response["activeSprints"] = array();
 		$sprint = array();
 		while($rowGetSprint = $resultGetSprint -> fetch_assoc()){
 			$sprint["sprintId"] = $rowGetSprint["sprintId"];
@@ -19,7 +20,9 @@ if(!empty($projectKey)){
  			$sprint["sprintGoal"] = $rowGetSprint["sprintGoal"];
 			$sprint["sprintStartDate"] = $rowGetSprint["sprintStartDate"];
 			$sprint["sprintEndDate"] = $rowGetSprint["sprintEndDate"];
-			
+			if($sprint["sprintStatus"] == 'Active'){
+				$response["found"] = true;
+			}
 			$getSprintBacklogSql = "Select * from `backlog` where `sprintId` =". $sprint["sprintId"]. ";";
 			$resultsBacklogSprint = $conn ->query($getSprintBacklogSql);
 			$sprint["backlogs"] = array();
@@ -40,17 +43,40 @@ if(!empty($projectKey)){
 					$backlog["backlogStatus"] = $rowBacklogSprint["backlogStatus"];
 					$backlog["backlogBusinessValue"] = $rowBacklogSprint["backlogBusinessValue"];
 					$backlog["drag"] =true;
+					$backlogId = $rowBacklogSprint["backlogId"];
+						$getTaskSql = "select * from `tasks` where `backlogId` =". $rowBacklogSprint['backlogId'];
+						
+						$resultBacklogTask = $conn -> query($getTaskSql);
+						$backlog["tasks"] = array();
+						$task = array();
+						if($rowTask = $resultBacklogTask -> num_rows >0){
+							while($rowTask = $resultBacklogTask ->fetch_assoc()){
+								$task["tasksId"] = $rowTask["tasksId"];
+								$task["tasksTitle"] = $rowTask["tasksTitle"];
+								$task["tasksDesc"] = $rowTask["tasksDescription"];
+								$task["tasksStatus"] = $rowTask["tasksStatus"];
+								$task["assignee"] = $rowTask["assignee"];
+								$task["dateCreated"] = $rowTask["date_created"];
+								$task["dateModified"] = $rowTask["date_modified"];
+								$task["backlogId"] = $rowTask["backlogId"];
+								array_push($backlog["tasks"], $task);
+							}
+						}else{
+							$task["tasksTitle"] = "Empty status, drag one to update";
+							$task["tasksStatus"] = "??";
+							array_push($backlog["tasks"], $task);
+						}
 					array_push($sprint["backlogs"], $backlog);
 				}
 			}else{
 				$backlog["backlogTitle"] = "Drag a backlog here :) !";
 				$backlog["backlogPriority"] = "Unknown";
-				$backlog["backlogStoryPoint"] = 0;
-				$backlog["backlogType"] = "None";
+				$backlog["backlogStoryPoint"] = "-";
+				$backlog["backlogType"] = "Not even created";
 				$backlog["drag"] = false;
 				array_push($sprint["backlogs"], $backlog);
 			}
-			array_push($response["sprints"], $sprint);
+			array_push($response["activeSprints"], $sprint);
 		}
 		$response["success"] = 1;
 		echo json_encode($response);

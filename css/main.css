@@ -875,3 +875,47 @@ fieldset[disabled] .form-control {
 .activeSprintItemDetails{
 	line-height:20px;
 }
+
+#issues-container{
+	padding:10px;
+}
+
+#issue-header{
+	margin:0px;
+}
+
+.header{
+	font-size: 20px;
+}
+
+#side-issues{
+	overflow-y:scroll;
+}
+
+::-webkit-scrollbar
+{
+  width: 5px;  /* for vertical scrollbars */
+}
+
+::-webkit-scrollbar-track
+{
+  background: rgba(0, 0, 0, 0.1);
+  
+}
+
+::-webkit-scrollbar-thumb
+{
+  background: rgba(0, 0, 0, 0.5);
+}
+
+#mainIssues{
+	padding:10px;
+}
+
+.spacing{
+	margin-bottom:20px;
+}
+
+#sideTask{
+	border-left:1px solid #ccc;
+}

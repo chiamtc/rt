@@ -59,12 +59,15 @@ angular.module('backlog')
 	};
 	
 	BacklogService.ListBacklogs(function(response){
-		if(response.backlogs == null){
+		switch(response.success){
+			case 0:
 			$scope.backlogLists = [];
 			$scope.backlogListsClass = "backlogListsEmpty";
-		}else{
+			break;
+			case 1:
 			$scope.backlogListsClass ="backlogLists";
 			$scope.backlogLists =  response.backlogs;
+			break;
 		}
 	});
 
