@@ -10,11 +10,14 @@ angular.module('backlog',[]);
 angular.module('sprint',[]);
 angular.module('backlog-details',[]);
 angular.module('active-sprint',[]);
-angular.module('task-details',[]),
-angular.module('review',[]),
-angular.module('analytics',[]),
+angular.module('task-details',[]);
+angular.module('review',[]);
+angular.module('analytics',[]);
+angular.module('issues',[]);
+angular.module('side-issues',[]);
+angular.module('main-issues',[]);
 
-angular.module('reApp',['header','login','home','register','project','sidebar','backlog','sprint','backlog-details','active-sprint','task-details','review','analytics','ngDragDrop','ngRoute','ngCookies', 'ngMessages','chart.js'])
+angular.module('reApp',['header','login','home','register','project','sidebar','backlog','sprint','backlog-details','active-sprint','task-details','review','analytics','issues','side-issues','main-issues','ngDragDrop','ngRoute','ngCookies', 'ngMessages','chart.js'])
 
 .config(['$routeProvider', function($routeProvider){
 	$routeProvider
@@ -30,6 +33,11 @@ angular.module('reApp',['header','login','home','register','project','sidebar','
 	.when('/analytics/:projectKey/:projectSeo',{
 		controller:'AnalyticsController',
 		templateUrl:'analytics/analytics.html'
+	})
+	
+	.when('/issues/:projectKey/:projectSeo',{
+		controller:'IssuesController',
+		templateUrl:'issues/issues.html'
 	})
 	
 	.when('/register',{

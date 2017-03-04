@@ -30,14 +30,16 @@
 			<div class="sprintItemHeader">
 			<div class="sprintItemHeaderTitle">
 				<h5> <a href=""  ng-click="toggle(itemActive)">{{itemActive.backlogTitle}} </a><span class="badge" ng-if="itemActive.backlogStatus == 'Regressed' || itemActive.backlogStatus == 'Rejected'">{{itemActive.backlogStatus}}</span></h5>
+				<div class="sprintItemHeaderDetails">
 				<span class="minimize" data-toggle="tooltip" data-placement="bottom" title="Created Since">{{itemActive.dateCreated}}</span>
-				<span class="minimize" data-toggle="tooltip" data-placement="bottom" title="sprint Owner"><i class="glyphicon glyphicon-user"></i> {{itemActive.backlogCreator}}</span>
+				<span class="minimize" data-toggle="tooltip" data-placement="bottom" title="Backlog Owner"><i class="glyphicon glyphicon-user"></i> {{itemActive.backlogCreator}}</span>
+				</div>
 			</div>
 			<div class="sprintItemHeaderTitleDetails">
 				<div class="sprintDetails">
 					<p class="minimize">Story Pts: {{itemActive.backlogStoryPoint}}</p>
 					<p class="minimize">Type: {{itemActive.backlogType}}</p>
-					<p class="minimize">Business Value: {{itemActive.backlogBusinessValue}}</p>
+					<p class="minimize" style="margin-bottom:0px">Business Value: {{itemActive.backlogBusinessValue}}</p>
 				</div>
 			</div>
 			</div>

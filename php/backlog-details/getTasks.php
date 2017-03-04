@@ -18,6 +18,9 @@ if(!empty($backlogId)){
 			$task["tasksDesc"] = $rowGetTasks["tasksDescription"];
 			$task["tasksStatus"] = $rowGetTasks["tasksStatus"];
 			$task["assignee"] = $rowGetTasks["assignee"];
+			$task["dateCreated"] = $rowGetTasks["date_created"];
+			$task["dateModified"] = $rowGetTasks["date_modified"];
+			$task["backlogId"] = $rowGetTasks["backlogId"];
 			array_push($response["tasks"], $task);
 		}
 		$response["success"] = 1;

@@ -240,40 +240,50 @@ angular.module('backlog-details')
 	}
 	
 	$scope.updateTitle = function(){
+		NProgress.start();
 		if(!$scope.backlogDTitle.length){
 			$scope.snackbarShow = !$scope.snackbarShow;
 			$scope.snackbarClass= "alert alert-danger alert-dismissible snackbar";
 			$scope.snackbarMessage = "Backlog Title cannot be empty ! ";
 		}else{
 			BacklogDetailsService.UpdateTitle($scope.backlogDTitle, $scope.passBacklog.backlogId,function(response){
+			
 			switch(response.success){
 				case 1:
+					NProgress.set(0.5);
 					$scope.snackbarShow = !$scope.snackbarShow;
 					$scope.snackbarClass= "alert alert-success alert-dismissible snackbar";
 					$scope.snackbarMessage = "Backlog Title Updated ! ";
 					$scope.passBacklog.backlogTitle = $scope.backlogDTitle; // two-way binding in parameter
 					$scope.passBacklog.dateModified = moment().fromNow();
-					console.log($scope.passBacklog);
+					
 					$timeout(function(){
+						
 						$scope.snackbarShow = !$scope.snackbarShow;
 					},5000);
+					NProgress.done();
 				break;
 				
 				case 0:
+					NProgress.set(0.5);
 					$scope.snackbarShow = !$scope.snackbarShow;
 					$scope.snackbarClass= "alert alert-danger alert-dismissible snackbar";
 					$scope.snackbarMessage = "Sorry, Something is wrong ! ";
+					NProgress.done();
 					$timeout(function(){
 						$scope.snackbarShow = !$scope.snackbarShow;
 					},5000);
+					NProgress.done();
 				break;
 			}
 			
 			});
 		}
+		
 	}
 	
 	$scope.updateBV = function(){
+		NProgress.start();
 		if(!$scope.backlogDBusinessValue){
 			$scope.snackbarShow = !$scope.snackbarShow;
 			$scope.snackbarClass= "alert alert-danger alert-dismissible snackbar";
@@ -282,6 +292,7 @@ angular.module('backlog-details')
 			BacklogDetailsService.UpdateBV($scope.backlogDBusinessValue, $scope.passBacklog.backlogId,function(response){
 			switch(response.success){
 				case 1:
+					NProgress.set(0.5);
 					$scope.snackbarShow = !$scope.snackbarShow;
 					$scope.snackbarClass= "alert alert-success alert-dismissible snackbar";
 					$scope.snackbarMessage = "Business Value Updated ! ";
@@ -290,15 +301,18 @@ angular.module('backlog-details')
 					$timeout(function(){
 						$scope.snackbarShow = !$scope.snackbarShow;
 					},5000);
+					NProgress.done();
 				break;
 				
 				case 0:
+					NProgress.set(0.5);
 					$scope.snackbarShow = !$scope.snackbarShow;
 					$scope.snackbarClass= "alert alert-danger alert-dismissible snackbar";
 					$scope.snackbarMessage = "Sorry, Something is wrong ! ";
 					$timeout(function(){
 						$scope.snackbarShow = !$scope.snackbarShow;
 					},5000);
+					NProgress.done();
 				break;
 			}
 			});
@@ -306,9 +320,11 @@ angular.module('backlog-details')
 	}
 	
 	$scope.updateType = function(){
+		NProgress.start();
 		BacklogDetailsService.UpdateType($scope.backlogDType, $scope.passBacklog.backlogId,function(response){
 		switch(response.success){
 			case 1:
+				NProgress.set(0.5);
 				$scope.snackbarShow = !$scope.snackbarShow;
 				$scope.snackbarClass= "alert alert-success alert-dismissible snackbar";
 				$scope.snackbarMessage = "Backlog Type Updated ! ";
@@ -317,21 +333,25 @@ angular.module('backlog-details')
 				$timeout(function(){
 					$scope.snackbarShow = !$scope.snackbarShow;
 				},5000);
+				NProgress.done();
 			break;
 			
 			case 0:
+				NProgress.set(0.5);
 				$scope.snackbarShow = !$scope.snackbarShow;
 				$scope.snackbarClass= "alert alert-danger alert-dismissible snackbar";
 				$scope.snackbarMessage = "Sorry, Something is wrong ! ";
 				$timeout(function(){
 					$scope.snackbarShow = !$scope.snackbarShow;
 				},5000);
+				NProgress.done();
 			break;
 		}
 		});
 	}
 	
 	$scope.updateSP = function(){
+		NProgress.start();
 		if(!$scope.backlogDStoryPoint){
 			$scope.snackbarShow = !$scope.snackbarShow;
 			$scope.snackbarClass= "alert alert-danger alert-dismissible snackbar";
@@ -340,6 +360,7 @@ angular.module('backlog-details')
 			BacklogDetailsService.UpdateSP($scope.backlogDStoryPoint, $scope.passBacklog.backlogId,function(response){
 			switch(response.success){
 				case 1:
+					NProgress.set(0.5);
 					$scope.snackbarShow = !$scope.snackbarShow;
 					$scope.snackbarClass= "alert alert-success alert-dismissible snackbar";
 					$scope.snackbarMessage = "Backlog Story Points Updated ! ";
@@ -348,15 +369,18 @@ angular.module('backlog-details')
 					$timeout(function(){
 						$scope.snackbarShow = !$scope.snackbarShow;
 					},5000);
+					NProgress.done();
 				break;
 				
 				case 0:
+					NProgress.set(0.5);
 					$scope.snackbarShow = !$scope.snackbarShow;
 					$scope.snackbarClass= "alert alert-danger alert-dismissible snackbar";
 					$scope.snackbarMessage = "Sorry, Something is wrong ! ";
 					$timeout(function(){
 						$scope.snackbarShow = !$scope.snackbarShow;
 					},5000);
+					NProgress.done();
 				break;
 			}
 			});
@@ -364,9 +388,11 @@ angular.module('backlog-details')
 	}
 	
 	$scope.updatePriority = function(){
+		NProgress.start();
 		BacklogDetailsService.UpdatePriority($scope.backlogDPriority, $scope.passBacklog.backlogId,function(response){
 		switch(response.success){
 			case 1:
+				NProgress.set(0.5);
 				$scope.snackbarShow = !$scope.snackbarShow;
 				$scope.snackbarClass= "alert alert-success alert-dismissible snackbar";
 				$scope.snackbarMessage = "Backlog Priority Updated ! ";
@@ -375,24 +401,29 @@ angular.module('backlog-details')
 				$timeout(function(){
 					$scope.snackbarShow = !$scope.snackbarShow;
 				},5000);
+				NProgress.done();
 			break;
 			
 			case 0:
+				NProgress.set(0.5);
 				$scope.snackbarShow = !$scope.snackbarShow;
 				$scope.snackbarClass= "alert alert-danger alert-dismissible snackbar";
 				$scope.snackbarMessage = "Sorry, Something is wrong ! ";
 				$timeout(function(){
 					$scope.snackbarShow = !$scope.snackbarShow;
 				},5000);
+				NProgress.done();
 			break;
 		}
 		});
 	}
 	
 	$scope.updateDesc = function(){
+		NProgress.start();
 		BacklogDetailsService.UpdateDesc($scope.backlogDDesc, $scope.passBacklog.backlogId,function(response){
 		switch(response.success){
 			case 1:
+				NProgress.set(0.5);
 				$scope.snackbarShow = !$scope.snackbarShow;
 				$scope.snackbarClass= "alert alert-success alert-dismissible snackbar";
 				$scope.snackbarMessage = "Backlog Priority Updated ! ";
@@ -401,15 +432,18 @@ angular.module('backlog-details')
 				$timeout(function(){
 					$scope.snackbarShow = !$scope.snackbarShow;
 				},5000);
+				NProgress.done();
 			break;
 			
 			case 0:
+				NProgress.set(0.5);
 				$scope.snackbarShow = !$scope.snackbarShow;
 				$scope.snackbarClass= "alert alert-danger alert-dismissible snackbar";
 				$scope.snackbarMessage = "Sorry, Something is wrong ! ";
 				$timeout(function(){
 					$scope.snackbarShow = !$scope.snackbarShow;
 				},5000);
+				NProgress.done();
 			break;
 		}
 		});

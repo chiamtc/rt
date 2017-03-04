@@ -1,0 +1,44 @@
+<h4>Task Details</h4>
+
+<div class="row" id="sideTask">
+	<div class="form-group">
+		<label class="detailLabel"> Task Title:</label>
+		<input ng-model="taskDTitle" type="text" class="form-control" name="backlogDTitle">
+			<div class="btn-group quickEdit" role="group" aria-label="">
+				<button type="button" class="close" data-toggle="tooltip" ng-click="retainTask()" data-placement="bottom" title="Retain Title" style="padding-right:5px"><small><i class="glyphicon glyphicon-remove"></i></small></button>
+				<button type="button" class="close" data-toggle="tooltip" ng-click="updateTitle()" data-placement="bottom" title="Update Title" style="padding-right:10px"><small><i class="glyphicon glyphicon-ok"></i></small></button>
+			</div>
+	</div>
+	
+	<div class="form-group">
+		<label class="detailLabel">Assignees</label>
+			<select class="form-control" ng-model="taskDAssignee">
+				<option value="Unassigned">Unassigned</option>
+				<option ng-selected="taskDAssignee == user.email" ng-repeat="user in userLists" >{{user.email}}</option>
+			</select>
+						
+			<div class="btn-group quickEdit" role="group">
+				<button type="button" class="close" data-toggle="tooltip" ng-click="retain()" data-placement="bottom" title="Retain Title" style="padding-right:5px"><small><i class="glyphicon glyphicon-remove"></i></small></button>
+				<button type="button" class="close" data-toggle="tooltip" ng-click="updateAssignee()" data-placement="bottom" title="Update Title" style="padding-right:10px"><small><i class="glyphicon glyphicon-ok"></i></small></button>
+			</div>
+	</div>
+	
+	<div class="form-group">
+		<div class="col-md-12 sidePadding">
+			<label class="detailLabel">Description</label>
+			<textarea ng-model="taskDDesc" class="form-control" rows="4" name="taskDesc"></textarea>
+
+		<div class="btn-group quickEdit" role="group">
+			<button type="button" class="close" data-toggle="tooltip" ng-click="retain()" data-placement="bottom" title="Retain Title" style="padding-right:5px"><small><i class="glyphicon glyphicon-remove"></i></small></button>
+			<button type="button" class="close" data-toggle="tooltip" ng-click="updateTaskDesc()" data-placement="bottom" title="Update Title" style="padding-right:10px"><small><i class="glyphicon glyphicon-ok"></i></small></button>
+		</div>
+		</div>
+	</div>
+	
+	<div class="form-group">
+		<label class="col-sm-4 detailLabel" style="padding-left:0px">Status: </label>
+		<label class="col-sm-8 detailLabel"><span  id="taskLabelling" ng-class="labelling(taskDStatus)">{{taskDStatus}}</span></label>
+	</div>
+	
+</div>
+<hr>

@@ -1,0 +1,146 @@
+<div id="mainIssues">
+	<div class="row">
+		<div class="form-group">
+			<div class="col-sm-12">
+			<input ng-model="backlogDTitle" type="text" class="form-control" name="backlogDTitle">
+				<div class="btn-group quickEdit" role="group" aria-label="">
+					<button type="button" class="close" data-toggle="tooltip" ng-click="retain()" data-placement="bottom" title="Retain Title" style="padding-right:5px"><small><i class="glyphicon glyphicon-remove"></i></small></button>
+					<button type="button" class="close" data-toggle="tooltip" ng-click="updateTitle()" data-placement="bottom" title="Update Title" style="padding-right:10px"><small><i class="glyphicon glyphicon-ok"></i></small></button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<hr>
+	<div ng-class="taskLists.length>0 ? 'col-md-8': 'col-md-12'" id="detailIssues">
+	
+	<div class="row">
+	<h4> General Details </h4>
+		<div class="col-xs-7">
+			<div class="form-group">
+				<label class="col-sm-4 detailLabel">Type: </label>
+				<div class="col-sm-8 spacing">
+					<select class="form-control" ng-model="backlogDType">
+						<option ng-selected="backlogDType == selectedBacklog.backlogType" ng-repeat="backlogType in backlogCreateTypes" >{{backlogType.typeName}}</option>
+					</select>
+					
+					<div class="btn-group quickEdit" role="group">
+						<button type="button" class="close" data-toggle="tooltip" ng-click="retain()" data-placement="bottom" title="Retain Title" style="padding-right:5px"><small><i class="glyphicon glyphicon-remove"></i></small></button>
+						<button type="button" class="close" data-toggle="tooltip" ng-click="updateType()" data-placement="bottom" title="Update Title" style="padding-right:10px"><small><i class="glyphicon glyphicon-ok"></i></small></button>
+					</div>
+				</div>
+			</div>
+			
+			<div class="form-group" >
+				<label class="col-sm-4 detailLabel">Story Pts.: </label>
+				<div class="col-sm-8 spacing">
+					<input  string-to-number ng-model="backlogDStoryPoint" type="number" class="form-control" name="backlogDSP">
+					<div class="btn-group quickEdit" role="group" aria-label="">
+						<button type="button" class="close" data-toggle="tooltip" ng-click="retain()" data-placement="bottom" title="Retain Title" style="padding-right:5px"><small><i class="glyphicon glyphicon-remove"></i></small></button>
+						<button type="button" class="close" data-toggle="tooltip" ng-click="updateSP()" data-placement="bottom" title="Update Title" style="padding-right:10px"><small><i class="glyphicon glyphicon-ok"></i></small></button>
+					</div>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label class="col-sm-4 detailLabel">Business Value: </label>
+				<div class="col-sm-8 spacing">
+					<input  string-to-number ng-model="backlogDBusinessValue" type="number" class="form-control" name="backlogDBV">
+					<div class="btn-group quickEdit" role="group" aria-label="">
+						<button type="button" class="close" data-toggle="tooltip" ng-click="retain()" data-placement="bottom" title="Retain Title" style="padding-right:5px"><small><i class="glyphicon glyphicon-remove"></i></small></button>
+						<button type="button" class="close" data-toggle="tooltip" ng-click="updateBV()" data-placement="bottom" title="Update Title" style="padding-right:10px"><small><i class="glyphicon glyphicon-ok"></i></small></button>
+					</div>
+				</div>
+			</div>
+			
+			
+		
+		</div><!-- end col-xs-6 (left) -->
+		
+		<div class="col-xs-5">
+			<div class="form-group">
+				<label class="col-sm-5 detailLabel">Status: </label>
+				<label class="col-sm-7 detailLabel spacing">{{selectedBacklog.backlogStatus}}</label>
+			</div>
+			
+			<div class="form-group">
+				<label class="col-sm-5 detailLabel">Date Created: </label>
+				<label class="col-sm-7 detailLabel spacing">{{selectedBacklog.dateCreated}}</label>
+			</div>
+			
+			<div class="form-group">
+				<label class="col-sm-5 detailLabel">Date Modified: </label>
+				<label class="col-sm-7 detailLabel spacing">{{selectedBacklog.dateModified}}</label>
+			</div>
+			
+			<div class="form-group">
+				<label class="col-sm-5 detailLabel">Owner:</label>
+				<label class="col-sm-7 detailLabel spacing">{{selectedBacklog.backlogCreator}}</label>
+			</div>
+			
+			<div class="form-group">
+				<label class="col-sm-5 detailLabel">Assignees: </label>
+				<label class="col-sm-7 detailLabel spacing">{{backlogAssignee}}</label>
+			</div>
+			
+		</div> <!-- end col-xs-6 (right) -->
+		<div class="form-group">
+			<div class="col-md-12">
+				<label class="detailLabel">Description</label>
+					<textarea ng-model="backlogDDesc" class="form-control" rows="4" name="backlogDDesc"></textarea>
+					<div class="btn-group quickEdit" role="group">
+						<button type="button" class="close" data-toggle="tooltip" ng-click="retain()" data-placement="bottom" title="Retain Title" style="padding-right:5px"><small><i class="glyphicon glyphicon-remove"></i></small></button>
+						<button type="button" class="close" data-toggle="tooltip" ng-click="updateDesc()" data-placement="bottom" title="Update Title" style="padding-right:10px"><small><i class="glyphicon glyphicon-ok"></i></small></button>
+					</div>
+			</div>
+		</div>
+	</div> <!-- row  1-->
+	<hr>
+	<div class="row" id="taskIssues">
+		<h4> Tasks </h4>
+			<div class="taskItem" ng-repeat="task in taskLists">
+				<div class="taskItemHeader">
+					<div class="taskInfo">
+						<span class="taskItemTitle" ng-style="taskLabelling(task.tasksStatus)"><a href="" ng-click="toggleTask(task)" ng-init="toggleTask(taskLists[0])">{{task.tasksTitle}}</a> </span><span ng-class="labelling(task.tasksStatus)">{{task.tasksStatus}}</span>
+						
+						<div class="taskInfoDetails">
+							<span class="minimize"> <span ng-if="task.assignee != 'Unassigned'">Assigned to:</span> {{task.assignee}}</span>
+						</div>
+					</div>
+				</div>
+			</div>
+	</div> <!-- row for tasks -->
+	<hr>
+	
+	<div class="row" id="commentIssues">
+		<h4> Backlog Comments </h4>
+		<div ng-repeat="comment in commentLists track by $index">
+			<div class="panel panel-info" >
+				<div class="panel-heading">
+				<div class="panelHeader">
+					<span class="panelTitle">{{comment.email}} - {{comment.dateComment}}</span>
+					<div class="dropdown panelOptions">
+						<i ng-show="{{comment.email == userEmail}}" data-toggle="dropdown" id="dropdown" class="glyphicon glyphicon-menu-hamburger" role="button" ></i>
+						<ul class="dropdown-menu dropdown-menu-right">
+							<li><a href="" ng-click="editComment(comment)"><i class="glyphicon glyphicon-edit"></i> Edit 
+							Comment</a></li>
+							<li><a href="" ng-click="deleteComment(comment, $index)"><i class="glyphicon glyphicon-remove"></i> Delete Comment</a></li>
+						</ul>
+					</div>
+					
+				</div>
+				</div>
+				<textarea class="form-control" readonly rows="4" ng-model="comment.comment" ></textarea>
+			</div>
+		</div>
+			<textarea ng-model="backlogDComment" rows="4" class="form-control" name="backlogNComment"></textarea>
+			<br>
+			<button style="float:right" ng-disabled="!backlogDComment" ng-click="comment()" class="btn btn-default">Comment Backlog</button>
+	</div> <!-- row for tasks -->
+	<br>
+	<hr>
+	
+	</div> <!--col-md-8 main issue left-->
+	<div ng-class="taskLists.length>0 ? 'col-md-4':'hidden'" id="sideTask">
+		<task-details></task-details>
+	</div> <!--col-md-4 main issue right (sidebar)-->
+</div>

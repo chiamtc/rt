@@ -8,7 +8,7 @@
 		<form class="form-horizontal">
 			<h5 class="detailHeader">General Details </h5>
 				<div class="form-group">
-					<label class="col-sm-4 detailLabel"> Title</label>
+					<label class="col-sm-4 detailLabel">Title: </label>
 					<div class="col-sm-8">
 						<input ng-model="taskDTitle" ng-value="" type="text" class="form-control" name="taskTitle">
 						<div class="btn-group quickEdit" role="group" aria-label="">
@@ -19,13 +19,13 @@
 				</div>
 								
 				<div class="form-group">
-					<label class="col-sm-4 detailLabel">Status </label>
+					<label class="col-sm-4 detailLabel">Status: </label>
 					<label class="col-sm-8 detailLabel"><span  id="taskLabelling" ng-class="labelling(taskDStatus)">{{taskDStatus}}</span></label>
 				</div>
 				
 				<div class="form-group">
 					<div class="col-md-12">
-						<label class="detailLabel">Description</label>
+						<label class="detailLabel">Description: </label>
 							<textarea ng-model="taskDDesc" class="form-control" rows="4" name="taskDesc"></textarea>
 								
 							<div class="btn-group quickEdit" role="group">
@@ -39,7 +39,7 @@
 				
 				<h5 class="detailHeader">People</h5>				
 				<div class="form-group">
-					<label class="col-sm-4 detailLabel">Assignees</label>
+					<label class="col-sm-4 detailLabel">Assignees: </label>
 					<div class="col-sm-8">
 						<select class="form-control" ng-model="taskDAssignee">
 							<option value="Unassigned">Unassigned</option>
@@ -57,17 +57,17 @@
 				
 				<h5 class="detailHeader">Dates </h5>
 					<div class="form-group">
-						<label class="col-sm-4 detailLabel">Created on</label>
+						<label class="col-sm-4 detailLabel">Created on: </label>
 						<label class="col-sm-8">{{passTask.dateCreated}}</label>
 					</div>
 					
 					<div class="form-group">
-						<label class="col-sm-4 detailLabel">Modified on</label>
+						<label class="col-sm-4 detailLabel">Modified on: </label>
 						<label class="col-sm-8"> {{passTask.dateModified}}</label>
 					</div>
 				
 				<hr>
-				<h5 class="detailHeader">Comments </h5>
+				<h5 class="detailHeader"> Task Comments </h5>
 			
 				<div ng-repeat="comment in taskCommentLists track by $index">
 					<div class="panel panel-info" >
@@ -92,7 +92,7 @@
 					<div class="col-md-12">
 					<textarea ng-model="tasksDComment" rows="4" class="form-control" name="backlogNComment"></textarea>
 					<br>
-					<button style="float:right" ng-disabled="!tasksDComment" ng-click="commentTask()" class="btn btn-default">Comment</button>
+					<button style="float:right" ng-disabled="!tasksDComment" ng-click="commentTask()" class="btn btn-default">Comment Task</button>
 					</div>
 				</div>
 			<br>

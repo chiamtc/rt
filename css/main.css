@@ -875,3 +875,77 @@ fieldset[disabled] .form-control {
 .activeSprintItemDetails{
 	line-height:20px;
 }
+
+/** issues.html begins**/
+#issues-container{
+	padding:10px;
+	padding-right:0px;
+}
+
+#main-issues{
+	padding-right:0px;
+}
+
+#issue-header{
+	margin:0px;
+}
+
+.header{
+	font-size: 20px;
+}
+
+#side-issues{
+	overflow-y:scroll;
+}
+
+/** issues.html ends**/
+
+::-webkit-scrollbar
+{
+  width: 5px;  /* for vertical scrollbars */
+}
+
+::-webkit-scrollbar-track
+{
+  background: rgba(0, 0, 0, 0.1);
+  
+}
+
+::-webkit-scrollbar-thumb
+{
+  background: rgba(0, 0, 0, 0.5);
+}
+
+/** main-issues.html begins **/
+#mainIssues{
+	padding:10px;
+}
+
+#taskIssues{
+	padding-right:15px;
+}
+
+#commentIssues{
+	padding-right:15px;
+}
+
+#detailIssues{
+	border-right:1px solid #ccc;
+	padding-left:5px;
+}
+
+.spacing{
+	margin-bottom:20px;
+}
+
+/** main-issues.html ends **/
+
+#sideTask{
+	padding-left:15px;
+}
+
+.sidePadding{
+	padding-left:0px;
+	padding-right:0px;
+	
+}

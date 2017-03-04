@@ -276,7 +276,7 @@ angular.module('active-sprint')
 				angular.forEach($scope.backlogActive, function(value,key){
 					$scope.taskActive.push($scope.backlogActive[key].tasks);
 					
-				}); 
+				});
 			break;
 			
 			case 0:

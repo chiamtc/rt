@@ -13,7 +13,7 @@ angular.module('task-details')
 	$scope.snackbarShow = false;
 	
 	/** UI function(s) **/
-	$scope.toggle = function(task){
+	$scope.toggleTask = function(task){
 		$scope.colSize = true;
 		$scope.passTask = task;
 		$scope.taskDTitle = task.tasksTitle;
@@ -93,6 +93,7 @@ angular.module('task-details')
 	
 	$scope.updateTaskTitle = function(){
 		TaskDetailsService.UpdateTaskTitle($scope.taskDTitle, $scope.passTask.tasksId,$scope.passTask.backlogId, function(response){
+			console.log($scope.taskDTitle + " " + $scope.passTask.tasksId + " " + $scope.passTask.backlogId);
 			switch(response.success){
 				case 1:
 					$scope.snackbarShow = !$scope.snackbarShow;
@@ -107,6 +108,7 @@ angular.module('task-details')
 				break;
 				
 				case 0:
+				console.log(response.data);
 					$scope.snackbarShow = !$scope.snackbarShow;
 					$scope.snackbarClass= "alert alert-danger alert-dismissible snackbar";
 					$scope.snackbarMessage = "Something is wrong! :X ";

@@ -1,0 +1,37 @@
+<span><button class="btn btn-default"><i class="glyphicon glyphicon-sort"></i></button></span>
+<div class="list-group">
+	<h4>Active Sprint</h4>
+	<a href="" ng-click="toggle(backlog)" ng-init="toggle(activeBacklog[0])" class="list-group-item" ng-show="backlog.drag" ng-repeat="backlog in activeBacklog">
+		<h4 class="list-group-item-heading issueTitle">{{backlog.backlogTitle}}</h4>
+		<h6 class="label label-primary">{{backlog.backlogType}}</h6>
+		<h6 style="margin-bottom:0px">
+		<span class="minimize" data-toggle="tooltip" data-placement="bottom" title="Created Since">{{backlog.dateCreated}}</span>
+		<span class="minimize" data-toggle="tooltip" data-placement="bottom" title="Backlog Owner"> - <i class="glyphicon glyphicon-user"></i> {{backlog.backlogCreator}}</span>
+		
+		</h6>
+	</a>
+</div>
+<hr  ng-show="activeBacklog.length>0">
+<div class="list-group" ng-repeat="sprint in inactiveBacklog track by $index">
+	<h4>Inactive Sprint # {{$index + 1}}</h4>
+	<a href="" ng-click="toggle(backlog)" class="list-group-item" ng-show="backlog.drag" ng-repeat="backlog in sprint.backlogs">
+		<h4 class="list-group-item-heading issueTitle">{{backlog.backlogTitle}}</h4>
+		<h6 class="label label-primary">{{backlog.backlogType}}</h6>
+		<h6 style="margin-bottom:0px">
+		<span class="minimize" data-toggle="tooltip" data-placement="bottom" title="Created Since">{{backlog.dateCreated}}</span>
+		<span class="minimize" data-toggle="tooltip" data-placement="bottom" title="Backlog Owner"> - <i class="glyphicon glyphicon-user"></i> {{backlog.backlogCreator}}</span>
+		</h6>
+	</a>
+</div>
+<hr ng-show="inactiveBacklog.length>0">
+<div class="list-group" >
+	<h4>Unassigned Backlogs</h4>
+	<a href="" ng-click="toggle(backlog)" class="list-group-item" ng-repeat="backlog in backlogLists">
+		<h4 class="list-group-item-heading issueTitle">{{backlog.backlogTitle}}</h4>
+		<h6 class="label label-primary">{{backlog.backlogType}}</h6>
+		<h6 style="margin-bottom:0px">
+		<span class="minimize" data-toggle="tooltip" data-placement="bottom" title="Created Since">{{backlog.dateCreated}}</span>
+		<span class="minimize" data-toggle="tooltip" data-placement="bottom" title="Backlog Owner"> - <i class="glyphicon glyphicon-user"></i> {{backlog.backlogCreator}}</span>
+		</h6>
+	</a>
+</div>

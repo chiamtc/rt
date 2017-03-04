@@ -132,6 +132,8 @@
 						
 						<div class="taskInfoDetails">
 							<span class="minimize"> <span ng-if="task.assignee != 'Unassigned'"> Assigned to:</span> {{task.assignee}}</span>
+							<br>
+							<span class="minimize">Modified since: {{task.dateModified}}</span>
 						</div>
 					</div>
 					
@@ -146,7 +148,7 @@
 				</div>
 			</div>
 		<hr>
-		<h5 class="detailHeader">Comments </h5>
+		<h5 class="detailHeader"> Backlog Comments </h5>
 		
 		<div ng-repeat="comment in commentLists track by $index">
 			<div class="panel panel-info" >
@@ -171,7 +173,7 @@
 			<div class="col-md-12">
 			<textarea ng-model="backlogDComment" rows="4" class="form-control" name="backlogNComment"></textarea>
 			<br>
-			<button style="float:right" ng-disabled="!backlogDComment" ng-click="comment()" class="btn btn-default">Comment</button>
+			<button style="float:right" ng-disabled="!backlogDComment" ng-click="comment()" class="btn btn-default">Comment Backlog</button>
 			</div>
 		</div>
 		<br>

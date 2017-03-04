@@ -95,7 +95,11 @@ angular.module('backlog-details')
 			},
 			headers: {'Content-Type':'application/json'}
 		}).then(function(response){
-			
+			console.log(response.data);
+			angular.forEach(response.data.tasks,function(value,key){
+				value.dateCreated = moment(value.dateCreated).fromNow();
+				value.dateModified = moment(value.dateModified).fromNow();
+			});
 			callback(response.data);
 		});
 	}
