@@ -11,7 +11,11 @@
 		</div>
 	</div>
 	<hr>
+<<<<<<< HEAD
 	<div ng-class="taskLists.length>0 ? 'col-md-8': 'col-md-12'" id="detailIssues">
+=======
+	<div class="col-md-8">
+>>>>>>> 63b08976d6018f6431705f547af9a9a690221b69
 	
 	<div class="row">
 	<h4> General Details </h4>
@@ -87,6 +91,10 @@
 			<div class="col-md-12">
 				<label class="detailLabel">Description</label>
 					<textarea ng-model="backlogDDesc" class="form-control" rows="4" name="backlogDDesc"></textarea>
+<<<<<<< HEAD
+=======
+							
+>>>>>>> 63b08976d6018f6431705f547af9a9a690221b69
 					<div class="btn-group quickEdit" role="group">
 						<button type="button" class="close" data-toggle="tooltip" ng-click="retain()" data-placement="bottom" title="Retain Title" style="padding-right:5px"><small><i class="glyphicon glyphicon-remove"></i></small></button>
 						<button type="button" class="close" data-toggle="tooltip" ng-click="updateDesc()" data-placement="bottom" title="Update Title" style="padding-right:10px"><small><i class="glyphicon glyphicon-ok"></i></small></button>
@@ -95,15 +103,26 @@
 		</div>
 	</div> <!-- row  1-->
 	<hr>
+<<<<<<< HEAD
 	<div class="row" id="taskIssues">
+=======
+	<div class="row">
+>>>>>>> 63b08976d6018f6431705f547af9a9a690221b69
 		<h4> Tasks </h4>
 			<div class="taskItem" ng-repeat="task in taskLists">
 				<div class="taskItemHeader">
 					<div class="taskInfo">
+<<<<<<< HEAD
 						<span class="taskItemTitle" ng-style="taskLabelling(task.tasksStatus)"><a href="" ng-click="toggleTask(task)" ng-init="toggleTask(taskLists[0])">{{task.tasksTitle}}</a> </span><span ng-class="labelling(task.tasksStatus)">{{task.tasksStatus}}</span>
 						
 						<div class="taskInfoDetails">
 							<span class="minimize"> <span ng-if="task.assignee != 'Unassigned'">Assigned to:</span> {{task.assignee}}</span>
+=======
+						<span class="taskItemTitle" ng-style="taskLabelling(task.tasksStatus)"><a href="" ng-click="toggleTask(taskList[0])" ng-init="toggleTask(taskList[0])">{{task.tasksTitle}}</a> </span><span ng-class="labelling(task.tasksStatus)">{{task.tasksStatus}}</span>
+						
+						<div class="taskInfoDetails">
+							<span class="minimize"> <span ng-if="task.assignee != 'Unassigned'"> Assigned to:</span> {{task.assignee}}</span>
+>>>>>>> 63b08976d6018f6431705f547af9a9a690221b69
 						</div>
 					</div>
 				</div>
@@ -111,8 +130,13 @@
 	</div> <!-- row for tasks -->
 	<hr>
 	
+<<<<<<< HEAD
 	<div class="row" id="commentIssues">
 		<h4> Backlog Comments </h4>
+=======
+	<div class="row">
+		<h4> Comments </h4>
+>>>>>>> 63b08976d6018f6431705f547af9a9a690221b69
 		<div ng-repeat="comment in commentLists track by $index">
 			<div class="panel panel-info" >
 				<div class="panel-heading">
@@ -134,13 +158,22 @@
 		</div>
 			<textarea ng-model="backlogDComment" rows="4" class="form-control" name="backlogNComment"></textarea>
 			<br>
+<<<<<<< HEAD
 			<button style="float:right" ng-disabled="!backlogDComment" ng-click="comment()" class="btn btn-default">Comment Backlog</button>
+=======
+			<button style="float:right" ng-disabled="!backlogDComment" ng-click="comment()" class="btn btn-default">Comment</button>
+>>>>>>> 63b08976d6018f6431705f547af9a9a690221b69
 	</div> <!-- row for tasks -->
 	<br>
 	<hr>
 	
 	</div> <!--col-md-8 main issue left-->
+<<<<<<< HEAD
 	<div ng-class="taskLists.length>0 ? 'col-md-4':'hidden'" id="sideTask">
 		<task-details></task-details>
+=======
+	<div class="col-md-4" id="sideTask">
+		
+>>>>>>> 63b08976d6018f6431705f547af9a9a690221b69
 	</div> <!--col-md-4 main issue right (sidebar)-->
 </div>

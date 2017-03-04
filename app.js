@@ -10,12 +10,21 @@ angular.module('backlog',[]);
 angular.module('sprint',[]);
 angular.module('backlog-details',[]);
 angular.module('active-sprint',[]);
+<<<<<<< HEAD
 angular.module('task-details',[]);
 angular.module('review',[]);
 angular.module('analytics',[]);
 angular.module('issues',[]);
 angular.module('side-issues',[]);
 angular.module('main-issues',[]);
+=======
+angular.module('task-details',[]),
+angular.module('review',[]),
+angular.module('analytics',[]),
+angular.module('issues',[]),
+angular.module('side-issues',[]),
+angular.module('main-issues',[]),
+>>>>>>> 63b08976d6018f6431705f547af9a9a690221b69
 
 angular.module('reApp',['header','login','home','register','project','sidebar','backlog','sprint','backlog-details','active-sprint','task-details','review','analytics','issues','side-issues','main-issues','ngDragDrop','ngRoute','ngCookies', 'ngMessages','chart.js'])
 

@@ -876,6 +876,7 @@ fieldset[disabled] .form-control {
 	line-height:20px;
 }
 
+<<<<<<< HEAD
 /** issues.html begins**/
 #issues-container{
 	padding:10px;
@@ -884,6 +885,10 @@ fieldset[disabled] .form-control {
 
 #main-issues{
 	padding-right:0px;
+=======
+#issues-container{
+	padding:10px;
+>>>>>>> 63b08976d6018f6431705f547af9a9a690221b69
 }
 
 #issue-header{
@@ -898,8 +903,11 @@ fieldset[disabled] .form-control {
 	overflow-y:scroll;
 }
 
+<<<<<<< HEAD
 /** issues.html ends**/
 
+=======
+>>>>>>> 63b08976d6018f6431705f547af9a9a690221b69
 ::-webkit-scrollbar
 {
   width: 5px;  /* for vertical scrollbars */
@@ -916,11 +924,15 @@ fieldset[disabled] .form-control {
   background: rgba(0, 0, 0, 0.5);
 }
 
+<<<<<<< HEAD
 /** main-issues.html begins **/
+=======
+>>>>>>> 63b08976d6018f6431705f547af9a9a690221b69
 #mainIssues{
 	padding:10px;
 }
 
+<<<<<<< HEAD
 #taskIssues{
 	padding-right:15px;
 }
@@ -934,10 +946,13 @@ fieldset[disabled] .form-control {
 	padding-left:5px;
 }
 
+=======
+>>>>>>> 63b08976d6018f6431705f547af9a9a690221b69
 .spacing{
 	margin-bottom:20px;
 }
 
+<<<<<<< HEAD
 /** main-issues.html ends **/
 
 #sideTask{
@@ -948,4 +963,8 @@ fieldset[disabled] .form-control {
 	padding-left:0px;
 	padding-right:0px;
 	
+=======
+#sideTask{
+	border-left:1px solid #ccc;
+>>>>>>> 63b08976d6018f6431705f547af9a9a690221b69
 }
