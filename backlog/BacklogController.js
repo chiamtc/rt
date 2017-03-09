@@ -27,14 +27,15 @@ angular.module('backlog')
 	$scope.startCallback = function(event, ui, title){
 		console.log('You started draggin: ' + title.backlogId + " status"+ title.backlogStatus);
 		$scope.draggedTitle = title.backlogId;
+		$scope.draggedBacklog = title;
 		$scope.draggedStatus = title.backlogStatus;
 	};
 	
-	$scope.dropCallback = function(event, ui) {
+	$scope.dropCallback = function(event, ui,item) {
 		NProgress.start();
 		$scope.backlogListsClass ="backlogLists";
 		console.log('hey, you dumped me :-(' , $scope.draggedTitle, 'from sc12', $scope.draggedStatus);
-		SprintService.UpdateSprint(0, $scope.draggedTitle, $scope.draggedStatus, function(response){
+		SprintService.UpdateSprint(0, $scope.draggedBacklog, $scope.draggedActiveSprintId, function(response){
 			console.log(0 + " " + $scope.draggedTitle2);
 			switch(response.success){
 				case 1:

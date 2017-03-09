@@ -14,13 +14,12 @@ angular.module('home')
 				projectName : projectName,
 				projectDesc : projectDesc,
 				projectKey: projectKey,
-				dateCreated: moment().format(),
+				dateCreated: moment().format('YYYY-MM-DD HH:mm:ss'),
 			},
 			headers: { 'Content-Type' : 'application/json' }
 		}).then(function(response){
 			angular.forEach(response.data.project, function(value, key){
 				value.dateCreated = moment(value.dateCreated).format("D MMMM YYYY");
-				
 			});
 			callback(response.data);
 		}); //end then

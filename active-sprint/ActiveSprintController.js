@@ -2,7 +2,7 @@
 
 angular.module('active-sprint')
 
-.controller('ActiveSprintController',['$timeout','$scope','ProjectService','ActiveSprintService','$http', '$routeParams', '$cookies', function($timeout, $scope,ProjectService, ActiveSprintService,$http, $routeParams, $cookies){
+.controller('ActiveSprintController',['$timeout','AnalyticsService','$scope','ProjectService','ActiveSprintService','$http', '$routeParams', '$cookies', function($timeout, AnalyticsService,$scope,ProjectService, ActiveSprintService,$http, $routeParams, $cookies){
 	/** fancy starts **/
 	NProgress.start();
 	NProgress.done();
@@ -145,8 +145,8 @@ angular.module('active-sprint')
 	};
 	
 	$scope.dropCallback5 = function(event, ui, item) {
-		console.log("Tasks title: "  + $scope.draggedTitle.tasksTitle+ " status:" + $scope.draggedTitle.tasksStatus + " and "+ item); 
-		if($scope.draggedId != item ){
+		console.log("Tasks title: "  + $scope.draggedTitle.tasksTitle+ " status:" + $scope.draggedTitle.tasksStatus + " and "+ item.backlogId); 
+		if($scope.draggedId != item.backlogId ){
 			ActiveSprintService.ListActiveBacklogsTasks(function(response){
 				switch(response.success){
 					case 1:
@@ -169,7 +169,7 @@ angular.module('active-sprint')
 				}
 			});
 		}else{
-			ActiveSprintService.UpdateInProgress($scope.draggedTitle.tasksId, item, function(response){
+			ActiveSprintService.UpdateInProgress($scope.draggedTitle.tasksId, item.backlogId, function(response){
 				console.log(response);
 				switch(response.success){
 					case 1:
@@ -193,8 +193,8 @@ angular.module('active-sprint')
 	};
 	
 	$scope.dropCallback6 = function(event, ui, item) {
-		console.log("Tasks title: "  + $scope.draggedTitle.tasksTitle+ " status:" + $scope.draggedTitle.tasksStatus + " and "+ item); 
-		if($scope.draggedId != item ){
+		console.log("Tasks title: "  + $scope.draggedTitle.tasksTitle+ " status:" + $scope.draggedTitle.tasksStatus + " and "+ item.backlogId); 
+		if($scope.draggedId != item.backlogId ){
 			ActiveSprintService.ListActiveBacklogsTasks(function(response){
 				switch(response.success){
 					case 1:
@@ -217,16 +217,27 @@ angular.module('active-sprint')
 				}
 			});
 		}else{
-			ActiveSprintService.UpdateDone($scope.draggedTitle.tasksId, item, function(response){
-				console.log(response);
+			ActiveSprintService.UpdateDone($scope.draggedTitle.tasksId, item.backlogId, function(response){
+				
 				switch(response.success){
 					case 1:
+					console.log($scope.activeSprints);
 						$scope.snackbarShow = !$scope.snackbarShow;
 						$scope.draggedTitle.dateModified = response.dateModified;
 						$scope.draggedTitle.tasksStatus = "Done";
 						$scope.taskDStatus = "Done";
 						$scope.snackbarClass= "alert alert-success alert-dismissible snackbar";
 						$scope.snackbarMessage = "Task Progress Updated ! ";
+						$scope.backlogDone = 0;
+						angular.forEach(item.tasks, function(v,k){
+							if(v.tasksStatus == 'Done'){
+								$scope.backlogDone++;
+							}
+						});
+						if(item.tasks.length == $scope.backlogDone){
+							console.log($scope.activeSprints[0].sprintId);
+							AnalyticsService.UpdateBurnDown($scope.activeSprints[0].sprintId, item.backlogBusinessValue, item.backlogStoryPoint);
+						}
 						
 						$timeout(function(){
 							$scope.snackbarShow = !$scope.snackbarShow;
@@ -243,7 +254,6 @@ angular.module('active-sprint')
 	ActiveSprintService.ListActiveBacklogsTasks(function(response){
 		switch(response.success){
 			case 1:
-				
 				$scope.sprintGoal = response.activeSprints[0].sprintGoal;
 				var startDate = moment(response.activeSprints[0].sprintStartDate);
 				var endDate = moment(response.activeSprints[0].sprintEndDate);
@@ -269,13 +279,14 @@ angular.module('active-sprint')
 				
 				$scope.goneNumberDays = goneDays;
 				$scope.activeSprints = response.activeSprints;
+				
 				angular.forEach(response.activeSprints[0], function(value, key){
 					$scope.backlogActive = value;
 				});
 				
 				angular.forEach($scope.backlogActive, function(value,key){
-					$scope.taskActive.push($scope.backlogActive[key].tasks);
 					
+					$scope.taskActive.push($scope.backlogActive[key].tasks);
 				});
 			break;
 			

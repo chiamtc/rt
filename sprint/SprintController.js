@@ -16,12 +16,10 @@ angular.module('sprint')
 	/** date format **/
 	//var a = new Date(Date.parse("2017-02-08T14:00:00.000Z"));
 	
-	$scope.startCallback2 = function(event, ui, sc2){
+	$scope.startCallback2 = function(event, ui, sc2,activeSprintId){
 		console.log('You started draggin: ' + sc2.backlogId + sc2.backlogStatus);
-		$scope.draggedTitle= sc2.backlogId;
-		$scope.draggedStatus = sc2.backlogStatus;
-		$scope.backlogTotalPoint =  $scope.backlogTotalPoint - sc2.backlogStoryPoint;
-		$scope.backlogTotalBV =  $scope.backlogTotalBV - sc2.backlogBusinessValue;
+		$scope.draggedActiveSprintId = activeSprintId;
+		$scope.draggedBacklog = sc2;
 	};
 
 	$scope.dropCallback2 = function(event, ui, item) {
@@ -34,7 +32,7 @@ angular.module('sprint')
 		}else{
 			$scope.sprintListsClass = "sprintLists";
 			console.log('sprintId' , item,' backlogId',$scope.draggedTitle, $scope.draggedStatus);
-			SprintService.UpdateSprint(item, $scope.draggedTitle, $scope.draggedStatus, function(response){
+			SprintService.UpdateSprint(item, $scope.draggedBacklog, $scope.draggedActiveSprintId,function(response){
 				NProgress.start();
 				NProgress.set(0.7);
 				NProgress.done();
@@ -51,25 +49,28 @@ angular.module('sprint')
 		if($scope.sprintListsActive.length == 0){
 			$scope.sprintListsClass= "sprintListsEmpty";
 		}else{
-			$scope.sprintListsClass = "sprintLists";
-			console.log('sprintId' , item,' backlogId',$scope.draggedTitle);
-			SprintService.UpdateActiveSprint(item, $scope.draggedTitle, $scope.draggedStatus,function(response){
-				NProgress.start();
-				NProgress.set(0.7);
-				NProgress.done();
-				console.log(response.activeSprints);
-				$scope.sprintListsActive = response.activeSprints;
-				
-				$scope.backlogTotalPoint = response.activeSprints.backlogTotalPoint;
-				$scope.backlogTotalBV = response.activeSprints.backlogTotalBV;
-				console.log($scope.sprintListsActive);
-			});
+			if($scope.draggedActiveSprintId == item){
+				console.log($scope.draggedActiveSprintId == item);
+			}else{
+				$scope.sprintListsClass = "sprintLists";
+				console.log('sprintId ACTIVE?' + $scope.draggedActiveSprintId);
+				SprintService.UpdateActiveSprint(item, $scope.draggedBacklog,$scope.draggedActiveSprintId, function(response){
+					NProgress.start();
+					NProgress.set(0.7);
+					NProgress.done();
+					console.log(response.activeSprints);
+					$scope.sprintListsActive = response.activeSprints;
+					
+					
+				});
+			}
 		}
 	};
 	
-	$scope.startSprint = function(sprintId){
-		console.log($scope.sprintLists);
-		SprintService.StartSprint(sprintId , function(response){
+	$scope.startSprint = function(sprint){
+		console.log(sprint);
+		console.log(moment(sprint.sprintStartDate).format('YYYY-MM-DD'));
+		SprintService.StartSprint(sprint,function(response){
 			switch(response.success){
 				case 0:
 					console.log(response);
@@ -97,6 +98,8 @@ angular.module('sprint')
 								$scope.sprintListsClass="sprintLists";
 								$scope.sprintListsActive = response.activeSprints;
 								console.log(response);
+								$scope.backlogTotalPoint = response.activeSprints.backlogTotalPoint;
+								$scope.backlogTotalBV = response.activeSprints.backlogTotalBV;
 							break;
 							
 							case 0:
@@ -109,6 +112,7 @@ angular.module('sprint')
 				$scope.snackbarShow = !$scope.snackbarShow;
 				$scope.snackbarClass= "alert alert-success alert-dismissible snackbar";
 				$scope.snackbarMessage = "Sprint has activated ! ";
+				
 				$timeout(function(){
 					$scope.snackbarShow = !$scope.snackbarShow;
 				},3000);
@@ -126,7 +130,10 @@ angular.module('sprint')
 	}
 	
 	$scope.updateSprintDetails = function(){
-		SprintService.UpdateSprintDetails($scope.sprintEditId, $scope.sprintEditGoal, $scope.sprintEditStartDate, $scope.sprintEditEndDate, function(response){
+		var startDate = moment($scope.sprintEditStartDate).format('YYYY-MM-DD HH:mm:ss');
+		var endDate = moment($scope.sprintEditEndDate).format('YYYY-MM-DD HH:mm:ss');
+		
+		SprintService.UpdateSprintDetails($scope.sprintEditId, $scope.sprintEditGoal,startDate, endDate, function(response){
 			NProgress.start();
 			$scope.editSprintResponse = !$scope.editSprintResponse;
 			switch(response.success){
@@ -264,11 +271,12 @@ angular.module('sprint')
 			$scope.createSprintResponseMessage = "Start date is later than end date 2";
 		}else{
 			console.log($scope.sprintStartDate);
-			/* var startDate = moment($scope.sprintStartDate).format('DD/MM/YYYY');
-			var endDate = moment($scope.sprintEndDate).format('DD/MM/YYYY');
-			console.log((moment.duration($scope.sprintEndDate - $scope.sprintStartDate)).humanize()); */
-			SprintService.CreateSprint($scope.sprintGoal, $scope.sprintStartDate, $scope.sprintEndDate, function(response){
-				console.log(response);
+			var startDate = moment($scope.sprintStartDate).format('YYYY-MM-DD');
+			var endDate = moment($scope.sprintEndDate).format('YYYY-MM-DD');
+			
+			//var endDate = moment($scope.sprintEndDate).format('DD/MM/YYYY');
+			//console.log((moment.duration($scope.sprintEndDate - $scope.sprintStartDate)).humanize());
+			SprintService.CreateSprint($scope.sprintGoal, startDate, endDate, function(response){
 				switch(response.success){
 				case 0:
 					$scope.createSprintResponseClass ="alert alert-danger";

@@ -19,6 +19,10 @@ if(!empty($projectKey)){
  			$sprint["sprintGoal"] = $rowGetSprint["sprintGoal"];
 			$sprint["sprintStartDate"] = $rowGetSprint["sprintStartDate"];
 			$sprint["sprintEndDate"] = $rowGetSprint["sprintEndDate"];
+			$sprint["backlogTotalSP"] = $rowGetSprint["backlogTotalSP"];
+			$sprint["backlogRemainSP"] = $rowGetSprint["backlogRemainSP"];
+			$sprint["backlogTotalBV"] = $rowGetSprint["backlogTotalBV"];
+			$sprint["backlogRemainBV"] = $rowGetSprint["backlogRemainBV"];
 			
 			$getSprintBacklogSql = "Select * from `backlog` where `sprintId` =". $sprint["sprintId"]. ";";
 			$resultsBacklogSprint = $conn ->query($getSprintBacklogSql);

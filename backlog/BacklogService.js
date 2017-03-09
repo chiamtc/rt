@@ -17,8 +17,8 @@ angular.module('backlog')
 				backlogStoryPoint : backlogStoryPoint,
 				backlogCreator: backlogCreator,
 				backlogBusinessValue:backlogBusinessValue,
-				dateCreated : moment().format(),
-				dateModified : moment().format(),
+				dateCreated : moment().format('YYYY-MM-DD HH:mm:ss'),
+				dateModified : moment().format('YYYY-MM-DD HH:mm:ss'),
 				projectKey : $routeParams.projectKey,
 			},
 			headers :{ 'Content-Type' : 'application/json' }

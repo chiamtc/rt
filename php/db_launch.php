@@ -77,6 +77,10 @@ $sqltbl5 = "CREATE TABLE sprint(
             sprintGoal text NOT NULL,
 			sprintStartDate varchar(255),
 			sprintEndDate varchar(255),
+			backlogTotalSP float(10,1) unsigned NOT NULL,
+			backlogRemainSP float(10,1) unsigned NOT NULL,
+			backlogTotalBV float(10,1) unsigned NOT NULL,
+			backlogRemainBV float(10,1) unsigned NOT NULL,
 			projectKey varchar(255) NOT NULL,
 			PRIMARY KEY(sprintId),
 			FOREIGN KEY (projectKey) REFERENCES project(projectKey)
@@ -192,6 +196,22 @@ if($conn -> query($sqltbl13)){
     echo "tbl review created<br>";
 }else{
     echo "tbl review failed <br>";
+}
+
+$sqltbl14 = "create table analytics(
+			analyticsId int not null AUTO_INCREMENT,
+			eachDay varchar(255) NOT NULL,
+			backlogRemainSP float(10,1) unsigned NOT NULL,
+			backlogRemainBV float(10,1) unsigned NOT NULL,
+			sprintId int not null,
+			PRIMARY KEY (analyticsId,sprintId),
+			FOREIGN KEY(sprintId) REFERENCES sprint(sprintId)
+			)";
+			
+if($conn -> query($sqltbl14)){
+    echo "tbl analytics created<br>";
+}else{
+    echo "tbl analytics failed <br>";
 }
 $conn->close();
 ?>

@@ -13,7 +13,7 @@ angular.module('task-details')
 				tasksTitle : taskTitle,
 				taskId : taskId,
 				backlogId:backlogId,
-				dateModified : moment().format(),
+				dateModified : moment().format('YYYY-MM-DD HH:mm:ss'),
 			},
 			headers : { 'Content-Type' : 'application/json'}
 		}).then(function(response){
@@ -43,7 +43,7 @@ angular.module('task-details')
 				tasksId:tasksId,
 				assignee:assignee,
 				backlogId:backlogId,
-				dateModified : moment().format(),
+				dateModified : moment().format('YYYY-MM-DD HH:mm:ss'),
 			},
 			headers : { 'Content-Type' : 'application/json'}
 		}).then(function(response){
@@ -59,7 +59,7 @@ angular.module('task-details')
 				taskId:taskId,
 				taskDesc : taskDesc,
 				backlogId:backlogId,
-				dateModified : moment().format(),
+				dateModified : moment().format('YYYY-MM-DD HH:mm:ss'),
 			},
 			headers : { 'Content-Type' : 'application/json'}
 		}).then(function(response){
@@ -91,7 +91,7 @@ angular.module('task-details')
 			data:{
 				comment : comment,
 				email:$cookies.get('email'),
-				dateComment : moment().format(),
+				dateComment : moment().format('YYYY-MM-DD HH:mm:ss'),
 				tasksId: tasksId,
 			},
 			headers: {'Content-Type':'application/json'}

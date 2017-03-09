@@ -949,3 +949,25 @@ fieldset[disabled] .form-control {
 	padding-right:0px;
 	
 }
+
+.activeSprintRightDetails{
+
+	display:inline;
+	padding-top:5px;
+	padding-right:5px;
+	
+}
+.analytics{
+	width:95%;
+	height:90%;
+	padding-top:10px;
+}
+
+.analyticsHeader{
+	
+	display:inline-block;
+}
+
+#analytics-container{
+	padding:10px;
+}

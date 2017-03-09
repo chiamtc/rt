@@ -14,7 +14,7 @@ angular.module('register')
 				email: email,
 				password:password,
 				confPassword:confPassword,
-				dateJoined : moment().format(),
+				dateJoined : moment().format('YYYY-MM-DD HH:mm:ss'),
 			},
 			headers: { 'Content-Type': 'application/json' }
 		}).then(function(response){

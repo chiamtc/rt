@@ -11,8 +11,8 @@
 		<div>
 			<span>Active Sprint </span>
 			<span class="badge">{{sprintActive.backlogs.length}} issues </span>
-			<span class="badge">{{backlogTotalPoint}} Total SP</span>
-			<span class="badge">{{backlogTotalBV}} Business Value</span>
+			<span class="badge">{{sprintActive.backlogTotalSP}} Total SP</span>
+			<span class="badge">{{sprintActive.backlogTotalBV}} Business Value</span>
 		</div>
 		<div class="sprintListRight">
 			<div class="dropdown">
@@ -25,7 +25,7 @@
 		</div>
 	</div>
 	<ul class="nav nav-pills nav-stacked dropPlace" data-drop="true" data-jqyoui-options="{ greedy:true}" ng-model="sprintActive.backlogs" jqyoui-droppable="{multiple:true, onDrop:'dropCallback3(sprintActive.sprintId)'}">
-		<li role="presentation" ng-repeat="itemActive in sprintActive.backlogs" data-drag="{{itemActive.drag}}" data-jqyoui-options="{revert:'invalid'}"   ng-model="sprintActive.backlogs" jqyoui-draggable="{index: {{$index}},animate:true, onStart:'startCallback2(itemActive, $index)'}">
+		<li role="presentation" ng-repeat="itemActive in sprintActive.backlogs" data-drag="{{itemActive.drag}}" data-jqyoui-options="{revert:'invalid'}"   ng-model="sprintActive.backlogs" jqyoui-draggable="{index: {{$index}},animate:true, onStart:'startCallback2(itemActive, sprintActive.sprintId,$index)'}">
 		<div class="sprintItem" ng-style="calculateStyle(itemActive)">
 			<div class="sprintItemHeader">
 			<div class="sprintItemHeaderTitle">
@@ -57,7 +57,7 @@
 		</div>
 		<div class="sprintListRight">
 			<div class="dropdown">
-				<button class="btn btn-default" type="button" ng-click="startSprint(sprint.sprintId)" ng-show="sprintListsActive.length ==0">Start Sprint</button>
+				<button class="btn btn-default" type="button" ng-click="startSprint(sprint)" ng-show="sprintListsActive.length ==0">Start Sprint</button>
 				<i role="button" data-toggle="dropdown"  id="dropdown"  class="glyphicon glyphicon-menu-hamburger white" style="font-weight:bold"></i>
 					<ul class="dropdown-menu dropdown-menu-right">
 						<li><a href="" ng-click="passDelete(sprint)" data-toggle="modal" data-target="#sprintDeleteModal"><i class="glyphicon glyphicon-remove"></i> Delete Sprint</a></li>
@@ -66,7 +66,7 @@
 		</div>
 	</div>
 	<ul class="nav nav-pills nav-stacked dropPlace" data-drop="true" data-jqyoui-options="{ greedy:true}" ng-model="sprint.backlogs" jqyoui-droppable="{multiple:true, onDrop:'dropCallback2(sprint.sprintId)'}">
-		<li role="presentation" ng-repeat="item in sprint.backlogs" data-drag="{{item.drag}}" data-jqyoui-options="{revert:'invalid'}"   ng-model="sprint.backlogs" jqyoui-draggable="{index: {{$index}},animate:true, onStart:'startCallback2(item, $index)'}">
+		<li role="presentation" ng-repeat="item in sprint.backlogs" data-drag="{{item.drag}}" data-jqyoui-options="{revert:'invalid'}"   ng-model="sprint.backlogs" jqyoui-draggable="{index: {{$index}},animate:true, onStart:'startCallback2(item, sprint.sprintId, $index)'}">
 		<div class="sprintItem" ng-style="calculateStyle(item)">
 			<div class="sprintItemHeader">
 			<div class="sprintItemHeaderTitle">

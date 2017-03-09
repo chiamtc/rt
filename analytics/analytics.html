@@ -1,10 +1,23 @@
 <project-header></project-header>
 <side-bar></side-bar>
 <div id="main">
-	<div class="col-md-12">
-		<canvas id="line" class="chart chart-line" chart-data="data"
-		chart-labels="labels" chart-series="series" chart-options="options"
-		chart-dataset-override="datasetOverride" chart-click="onClick">
-		</canvas>
+	<div class="col-md-12" id="analytics-container">
+		<div class="analyticsHeader">
+		<h4> Burndown Chart </h4>
+		</div>
+		
+		<div class="analytics">
+			<div class="col-md-2">
+				<select class="form-control" ng-change="hasChanged()" ng-model="reportType">
+					<option ng-selected=true>Story Point</option>
+					<option>Business Value</option>
+				</select>
+			</div>
+			<div class="col-md-10">
+				<canvas id="line" class="chart chart-line" chart-data="data" chart-labels="labels" chart-series="series" chart-click="onClick">
+				</canvas>
+			</div>
+			
+		</div><hr>
 	</div>
 </div>

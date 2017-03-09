@@ -20,6 +20,10 @@ if(!empty($projectKey)){
  			$sprint["sprintGoal"] = $rowGetSprint["sprintGoal"];
 			$sprint["sprintStartDate"] = $rowGetSprint["sprintStartDate"];
 			$sprint["sprintEndDate"] = $rowGetSprint["sprintEndDate"];
+			$sprint["backlogTotalSP"] = $rowGetSprint["backlogTotalSP"];
+			$sprint["backlogRemainSP"] = $rowGetSprint["backlogRemainSP"];
+			$sprint["backlogTotalBV"] = $rowGetSprint["backlogTotalBV"];
+			$sprint["backlogRemainBV"] = $rowGetSprint["backlogRemainBV"];
 			if($sprint["sprintStatus"] == 'Active'){
 				$response["found"] = true;
 			}

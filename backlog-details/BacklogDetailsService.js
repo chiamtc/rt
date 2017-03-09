@@ -58,7 +58,7 @@ angular.module('backlog-details')
 				
 				taskId : taskId,
 				backlogId:backlogId,
-				date_modified : moment().format(),
+				date_modified : moment().format('YYYY-MM-DD HH:mm:ss'),
 			},
 			headers: {'Content-Type':'application/json'}
 		}).then(function(response){
@@ -77,7 +77,7 @@ angular.module('backlog-details')
 				taskId : taskId,
 				assignee:assignee,
 				backlogId: backlogId,
-				date_modified : moment().format(),
+				date_modified : moment().format('YYYY-MM-DD HH:mm:ss'),
 			},
 			headers: {'Content-Type':'application/json'}
 		}).then(function(response){
@@ -113,8 +113,8 @@ angular.module('backlog-details')
 				taskDesc:taskDesc,
 				assignee: assignee,
 				backlogId : backlogId,
-				date_created : moment().format(),
-				date_modified : moment().format(),
+				date_created : moment().format('YYYY-MM-DD HH:mm:ss'),
+				date_modified : moment().format('YYYY-MM-DD HH:mm:ss'),
 			},
 			headers: {'Content-Type':'application/json'}
 		}).then(function(response){
@@ -144,7 +144,7 @@ angular.module('backlog-details')
 			url : 'php/backlog-details/updateTitle.php',
 			data:{
 				backlogTitle : backlogTitle,
-				dateModified : moment().format(),
+				dateModified : moment().format('YYYY-MM-DD HH:mm:ss'),
 				backlogId: backlogId,
 			},
 			headers: {'Content-Type':'application/json'}
@@ -159,7 +159,7 @@ angular.module('backlog-details')
 			url : 'php/backlog-details/updateBV.php',
 			data:{
 				backlogBusinessValue : backlogBusinessValue,
-				dateModified : moment().format(),
+				dateModified : moment().format('YYYY-MM-DD HH:mm:ss'),
 				backlogId: backlogId,
 			},
 			headers: {'Content-Type':'application/json'}
@@ -174,7 +174,7 @@ angular.module('backlog-details')
 			url : 'php/backlog-details/updateType.php',
 			data:{
 				backlogType : backlogType,
-				dateModified : moment().format(),
+				dateModified : moment().format('YYYY-MM-DD HH:mm:ss'),
 				backlogId: backlogId,
 			},
 			headers: {'Content-Type':'application/json'}
@@ -189,7 +189,7 @@ angular.module('backlog-details')
 			url : 'php/backlog-details/updateSP.php',
 			data:{
 				backlogSP : backlogSP,
-				dateModified : moment().format(),
+				dateModified : moment().format('YYYY-MM-DD HH:mm:ss'),
 				backlogId: backlogId,
 			},
 			headers: {'Content-Type':'application/json'}
@@ -204,7 +204,7 @@ angular.module('backlog-details')
 			url : 'php/backlog-details/updatePriority.php',
 			data:{
 				backlogPriority : backlogPriority,
-				dateModified : moment().format(),
+				dateModified : moment().format('YYYY-MM-DD HH:mm:ss'),
 				backlogId: backlogId,
 			},
 			headers: {'Content-Type':'application/json'}
@@ -220,7 +220,7 @@ angular.module('backlog-details')
 			url : 'php/backlog-details/updateDesc.php',
 			data:{
 				backlogDesc : backlogDesc,
-				dateModified : moment().format(),
+				dateModified : moment().format('YYYY-MM-DD HH:mm:ss'),
 				backlogId: backlogId,
 			},
 			headers: {'Content-Type':'application/json'}
@@ -236,7 +236,7 @@ angular.module('backlog-details')
 			data:{
 				comment : comment,
 				email:$cookies.get('email'),
-				dateComment : moment().format(),
+				dateComment : moment().format('YYYY-MM-DD HH:mm:ss'),
 				backlogId: backlogId,
 			},
 			headers: {'Content-Type':'application/json'}
