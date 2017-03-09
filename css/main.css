@@ -468,6 +468,7 @@ textarea{
 .backlogDetailsWrap{
 	box-sizing:border-box;
 	padding:0px 10px;
+	padding-right:0px;
 	display:inline-block;
 	width:100%;
 }
@@ -941,7 +942,8 @@ fieldset[disabled] .form-control {
 /** main-issues.html ends **/
 
 #sideTask{
-	padding-left:15px;
+	padding-right:0px;
+	padding-left:0px;
 }
 
 .sidePadding{
