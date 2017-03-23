@@ -29,6 +29,20 @@ angular.module('backlog-details')
 			$scope.backlogDType = $scope.passBacklog.backlogType;
 			$scope.backlogDStoryPoint = parseFloat($scope.passBacklog.backlogStoryPoint);
 			$scope.backlogDBusinessValue = parseFloat($scope.passBacklog.backlogBusinessValue);
+			$scope.defaultVersion ="";
+			BacklogDetailsService.GetBacklogVersion($scope.passBacklog.backlogId, function(response){
+				switch(response.success){
+					case 1:
+						$scope.defaultVersion = response.version;
+						$scope.backlogVersion = $scope.defaultVersion;
+					break;
+					
+					case 0:
+						$scope.defaultVersion = response.version;
+						$scope.backlogVersion = $scope.defaultVersion;
+					break;
+				}
+			});
 			BacklogDetailsService.ListComment($scope.passBacklog.backlogId,function(response){
 				switch(response.success){
 					case 0:
@@ -237,6 +251,7 @@ angular.module('backlog-details')
 		$scope.backlogDStoryPoint = parseInt($scope.passBacklog.backlogStoryPoint);
 		$scope.backlogDPriority = $scope.passBacklog.backlogPriority;
 		$scope.backlogDDesc = $scope.passBacklog.backlogDesc;
+		$scope.backlogVersion = $scope.defaultVersion;
 	}
 	
 	$scope.updateTitle = function(){

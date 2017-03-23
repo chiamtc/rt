@@ -984,3 +984,17 @@ fieldset[disabled] .form-control {
 #releases-header{
 	margin:0px;
 }
+
+.releaseHeader{
+	display:flex;
+	justify-content: space-between;
+}
+
+.releaseHeaderLeft{
+	font-size: 20px;
+	text-align:left;
+}
+
+.releaseHeaderRight{
+	text-align:right;
+}

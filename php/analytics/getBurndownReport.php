@@ -7,7 +7,7 @@ date_default_timezone_set("Australia/Brisbane");
 $today = Date("Y-m-d");
 $response = array();
 if(!empty($projectKey)){
-	$getBurndownSql = "select a.eachDay, a.backlogRemainSP, a.backlogRemainBV from `analytics` a join `sprint` s on a.`sprintId` = s.`sprintId` where s.`projectKey` = '$projectKey' AND s.sprintStatus = 'Active' order by a.eachDay";
+	$getBurndownSql = "select a.eachDay, a.backlogRemainSP, a.backlogRemainBV from `analytics` a join `sprint` s on a.`sprintId` = s.`sprintId` where s.`projectKey` = '$projectKey' AND s.sprintStatus = 'Active'";
 	$resultBurndown = $conn -> query($getBurndownSql);
 	if($resultBurndown -> num_rows >0){
 		$response["burndown"] = array();

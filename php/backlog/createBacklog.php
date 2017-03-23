@@ -11,6 +11,7 @@ $backlogCreator = $data -> backlogCreator;
 $projectKey = $data-> projectKey;
 $date_created = $data ->dateCreated;
 $date_modified = $data -> dateModified;
+$backlogVersion = $data ->backlogVersion;
 $uid = $_COOKIE['uid'];
 $response = array();
 
@@ -34,6 +35,10 @@ if(!empty($backlogName) && !empty($backlogType) && !empty($backlogPriority) && !
 		
 		$updateUpbSql = "INSERT INTO `upb`(`uid`,`projectKey`,`backlogId`)VALUES($uid, '$projectKey', $backlogId)";
 		if($conn ->query($updateUpbSql)){
+			if(!empty($backlogVersion)){
+				$insertVersionSql = "INSERT INTO `releaseBacklog`(`releaseId`,`backlogId`)VALUES($backlogVersion,$backlogId)";
+				$conn->query($insertVersionSql);
+			}
 			$getBacklogSql = "SELECT * FROM `backlog` b join `upb` upb on b.backlogId = upb.backlogId AND b.sprintId = 0 AND upb.projectKey = '$projectKey' AND b.`backlogStatus` != 'Done'";
 			$resultGetBacklogs = $conn -> query($getBacklogSql);
 			if($resultGetBacklogs -> num_rows >0){
@@ -68,8 +73,8 @@ if(!empty($backlogName) && !empty($backlogType) && !empty($backlogPriority) && !
 		}
 	}else{
 		$response["message"] = $createBacklogSql;
-		$response["success"] = 0;
-			echo json_encode($response);
+		$response["success"] = 3;
+		echo json_encode($response);
 	}
 }else{
 	$response["message"] = "fields empty";

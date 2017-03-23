@@ -1,7 +1,7 @@
 'use strict';
 angular.module('backlog')
 
-.controller('BacklogController', ['$scope','$filter','$timeout','SprintService','BacklogService', function($scope, $filter,$timeout,SprintService,  BacklogService){
+.controller('BacklogController', ['$scope','$filter','$timeout','ReleasesService','SprintService','BacklogService', function($scope, $filter,$timeout,ReleasesService,SprintService,  BacklogService){
 	
 	/** fancy starts **/
 	NProgress.start();
@@ -10,6 +10,7 @@ angular.module('backlog')
 	/** UI bindings **/
 	$scope.createBacklogResponse = false;
 	$scope.backlogLists = [];
+	$scope.releaseAvailable = [];
 	$scope.backlogCreateTypes=[
 		{typeName: 'User Story', type: 'User Story',icon:'glyphicon glyphicon-plus'},
 		{typeName: 'Issues', type: 'Issues',icon:'glyphicon glyphicon-user'},
@@ -30,6 +31,17 @@ angular.module('backlog')
 		$scope.draggedBacklog = title;
 		$scope.draggedStatus = title.backlogStatus;
 	};
+	
+	ReleasesService.GetReleases(function(response){
+		switch(response.success){
+			case 1:
+				$scope.releaseAvailable = response.releases;
+				console.log($scope.releaseAvailable);
+			break;
+			case 0:
+			break;
+		}
+	});
 	
 	$scope.dropCallback = function(event, ui,item) {
 		NProgress.start();
@@ -82,7 +94,7 @@ angular.module('backlog')
 				$scope.createBacklogResponse = !$scope.createBacklogResponse;	
 			},1000);
 		}else{
-			BacklogService.CreateBacklog($scope.backlogCreateName,$scope.backlogCreateType.type,$scope.backlogCreateDesc,$scope.backlogCreatePriority.type, $scope.backlogCreateStoryPoint,$scope.backlogCreateBusinessValue,$scope.userEmail, function(response){
+			BacklogService.CreateBacklog($scope.backlogCreateName,$scope.backlogCreateType.type,$scope.backlogCreateDesc,$scope.backlogCreatePriority.type, $scope.backlogCreateStoryPoint,$scope.backlogCreateBusinessValue,$scope.backlogVersion,$scope.userEmail, function(response){
 			switch(response.success){
 				case 0:
 					

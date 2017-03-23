@@ -16,7 +16,9 @@ angular.module('analytics')
 	
 	AnalyticsService.GetBurnDown(function(response){
 		$scope.reportData = response.burndown;
+		console.log(response.burndown);
 		switch(response.success){
+			
 			case 1:
 			$scope.labels = response.burndown[0];
 			$scope.data = $scope.reportData[1];

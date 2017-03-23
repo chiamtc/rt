@@ -22,6 +22,20 @@ angular.module('backlog-details')
 		});
 	}
 	
+	factory.GetBacklogVersion = function(backlogId,callback){
+		$http({
+			method : 'POST',
+			url : 'php/backlog-details/getBacklogVersion.php',
+			data:{
+				backlogId: backlogId,
+			},
+			headers: {'Content-Type':'application/json'}
+		}).then(function(response){
+			
+			callback(response.data);
+		});
+	}
+	
 	factory.ListReview = function(backlogId,callback){
 		$http({
 			method : 'POST',

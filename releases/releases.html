@@ -6,9 +6,48 @@
 		<div class="page-header" id="releases-header">
 			<span class="header">Releases</span>
 			<hr>
+			<button class="btn btn-primary" data-toggle="modal" data-target="#releaseCreateModal" > Add Release</button>
 		</div>
 		
-		<button class="btn btn-primary" data-toggle="modal" data-target="#releaseCreateModal" > Add Release</button>
+		<div style="padding:0px" class="col-md-12">
+			<div class="panel-group"  id="accordion-group" role="tablist" aria-multiselectable="true">
+				<div class="panel panel-primary" ng-repeat="release in releaseList track by $index">
+				<div class="panel-heading releaseHeader" role="tab" id="headingOne">
+					<div class="releaseHeaderLeft">
+						<span class="panel-title">
+						
+						<span role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{$index}}" aria-expanded="true" aria-controls="collapseOne">{{release.releaseName}} 
+						<span class="minimize" style="color:white"> Release Dates: {{release.releaseStartDate}}  - {{release.releaseEndDate}}</span>
+						</span>
+						</span>
+					</div>
+					<div class="releaseHeaderRight">
+						<button style="text-align:right" ng-click="deleteVersion()" class="btn btn-danger">Delete Version </button>
+					</div>
+				</div>
+					<div id="collapse{{$index}}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+						<div class="panel-body">
+							<table class="table table-striped">
+							<th class="col-md-1">Priority</th>
+							<th class="col-md-1">Backlog Type</th>
+							<th class="col-md-1">SP</th>
+							<th class="col-md-1">Business Value</th>
+							<th class="col-md-7">Title</th>
+							<th class="col-md-1">Status</th>
+							<tr ng-repeat="backlog in release.releaseBacklogs track by $index">
+							<td class="col-md-1">{{backlog.backlogPriority}}</td>
+							<td class="col-md-1">{{backlog.backlogType}}</td>
+							<td class="col-md-1">{{backlog.backlogStoryPoint}}</td>
+							<td class="col-md-1">{{backlog.backlogBusinessValue}}</td>
+							<td class="col-md-7">{{backlog.backlogTitle}}</td>
+							<td class="col-md-1">{{backlog.backlogStatus}}</td>
+							</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 		
 	</div>
 </div>
@@ -27,8 +66,14 @@
 				<form id="createReleaseForm" name="releaseForm" class="form-group">
 					
 					<div class="form-group">
-						<label>Release Goal/Note:</label>
-						<textarea ng-model="releaseGoal" class="form-control" rows="4" placeholder="Release Notes and Goals"></textarea>
+						<label>Version Name:</label>
+						<input ng-model="releaseName" class="form-control" type="text" placeholder="Example : Version 1.0" name="releaseName" />
+						
+					</div>
+					
+					<div class="form-group">
+						<label>Release Description:</label>
+						<textarea ng-model="releaseDesc" class="form-control" rows="4" placeholder="Release Notes and Goals"></textarea>
 					</div>
 					
 					<div class="form-group">
@@ -62,7 +107,7 @@
 				
 				<div ng-show="createReleaseResponse" ng-class="createReleaseResponseClass" role="alert">
 					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-							{{createReleaseResponseMessage}}
+						{{createReleaseResponseMessage}}
 				</div> <!-- create response -->
 			</div>
 			

@@ -72,7 +72,22 @@
 				</div>
 			</div>
 		</div>
-			
+		
+		<div class="form-group">
+			<label class="col-sm-3 detailLabel">Version</label>
+			<div class="col-sm-9">
+				<select class="form-control" ng-model="backlogVersion">
+					<option value="Unassigned">Unassigned</option>
+					<option ng-repeat="releases in releaseAvailable" ng-selected = "backlogVersion == releases.releaseName">{{releases.releaseName}}</option>
+				</select>
+				
+				<div class="btn-group quickEdit" role="group">
+					<button type="button" class="close" data-toggle="tooltip" ng-click="retain()" data-placement="bottom" title="Retain Title" style="padding-right:5px"><small><i class="glyphicon glyphicon-remove"></i></small></button>
+					<button type="button" class="close" data-toggle="tooltip" ng-click="updateVersion()" data-placement="bottom" title="Update Title" style="padding-right:10px"><small><i class="glyphicon glyphicon-ok"></i></small></button>
+				</div>
+			</div>
+		</div>
+		
 		<div class="form-group">
 			<div class="col-md-12">
 				<label class="detailLabel">Description</label>

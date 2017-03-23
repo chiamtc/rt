@@ -82,7 +82,7 @@ $sqltbl5 = "CREATE TABLE sprint(
 			backlogTotalBV float(10,1) unsigned NOT NULL,
 			backlogRemainBV float(10,1) unsigned NOT NULL,
 			projectKey varchar(255) NOT NULL,
-			PRIMARY KEY(sprintId),
+			PRIMARY KEY(sprintId,projectKey),
 			FOREIGN KEY (projectKey) REFERENCES project(projectKey)
         )";
 
@@ -212,6 +212,38 @@ if($conn -> query($sqltbl14)){
     echo "tbl analytics created<br>";
 }else{
     echo "tbl analytics failed <br>";
+}
+
+$sqltbl15 = "create table releases(
+			releaseId int not null AUTO_INCREMENT,
+			releaseName varchar(255) NOT NULL,
+			releaseStartDate varchar(255),
+			releaseEndDate varchar(255),
+			releaseDesc text,
+			releaseStatus varchar(255),
+			projectKey varchar(255) NOT NULL,
+			PRIMARY KEY (releaseId,projectKey),
+			FOREIGN KEY (projectKey) REFERENCES project(projectKey)
+			)";
+			
+if($conn -> query($sqltbl15)){
+    echo "tbl release created<br>";
+}else{
+    echo "tbl release failed <br>";
+}
+
+$sqltbl16 = "create table releaseBacklog(
+			releaseId int not null,
+			backlogId int not null,
+			PRIMARY KEY (releaseId,backlogId),
+			FOREIGN KEY(releaseId) REFERENCES releases(releaseId),
+            FOREIGN KEY(backlogId) REFERENCES backlog(backlogId)
+			)";
+			
+if($conn -> query($sqltbl16)){
+    echo "tbl releaseBacklog created<br>";
+}else{
+    echo "tbl releaseBacklog failed <br>";
 }
 $conn->close();
 ?>
