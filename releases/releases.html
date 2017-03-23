@@ -1,0 +1,75 @@
+<project-header></project-header>
+<side-bar></side-bar>
+
+<div id="main">
+	<div class="col-md-12" id="releases-container">
+		<div class="page-header" id="releases-header">
+			<span class="header">Releases</span>
+			<hr>
+		</div>
+		
+		<button class="btn btn-primary" data-toggle="modal" data-target="#releaseCreateModal" > Add Release</button>
+		
+	</div>
+</div>
+
+<div class="modal fade" id="releaseCreateModal" aria-hidden="true" role="dialog" tabindex="-1" aria-labelledby="releaseModal">
+	<div class="modal-dialog">
+      <!-- Modal content-->
+		<div class="modal-content">
+		
+			<div class="modal-header">
+			  <button type="button" class="close" data-dismiss="modal">&times;</button>
+			  <h4 class="modal-title">New Release</h4>
+			</div>
+			
+			<div class="modal-body">
+				<form id="createReleaseForm" name="releaseForm" class="form-group">
+					
+					<div class="form-group">
+						<label>Release Goal/Note:</label>
+						<textarea ng-model="releaseGoal" class="form-control" rows="4" placeholder="Release Notes and Goals"></textarea>
+					</div>
+					
+					<div class="form-group">
+						<label>Release Start Date:</label>
+						<input ng-model="releaseStartDate" id="startDate" class="form-control" type="date" name="releaseStart" />
+						
+					</div>
+					
+					<div class="form-group">
+						<label>Release End Date:</label>
+						<input ng-model="releaseEndDate" class="form-control" id="endDate" type="date" name="releaseEnd" />
+						<div ng-messages="releaseForm.releaseEnd.$error" ng-if="releaseForm.releaseEnd.$touched">
+							<div ng-message="required" class="alert alert-danger alert-dismissible" role="alert">
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+									<strong>Warning!</strong> release End Date is empty!
+							</div>
+						</div>
+						
+						<div ng-show="releaseStartDate.getTime()  == releaseEndDate.getTime() && releaseForm.releaseStart.$touched && releaseForm.releaseEnd.$touched" class="alert alert-danger" role="alert">
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								<strong>Warning!</strong> <span> Both dates shouldn't be the same </span>
+						</div> <!-- create response -->
+						
+						<div ng-show="releaseStartDate.getTime()  > releaseEndDate.getTime() && releaseForm.releaseStart.$touched && releaseForm.releaseEnd.$touched" class="alert alert-danger" role="alert">
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								<strong>Warning!</strong> <span> Start date is later than end date </span>
+						</div> <!-- create response -->
+					</div>
+					
+				</form>
+				
+				<div ng-show="createReleaseResponse" ng-class="createReleaseResponseClass" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							{{createReleaseResponseMessage}}
+				</div> <!-- create response -->
+			</div>
+			
+			<div class="modal-footer">
+				<button type="button" data-dismiss="modal" class="btn btn-default">Cancel</button>
+				<button type="button" ng-click="createRelease()" class="btn btn-primary">Create Release</button>
+			</div>
+      </div> <!-- end of modal content -->
+	</div> <!-- end of modal dialog -->
+</div> <!-- end of modal -->

@@ -16,6 +16,10 @@
 		<a href="#/issues/{{pathParams}}"><i class="glyphicon glyphicon-flag"></i> Issues </a>
 		</li>
 		
+		<li ng-class="isCurrent('/releases/{{pathParams}}')">
+		<a href="#/releases/{{pathParams}}"><i class="glyphicon glyphicon-calendar"></i> Releases </a>
+		</li>
+		
 		<li ng-class="isCurrent('/analytics/{{pathParams}}')">
 		<a href="#/analytics/{{pathParams}}"><i class="glyphicon glyphicon-stats"></i> Analytics </a>
 		</li>

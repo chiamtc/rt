@@ -462,7 +462,8 @@ textarea{
 	overflow-x:hidden;
 	font-size:20px;	
 	margin:0px 5px 0px 5px;
-	padding: 15px 10px 0px 10px;
+	padding: 10px 10px 0px 10px;
+	
 }
 
 .backlogDetailsWrap{
@@ -884,6 +885,7 @@ fieldset[disabled] .form-control {
 }
 
 #main-issues{
+	border-left:1px solid #ccc;
 	padding-right:0px;
 }
 
@@ -896,7 +898,6 @@ fieldset[disabled] .form-control {
 }
 
 #side-issues{
-	overflow-y:scroll;
 }
 
 /** issues.html ends**/
@@ -919,6 +920,7 @@ fieldset[disabled] .form-control {
 
 /** main-issues.html begins **/
 #mainIssues{
+	
 	padding:10px;
 }
 
@@ -944,6 +946,7 @@ fieldset[disabled] .form-control {
 #sideTask{
 	padding-right:0px;
 	padding-left:0px;
+	
 }
 
 .sidePadding{
@@ -972,4 +975,12 @@ fieldset[disabled] .form-control {
 
 #analytics-container{
 	padding:10px;
+}
+
+#releases-container{
+	padding:10px;
+}
+
+#releases-header{
+	margin:0px;
 }

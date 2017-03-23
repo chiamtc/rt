@@ -130,8 +130,8 @@ angular.module('sprint')
 	}
 	
 	$scope.updateSprintDetails = function(){
-		var startDate = moment($scope.sprintEditStartDate).format('YYYY-MM-DD HH:mm:ss');
-		var endDate = moment($scope.sprintEditEndDate).format('YYYY-MM-DD HH:mm:ss');
+		var startDate = moment($scope.sprintEditStartDate).format('YYYY-MM-DD');
+		var endDate = moment($scope.sprintEditEndDate).format('YYYY-MM-DD');
 		
 		SprintService.UpdateSprintDetails($scope.sprintEditId, $scope.sprintEditGoal,startDate, endDate, function(response){
 			NProgress.start();
