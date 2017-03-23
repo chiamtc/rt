@@ -6,7 +6,8 @@ angular.module('releases')
 
 	$scope.createReleaseResponse=false;
 	$scope.releaseList = [];
-	
+	NProgress.start();
+	NProgress.done();
 	ReleasesService.GetReleases(function(response){
 		switch(response.success){
 			case 1:
@@ -44,6 +45,29 @@ angular.module('releases')
 		$timeout(function(){
 			$scope.createReleaseResponse = !$scope.createReleaseResponse;
 		},1000);
+	}
+	
+	$scope.deleteVersion = function(releaseId){
+		
+		ReleasesService.DeleteRelease(releaseId,function(response){
+			NProgress.start();
+		switch(response.success){
+			case 1:
+				ReleasesService.GetReleases(function(response){
+					switch(response.success){
+						case 1:
+							$scope.releaseList = response.releases;
+							console.log($scope.releaseList);
+							NProgress.set(0.5);
+							NProgres.done();
+							
+							
+						break;
+						}
+					});
+			break;
+		}
+	});
 	}
 
 }]);

@@ -35,5 +35,18 @@ angular.module('releases')
 		});
 	}
 	
+	factory.DeleteRelease = function(releaseId,callback){
+		$http({
+			method : "POST",
+			url:"php/releases/deleteRelease.php",
+			data:{
+				releaseId: releaseId,
+			},
+			headers :{ 'Content-Type' : 'application/json' }
+		}).then(function(response){
+			callback(response.data);
+		});
+	}
+	
 	return factory;
 }]);
