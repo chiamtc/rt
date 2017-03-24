@@ -29,17 +29,17 @@ angular.module('backlog-details')
 			$scope.backlogDType = $scope.passBacklog.backlogType;
 			$scope.backlogDStoryPoint = parseFloat($scope.passBacklog.backlogStoryPoint);
 			$scope.backlogDBusinessValue = parseFloat($scope.passBacklog.backlogBusinessValue);
-			$scope.defaultVersion ="";
+			$scope.defaultVersion =[];
 			BacklogDetailsService.GetBacklogVersion($scope.passBacklog.backlogId, function(response){
 				switch(response.success){
 					case 1:
 						$scope.defaultVersion = response.version;
-						$scope.backlogVersion = $scope.defaultVersion;
+						$scope.backlogVersion = $scope.defaultVersion[0].versionName;
 					break;
 					
 					case 0:
 						$scope.defaultVersion = response.version;
-						$scope.backlogVersion = $scope.defaultVersion;
+						$scope.backlogVersion = $scope.defaultVersion[0].versionName;
 					break;
 				}
 			});
@@ -251,7 +251,7 @@ angular.module('backlog-details')
 		$scope.backlogDStoryPoint = parseInt($scope.passBacklog.backlogStoryPoint);
 		$scope.backlogDPriority = $scope.passBacklog.backlogPriority;
 		$scope.backlogDDesc = $scope.passBacklog.backlogDesc;
-		$scope.backlogVersion = $scope.defaultVersion;
+		$scope.backlogVersion = $scope.defaultVersion[0].versionName;
 	}
 	
 	$scope.updateTitle = function(){
@@ -443,6 +443,50 @@ angular.module('backlog-details')
 				$scope.snackbarClass= "alert alert-success alert-dismissible snackbar";
 				$scope.snackbarMessage = "Backlog Priority Updated ! ";
 				$scope.passBacklog.backlogDesc = $scope.backlogDDesc; // two-way binding in parameter
+				$scope.passBacklog.dateModified = moment().fromNow();
+				$timeout(function(){
+					$scope.snackbarShow = !$scope.snackbarShow;
+				},5000);
+				NProgress.done();
+			break;
+			
+			case 0:
+				NProgress.set(0.5);
+				$scope.snackbarShow = !$scope.snackbarShow;
+				$scope.snackbarClass= "alert alert-danger alert-dismissible snackbar";
+				$scope.snackbarMessage = "Sorry, Something is wrong ! ";
+				$timeout(function(){
+					$scope.snackbarShow = !$scope.snackbarShow;
+				},5000);
+				NProgress.done();
+			break;
+		}
+		});
+	}
+	
+	$scope.updateVersion = function(){
+		NProgress.start();
+		BacklogDetailsService.UpdateVersion($scope.backlogVersion, $scope.passBacklog.backlogId,function(response){
+		switch(response.success){
+			case 1:
+				NProgress.set(0.5);
+				$scope.snackbarShow = !$scope.snackbarShow;
+				$scope.snackbarClass= "alert alert-success alert-dismissible snackbar";
+				$scope.snackbarMessage = "Backlog Release  Updated ! ";
+				$scope.defaultVersion[0].versionName = $scope.backlogVersion; // two-way binding in parameter
+				$scope.passBacklog.dateModified = moment().fromNow();
+				$timeout(function(){
+					$scope.snackbarShow = !$scope.snackbarShow;
+				},5000);
+				NProgress.done();
+			break;
+			
+			case 2:
+				NProgress.set(0.5);
+				$scope.snackbarShow = !$scope.snackbarShow;
+				$scope.snackbarClass= "alert alert-success alert-dismissible snackbar";
+				$scope.snackbarMessage = "Backlog Release Assigned ! ";
+				$scope.defaultVersion[0].versionName = $scope.backlogVersion; // two-way binding in parameter
 				$scope.passBacklog.dateModified = moment().fromNow();
 				$timeout(function(){
 					$scope.snackbarShow = !$scope.snackbarShow;

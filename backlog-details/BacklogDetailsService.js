@@ -31,7 +31,6 @@ angular.module('backlog-details')
 			},
 			headers: {'Content-Type':'application/json'}
 		}).then(function(response){
-			
 			callback(response.data);
 		});
 	}
@@ -234,6 +233,21 @@ angular.module('backlog-details')
 			url : 'php/backlog-details/updateDesc.php',
 			data:{
 				backlogDesc : backlogDesc,
+				dateModified : moment().format('YYYY-MM-DD HH:mm:ss'),
+				backlogId: backlogId,
+			},
+			headers: {'Content-Type':'application/json'}
+		}).then(function(response){
+			callback(response.data);
+		});
+	}
+	
+	factory.UpdateVersion= function(releaseId, backlogId,callback){
+		$http({
+			method : 'POST',
+			url : 'php/backlog-details/updateVersion.php',
+			data:{
+				releaseId : releaseId,
 				dateModified : moment().format('YYYY-MM-DD HH:mm:ss'),
 				backlogId: backlogId,
 			},

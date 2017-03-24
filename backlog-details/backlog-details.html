@@ -78,7 +78,7 @@
 			<div class="col-sm-9">
 				<select class="form-control" ng-model="backlogVersion">
 					<option value="Unassigned">Unassigned</option>
-					<option ng-repeat="releases in releaseAvailable" ng-selected = "backlogVersion == releases.releaseName">{{releases.releaseName}}</option>
+					<option ng-repeat="releases in releaseAvailable" value="{{releases.releaseId}}" ng-selected = "backlogVersion == releases.releaseName">{{releases.releaseName}}</option>
 				</select>
 				
 				<div class="btn-group quickEdit" role="group">
