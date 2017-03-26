@@ -408,12 +408,15 @@ textarea{
 	padding:5px 10px;
 	width:100%;
 	display:flex;
+	justify-content:space-between;
 	border-bottom: 1px solid #ccc;
 }
 
 .sprintItemHeaderTitle{
 	width:70%;
 }
+
+
 
 .sprintItemHeaderDetails{
 	padding-top:10px;

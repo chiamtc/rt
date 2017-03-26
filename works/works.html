@@ -1,0 +1,43 @@
+<project-header></project-header>
+<project-header></project-header>
+<!-- <div ng-controller="homeProjectCtrl"> -->
+<Br>
+<div class="col-md-12">
+	<div ng-class="colSize? 'col-md-9' : 'container'">
+	<div class="panel panel-info" ng-repeat="(key,value) in works | groupBy: 'projectName'">
+		<div class="panel-heading">
+			<div class="panel-title">
+				Project Name: {{key}}
+			</div>
+		</div>
+		
+		<div class="panel-body" ng-repeat="(k,v) in value | groupBy: 'backlogTitle'">
+			Backlog Title: {{k}} 
+			<div>
+				<table class="table table-striped">
+				<th> Task Title</th>
+				<th> Task Description</th>
+				<th ng-click="sortByHeader(1)" style="cursor:pointer"> Task Status <i class="glyphicon glyphicon-sort"></i></th>
+				<tr ng-repeat="task in v">
+				
+					<td class="col-md-4"> <a href="" ng-click="toggleEachTask(task.taskId , task.projectKey)">{{task.taskTitle}}</a></td>
+					<td class="col-md-7"> {{task.taskDescription}}</td>
+					<td class="col-md-1"> <span ng-class="labelling(task.taskStatus)">{{task.taskStatus}}</span></td>
+					
+				</tr>
+				</table>
+				<hr>
+			</div>
+		</div>
+	</div>
+	</div>
+	<div ng-class="colSize? 'col-md-3': 'hidden'" id="task-details">
+		<task-details></task-details>
+	</div>
+	
+</div>
+
+	<div ng-show="snackbarShow" ng-class="snackbarClass" role="alert">
+	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		{{snackbarMessage}}
+	</div>

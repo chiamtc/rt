@@ -208,7 +208,7 @@ angular.module('backlog-details')
 						$scope.editTaskResponse = !$scope.editTaskResponse;
 						$scope.editTaskResponseClass=  "alert alert-success alert-dismissible";
 						$scope.editTaskResponseMessage = "Task updated !"
-						$scope.passBacklog.dateModified = response.date_modified;
+						$scope.passBacklog.dateModified = moment(response.dateModified).fromNow();
 						$timeout(function(){
 							$('#taskEditModal').modal('toggle');
 							$scope.editTaskResponse = !$scope.editTaskResponse;

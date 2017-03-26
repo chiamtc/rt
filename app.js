@@ -17,8 +17,9 @@ angular.module('issues',[]);
 angular.module('side-issues',[]);
 angular.module('main-issues',[]);
 angular.module('releases',[]);
+angular.module('works',[]);
 
-angular.module('reApp',['header','login','home','register','project','sidebar','backlog','sprint','backlog-details','active-sprint','task-details','review','analytics','issues','side-issues','main-issues','releases','ngDragDrop','ngRoute','ngCookies', 'ngMessages','chart.js'])
+angular.module('reApp',['header','login','home','register','project','sidebar','backlog','sprint','backlog-details','active-sprint','task-details','review','analytics','issues','side-issues','main-issues','releases','works','ngDragDrop','ngRoute','ngCookies', 'ngMessages','chart.js','angular.filter'])
 
 .config(['$routeProvider', function($routeProvider){
 	$routeProvider
@@ -64,6 +65,11 @@ angular.module('reApp',['header','login','home','register','project','sidebar','
 	.when('/releases/:projectKey/:projectSeo',{
 		controller:'ReleasesController',
 		templateUrl:'releases/releases.html'
+	})
+	
+	.when('/works',{
+		controller:'WorksController',
+		templateUrl:'works/works.html'
 	})
 	
 	.otherwise({

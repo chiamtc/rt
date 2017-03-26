@@ -9,7 +9,6 @@ angular.module('project')
 		$scope.colSize = false;
 	}
 	
-	
 	$scope.calculateStyle= function(retrieved){
 		var bPVal = retrieved.backlogPriority;
 		if(bPVal == "Highest"){

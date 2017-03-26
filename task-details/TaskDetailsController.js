@@ -19,8 +19,8 @@ angular.module('task-details')
 		$scope.taskDTitle = task.tasksTitle;
 		$scope.taskDDesc = task.tasksDesc;
 		$scope.taskDAssignee = task.assignee;
-		
 		$scope.taskDStatus = task.tasksStatus;
+		
 		TaskDetailsService.ListTaskComments($scope.passTask.tasksId,function(response){
 		
 			switch(response.success){ 
