@@ -57,6 +57,79 @@ angular.module('main-issues')
 			});
 	}
 	
+	$scope.passEditTask= function(editTask){
+		$scope.taskEditId = editTask.tasksId;
+		$scope.taskEditTitle = editTask.tasksTitle;
+		$scope.taskEditDesc = editTask.tasksDesc;
+		$scope.taskEditAssignee = editTask.assignee;
+		console.log($scope.taskEditAssignee);
+		if(editTask.tasksDesc == ""){
+			$scope.taskEditDesc = "No Description when this task was created";
+		}else{
+			$scope.taskEditDesc = editTask.tasksDesc;
+		}
+	}
+	
+	$scope.editTask = function(){
+		if(!$scope.taskEditTitle.length){
+			$scope.editTaskResponse = !$scope.editTaskResponse;
+			$scope.editTaskResponseClass=  "alert alert-danger alert-dismissible";
+			$scope.editTaskResponseMessage = "Unable to update task with empty title !"
+		}else{
+			var assignee = $scope.taskEditAssignee? $scope.taskEditAssignee:'Unassigned';
+			BacklogDetailsService.EditTask($scope.taskEditTitle, $scope.taskEditDesc, $scope.taskEditId,assignee ,$scope.selectedBacklog.backlogId,function(response){
+				switch(response.success){
+					case 1:
+					console.log(response.tasks);
+						$scope.taskLists = response.tasks;
+						$scope.editTaskResponse = !$scope.editTaskResponse;
+						$scope.editTaskResponseClass=  "alert alert-success alert-dismissible";
+						$scope.editTaskResponseMessage = "Task updated !"
+						$scope.selectedBacklog.dateModified = moment(response.dateModified).fromNow();
+						$timeout(function(){
+							$('#taskEditModal').modal('toggle');
+							$scope.editTaskResponse = !$scope.editTaskResponse;
+						},500);
+					break;
+					case 0:
+					break;
+				}
+			});
+		}
+	}
+	
+	$scope.passDeleteTask = function(passTask){
+		$scope.passTaskDelete = passTask;
+	}
+	
+	$scope.deleteTask = function(){
+		BacklogDetailsService.DeleteTask($scope.passTaskDelete.tasksId,$scope.selectedBacklog.backlogId, function(response){
+			console.log(response);
+			switch(response.success){
+				case 1:
+					BacklogDetailsService.ListTasks($scope.selectedBacklog.backlogId,function(response){
+						switch(response.success){
+							case 0:
+								$scope.taskLists =[];
+							break;
+							case 1:
+								$scope.taskLists = response.tasks;
+							break;
+							case 2:
+							break;
+						}
+					});
+					$scope.selectedBacklog.dateModified = response.date_modified;
+					$timeout(function(){
+						$('#taskDeleteModal').modal('toggle');
+					},500);
+				break;
+				case 0:
+				break;
+			}
+		});
+	}
+	
 	$scope.updateTitle = function(){
 		NProgress.start();
 		if(!$scope.backlogDTitle.length){

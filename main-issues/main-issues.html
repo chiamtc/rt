@@ -98,7 +98,12 @@
 	</div> <!-- row  1-->
 	<hr>
 	<div class="row" id="taskIssues">
-		<h4> Tasks </h4>
+		<div class="taskHeader">
+			<span class="taskHeaderLeft">Tasks</span>
+				<div class="taskHeaderRight">
+					<i role="button" data-toggle="modal" data-target="#taskCreateModal" class="glyphicon glyphicon-plus"></i> 
+				</div>
+		</div>
 			<div class="taskItem" ng-repeat="task in taskLists">
 				<div class="taskItemHeader">
 					<div class="taskInfo">
@@ -107,6 +112,14 @@
 						<div class="taskInfoDetails">
 							<span class="minimize"> <span ng-if="task.assignee != 'Unassigned'">Assigned to:</span> {{task.assignee}}</span>
 						</div>
+					</div>
+					<div class="dropdown taskOptions">
+						<i data-toggle="dropdown" id="dropdown" class="glyphicon glyphicon-menu-hamburger white" role="button" style="font-weight:bold"></i>
+						<ul class="dropdown-menu dropdown-menu-right">
+							<li><a href="" ng-click="passEditTask(task)" data-toggle="modal" data-target="#taskEditModal"><i class="glyphicon glyphicon-edit"></i>Edit 
+							Task</a></li>
+							<li><a href="" ng-click="passDeleteTask(task)" data-toggle="modal" data-target="#taskDeleteModal"><i class="glyphicon glyphicon-remove"></i> Delete Task</a></li>
+						</ul>
 					</div>
 				</div>
 			</div>
@@ -146,3 +159,132 @@
 		<task-details></task-details>
 	</div> <!--col-md-4 main issue right (sidebar)-->
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="taskCreateModal" aria-hidden="true" role="dialog" tabindex="-1">
+	<div class="modal-dialog">
+      <!-- Modal content-->
+		<div class="modal-content">
+		
+			<div class="modal-header">
+			  <button type="button" class="close" data-dismiss="modal">&times;</button>
+			  <h4 class="modal-title">New Task</h4>
+			</div>
+			
+			<div class="modal-body">
+				<form id="createTaskForm" name="taskForm" class="form-group">
+					<div class="form-group">
+						<label>Task Title</label>
+						<input ng-model="taskCreateTitle" type="text" class="form-control" name="taskCreateTitle" id="taskCreateTitle" required placeholder="Task Title">
+					
+						<div ng-messages="taskForm.taskTitle.$error" ng-if="taskForm.taskTitle.$touched">
+							<div ng-message="required" class="alert alert-danger alert-dismissible" role="alert">
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								<strong>Warning!</strong> Task title is required!
+							</div>  <!-- end of ng-message -->
+					</div> <!-- end of ng-messages -->
+					</div>
+					
+					<div class="form-group">
+						<label>Task Description</label>
+						<textarea ng-model="taskCreateDesc" class="form-control" rows="4" placeholder="Task Description"></textarea>
+					</div>
+					
+					<div class="form-group">
+						<label>Assignees</label>
+							<select class="form-control" ng-model="taskCreateAssignees">
+								<option value="" selected="selected">Unassigned</option>
+								<option ng-repeat="user in userLists" >{{user.email}}</option>
+							</select>
+					</div>
+					
+				</form>
+
+				<div ng-show="createTaskResponse" ng-class="createTaskResponseClass" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							{{createTaskResponseMessage}}
+				</div> <!-- create response -->
+			</div>
+			
+			<div class="modal-footer">
+				<button type="button" data-dismiss="modal" class="btn btn-default">Cancel</button>
+				<button type="button" ng-click="createTask()" class="btn btn-primary">Create Task</button>
+			</div>
+      </div> <!-- end of modal content -->
+	</div> <!-- end of modal dialog -->
+</div> <!-- end of modal -->
+<!--</div> for ng controller -->
+
+<div class="modal fade" id="taskEditModal" aria-hidden="true" role="dialog" tabindex="-1" >
+	<div class="modal-dialog">
+      <!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+			  <button type="button" class="close" data-dismiss="modal">&times;</button>
+			  <h4 class="modal-title" ng-model="taskEditId">Edit Task</h4>
+			</div>
+			
+			<div class="modal-body">
+				<form name="taskEditForm" class="form-group">
+					<div class="form-group">
+						<label>Task Title</label>
+						<input ng-model="taskEditTitle" type="text" class="form-control" name="taskeditTitle" required placeholder="Task Title">
+					
+						<div ng-messages="taskEditForm.taskEditTitle.$error" ng-if="taskEditForm.taskEditTitle.$touched">
+							<div ng-message="required" class="alert alert-danger alert-dismissible" role="alert">
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								<strong>Warning!</strong> Task title is required!
+							</div>  <!-- end of ng-message -->
+					</div> <!-- end of ng-messages -->
+					</div>
+					
+					<div class="form-group">
+						<label>Task Description</label>
+						<textarea ng-model="taskEditDesc" class="form-control" rows="4" placeholder="Task Description"></textarea>
+					</div>
+					
+					<div class="form-group">
+						<label>Assignees</label>
+						<select class="form-control" ng-model="taskEditAssignee">
+							<option value="Unassigned">Unassigned</option>
+							<option ng-selected="taskEditAssignee == user.email" ng-repeat="user in userLists" >{{user.email}}</option>
+						</select>
+					</div>
+				</form>
+				
+				<div ng-show="editTaskResponse" ng-class="editTaskResponseClass" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						{{editTaskResponseMessage}}
+				</div> <!-- create response -->
+			</div>
+			
+			<div class="modal-footer">
+				<button type="button" data-dismiss="modal" class="btn btn-default">Cancel</button>
+				<button type="button" ng-click="editTask()" class="btn btn-primary">Update Sprint</button>
+			</div>
+      </div> <!-- end of modal content -->
+	</div> <!-- end of modal dialog -->
+</div> <!-- end of modal -->
+<!--</div> for ng controller -->
+
+<div class="modal fade" id="taskDeleteModal" aria-hidden="true" role="dialog" tabindex="-1" >
+	<div class="modal-dialog">
+      <!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+			  <button type="button" class="close" data-dismiss="modal">&times;</button>
+			 <h4 class="modal-title" ng-model="passTaskDelete">Delete Task</h4>
+			</div>
+			
+			<div class="modal-body">
+				<h5 ng-model="passIndex"> Are you sure to <span  style="color:red;font-weight:bold;">delete</span> this task?</h5>
+			</div>
+			
+			<div class="modal-footer">
+				<button type="button" data-dismiss="modal" class="btn btn-default">Cancel</button>
+				<button type="button" ng-click="deleteTask()" class="btn btn-danger">Delete Task</button>
+			</div>
+      </div> <!-- end of modal content -->
+	</div> <!-- end of modal dialog -->
+</div> <!-- end of modal -->
+<!--</div> for ng controller -->

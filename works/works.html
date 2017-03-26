@@ -11,8 +11,12 @@
 			</div>
 		</div>
 		
-		<div class="panel-body" ng-repeat="(k,v) in value | groupBy: 'backlogTitle'">
-			Backlog Title: {{k}} 
+		<div class="panel-body" style="padding-top:0px" ng-repeat="(k,v) in value | groupBy: 'backlogTitle'">
+			<div class="backlogWorkDetails">
+				<div class="backlogWorkDetailsLeft">
+					Backlog Title: {{k}} 
+				</div>
+			</div>
 			<div>
 				<table class="table table-striped">
 				<th> Task Title</th>
@@ -36,8 +40,9 @@
 	</div>
 	
 </div>
-
-	<div ng-show="snackbarShow" ng-class="snackbarClass" role="alert">
-	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		{{snackbarMessage}}
-	</div>
+<div ng-show="snackbarShow" ng-class="snackbarClass" role="alert">
+	<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		<span aria-hidden="true">&times;</span>
+	</button>
+	{{snackbarMessage}}
+</div>

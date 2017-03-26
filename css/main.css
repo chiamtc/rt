@@ -1001,3 +1001,20 @@ fieldset[disabled] .form-control {
 .releaseHeaderRight{
 	text-align:right;
 }
+
+.backlogWorkDetails{
+	display:flex;
+	justify-content: space-between;
+	padding:7px;
+}
+
+.backlogWorkDetailsLeft{
+	font-size: 16px;
+	padding-top:8px;
+	font-weight:bold;
+	text-align:left;
+}
+
+.backlogWorkDetailsRight{
+	text-align:right;
+}
