@@ -12,6 +12,7 @@ background-color grey :#525C65  f3f4f4
 html{}
 
 body{
+	/** f1f1f1**/
 	background-color: #f1f1f1;
     padding-top:50px;	
 }
@@ -37,8 +38,8 @@ textarea{
 }
 
 .navbar-inverse{
-	/** 36648b **/
-    background-color:#4267b2;
+	/** 36648b current 4267b2**/
+    background-color:#113285;
 }
 
 .navbar .nav > li> a{
@@ -192,7 +193,7 @@ textarea{
 }
 
 #md12{
-	padding:0px 0px;
+	padding-top:10px;
 }
 
 @media screen and (max-height: 450px) {

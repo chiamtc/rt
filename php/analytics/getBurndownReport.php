@@ -25,8 +25,6 @@ if(!empty($projectKey)){
 			array_push($burndownBV["backlogRemainBV"], $rowBurndown["backlogRemainBV"]);
 			
 		}
-		array_push($burndownSP["backlogRemainSP"], 0);
-		array_push($burndownBV["backlogRemainBV"], 0);
 		array_push($response["burndown"], $burndownDate["eachDay"],$burndownSP["backlogRemainSP"], $burndownBV["backlogRemainBV"]);
 		$response["success"] = 1;
 		echo json_encode($response);
