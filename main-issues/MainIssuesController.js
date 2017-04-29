@@ -392,6 +392,54 @@ angular.module('main-issues')
 		});
 	}
 	
+	$scope.createTask = function(){
+		
+		if(!$scope.taskCreateTitle){
+			$scope.createTaskResponse = !$scope.createTaskResponse;
+			$scope.createTaskResponseClass=  "alert alert-danger alert-dismissible";
+			$scope.createTaskResponseMessage = "Task Title Required !"
+				$timeout(function(){
+					$scope.createTaskResponse = !$scope.createTaskResponse;
+				},1000);
+		}else{
+		$scope.createTaskResponse = !$scope.createTaskResponse;
+		var assignee = $scope.taskCreateAssignees? $scope.taskCreateAssignees:'Unassigned';
+		BacklogDetailsService.CreateTask($scope.taskCreateTitle, $scope.taskCreateDesc, assignee,$scope.selectedBacklog.backlogId,function(response){
+			console.log(response);
+			switch(response.success){
+				case 1:
+					$scope.taskLists = response.tasks;
+					$scope.createTaskResponseClass=  "alert alert-success alert-dismissible";
+					$scope.createTaskResponseMessage = "Created a new task !"
+					$scope.selectedBacklog.dateModified = response.date_modified;
+					$timeout(function(){
+						$('#taskCreateModal').modal('toggle');
+						$scope.taskCreateAssignees = "";
+						$scope.createTaskResponse = !$scope.createTaskResponse;
+					},1000);
+					$('#createTaskForm').trigger("reset");
+				break;
+				case 3:
+				
+					$scope.createTaskResponseClass=  "alert alert-danger alert-dismissible";
+					$scope.createTaskResponseMessage = "Task Title Required !"
+					$timeout(function(){
+						$scope.createTaskResponse = !$scope.createTaskResponse;
+					},1000);
+				break;
+				
+				case 0:
+					$scope.createTaskResponseClass=  "alert alert-danger alert-dismissible";
+					$scope.createTaskResponseMessage = "Server Error"
+					$timeout(function(){
+						$scope.createTaskResponse = !$scope.createTaskResponse;
+					},1000);
+				break;
+			}
+		});
+		}
+	}
+	
 	$scope.retain = function(){
 		$scope.backlogDTitle = $scope.selectedBacklog.backlogTitle;
 		$scope.backlogDType = $scope.selectedBacklog.backlogType;
